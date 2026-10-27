@@ -76,6 +76,7 @@ def check_files(files):
         ".hst",
         ".rdf",
         ".mcn",
+        ".prs",
         ".rao",
     }
     for name in files:
@@ -88,7 +89,7 @@ def check_files(files):
             path.suffix.lower() not in {".exe", ".dll", ".dat", ".key", ".lic"},
             "Vendor or credential file: " + name,
         )
-        if path.suffix.lower() in {".png", ".pdf"}:
+        if path.suffix.lower() in {".png", ".pdf", ".gif"}:
             require(name.startswith("docs/assets/"), "Unreviewed binary asset: " + name)
         if path.suffix in text_types or path.name in {
             "LICENSE",
@@ -285,6 +286,9 @@ def main():
         check_files(files)
         links = check_links(files)
         results = check_results()
+        from scripts.check_wavefields import check_wavefields
+
+        results.update(check_wavefields())
         print(
             json.dumps(
                 dict(

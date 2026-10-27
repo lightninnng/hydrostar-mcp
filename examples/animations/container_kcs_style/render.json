@@ -1,0 +1,14 @@
+{
+  "frames": 48,
+  "size_px": [
+    1200,
+    660
+  ],
+  "duration_ms": 80,
+  "period_s": 12.566370614359172,
+  "motion_gain": 6.0,
+  "colour_gain": 1.0,
+  "total_colour_limit_m": 0.5523135,
+  "scattered_colour_limit_m": 0.09573658435091131,
+  "phase_convention": "real(H*exp(+i*omega*t)); phase lead"
+}

@@ -27,9 +27,17 @@ Local MCP automation for HydroStar, with source-informed geometry and reproducib
 
 静态图采用色盲友好配色、浪向线型、统一单位与六联图编号；提供 300 dpi PNG 和矢量 PDF。[集装箱船曲线](docs/assets/container_kcs_style_rao.png) · [油船曲线](docs/assets/tanker_kvlcc2_style_rao.png) · [半潜矢量图](docs/assets/semisub_oc4_style_rao.pdf)。
 
-[交互页](https://lightninnng.github.io/hydrostar-mcp/)可切换构型、浪向、幅值和相位，旋转实际求解网格，并点按曲线读取原始频率点。克隆后也可直接打开 [docs/index.html](docs/index.html)，页面内嵌数据，无需联网。
+[交互页](https://lightninnng.github.io/hydrostar-mcp/)可切换构型、浪向、幅值和相位，旋转实际求解网格，并点按曲线读取原始频率点。克隆后也可直接打开 [docs/index.html](docs/index.html)，页面内嵌计算数据，动图使用同目录资源，可离线查看。
 
 每套[公开结果](examples/results/index.json)包含生成输入（HST/RDF/MCN/RAO）、原生 RAO 数值文件、完整数组、质量摘要与文件哈希。参照构型已完成几何与执行验收；具体工程应用按实际线型、装载、约束、阻尼及参考响应补齐验证。该状态记录为 `engineering_acceptance.ready=false`，详见[结果说明](docs/results.md)。
+
+## 动态波面与刚体运动
+
+![半潜总波面与散射波面动图](docs/assets/semisub_oc4_style_wave.gif)
+
+动图来自独立原生场点计算：左侧为总波面和六自由度运动，右侧为包含绕射与辐射贡献的散射波面。色标保持实际米制数值；三维波高和运动使用 6 倍观察倍率，物理周期与播放时长均标明。
+
+[集装箱船 GIF](docs/assets/container_kcs_style_wave.gif) · [油船 GIF](docs/assets/tanker_kvlcc2_style_wave.gif) · [场数据与相位说明](docs/wavefields.md) · [完整原生场点记录](examples/animations/index.json)
 
 ## 安装与运行
 

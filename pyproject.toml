@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hydrostar-mcp"
-version = "0.2.0"
+version = "0.2.1"
 description = "Validated HydroStar input generation and local MCP automation"
 readme = "README.md"
 license = "MIT"
@@ -22,7 +22,7 @@ dependencies = ["mcp>=1.28,<2", "pydantic>=2.11,<3"]
 
 [project.optional-dependencies]
 test = ["pytest>=8,<9"]
-plot = ["matplotlib>=3.8,<4"]
+plot = ["matplotlib>=3.8,<4", "numpy>=1.24,<3", "Pillow>=10,<13"]
 dev = ["pytest>=8,<9", "ruff>=0.11,<1", "build>=1.2,<2"]
 
 [project.urls]

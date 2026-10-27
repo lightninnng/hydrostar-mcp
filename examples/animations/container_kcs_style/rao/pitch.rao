@@ -1,0 +1,25 @@
+# Project : 
+# User    : 
+# File : pitch.rao
+#
+# Constants used in computations :
+#     Reference length     :     1.0000 
+#     Water density (rho)  :  1025.0000
+#     Gravity acceleration :     9.8100
+#     Waterdepth           :        80.0000
+#     Ref.pt incident wave : (     -3.4600   0.0000)
+#            Forward speed :   0.0000  m/s   
+#
+# Reference point of body 1: (   -3.461    0.000    0.860)
+# MEANVALUE :   0.0000E+00
+#   AMP/PHASE
+#------------------------------------------------------------------------
+#RAOTYPE    :  MOTION
+#COMPONENT  :  5
+#UNIT       :  deg/m
+#NBHEADING   1
+#HEADING         60.00
+#---w(r/s)-----------------------------------------------------
+  0.5000  7.709609E-01     86.1932
+#------------------------------------------------------------
+#ENDFILE pitch.rao

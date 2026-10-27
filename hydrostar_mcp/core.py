@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 DEFAULT_ROOT = r"D:\Bureau Veritas\Hstar4Experts\v8.2.0"
 RECOMMENDED_MAX_PANELS = 3000
 MODULES = ("hsmsh", "hslec", "hschk", "hsrdf", "hsmcn", "hsrao", "mpiexec")
+POSTPROCESS_MODULES = ("hsprs",)
 DOFS = ("surge", "sway", "heave", "roll", "pitch", "yaw")
 NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[EeDd][+-]?\d+)?"
 
@@ -60,7 +61,7 @@ def hstar_root():
 
 
 def hstar_bin(name):
-    if name not in MODULES:
+    if name not in (*MODULES, *POSTPROCESS_MODULES):
         raise ValueError(f"不允许的模块: {name}")
     for sub in ("bin", "PythonWrap"):
         path = Path(hstar_root()) / sub / (name + ".exe")
@@ -97,7 +98,7 @@ def log_error(log):
         ),
         (
             "INPUT_ERROR",
-            r"can't find (?:the )?input file|cannot open.*file|\*{3}\s*(?:error|can't|cannot)",
+            r"\[ERROR\]|can't find (?:the )?input file|cannot open.*file|\*{3}\s*(?:error|can't|cannot)",
         ),
         (
             "SOLVER_EQUILIBRIUM_FAILED",
@@ -872,11 +873,16 @@ def morison_displacement(members, free_surface=0.0):
 
 
 def read_rao(path):
+    return read_rao_text(
+        Path(path).read_text(encoding="utf-8", errors="strict"), str(path)
+    )
+
+
+def read_rao_text(content, path="<text>"):
+    """Parse the same strict native RAO format from an archived text record."""
     omega, heads, amps, phases, metadata = [], [], [], [], {}
     ended = False
-    for lineno, raw in enumerate(
-        Path(path).read_text(encoding="utf-8", errors="strict").splitlines(), 1
-    ):
+    for lineno, raw in enumerate(content.splitlines(), 1):
         line = raw.strip()
         if not line:
             continue

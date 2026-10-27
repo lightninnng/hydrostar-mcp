@@ -1,0 +1,116 @@
+{
+  "surge": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        0.1091149
+      ]
+    ],
+    "phase": [
+      [
+        294.6566
+      ]
+    ],
+    "unit": "m/m"
+  },
+  "sway": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        0.1889391
+      ]
+    ],
+    "phase": [
+      [
+        294.6592
+      ]
+    ],
+    "unit": "m/m"
+  },
+  "heave": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        0.06333319
+      ]
+    ],
+    "phase": [
+      [
+        56.2215
+      ]
+    ],
+    "unit": "m/m"
+  },
+  "roll": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        0.2435928
+      ]
+    ],
+    "phase": [
+      [
+        251.4442
+      ]
+    ],
+    "unit": "deg/m"
+  },
+  "pitch": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        0.1406144
+      ]
+    ],
+    "phase": [
+      [
+        71.4292
+      ]
+    ],
+    "unit": "deg/m"
+  },
+  "yaw": {
+    "omega": [
+      0.8
+    ],
+    "headings": [
+      60.0
+    ],
+    "amplitude": [
+      [
+        8.997135e-05
+      ]
+    ],
+    "phase": [
+      [
+        293.7359
+      ]
+    ],
+    "unit": "deg/m"
+  }
+}

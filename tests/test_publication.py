@@ -23,3 +23,11 @@ def test_scientific_plot_exports_raster_and_vector(tmp_path):
     target = plot_rao(responses, tmp_path / "response.png")
     assert target.stat().st_size > 1000
     assert target.with_suffix(".pdf").read_bytes().startswith(b"%PDF")
+
+
+def test_native_wavefield_bundle_and_gifs_match_physical_records():
+    from scripts.check_wavefields import check_wavefields
+
+    result = check_wavefields()
+    assert result["native_wavefield_cases"] == 3
+    assert result["native_field_records"] > 14000
