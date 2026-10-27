@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import atexit
+import asyncio
 from typing import Any
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ToolAnnotations
@@ -10,6 +11,8 @@ from mcp.types import ToolAnnotations
 from .models import CaseConfig
 from .workflow import CaseService
 from .reference_forms import catalog, make_case
+from .geometry_sources import GeometryRequest, format_catalog
+from .geometry_workflow import GeometryService
 
 service = CaseService()
 atexit.register(service.close)
@@ -19,6 +22,9 @@ mcp = FastMCP(
         "HydroStar local automation: plan_case -> prepare_case -> start_case -> case_status -> read_rao. "
         "Present needs_confirmation warnings with the concrete plan, then use its token after human agreement. "
         "Use explicit mass parameters and provenance for imported meshes. "
+        "For CAD, station tables, DXF curves, surface meshes or drawings, use inspect_geometry_source and build_geometry. "
+        "Use the returned case_geometry with explicit mechanics; retain source_manifest through prepare_case. "
+        "Drawing inputs require metric calibration, independent checkpoints and reviewed tracing before meshing. "
         "Use list_reference_forms and make_reference_case to choose a source-informed basic configuration. "
         "Carry reference_model and engineering_acceptance with results; execution gates and engineering-purpose evidence are distinct acceptance stages. "
         "Review quality_gates and compare response sensitivity for the intended study level. Full logs are available at the returned local paths."
@@ -30,6 +36,27 @@ mcp = FastMCP(
 def inspect_environment() -> dict[str, Any]:
     """Locate solver executables and supported capabilities; does not claim license availability."""
     return service.environment()
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
+def inspect_geometry_source(path: str | None = None) -> dict[str, Any]:
+    """Read supported source routes or inspect a source inside HS_SOURCE_ROOT."""
+    if path is None:
+        return format_catalog()
+    return GeometryService(service.root / "geometry", service.source_root).inspect(path)
+
+
+@mcp.tool()
+async def build_geometry(request: GeometryRequest) -> dict[str, Any]:
+    """Build an independently checked, provenance-preserving wetted HST bundle.
+
+    CAD and section data use an isolated OpenCASCADE/Gmsh process. Drawing inputs
+    produce a metric tracing workspace. Use case_geometry from accepted output
+    in prepare_case, with explicit mass, CG, inertia and the desired wave conditions.
+    """
+    return await asyncio.to_thread(
+        GeometryService(service.root / "geometry", service.source_root).build, request
+    )
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))

@@ -33,3 +33,16 @@ are outside the distribution. Product names belong to their respective owners.
 See [reference configurations](docs/reference-forms.md) and the machine-readable
 [source index](docs/references/sources.json) for URLs, versions, and verification
 metadata. Python dependencies keep their own licenses.
+
+## Optional geometry software
+
+The geometry extra uses separately installed software under its upstream terms:
+[Gmsh](https://gmsh.info/) (GPLv2 or later, with OpenCASCADE CAD support),
+[ezdxf](https://ezdxf.readthedocs.io/) and [meshio](https://github.com/nschloe/meshio)
+(MIT), Shapely and SciPy (BSD), Matplotlib, Pillow, and
+[pypdfium2](https://pypdfium2.readthedocs.io/) (BSD/Apache and dependency notices).
+This project's wheel contains its original adapter code and tracing HTML; it
+does not bundle those kernels, their binaries or the HydroStar solver.
+Redistributing a combined installation requires following each dependency's
+license. The original general-geometry examples are constructed from the scalars
+in geometry_source_study.py and include no external reference meshes.

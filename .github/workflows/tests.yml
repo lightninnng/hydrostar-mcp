@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - run: python -m pip install -e ".[dev,plot]"
+      - run: python -m pip install -e ".[dev,plot,geometry]"
       - run: python -m ruff check hydrostar_mcp scripts tests
       - run: python -m pytest -q -m "not integration" --basetemp .pytest-tmp
       - run: python scripts/check_release.py

@@ -1,0 +1,116 @@
+{
+  "schema": "hydrostar-general-geometry-study-1",
+  "publication_version": "0.4.0",
+  "source_origin": "Original scalar construction in geometry_source_study.py; no external meshes",
+  "cases": [
+    {
+      "key": "lofted_vessel",
+      "label": "曲线站位船体",
+      "label_en": "Vessel reconstructed from curved sections",
+      "geometry_figure": "assets/lofted_vessel_geometry.png",
+      "rao_figure": "assets/lofted_vessel_rao.png",
+      "volume_m3": 13344.017393347116,
+      "cad_volume_m3": 13406.263634846833,
+      "volume_relative_error": 0.0046430715667802325,
+      "cb_distance_m": 0.01234233880696695,
+      "panels": 6120,
+      "waterplane_panels": 1572,
+      "quality_gates": {
+        "semantic_input": "passed",
+        "static_equilibrium": "passed",
+        "mesh_geometry": "passed",
+        "mesh_topology": "passed",
+        "module_execution": "passed",
+        "rao_integrity": "passed"
+      },
+      "frequency_count": 7,
+      "heading_count": 4,
+      "frequency_grid": {
+        "min": 0.2,
+        "max": 0.8,
+        "step": 0.1
+      },
+      "summary": "examples/geometry/lofted_vessel/verification.json",
+      "summary_sha256": "96bc4e6924571de8939d36c144c4693ae34ffefb638990c2cd14a2f4a29f358e",
+      "source_case_id": "lofted_vessel-521f3bb8fbc849f4"
+    },
+    {
+      "key": "moonpool_caisson",
+      "label": "带贯通月池的多边形浮体",
+      "label_en": "Polygonal caisson with a through moonpool",
+      "geometry_figure": "assets/moonpool_caisson_geometry.png",
+      "rao_figure": "assets/moonpool_caisson_rao.png",
+      "volume_m3": 23600.00000000004,
+      "cad_volume_m3": 23599.999999999996,
+      "volume_relative_error": 1.7763568394002505e-15,
+      "cb_distance_m": 8.571805279148366e-15,
+      "panels": 860,
+      "waterplane_panels": 132,
+      "quality_gates": {
+        "semantic_input": "passed",
+        "static_equilibrium": "passed",
+        "mesh_geometry": "passed",
+        "mesh_topology": "passed",
+        "module_execution": "passed",
+        "rao_integrity": "passed"
+      },
+      "frequency_count": 7,
+      "heading_count": 4,
+      "frequency_grid": {
+        "min": 0.2,
+        "max": 0.8,
+        "step": 0.1
+      },
+      "summary": "examples/geometry/moonpool_caisson/verification.json",
+      "summary_sha256": "1ebad9dd32da2f07d767694f021bc8a565b1db4d01206e50f5ca71ffa2896689",
+      "source_case_id": "moonpool_caisson-fa66df8717a54754"
+    },
+    {
+      "key": "cad_spar",
+      "label": "带升沉板的曲面 Spar",
+      "label_en": "Curved CAD spar with a finite heave plate",
+      "geometry_figure": "assets/cad_spar_geometry.png",
+      "rao_figure": "assets/cad_spar_rao.png",
+      "volume_m3": 1720.426942011799,
+      "cad_volume_m3": 1724.642945423292,
+      "volume_relative_error": 0.0024445659448996127,
+      "cb_distance_m": 0.009264877617078239,
+      "panels": 7793,
+      "waterplane_panels": 283,
+      "quality_gates": {
+        "semantic_input": "passed",
+        "static_equilibrium": "passed",
+        "mesh_geometry": "passed",
+        "mesh_topology": "passed",
+        "module_execution": "passed",
+        "rao_integrity": "passed"
+      },
+      "frequency_count": 7,
+      "heading_count": 4,
+      "frequency_grid": {
+        "min": 0.2,
+        "max": 0.8,
+        "step": 0.1
+      },
+      "summary": "examples/geometry/cad_spar/verification.json",
+      "summary_sha256": "f169f716860aedba4cd4ad3889da4b8c66830a06d23050c1e5d3fc24c09e87bc",
+      "source_case_id": "cad_spar-49ca2d0ed2f447d1"
+    }
+  ],
+  "figures": {
+    "cad_spar_geometry.pdf": "67ece06ff5cca2efdab6858e96901cc3858106e98f20efd9624c2d2e0911cdab",
+    "cad_spar_geometry.png": "503fe0f67a0c5c720e37a31de6440db32b8222236a850010eb1d7e4377c30d1a",
+    "cad_spar_rao.pdf": "8dea737aac92ac92df303880efce2ab1642f2a3da07c7ed0308b32fc906854b5",
+    "cad_spar_rao.png": "5717d0411f7d15f641a262a9f4c3fc0fe71baaef730bd3305f98064951613b04",
+    "geometry-source-cases.pdf": "b0f94cc8f39abd9b08a635067bbe49a462af479ef160ae06f7473ede423b6102",
+    "geometry-source-cases.png": "c32f9eb11f4b839da987b9e969c909acfb627b9ecf9136e5ed59b25a923f58c4",
+    "lofted_vessel_geometry.pdf": "f31407a7fb4afc0d8cb586e8930b659fe53c6cd1b2f274f661abd4354063551b",
+    "lofted_vessel_geometry.png": "a2e99bae5571f7d71be469cefa30ecd799c1a7e6c1eafcac666503b04c1b09b5",
+    "lofted_vessel_rao.pdf": "d4aa091dd4f46fee0984cedfc90ec66bf453168523c8bb59d86ddfaf326bed7c",
+    "lofted_vessel_rao.png": "c5aa85a9a8a1de418f73c00d3ff9f0bcc10835836519ccff09d2834ae2821d94",
+    "moonpool_caisson_geometry.pdf": "594ac28650382a467a2e9867b3a6d53441a4b59ae3a9da7cb1148a8b5d612de5",
+    "moonpool_caisson_geometry.png": "7dc2a84250e8fbf66483fa401af3192bb32a2ffe1876887415b212df12f7c457",
+    "moonpool_caisson_rao.pdf": "3fcf44f80dba05c379e58d3da75fbae6a5ca81f21377e492245d8f4fa2904656",
+    "moonpool_caisson_rao.png": "bb18bd6a4840f173a28ac91c6647a685c2e2029ada1a377ff3cfdeb815620c47"
+  }
+}

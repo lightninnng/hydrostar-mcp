@@ -1,0 +1,36 @@
+{
+  "project": "cad_spar",
+  "path": "examples/geometry/sources/stepped-spar.step",
+  "units": "file",
+  "waterline_z_m": 0.0,
+  "rho_kg_m3": 1025.0,
+  "gravity_m_s2": 9.81,
+  "axis_map": [
+    "x",
+    "y",
+    "z"
+  ],
+  "translation_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mesh_size_m": 1.4,
+  "curvature_samples": 64,
+  "curve_tolerance_m": 0.005,
+  "weld_tolerance_m": 1e-08,
+  "section_axis": "x",
+  "section_curve": "polyline",
+  "longitudinal_ruled": true,
+  "spline_seam": "source",
+  "mirror_half_sections": false,
+  "station_layers": {},
+  "expected_volume_m3": null,
+  "volume_tolerance_relative": 0.005,
+  "expected_wet_components": 1,
+  "flip_normals": false,
+  "max_panels": 12000,
+  "timeout_s": 600.0,
+  "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
+  "pdf_page": 0
+}

@@ -52,6 +52,18 @@ The separate [wave-field dataset](examples/animations/index.json) retains total 
 
 The [online report](https://lightninnng.github.io/hydrostar-mcp/) provides model selection, a rotatable solved mesh, synchronized animations, heading selection, amplitude/phase plots and raw-sample inspection. Opening [docs/index.html](docs/index.html) after cloning also works offline, using its embedded numerical data and local media files.
 
+## General geometry from source data
+
+The optional geometry workflow accepts CSV/JSON sections, closed station curves in DXF, external displacement solids in STEP/IGES/BREP, and oriented surface meshes in STL/OBJ/PLY/HST. Explicit units, a right-handed frame and the mean waterline are recorded. Polygon corners are retained; interpolating splines and smooth longitudinal lofts represent curved forms. Image and PDF inputs produce a calibrated tracing workspace with independent metric checkpoints.
+
+![Original complex geometries used for native calculations](docs/assets/geometry-source-cases.png)
+
+The [general geometry examples](examples/geometry/index.json) contain an original vessel reconstructed from curved sections, a polygonal caisson with a through moonpool, and a millimetre STEP spar with a connected finite-thickness heave plate. Each package retains original source data, the accepted wetted mesh, CAD/mesh displacement and buoyancy-centre comparisons, topology and intersection checks, native inputs and complete six-DOF arrays. Their seven frequencies and four headings verify the geometry-to-solver chain; response-peak studies require separate grid refinement.
+
+Install with `python -m pip install -e ".[geometry]"`. Use `geometry-inspect` and `geometry-build`, or MCP tools `inspect_geometry_source` and `build_geometry`. The returned `case_geometry` feeds `prepare_case` with explicit mechanics and environment. Source hashes are checked when preparing and starting a case. The default CAD/mesh volume tolerance is 0.5%; the buoyancy-centre tolerance is max(0.002 m, 0.0005 × maximum wetted dimension).
+
+Geometry acceptance precedes all six native execution gates. A source mesh without an independent displacement reference retains `source_reference_pending` for fidelity. The [geometry guide](docs/geometry-sources.md) explains inputs, reconstruction assumptions and structure-specific scope. The drawing route has automated backend checks for rendering, calibration, independent dimensions and traced data; manual verification of the interactive tracing interface remains pending.
+
 ## Install and run
 
 Python 3.10+ is required. Planning, input export and viewing the published data work offline. New numerical solves require a separately installed and authorized HydroStar solver and its MPI runtime.
@@ -95,6 +107,7 @@ python -m hydrostar_mcp.server
 | --- | --- |
 | `list_reference_forms` and `make_reference_case` | Inspect reference configurations, sources and typed recipes |
 | `inspect_environment` | Locate native solver programs and inspect runtime capabilities |
+| `inspect_geometry_source` and `build_geometry` | Inspect source data and build a checked wet surface or metric tracing workspace |
 | `plan_case` and `generate_inputs` | Validate a plan and export inputs offline |
 | `prepare_case` | Prepare a fresh case and check mesh and equilibrium |
 | `start_case`, `case_status` and `cancel_case` | Run, monitor and cancel a case with process-tree cleanup |
@@ -114,6 +127,8 @@ python -m hydrostar_mcp.server
 A failed hard gate stops dependent work. Panel budget, wavelength-to-panel scale and panel aspect ratio are modelling recommendations. When a recommendation is exceeded, the workflow reports its concrete values and a confirmation token for review.
 
 The models describe one rigid body, small motions and first-order frequency-domain behaviour. Executable cases use zero static external preload. Semisubmersible modelling combines BEM surfaces, Morison members, component mass properties, added stiffness and linearized drag. Model-specific evidence and sensitivity studies establish the intended engineering use.
+
+General geometry adds curved lofts, boolean combinations, through openings and CAD import. Multibody motion, structural flexibility, actual mooring preload equilibrium and moonpool viscous losses require the corresponding physical extensions and validation.
 
 ## Reproduce and verify
 

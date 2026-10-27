@@ -18,11 +18,18 @@ def main(argv=None):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="HydroStar 输入生成、校验与计算")
     parser.add_argument("--workspace", help="运行文件根目录，默认项目内 runs")
-    parser.add_argument("--source-root", help="可导入 HST 的根目录，默认项目目录")
+    parser.add_argument(
+        "--source-root", help="几何源资料和 HST 的允许输入根目录，默认项目目录"
+    )
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("environment")
     commands.add_parser("schema")
     commands.add_parser("forms")
+    commands.add_parser("geometry-formats")
+    inspect_geometry = commands.add_parser("geometry-inspect")
+    inspect_geometry.add_argument("path")
+    geometry_build = commands.add_parser("geometry-build")
+    geometry_build.add_argument("request", type=Path)
     reference = commands.add_parser("reference")
     reference.add_argument("form_id")
     reference.add_argument("--project")
@@ -54,6 +61,26 @@ def main(argv=None):
             service = CaseService(args.workspace, args.source_root)
             if args.command == "environment":
                 result = service.environment()
+            elif args.command == "geometry-formats":
+                from .geometry_sources import format_catalog
+
+                result = format_catalog()
+            elif args.command in ("geometry-inspect", "geometry-build"):
+                from .geometry_workflow import GeometryService
+
+                geometry_service = GeometryService(
+                    service.root / "geometry", service.source_root
+                )
+                if args.command == "geometry-inspect":
+                    result = geometry_service.inspect(args.path)
+                else:
+                    from .geometry_sources import GeometryRequest
+
+                    result = geometry_service.build(
+                        GeometryRequest.model_validate_json(
+                            args.request.read_text(encoding="utf-8-sig")
+                        )
+                    )
             elif args.command == "reference":
                 result = service.plan(make_case(args.form_id, args.project))
             elif args.command == "plot":

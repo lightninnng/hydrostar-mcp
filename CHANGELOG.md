@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-10-27
+
+- Add unit-aware section, DXF, CAD and surface-mesh preprocessing through isolated geometry workers and two new MCP tools.
+- Preserve polygon corners, support smooth transverse and longitudinal lofts, solid unions/subtractions and waterline clipping.
+- Anchor CAD normals to solid inside/outside probes; independently check oriented topology, waterline closure and global triangle intersections.
+- Compare mesh displacement and buoyancy centre against CAD references, and freeze source bundles into native-case input hashes.
+- Add calibrated image/PDF tracing workspaces with independent dimensional checks and source-drawing hashes.
+- Publish three original complex-geometry cases with native six-DOF results and scientific geometry/response figures.
+- Document single-rigid-body physics scope, common offshore idealizations and geometry-specific acceptance requirements.
+- Expand automated source-format, unit-conversion, tampering, drawing and actual MCP transport checks.
+
 ## 0.3.0 - 2026-10-27
 
 - Compute native body-following pressure on all 4,430 wetted BEM panels across three reference configurations.

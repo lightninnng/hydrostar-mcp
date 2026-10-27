@@ -77,9 +77,14 @@ def plot_rao(responses, destination, title="HydroStar | Six-DOF response"):
 
     _scientific_style(plt)
     sample = responses["heave"]
-    headings = [h for h in [0, 60, 90, 180] if h in sample["headings"]] or sample[
-        "headings"
-    ][:4]
+    headings = (
+        sample["headings"]
+        if len(sample["headings"]) <= 4
+        else (
+            [h for h in [0, 60, 90, 180] if h in sample["headings"]]
+            or sample["headings"][:4]
+        )
+    )
     fig, axes = plt.subplots(3, 2, figsize=(12, 9), sharex=True)
     for index, (ax, dof) in enumerate(zip(axes.flat, core.DOFS)):
         a = responses[dof]

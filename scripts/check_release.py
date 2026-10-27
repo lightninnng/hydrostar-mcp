@@ -90,7 +90,14 @@ def check_files(files):
             "Vendor or credential file: " + name,
         )
         if path.suffix.lower() in {".png", ".pdf", ".gif"}:
-            require(name.startswith("docs/assets/"), "Unreviewed binary asset: " + name)
+            reviewed_geometry = re.fullmatch(
+                r"examples/geometry/(lofted_vessel|moonpool_caisson|cad_spar)/geometry/geometry-qa\.png",
+                name,
+            )
+            require(
+                name.startswith("docs/assets/") or reviewed_geometry,
+                "Unreviewed binary asset: " + name,
+            )
         if path.suffix in text_types or path.name in {
             "LICENSE",
             ".gitignore",
@@ -292,6 +299,9 @@ def main():
         from scripts.check_pressures import check_pressures
 
         results.update(check_pressures())
+        from scripts.check_geometry import check_geometry
+
+        results.update(check_geometry())
         print(
             json.dumps(
                 dict(

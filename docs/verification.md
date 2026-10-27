@@ -5,7 +5,7 @@
 ## 离线验证
 
 ~~~powershell
-python -m pip install -e ".[dev,plot]"
+python -m pip install -e ".[dev,plot,geometry]"
 python -m ruff check hydrostar_mcp scripts tests
 python -m pytest -q -m "not integration" --basetemp .pytest-tmp
 python scripts/check_release.py
@@ -49,6 +49,12 @@ python scripts/peak_study.py
 
 三套资料参照构型发布了 0.005 rad/s 网格的原生结果和标量核查。方法基准的收敛数值仅适用于对应基准；新构型应另做三档空间网格和峰区频率研究，形成自身误差证据。
 
+## 多来源几何验证
+
+`python scripts/check_geometry.py` 核对三类原创复杂几何的源包、CAD 体积与浮心误差、求解湿面、六项原生门禁、完整 RAO 数组和图像哈希。单元测试覆盖毫米制 STEP/IGES、显式单位 BREP、DXF 角点、STL/OBJ/PLY/HST、全局面自交、图纸独立尺寸点及源包修改拦截；MCP 测试通过真实 stdio 调用几何构建。
+
+三类新增构型采用 0.2–0.8 rad/s、步长 0.1 rad/s 及四个浪向，验证的是几何转换、原生求解和数据追溯链路。其响应峰区和工程误差应按目标用途另做空间与频率研究。
+
 ## 动态场验证
 
 `python scripts/check_wavefields.py` 逐条核对压缩包内的原生场点 RAO、导出复数值、坐标网格、解析入射波、输入/数据哈希、GIF 帧数与循环时长。相位重建和运动坐标另有单元测试，详见[动态场说明](wavefields.md)。
@@ -57,6 +63,6 @@ python scripts/peak_study.py
 
 `engineering_acceptance` 保存目标用途/海况、实际几何、装载/惯性、约束/预载、耗散和周期/RAO 对照等证据项。以目标资料替换假设后重新完成静力和全链路检查，声明精度指标与适用范围。
 
-本版三套算例六项数值执行门禁全部通过，`engineering_acceptance.ready=false` 如实保留目标对象的后续证据工作。
+本版三套资料参照构型与三套多来源几何算例的六项数值执行门禁全部通过，`engineering_acceptance.ready=false` 保留目标对象的后续证据工作。
 
 [返回 README](../README.md) · [公开结果](results.md)

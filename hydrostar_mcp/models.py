@@ -40,6 +40,10 @@ class ImportedMesh(Model):
         description="HST path relative to HS_SOURCE_ROOT; resolved paths must stay inside it"
     )
     expected_volume_m3: Positive | None = None
+    volume_relative_tolerance: Annotated[float, Field(gt=0, le=0.05)] = 0.001
+    source_manifest: str | None = Field(
+        default=None, description="Accepted geometry-report.json from build_geometry"
+    )
 
 
 class Semisub(Model):

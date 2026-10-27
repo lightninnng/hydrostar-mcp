@@ -15,3 +15,4 @@ examples/animations/** -text -whitespace
 *.gif binary
 
 examples/pressures/** -text -whitespace
+examples/geometry/** -text -whitespace

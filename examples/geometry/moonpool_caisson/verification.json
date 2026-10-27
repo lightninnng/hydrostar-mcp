@@ -1,0 +1,316 @@
+{
+  "source_case_id": "moonpool_caisson-fa66df8717a54754",
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 23600.00000000004,
+    "cb": [
+      3.776865825738374e-15,
+      -1.608355633233241e-15,
+      -4.999999999999994
+    ],
+    "wetted_area": 4965.685424949242,
+    "n_nodes": 464,
+    "n_panels": 860,
+    "sym": 0,
+    "max_edge": 5.4901394584870795,
+    "max_aspect_ratio": 1.703777197422323,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "hslec": {
+    "bodies": 1,
+    "symmetry": 0,
+    "hull_panels": 860,
+    "waterline_segments": 68,
+    "waterplane_panels": 132,
+    "above_waterline": 0,
+    "cb_x": 0.0
+  },
+  "hschk": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      14.230898,
+      40.495095
+    ]
+  },
+  "geometry_source_validation": {
+    "schema": "hydrostar-geometry-bundle-1",
+    "quality": {
+      "passed": true,
+      "nodes": 464,
+      "panels": 860,
+      "wetted_components": 1,
+      "expected_wet_components": 1,
+      "component_volume_m3": [
+        23600.0
+      ],
+      "zero_area_panels": [],
+      "duplicate_faces": 0,
+      "above_water_panels": [],
+      "waterplane_panels": [],
+      "invalid_edges": [],
+      "cut_edges": 68,
+      "invalid_waterline_vertices": [],
+      "self_intersections": [],
+      "nonpositive_components": [],
+      "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap"
+    },
+    "fidelity": {
+      "cad_volume_relative_error": 1.7763568394002505e-15,
+      "cad_cb_distance_m": 8.571805279148366e-15,
+      "cad_cb_tolerance_m": 0.035
+    },
+    "geometry_gates": {
+      "source_units": "passed",
+      "coordinate_frame": "passed",
+      "waterline_clipping": "passed",
+      "topology": "passed",
+      "self_intersection": "passed",
+      "orientation": "passed",
+      "fidelity": "passed"
+    },
+    "reference": {
+      "kernel": "OpenCASCADE/Gmsh",
+      "gmsh_version": "4.15.2",
+      "cad_volume_m3": 23599.999999999996,
+      "cad_cb_m": [
+        1.2329160390610735e-15,
+        1.5415164436829296e-16,
+        -5.000000000000002
+      ],
+      "source_profiles": [
+        {
+          "solid": "chamfered_hull",
+          "operation": "add",
+          "position": -10.0,
+          "points_m": [
+            [
+              -35.0,
+              -10.0,
+              -10.0
+            ],
+            [
+              -25.0,
+              -20.0,
+              -10.0
+            ],
+            [
+              25.0,
+              -20.0,
+              -10.0
+            ],
+            [
+              35.0,
+              -10.0,
+              -10.0
+            ],
+            [
+              35.0,
+              10.0,
+              -10.0
+            ],
+            [
+              25.0,
+              20.0,
+              -10.0
+            ],
+            [
+              -25.0,
+              20.0,
+              -10.0
+            ],
+            [
+              -35.0,
+              10.0,
+              -10.0
+            ]
+          ]
+        },
+        {
+          "solid": "chamfered_hull",
+          "operation": "add",
+          "position": 5.0,
+          "points_m": [
+            [
+              -35.0,
+              -10.0,
+              5.0
+            ],
+            [
+              -25.0,
+              -20.0,
+              5.0
+            ],
+            [
+              25.0,
+              -20.0,
+              5.0
+            ],
+            [
+              35.0,
+              -10.0,
+              5.0
+            ],
+            [
+              35.0,
+              10.0,
+              5.0
+            ],
+            [
+              25.0,
+              20.0,
+              5.0
+            ],
+            [
+              -25.0,
+              20.0,
+              5.0
+            ],
+            [
+              -35.0,
+              10.0,
+              5.0
+            ]
+          ]
+        },
+        {
+          "solid": "through_moonpool",
+          "operation": "cut",
+          "position": -12.0,
+          "points_m": [
+            [
+              -10.0,
+              -6.0,
+              -12.0
+            ],
+            [
+              10.0,
+              -6.0,
+              -12.0
+            ],
+            [
+              10.0,
+              6.0,
+              -12.0
+            ],
+            [
+              -10.0,
+              6.0,
+              -12.0
+            ]
+          ]
+        },
+        {
+          "solid": "through_moonpool",
+          "operation": "cut",
+          "position": 7.0,
+          "points_m": [
+            [
+              -10.0,
+              -6.0,
+              7.0
+            ],
+            [
+              10.0,
+              -6.0,
+              7.0
+            ],
+            [
+              10.0,
+              6.0,
+              7.0
+            ],
+            [
+              -10.0,
+              6.0,
+              7.0
+            ]
+          ]
+        }
+      ],
+      "boundary_orientations": [
+        -1,
+        1
+      ],
+      "orientation_method": "CAD closest-point normals anchored by solid inside/outside probes; independently checked oriented edges",
+      "wet_solids": 1,
+      "curve_fit": "source curves/polyline"
+    }
+  },
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.141
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.329
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 6.203
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.406
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.172
+    }
+  ],
+  "engineering_acceptance": {
+    "ready": false,
+    "scope": "Own geometry and simplified rigid-body assumptions; target-specific validation remains an evidence requirement."
+  },
+  "files": {
+    "config.json": "affd1c88996696c73171987946c425a86ce7634e78f71f997cabcf2b9508a8ad",
+    "motions.json": "6e60948668f89a1b809a15b36d8bb079c32433bb4ce8dc159da7cb9cb4ff2511",
+    "geometry/geometry-qa.png": "29b3d2e95037ce7e2bc38af21c4d13ebeeb1969643489899e08f0e36c6a923dd",
+    "geometry/geometry-report.json": "a82293f78b8c12d2f351eeeb929a48a4090598ee82b71813c9a4bbabf3aed3e4",
+    "geometry/model.hst": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
+    "geometry/request.json": "4f4dc84636a62b445770bfb14183e862e08e986bee57b564fa3ed09828f81aa1",
+    "geometry/source.json": "996e6358fa99a402a321540c31d16193f1857813e4c46d3f5508132c3c67712c",
+    "geometry/surface.json": "c2ee89294a3163066fbea7fe447526bf3bc7cc98cea2ab12c04647cf87927bc2",
+    "inputs/moonpool_caisson.hst": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
+    "inputs/moonpool_caisson.mcn": "6237e9f50a26d03a429ef339f0f0b2706fe219d00bcb55b4865268c179e5067b",
+    "inputs/moonpool_caisson.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/moonpool_caisson.rdf": "58b107d25bbbef8aaa11fe241b7cd773ecf5cd0a29c68b66eab824f84fdc0fc8",
+    "rao/heave.rao": "b1290db70c67ad7c139c70a588e5acb8f0978491f87601823843449f2a994823",
+    "rao/pitch.rao": "06906642e24abf3e10f6f9930fcc2ff3dd68b630f5cbab62e90666ba3ec2b8c4",
+    "rao/roll.rao": "ddfd4e7c62189bd7427fd77477294204ff5b4ea3e85029db25683fc14ce7427d",
+    "rao/surge.rao": "3e0d17fa74849a076e49b7699ab7e523683945e05928021457595e339b5c38db",
+    "rao/sway.rao": "90018855c2a90ced9ae12199e17f1e4a62d1348c394d6b87c5af8bfcc817ad67",
+    "rao/yaw.rao": "e13b09c38676ca44e22e64eed06a7fa15299de244c2cff839fc590db744f6db4"
+  },
+  "publication_version": "0.4.0"
+}

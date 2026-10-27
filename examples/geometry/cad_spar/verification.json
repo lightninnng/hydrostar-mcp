@@ -1,0 +1,175 @@
+{
+  "source_case_id": "cad_spar-49ca2d0ed2f447d1",
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 1720.426942011799,
+    "cb": [
+      0.00011115080494183834,
+      1.675067096982703e-05,
+      -12.486970745089911
+    ],
+    "wetted_area": 1070.2882785532686,
+    "n_nodes": 3930,
+    "n_panels": 7793,
+    "sym": 0,
+    "max_edge": 1.750021020524208,
+    "max_aspect_ratio": 2.1307529302819006,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "hslec": {
+    "bodies": 1,
+    "symmetry": 0,
+    "hull_panels": 7793,
+    "waterline_segments": 65,
+    "waterplane_panels": 283,
+    "above_waterline": 0,
+    "cb_x": 0.000111
+  },
+  "hschk": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      1.133112,
+      1.153394
+    ]
+  },
+  "geometry_source_validation": {
+    "schema": "hydrostar-geometry-bundle-1",
+    "quality": {
+      "passed": true,
+      "nodes": 3930,
+      "panels": 7793,
+      "wetted_components": 1,
+      "expected_wet_components": 1,
+      "component_volume_m3": [
+        1720.426942011806
+      ],
+      "zero_area_panels": [],
+      "duplicate_faces": 0,
+      "above_water_panels": [],
+      "waterplane_panels": [],
+      "invalid_edges": [],
+      "cut_edges": 65,
+      "invalid_waterline_vertices": [],
+      "self_intersections": [],
+      "nonpositive_components": [],
+      "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap"
+    },
+    "fidelity": {
+      "cad_volume_relative_error": 0.0024445659448996127,
+      "cad_cb_distance_m": 0.009264877617078239,
+      "cad_cb_tolerance_m": 0.010000000000000002
+    },
+    "geometry_gates": {
+      "source_units": "passed",
+      "coordinate_frame": "passed",
+      "waterline_clipping": "passed",
+      "topology": "passed",
+      "self_intersection": "passed",
+      "orientation": "passed",
+      "fidelity": "passed"
+    },
+    "reference": {
+      "kernel": "OpenCASCADE/Gmsh",
+      "gmsh_version": "4.15.2",
+      "mesh_controls": {
+        "max_size_m": 1.4,
+        "min_size_factor": 0.03,
+        "curvature_samples": 64,
+        "algorithm": "Frontal-Delaunay; planar Delaunay",
+        "smoothing_steps": 20,
+        "short_edge_distance_field": true
+      },
+      "cad_volume_m3": 1724.642945423292,
+      "cad_cb_m": [
+        0.006449317559903611,
+        5.856633954218298e-05,
+        -12.493728248393321
+      ],
+      "source_profiles": null,
+      "boundary_orientations": [
+        -1,
+        1
+      ],
+      "orientation_method": "CAD closest-point normals anchored by solid inside/outside probes; independently checked oriented edges",
+      "wet_solids": 1,
+      "curve_fit": "source curves/polyline"
+    }
+  },
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.547
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 18.203
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 227.031
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.515
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.156
+    }
+  ],
+  "engineering_acceptance": {
+    "ready": false,
+    "scope": "Own geometry and simplified rigid-body assumptions; target-specific validation remains an evidence requirement."
+  },
+  "files": {
+    "config.json": "250b9fa709c292b33917e16ae41fdb12ffe4fdd523fc040d5898576128d79a35",
+    "motions.json": "be5aece887642b4a4c1f57985ffaed5bbfdad198daab05b6b7d22f033ec32799",
+    "geometry/geometry-qa.png": "9cbcf9840e46031ee326b572d6f6769599ae878b01c5153ae3873fe1a64bc214",
+    "geometry/geometry-report.json": "a24528ca8d52ab2ec5a30c2226d0e6aa768275f80dee8611a930c93b8dce9722",
+    "geometry/model.hst": "a400811b5dbfb7e4e751c3554fe4f6d30568027be2af78937d3e1e28640b5237",
+    "geometry/request.json": "8614c2ccd9c090aae2c02058495462e41b6af73365f112975b29bca70e39e5c6",
+    "geometry/source.step": "e9bdc57225e06b49cfe93d34af44cbd5bf174874f6ae5a57f489f581405b2fb3",
+    "geometry/surface.json": "33eacd9160b2ef606fc47d357ade84f43c4c44db5246cbe83b3be541e8e41e71",
+    "inputs/cad_spar.hst": "a400811b5dbfb7e4e751c3554fe4f6d30568027be2af78937d3e1e28640b5237",
+    "inputs/cad_spar.mcn": "2f3787fce00a339523b165699bb690775724972c1fd4d4bcb6df9c2564e993b4",
+    "inputs/cad_spar.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/cad_spar.rdf": "9908a84082793cc66406c91512ad8d731ed3eeda0662d3e24974aba4e46a5127",
+    "rao/heave.rao": "3d53cd3455a3d118749fba140f671e2ae68854950d8d7acf57e58dc61aac6b4f",
+    "rao/pitch.rao": "b7cc55e4651cf907e72873793c652f70c8784190df25fe05f3d9cdb026cc1e65",
+    "rao/roll.rao": "432c0f10b4b63b55de7503881a17b2d4de93b269bb77ff32ed841ca685a1a454",
+    "rao/surge.rao": "313c1fbad8f0d132d423b5553bdef73f913a31d1a9b97643dcbdf457010e016b",
+    "rao/sway.rao": "47abeff3a058f82222ac256046a5d14c8b35ead94128b1434b3949359c63c6e5",
+    "rao/yaw.rao": "ff3b63212f0feab3699ec5df91a1a1bfdc7ae7cbb81caebd35dcdb6291e465bd"
+  },
+  "publication_version": "0.4.0"
+}

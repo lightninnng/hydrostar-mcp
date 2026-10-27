@@ -1,0 +1,272 @@
+{
+  "schema": "hydrostar-geometry-bundle-1",
+  "version": "0.4.0",
+  "status": "geometry_accepted",
+  "request": {
+    "project": "moonpool_caisson",
+    "path": "examples/geometry/sources/moonpool-sections.json",
+    "units": "m",
+    "waterline_z_m": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81,
+    "axis_map": [
+      "x",
+      "y",
+      "z"
+    ],
+    "translation_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mesh_size_m": 4.0,
+    "curve_tolerance_m": 0.005,
+    "weld_tolerance_m": 1e-08,
+    "section_axis": "x",
+    "section_curve": "polyline",
+    "longitudinal_ruled": true,
+    "spline_seam": "source",
+    "mirror_half_sections": false,
+    "station_layers": {},
+    "expected_volume_m3": null,
+    "volume_tolerance_relative": 0.005,
+    "expected_wet_components": 1,
+    "flip_normals": false,
+    "max_panels": 12000,
+    "timeout_s": 600.0,
+    "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
+    "pdf_page": 0
+  },
+  "quality": {
+    "passed": true,
+    "nodes": 464,
+    "panels": 860,
+    "wetted_components": 1,
+    "expected_wet_components": 1,
+    "component_volume_m3": [
+      23600.0
+    ],
+    "zero_area_panels": [],
+    "duplicate_faces": 0,
+    "above_water_panels": [],
+    "waterplane_panels": [],
+    "invalid_edges": [],
+    "cut_edges": 68,
+    "invalid_waterline_vertices": [],
+    "self_intersections": [],
+    "nonpositive_components": [],
+    "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap"
+  },
+  "generator_sources": {
+    "geometry_worker.py": "0ea8da7db10c60d1419c50023a7d0033d88b262796a8a5a4a0d8d4787ffd3662",
+    "geometry_kernel.py": "ec57aab914243ff57a121088e7411f5239f945fd0436863518147616c6779ace",
+    "geometry_sources.py": "766ce10f264fb472e1965a24f5d5421e81c6a5aec4c9d2628eafbeae0fe539e9",
+    "surface_checks.py": "09f88699e76b9410d1749c50a514db3d2bc49221e66b41af1e403dd831612700"
+  },
+  "fidelity": {
+    "cad_volume_relative_error": 1.7763568394002505e-15,
+    "cad_cb_distance_m": 8.571805279148366e-15,
+    "cad_cb_tolerance_m": 0.035
+  },
+  "hydrostatics": {
+    "volume": 23600.00000000004,
+    "cb": [
+      3.776865825738374e-15,
+      -1.608355633233241e-15,
+      -4.999999999999994
+    ],
+    "wetted_area": 4965.685424949242,
+    "n_nodes": 464,
+    "n_panels": 860,
+    "sym": 0,
+    "max_edge": 5.4901394584870795,
+    "max_aspect_ratio": 1.703777197422323,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "reference": {
+    "kernel": "OpenCASCADE/Gmsh",
+    "gmsh_version": "4.15.2",
+    "cad_volume_m3": 23599.999999999996,
+    "cad_cb_m": [
+      1.2329160390610735e-15,
+      1.5415164436829296e-16,
+      -5.000000000000002
+    ],
+    "source_profiles": [
+      {
+        "solid": "chamfered_hull",
+        "operation": "add",
+        "position": -10.0,
+        "points_m": [
+          [
+            -35.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            -25.0,
+            -20.0,
+            -10.0
+          ],
+          [
+            25.0,
+            -20.0,
+            -10.0
+          ],
+          [
+            35.0,
+            -10.0,
+            -10.0
+          ],
+          [
+            35.0,
+            10.0,
+            -10.0
+          ],
+          [
+            25.0,
+            20.0,
+            -10.0
+          ],
+          [
+            -25.0,
+            20.0,
+            -10.0
+          ],
+          [
+            -35.0,
+            10.0,
+            -10.0
+          ]
+        ]
+      },
+      {
+        "solid": "chamfered_hull",
+        "operation": "add",
+        "position": 5.0,
+        "points_m": [
+          [
+            -35.0,
+            -10.0,
+            5.0
+          ],
+          [
+            -25.0,
+            -20.0,
+            5.0
+          ],
+          [
+            25.0,
+            -20.0,
+            5.0
+          ],
+          [
+            35.0,
+            -10.0,
+            5.0
+          ],
+          [
+            35.0,
+            10.0,
+            5.0
+          ],
+          [
+            25.0,
+            20.0,
+            5.0
+          ],
+          [
+            -25.0,
+            20.0,
+            5.0
+          ],
+          [
+            -35.0,
+            10.0,
+            5.0
+          ]
+        ]
+      },
+      {
+        "solid": "through_moonpool",
+        "operation": "cut",
+        "position": -12.0,
+        "points_m": [
+          [
+            -10.0,
+            -6.0,
+            -12.0
+          ],
+          [
+            10.0,
+            -6.0,
+            -12.0
+          ],
+          [
+            10.0,
+            6.0,
+            -12.0
+          ],
+          [
+            -10.0,
+            6.0,
+            -12.0
+          ]
+        ]
+      },
+      {
+        "solid": "through_moonpool",
+        "operation": "cut",
+        "position": 7.0,
+        "points_m": [
+          [
+            -10.0,
+            -6.0,
+            7.0
+          ],
+          [
+            10.0,
+            -6.0,
+            7.0
+          ],
+          [
+            10.0,
+            6.0,
+            7.0
+          ],
+          [
+            -10.0,
+            6.0,
+            7.0
+          ]
+        ]
+      }
+    ],
+    "boundary_orientations": [
+      -1,
+      1
+    ],
+    "orientation_method": "CAD closest-point normals anchored by solid inside/outside probes; independently checked oriented edges",
+    "wet_solids": 1,
+    "curve_fit": "source curves/polyline"
+  },
+  "geometry_gates": {
+    "source_units": "passed",
+    "coordinate_frame": "passed",
+    "waterline_clipping": "passed",
+    "topology": "passed",
+    "self_intersection": "passed",
+    "orientation": "passed",
+    "fidelity": "passed"
+  },
+  "physics_status": "Geometry accepted; use prepare_case and start_case for native hydrodynamic validation",
+  "files": {
+    "geometry-qa.png": "29b3d2e95037ce7e2bc38af21c4d13ebeeb1969643489899e08f0e36c6a923dd",
+    "model.hst": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
+    "request.json": "4f4dc84636a62b445770bfb14183e862e08e986bee57b564fa3ed09828f81aa1",
+    "source.json": "996e6358fa99a402a321540c31d16193f1857813e4c46d3f5508132c3c67712c",
+    "surface.json": "c2ee89294a3163066fbea7fe447526bf3bc7cc98cea2ab12c04647cf87927bc2"
+  }
+}

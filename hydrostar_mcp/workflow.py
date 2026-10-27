@@ -133,13 +133,31 @@ class CaseService:
 
     def source_path(self, name):
         path = (self.source_root / name).resolve()
+        generated = (
+            path.is_relative_to(self.root / "geometry") and path.name == "model.hst"
+        )
+        if generated and path.is_file():
+            from .geometry_workflow import verify_bundle
+
+            verify_bundle(path.parent / "geometry-report.json", path)
         if (
-            not path.is_relative_to(self.source_root)
+            not (path.is_relative_to(self.source_root) or generated)
             or path.suffix.lower() != ".hst"
             or not path.is_file()
         ):
             raise ValueError("导入文件必须是 HS_SOURCE_ROOT 内存在的 .hst 文件")
         return path
+
+    def _geometry_bundle(self, geometry):
+        from .geometry_workflow import verify_bundle
+
+        manifest = (self.source_root / geometry.source_manifest).resolve()
+        if not (
+            manifest.is_relative_to(self.source_root)
+            or manifest.is_relative_to(self.root / "geometry")
+        ):
+            raise ValueError("几何源清单位于允许的输入或几何生成目录之外")
+        return manifest, verify_bundle(manifest, self.source_path(geometry.path))
 
     def case_path(self, case_id):
         if not isinstance(case_id, str) or not re.fullmatch(
@@ -172,6 +190,7 @@ class CaseService:
                 "source_informed_section_hulls_and_column_semisub",
                 "reference_scalar_comparison_and_engineering_acceptance",
                 "single_body_hst_import",
+                "unit_aware_cad_sections_dxf_mesh_and_calibrated_drawing_sources",
                 "input_generation",
                 "mesh_validation",
                 "linear_6dof_rao",
@@ -253,6 +272,11 @@ class CaseService:
             warnings=warnings,
             geometry_source_hash=file_hash(self.source_path(geometry.path))
             if isinstance(geometry, ImportedMesh)
+            else None,
+            geometry_source_manifest_sha256=file_hash(
+                self._geometry_bundle(geometry)[0]
+            )
+            if isinstance(geometry, ImportedMesh) and geometry.source_manifest
             else None,
             heading_convention="Wave propagation angle from +x; with bow +x, 0 deg following / 180 deg head seas",
         )
@@ -585,6 +609,30 @@ class CaseService:
                 shutil.copyfile(self.source_path(cfg.geometry.path), target)
                 if file_hash(target) != plan["geometry_source_hash"]:
                     raise ValueError("导入网格在规划后发生变化，请重新规划")
+                if cfg.geometry.source_manifest:
+                    manifest, bundle = self._geometry_bundle(cfg.geometry)
+                    if file_hash(manifest) != plan["geometry_source_manifest_sha256"]:
+                        raise ValueError("几何源清单在规划后发生变化")
+                    shutil.copyfile(
+                        manifest, directory / "geometry-source--manifest.json"
+                    )
+                    for name, expected in bundle["files"].items():
+                        if Path(name).name != name:
+                            raise ValueError("几何源数据包采用平铺文件清单")
+                        archived = directory / ("geometry-source--" + name)
+                        shutil.copyfile(manifest.parent / name, archived)
+                        if file_hash(archived) != expected:
+                            raise ValueError("几何源文件在归档期间发生变化")
+                    report["geometry_source_validation"] = {
+                        k: bundle[k]
+                        for k in (
+                            "schema",
+                            "quality",
+                            "fidelity",
+                            "geometry_gates",
+                            "reference",
+                        )
+                    }
             else:
                 mesh = parametric.build(
                     cfg.geometry.model_dump(),
@@ -625,6 +673,7 @@ class CaseService:
                     *directory.glob("geometry.json"),
                     *directory.glob("geometry-generator.py"),
                     *directory.glob("forms_geometry.py"),
+                    *directory.glob("geometry-source--*"),
                     *sorted(directory.glob(cfg.project + ".*")),
                 ]
             }
@@ -743,7 +792,7 @@ class CaseService:
                     abs(hyd["volume"] - cfg.geometry.expected_volume_m3)
                     / cfg.geometry.expected_volume_m3
                 )
-                if delta > 0.001:
+                if delta > cfg.geometry.volume_relative_tolerance:
                     return self._fail(
                         directory,
                         report,
@@ -812,6 +861,7 @@ class CaseService:
                 *directory.glob("geometry.json"),
                 *directory.glob("geometry-generator.py"),
                 *directory.glob("forms_geometry.py"),
+                *directory.glob("geometry-source--*"),
                 *sorted(directory.glob(cfg.project + ".*")),
             ]
             report["input_hashes"] = {p.name: file_hash(p) for p in inputs}

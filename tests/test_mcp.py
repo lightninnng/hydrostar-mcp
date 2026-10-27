@@ -4,11 +4,62 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import pytest
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 REPO = Path(__file__).resolve().parent.parent
+
+
+def test_real_stdio_builds_a_frozen_geometry_bundle(tmp_path):
+    pytest.importorskip("shapely")
+    pytest.importorskip("matplotlib")
+    from conftest import box_mesh
+
+    source = box_mesh(tmp_path / "own.hst", symmetry=0)
+
+    async def check():
+        params = StdioServerParameters(
+            command=sys.executable,
+            args=["-m", "hydrostar_mcp.server"],
+            cwd=str(REPO),
+            env={
+                **os.environ,
+                "HS_WORKSPACE": str(tmp_path / "runs"),
+                "HS_SOURCE_ROOT": str(tmp_path),
+            },
+        )
+        async with stdio_client(params) as (read, write):
+            async with ClientSession(read, write) as client:
+                await client.initialize()
+                build = asyncio.create_task(
+                    client.call_tool(
+                        "build_geometry",
+                        {
+                            "request": {
+                                "project": "geometry_mcp",
+                                "path": str(source),
+                                "units": "m",
+                                "expected_volume_m3": 80,
+                                "timeout_s": 60,
+                                "source_note": "Original closed wet box for actual MCP geometry transport",
+                            }
+                        },
+                    )
+                )
+                await asyncio.sleep(0.1)
+                tools = await asyncio.wait_for(client.list_tools(), timeout=10)
+                assert any(t.name == "build_geometry" for t in tools.tools)
+                result = await asyncio.wait_for(build, timeout=90)
+                assert not result.isError
+                report = result.structuredContent
+                assert report["status"] == "geometry_accepted", report
+                assert report["quality"]["passed"]
+                assert report["hydrostatics"]["volume"] == pytest.approx(80)
+                assert Path(report["case_geometry"]["source_manifest"]).is_file()
+
+    asyncio.run(check())
 
 
 def test_real_stdio_handshake_schema_planning_and_input_export(tmp_path):
@@ -40,8 +91,13 @@ def test_real_stdio_handshake_schema_planning_and_input_export(tmp_path):
                     "read_rao",
                     "list_reference_forms",
                     "make_reference_case",
+                    "inspect_geometry_source",
+                    "build_geometry",
                 }
                 assert {t.name for t in tools.tools} == expected
+                routes = await client.call_tool("inspect_geometry_source", {})
+                assert not routes.isError
+                assert routes.structuredContent["formats"][".step"] == "cad_solid"
                 plan_tool = next(t for t in tools.tools if t.name == "plan_case")
                 assert "CaseConfig" in json.dumps(plan_tool.inputSchema)
                 plan = await client.call_tool("plan_case", {"config": {}})

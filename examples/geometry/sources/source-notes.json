@@ -1,0 +1,8 @@
+{
+  "origin": "original project geometry, authored from the scalars in geometry_source_study.py",
+  "external_meshes": [],
+  "vessel": "Closed station profiles in millimetres; interpolating transverse curves and smooth longitudinal interpolation; keel-side spline seams and finite narrow end caps.",
+  "moonpool": "Chamfered polygon displacement hull with a through opening; constructive subtraction.",
+  "spar": "Millimetre STEP solid with curved, varying elliptical sections and a connected finite-thickness heave plate.",
+  "physics": "Demonstration displacement envelopes; explicit loading and damping assumptions are recorded per native case."
+}
