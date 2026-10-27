@@ -295,6 +295,7 @@ def check_results():
                 [node, "--check"],
                 input=script,
                 text=True,
+                    encoding="utf-8",
                 capture_output=True,
                 timeout=20,
             )
