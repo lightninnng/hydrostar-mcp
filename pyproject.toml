@@ -46,4 +46,6 @@ markers = ["integration: requires the installed HydroStar executables"]
 target-version = "py310"
 
 [tool.ruff.lint]
+# Keep the validated correctness rules stable across Ruff releases.
+select = ["E4", "E7", "E9", "F"]
 ignore = ["E402"]
