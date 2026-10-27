@@ -6,12 +6,29 @@ import cmath
 import gzip
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+
+
+def same_numbers(actual, expected):
+    """Allow float roundoff in rederived quantities while preserving array shape."""
+    if isinstance(actual, list) or isinstance(expected, list):
+        return (
+            isinstance(actual, list)
+            and isinstance(expected, list)
+            and len(actual) == len(expected)
+            and all(same_numbers(a, b) for a, b in zip(actual, expected))
+        )
+    return (
+        math.isfinite(actual)
+        and math.isfinite(expected)
+        and math.isclose(actual, expected, rel_tol=1e-12, abs_tol=1e-11)
+    )
 
 
 def check_pressures():
@@ -74,9 +91,18 @@ def check_pressures():
         d = load(folder / "pressure.json")
         n = len(d["mesh"]["faces"])
         mesh = wet_panel_samples(folder / "inputs" / (cfg.project + ".hst"))
-        require(mesh == d["mesh"], key + ": source mesh/centroids/normals")
         require(
-            pressure_points(mesh, d["outward_offset_m"]) == d["points"],
+            mesh["vertices"] == d["mesh"]["vertices"]
+            and mesh["faces"] == d["mesh"]["faces"],
+            key + ": source mesh coordinates/connectivity",
+        )
+        for field in ("centers", "normals", "areas_m2"):
+            require(
+                same_numbers(mesh[field], d["mesh"][field]),
+                key + ": derived mesh " + field,
+            )
+        require(
+            same_numbers(pressure_points(mesh, d["outward_offset_m"]), d["points"]),
             key + ": pressure collocation geometry",
         )
         require(
@@ -121,7 +147,7 @@ def check_pressures():
             -d["rho_kg_m3"] * d["gravity_m_s2"] * c[2] / 1000 for c in mesh["centers"]
         ]
         require(
-            expected_static == d["mean_static_pressure_kpa"],
+            same_numbers(expected_static, d["mean_static_pressure_kpa"]),
             key + ": separate equilibrium pressure",
         )
         wave_folder = ROOT / "examples/animations" / key
@@ -137,6 +163,7 @@ def check_pressures():
             "depth_m",
             "rho_kg_m3",
             "gravity_m_s2",
+            "wave_reference_xy_m",
         ]:
             require(d[name] == wave[name], key + ": pressure/wave physical condition")
         motions = load(folder / "motions.json")
@@ -214,7 +241,7 @@ def check_pressures():
                 )
                 value = cmath.rect(
                     raw["amplitude"][0][0],
-                    __import__("math").radians(raw["phase"][0][0]),
+                    math.radians(raw["phase"][0][0]),
                 )
                 require(
                     abs(value - complex(*d[field][point])) < 1e-12,

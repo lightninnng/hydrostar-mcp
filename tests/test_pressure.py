@@ -90,8 +90,21 @@ def test_pressure_points_follow_full_wet_mesh_outward_normals():
         )
 
 
-def test_all_native_pressure_records_and_synchronized_media():
+@pytest.mark.parametrize("legacy_float_sum", [False, True])
+def test_all_native_pressure_records_and_synchronized_media(
+    monkeypatch, legacy_float_sum
+):
     from scripts.check_pressures import check_pressures
+
+    if legacy_float_sum:
+        # Reproduce the pre-3.12 floating-point sum used to derive panel geometry.
+        def sequential_sum(values, start=0):
+            result = start
+            for value in values:
+                result += value
+            return result
+
+        monkeypatch.setattr("hydrostar_mcp.pressure.sum", sequential_sum, raising=False)
 
     result = check_pressures()
     assert result["native_pressure_cases"] == 3

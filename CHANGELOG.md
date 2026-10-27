@@ -9,6 +9,7 @@
 - Rework the online gallery as a scientific case report with numbered figures, visible quality gates and connected explanatory prose.
 - Provide complete Chinese and English READMEs with reciprocal language links.
 - Retry transient Windows report-file sharing conflicts while preserving atomic updates and a bounded failure path.
+- Check rederived panel geometry with explicit floating-point tolerances across Python versions, retaining exact native-file hashes and connectivity checks.
 
 ## 0.2.1 - 2026-10-27
 
