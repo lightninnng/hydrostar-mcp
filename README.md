@@ -1,5 +1,7 @@
 # HydroStar MCP
 
+**简体中文**　[English](README.en.md)
+
 [![Tests](https://github.com/lightninnng/hydrostar-mcp/actions/workflows/tests.yml/badge.svg)](https://github.com/lightninnng/hydrostar-mcp/actions/workflows/tests.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -31,13 +33,17 @@ Local MCP automation for HydroStar, with source-informed geometry and reproducib
 
 每套[公开结果](examples/results/index.json)包含生成输入（HST/RDF/MCN/RAO）、原生 RAO 数值文件、完整数组、质量摘要与文件哈希。参照构型已完成几何与执行验收；具体工程应用按实际线型、装载、约束、阻尼及参考响应补齐验证。该状态记录为 `engineering_acceptance.ready=false`，详见[结果说明](docs/results.md)。
 
-## 动态波面与刚体运动
+## 表面动态压力、波面与运动
 
-![半潜总波面与散射波面动图](docs/assets/semisub_oc4_style_wave.gif)
+![半潜表面动态压力与波面运动](docs/assets/semisub_oc4_style_coupled.gif)
 
-动图来自独立原生场点计算：左侧为总波面和六自由度运动，右侧为包含绕射与辐射贡献的散射波面。色标保持实际米制数值；三维波高和运动使用 6 倍观察倍率，物理周期与播放时长均标明。
+动图来自原生湿面压力与波面计算。左图显示平均湿表面的随体压力扰动，单位为 kPa；中图显示总波面与六自由度运动；右图保留原有散射波面，由复总场减去复入射场得到，包含绕射和运动诱导的辐射贡献。两类波面高程均以 m 表示。三幅图采用相同的物理相位，色标在整个周期内固定并保持实际数值。
 
-[集装箱船 GIF](docs/assets/container_kcs_style_wave.gif) · [油船 GIF](docs/assets/tanker_kvlcc2_style_wave.gif) · [场数据与相位说明](docs/wavefields.md) · [完整原生场点记录](examples/animations/index.json)
+三维运动和波高使用已标明的 6 倍观察倍率。压力相对于平衡状态给出，静水基值独立存档。势流湿面按原生压力着色，干结构与 Morison 杆件单独标识。
+
+[集装箱船联动图](docs/assets/container_kcs_style_coupled.gif)和[油船联动图](docs/assets/tanker_kvlcc2_style_coupled.gif)采用相同格式。完整定义、采样稳定性与复现步骤见[表面压力说明](docs/surface-pressure.md)，原生数值见[压力数据索引](examples/pressures/index.json)。
+
+原有[总波面与散射波面](docs/assets/semisub_oc4_style_wave.gif)及[场点记录](examples/animations/index.json)继续保留，在线报告可在两类视图之间切换。
 
 ## 安装与运行
 

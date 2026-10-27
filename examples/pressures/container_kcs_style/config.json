@@ -1,0 +1,131 @@
+{
+  "project": "container_pressure",
+  "object_type": "ship",
+  "geometry": {
+    "type": "section_hull",
+    "family": "container",
+    "length": 230.0,
+    "beam": 32.2,
+    "draft": 10.8,
+    "midship_coefficient": 0.985,
+    "parallel_start": 0.25,
+    "parallel_end": 0.6,
+    "fullness_exponent": 0.9814008422430632,
+    "aft_fullness_exponent": 7.493508360651108,
+    "transom_width_ratio": 0.45,
+    "transom_draft_ratio": 0.35,
+    "bulb_length_ratio": 0.025,
+    "bulb_breadth_ratio": 0.15,
+    "n_length": 56,
+    "n_section": 10
+  },
+  "environment": {
+    "frequency": {
+      "min": 0.5,
+      "max": 0.5,
+      "step": 0.005
+    },
+    "headings": {
+      "min": 60.0,
+      "max": 60.0,
+      "step": 30.0
+    },
+    "depth": 80.0,
+    "speed_m_s": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81
+  },
+  "mechanics": {
+    "model": "explicit",
+    "mass_kg": 53072331.68231133,
+    "cog_m": [
+      -3.4614117726976663,
+      0.0,
+      0.8604264667718239
+    ],
+    "gyradius_m": [
+      12.880000000000003,
+      57.5,
+      57.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "roll_damping_pct": 0.0,
+    "restraint": "free",
+    "stiffness_matrix": null,
+    "linear_damping_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        5295900.638878172,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        165841860.12363887,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        16136583638.578178,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "hydrostatics_method": "waterplane",
+    "components": [],
+    "morison": [],
+    "wave_amplitude_m": 0.5,
+    "spectrum": null,
+    "vertical_external_force_n": 0.0,
+    "equilibrium_relative_tolerance": 0.01,
+    "cog_xy_tolerance_m": 0.05,
+    "source_note": "参照SIMMAN公开主尺度、CM、排水量、LCB构建船型族；本项目分段剖面与球鼻/艉部形状为近似重建。质量按本次网格排水量平衡，Gx按当前浮心，Gz由参照GM反算；kxx/B=0.4及kzz/L=0.25来自参照，kyy/L=0.25为项目假设。附加阻尼按干质量/未耦合恢复临界值的5%固定取值；裸船、零航速，阻尼与线型须按具体目标校准。"
+  },
+  "output_dofs": [
+    "surge",
+    "sway",
+    "heave",
+    "roll",
+    "pitch",
+    "yaw"
+  ],
+  "output_point_m": null,
+  "reference_form": "container_kcs_style",
+  "recommended_max_panels": 3000,
+  "waterplane_estimate_factor": 1.1,
+  "nproc": 1,
+  "module_timeout_s": 1800.0
+}

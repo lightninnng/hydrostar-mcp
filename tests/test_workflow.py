@@ -1,10 +1,11 @@
 from pathlib import Path
+import json
 
 import pytest
 from pydantic import ValidationError
 
 from hydrostar_mcp.models import CaseConfig
-from hydrostar_mcp.workflow import CaseService
+from hydrostar_mcp.workflow import CaseService, save_json
 from conftest import CHECK_LOG, box_mesh
 
 
@@ -12,6 +13,45 @@ def finish(service, case_id):
     future, _ = service.jobs[case_id]
     future.result(timeout=10)
     return service.status(case_id)
+
+
+def test_atomic_report_recovers_after_transient_read_handle(tmp_path, monkeypatch):
+    path = tmp_path / "report.json"
+    save_json(path, {"stage": "previous"})
+    replace = Path.replace
+    attempts = []
+    monkeypatch.setattr("hydrostar_mcp.workflow.time.sleep", lambda _: None)
+
+    def transient_replace(source, target):
+        attempts.append(1)
+        if len(attempts) < 4:
+            assert json.loads(path.read_text()) == {"stage": "previous"}
+            raise PermissionError("simulated Windows read handle")
+        return replace(source, target)
+
+    monkeypatch.setattr(Path, "replace", transient_replace)
+    save_json(path, {"stage": "next"})
+    assert len(attempts) == 4
+    assert json.loads(path.read_text()) == {"stage": "next"}
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+def test_atomic_report_keeps_previous_state_on_persistent_denial(tmp_path, monkeypatch):
+    path = tmp_path / "report.json"
+    save_json(path, {"stage": "previous"})
+    attempts = []
+    monkeypatch.setattr("hydrostar_mcp.workflow.time.sleep", lambda _: None)
+
+    def denied_replace(source, target):
+        attempts.append(1)
+        raise PermissionError("simulated persistent denial")
+
+    monkeypatch.setattr(Path, "replace", denied_replace)
+    with pytest.raises(PermissionError, match="persistent denial"):
+        save_json(path, {"stage": "next"})
+    assert len(attempts) == 8
+    assert json.loads(path.read_text()) == {"stage": "previous"}
+    assert not list(tmp_path.glob("*.tmp"))
 
 
 def test_generate_inputs_works_without_solver(service, solver):

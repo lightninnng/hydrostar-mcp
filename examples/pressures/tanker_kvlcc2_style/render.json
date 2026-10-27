@@ -1,0 +1,26 @@
+{
+  "frames": 48,
+  "size_px": [
+    1600,
+    740
+  ],
+  "duration_ms": 80,
+  "period_s": 15.707963267948966,
+  "motion_gain": 6.0,
+  "wave_height_gain": 6.0,
+  "pressure_colour_gain": 1.0,
+  "wave_colour_gain": 1.0,
+  "pressure_colour_unit": "kPa",
+  "wave_colour_unit": "m",
+  "pressure_colour_limit_kpa": 6.945422611499999,
+  "total_wave_colour_limit_m": 0.5794839999999999,
+  "scattered_colour_limit_m": 0.15115921575153526,
+  "views": [
+    "body_following_pressure",
+    "total_wave_and_motion",
+    "scattered_wave_diffraction_and_radiation"
+  ],
+  "pressure_definition": "First-order body-following pressure perturbation on mean wetted BEM panels; still-water pressure excluded",
+  "phase_convention": "real(H*exp(+i*omega*t)); phase lead",
+  "synchronization": "One physical phase for pressure, total wave elevation and six-DOF motion"
+}

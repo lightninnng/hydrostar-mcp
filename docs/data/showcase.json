@@ -145,7 +145,7 @@
           "version": "8.2.0",
           "automation_version": "0.2.0"
         },
-        "publication_version": "0.2.1",
+        "publication_version": "0.3.0",
         "computed_at_utc": "2026-10-27T03:59:37.814154+00:00",
         "frequency_count": 151,
         "heading_count": 13,
@@ -42539,6 +42539,15 @@
           -3.46,
           0.0
         ]
+      },
+      "pressure": {
+        "panel_count": 1454,
+        "incident_complex_max_error": 9.310547037915279e-07,
+        "hydrostatic_motion_complex_max_error": 2.42906722310854e-06,
+        "offset_complex_change_over_global_peak": 0.0063583885037809,
+        "pressure_colour_limit_kpa": 6.908298628500001,
+        "motion_gain": 6.0,
+        "source_case_id": "container_pressure-03088e37d0ec4d4b"
       }
     },
     {
@@ -42685,7 +42694,7 @@
           "version": "8.2.0",
           "automation_version": "0.2.0"
         },
-        "publication_version": "0.2.1",
+        "publication_version": "0.3.0",
         "computed_at_utc": "2026-10-27T04:00:31.479475+00:00",
         "frequency_count": 111,
         "heading_count": 13,
@@ -77103,6 +77112,15 @@
           10.9848,
           0.0
         ]
+      },
+      "pressure": {
+        "panel_count": 1320,
+        "incident_complex_max_error": 9.6891843785024e-07,
+        "hydrostatic_motion_complex_max_error": 1.5843116461757868e-06,
+        "offset_complex_change_over_global_peak": 0.004346281436335486,
+        "pressure_colour_limit_kpa": 6.945422611499999,
+        "motion_gain": 6.0,
+        "source_case_id": "tanker_pressure-2b78473d0ad3412f"
       }
     },
     {
@@ -77834,7 +77852,7 @@
           "version": "8.2.0",
           "automation_version": "0.2.0"
         },
-        "publication_version": "0.2.1",
+        "publication_version": "0.3.0",
         "computed_at_utc": "2026-10-27T04:02:08.748698+00:00",
         "frequency_count": 237,
         "heading_count": 13,
@@ -140734,6 +140752,15 @@
           0.0,
           0.0
         ]
+      },
+      "pressure": {
+        "panel_count": 1656,
+        "incident_complex_max_error": 7.700637816965452e-07,
+        "hydrostatic_motion_complex_max_error": 1.655890408703161e-06,
+        "offset_complex_change_over_global_peak": 0.00019505754877876118,
+        "pressure_colour_limit_kpa": 6.600834221625,
+        "motion_gain": 6.0,
+        "source_case_id": "semisub_pressure-0375d8ce98a64f9e"
       }
     }
   ]

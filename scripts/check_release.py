@@ -289,6 +289,9 @@ def main():
         from scripts.check_wavefields import check_wavefields
 
         results.update(check_wavefields())
+        from scripts.check_pressures import check_pressures
+
+        results.update(check_pressures())
         print(
             json.dumps(
                 dict(

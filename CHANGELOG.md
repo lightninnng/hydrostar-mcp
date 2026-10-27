@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 - 2026-10-27
+
+- Compute native body-following pressure on all 4,430 wetted BEM panels across three reference configurations.
+- Archive 22,150 original pressure records with checks of the incident solution, hydrostatic motion correction and outward-normal sampling sensitivity.
+- Synchronize pressure, total wave elevation, six-DOF motion and the retained scattered wave field in three-panel scientific GIFs.
+- State physical kPa and m colour scales, fixed cycle limits and 6× geometric viewing gains.
+- Rework the online gallery as a scientific case report with numbered figures, visible quality gates and connected explanatory prose.
+- Provide complete Chinese and English READMEs with reciprocal language links.
+- Retry transient Windows report-file sharing conflicts while preserving atomic updates and a bounded failure path.
+
 ## 0.2.1 - 2026-10-27
 
 - Add native HSPRS/HSRAO total and scattered wave fields for three fixed wave cases.

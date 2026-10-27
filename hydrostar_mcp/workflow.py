@@ -16,6 +16,7 @@ from pathlib import Path
 import re
 import shutil
 from threading import Event, RLock
+import time
 import uuid
 
 from . import __version__, core
@@ -67,7 +68,15 @@ def save_json(path, data):
             json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + "\n",
             encoding="utf-8",
         )
-        temp.replace(path)
+        for attempt in range(8):
+            try:
+                temp.replace(path)
+                break
+            except PermissionError:
+                # Windows readers can briefly hold a handle across atomic replacement.
+                if attempt == 7:
+                    raise
+                time.sleep(0.01 * 2 ** min(attempt, 4))
     finally:
         temp.unlink(missing_ok=True)
 

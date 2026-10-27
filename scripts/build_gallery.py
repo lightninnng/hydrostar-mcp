@@ -29,6 +29,28 @@ def main():
             field_points=verification["point_count"],
             wave_reference_xy_m=field["wave_reference_xy_m"],
         )
+    for model in data["cases"]:
+        folder = ROOT / "examples/pressures" / model["key"]
+        verification = json.loads(
+            (folder / "verification.json").read_text(encoding="utf-8")
+        )
+        render = json.loads((folder / "render.json").read_text(encoding="utf-8"))
+        if set(verification["pressure_gates"].values()) != {"passed"}:
+            raise ValueError("Pressure validation must pass before building the report")
+        model["pressure"] = {
+            k: verification[k]
+            for k in [
+                "panel_count",
+                "incident_complex_max_error",
+                "hydrostatic_motion_complex_max_error",
+                "offset_complex_change_over_global_peak",
+                "pressure_colour_limit_kpa",
+            ]
+        }
+        model["pressure"].update(
+            motion_gain=render["motion_gain"],
+            source_case_id=verification["source_case_id"],
+        )
     (ROOT / "docs/data/showcase.json").write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
