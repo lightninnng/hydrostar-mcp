@@ -1,0 +1,6 @@
+GSURGE BODY 1 FILE surge.rao
+GSWAY BODY 1 FILE sway.rao
+GHEAVE BODY 1 FILE heave.rao
+GROLL BODY 1 FILE roll.rao
+GPITCH BODY 1 FILE pitch.rao
+GYAW BODY 1 FILE yaw.rao

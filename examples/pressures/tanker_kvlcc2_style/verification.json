@@ -6619,7 +6619,7 @@
     "version": "8.2.0",
     "automation_version": "0.3.0"
   },
-  "publication_version": "0.3.0",
+  "publication_version": "0.6.0",
   "quality_gates": {
     "semantic_input": "passed",
     "static_equilibrium": "passed",

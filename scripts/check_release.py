@@ -7,6 +7,7 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import sys
 from urllib.parse import unquote, urlsplit
@@ -80,6 +81,9 @@ def check_files(files):
         ".mcn",
         ".prs",
         ".rao",
+        ".prv",
+        ".gp",
+        ".svg",
     }
     for name in files:
         path = ROOT / name
@@ -97,7 +101,9 @@ def check_files(files):
                 name,
             )
             require(
-                name.startswith("docs/assets/") or reviewed_geometry,
+                name.startswith("docs/assets/")
+                or reviewed_geometry
+                or name == "examples/vessel/geometry/geometry-qa.png",
                 "Unreviewed binary asset: " + name,
             )
         if path.suffix in text_types or path.name in {
@@ -271,11 +277,31 @@ def check_results():
     match = re.search(
         r'<script type="application/json" id="data">(.*?)</script>', html, re.S
     )
+    from scripts.gallery_data import presentation_data
+
     require(
-        match is not None and json.loads(match[1]) == showcase,
+        match is not None and json.loads(match[1]) == presentation_data(),
         "Embedded gallery dataset",
     )
+    require(
+        not re.search(r"\b[0-9a-f]{64}\b|source_case_id", html),
+        "Audit identifiers must stay in the data packages",
+    )
     require("__SHOWCASE_DATA__" not in html, "Unbuilt gallery")
+    node = shutil.which("node")
+    if node:
+        for script in re.findall(r"<script>(.*?)</script>", html, re.S):
+            syntax = subprocess.run(
+                [node, "--check"],
+                input=script,
+                text=True,
+                capture_output=True,
+                timeout=20,
+            )
+            require(
+                syntax.returncode == 0,
+                "Gallery JavaScript syntax: " + syntax.stderr[-1000:],
+            )
     require(
         not re.search(r"<script[^>]+src=|\bfetch\s*\(", html),
         "Gallery must work offline",
@@ -304,6 +330,9 @@ def main():
         from scripts.check_geometry import check_geometry
 
         results.update(check_geometry())
+        from scripts.check_native_media import check_native_media
+
+        results.update(check_native_media())
         print(
             json.dumps(
                 dict(

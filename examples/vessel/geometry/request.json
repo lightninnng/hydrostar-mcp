@@ -1,0 +1,50 @@
+{
+  "project": "vessel_course_balanced",
+  "path": "examples/geometry/sources/vessel-stations.csv",
+  "units": "mm",
+  "waterline_z_m": 0.0,
+  "rho_kg_m3": 1025.0,
+  "gravity_m_s2": 9.81,
+  "axis_map": [
+    "x",
+    "y",
+    "z"
+  ],
+  "translation_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mesh_size_m": 4.5,
+  "panel_layout": "station_bands",
+  "structured_axis": "x",
+  "longitudinal_cells": 40,
+  "longitudinal_grading_blend": 0.1,
+  "adaptive_stations": true,
+  "axis_center_xy_m": null,
+  "minimum_quad_fraction": 0.9,
+  "panel_quality": {
+    "max_edge_ratio": 8.0,
+    "min_corner_deg": 10.0,
+    "max_corner_deg": 170.0,
+    "max_warpage_deg": 5.0,
+    "max_neighbor_size_ratio": 2.0
+  },
+  "curvature_samples": 24,
+  "curve_tolerance_m": 0.005,
+  "weld_tolerance_m": 1e-08,
+  "section_axis": "x",
+  "section_curve": "spline",
+  "longitudinal_ruled": false,
+  "spline_seam": "lowest_z",
+  "mirror_half_sections": false,
+  "station_layers": {},
+  "expected_volume_m3": null,
+  "volume_tolerance_relative": 0.005,
+  "expected_wet_components": 1,
+  "flip_normals": false,
+  "max_panels": 2200,
+  "timeout_s": 600.0,
+  "source_note": "Original curved station hull. A topology-led course mesh planned within 3000 full-equivalent total panels including waterplane panels. Source geometry retained; cosine station grading and matched waterline/keel bands.",
+  "pdf_page": 0
+}

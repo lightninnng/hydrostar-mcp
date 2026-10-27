@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.6.0 - 2026-10-28
+
+- Add an original curved station hull with 2029 wetted and 844 waterplane panels, within the 3000-panel default budget, and a native 231-frequency, 13-heading response sweep.
+- Add optional adaptive station refinement with explicit budget enforcement and regression coverage for zero-return-code native errors.
+- Export response figures through the manual's Gnuplot route and scientific field frames through ParaView batch commands.
+- Independently compare HSprv components with HSPRS complex fields; use verified HSPRS total, incident, diffraction, radiation and body-following panel pressure for displayed animations.
+- Verify a single-frequency animation companion against all six complex responses in the detailed sweep, and package actual native inputs, fields and replay settings.
+- Present the new hull first, preserve the rotatable solved-mesh view and simplify the report's visible narrative. Refresh reciprocal Chinese and English READMEs.
+- Record tested native execution, sampling, DLL compatibility and field reconstruction repairs in the modelling skill.
 
 - Require current manual-recommended visualization first in the modelling skill, covering native tools and official companion routes such as HSprv → ParaView and StarSpec plotting.
 - Record native verification, actual media provenance, export settings and documented fallback or encoding steps with the native-file deliverables.

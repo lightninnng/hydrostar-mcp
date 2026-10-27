@@ -6,72 +6,44 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-**从参数化几何、质量与约束，到可追溯的一阶水动力计算。**<br>
-Local MCP automation for HydroStar, with source-informed geometry and reproducible six-DOF results.
+从参数、型值表和 CAD 建立水动力模型，完成面元质量检查、静力平衡、HydroStar 原生求解与六自由度结果验收。项目面向研究生课程、方法研究及明确假设下的工程简化分析，提供 Windows 本地 MCP 和命令行接口。
 
-面向研究生课程、方法研究与工程简化分析，将建模、网格检查、静力平衡、原生求解和 RAO 回读串成同一条可审阅流程。支持 Windows 上的 HydroStar 8.2.0、本地 MCP 与命令行；每个算例独立保存输入、检查结果、日志与 SHA-256。
+[在线计算报告](https://lightninnng.github.io/hydrostar-mcp/)可旋转实际求解网格，切换构型、浪向、幅值、相位及动态场量。[快速开始](docs/quickstart.md)介绍安装与复算，[建模说明](docs/modeling-guide.md)给出参数和质量要求。
 
-[交互结果展示](https://lightninnng.github.io/hydrostar-mcp/) · [快速开始](docs/quickstart.md) · [建模与质量](docs/modeling-guide.md) · [模型来源](docs/reference-forms.md) · [验证与复现](docs/verification.md)
+## 计算展示
 
-![三类实际求解网格](docs/assets/reference-geometry.png)
+曲线船体由本项目原创型值表重建，采用沿站位与剖面的四边形网格带。湿面包含 2018 个四边形和 11 个端部三角形，另有 844 个水线面元，全体合计 **2873 个面元**。在默认预算内完成 **231 个频率点和 13 个浪向**的真实计算，几何与六项原生执行门禁全部通过。
 
-## 真实计算示例
+![曲线船体六自由度原生响应](docs/assets/vessel-response.png)
 
-以下结果由 HydroStar 8.2.0 实际计算，包含六自由度幅值、相位和 13 个浪向（0°–360°，步长 30°）。三个算例均通过六项执行质量门禁。湿面节点与面板由项目参数化生成器建立，参数引用与重建假设随配置记录。
+曲线通过手册推荐的 Gnuplot 路径读取原生响应文件并批量保存，提供高分辨率 PNG、矢量 PDF 及可切换浪向的 SVG。平移幅值单位为 m/m，转动为 deg/m，相位为 deg；完整数值与参数见[曲线船体算例](examples/vessel)。
 
-| 资料参照构型 | 几何与物理特征 | 频率范围 / 步长（rad/s） | 半体湿面板 + 水线面面板 |
+| 计算对象 | 全体总面元，含水线面 | 频率范围与间隔（rad/s） | 频率点与浪向数 |
 | --- | --- | --- | --- |
-| [集装箱船](examples/results/container_kcs_style) | KCS 主尺度参照，平行中体、圆舭、球鼻艏、艉封板 | 0.05–0.80 / 0.005（151 点） | 727 + 128 |
-| [丰满油船](examples/results/tanker_kvlcc2_style) | KVLCC2 标量参照，丰满中体、宽平底、艏艉收缩 | 0.05–0.60 / 0.005（111 点） | 660 + 206 |
-| [圆柱半潜平台](examples/results/semisub_oc4_style) | OC4 标量参照，中心柱、三偏置扩底柱、细杆和压载 | 0.02–1.20 / 0.005（237 点） | 828 + 63 |
+| [原创曲线船体](examples/vessel) | 2873 | 0.05–1.20，0.005 | 231 × 13 |
+| [集装箱船](examples/results/container_kcs_style) | 1710 | 0.05–0.80，0.005 | 151 × 13 |
+| [丰满油船](examples/results/tanker_kvlcc2_style) | 1732 | 0.05–0.60，0.005 | 111 × 13 |
+| [半潜平台](examples/results/semisub_oc4_style) | 1782 | 0.02–1.20，0.005 | 237 × 13 |
 
-![半潜平台六自由度响应](docs/assets/semisub_oc4_style_rao.png)
+三类资料参照构型使用公开主尺度与本项目明确的形状假设，节点和面元由项目生成器建立。[来源说明](docs/reference-forms.md)保存了尺度引用、重建方法与物理模型。
 
-静态图采用色盲友好配色、浪向线型、统一单位与六联图编号；提供 300 dpi PNG 和矢量 PDF。[集装箱船曲线](docs/assets/container_kcs_style_rao.png) · [油船曲线](docs/assets/tanker_kvlcc2_style_rao.png) · [半潜矢量图](docs/assets/semisub_oc4_style_rao.pdf)。
+## 动态压力、波面与运动
 
-[交互页](https://lightninnng.github.io/hydrostar-mcp/)可切换构型、浪向、幅值和相位，旋转实际求解网格，并点按曲线读取原始频率点。克隆后也可直接打开 [docs/index.html](docs/index.html)，页面内嵌计算数据，动图使用同目录资源，可离线查看。
+![曲线船体动态压力、总波面和散射波面](docs/assets/vessel-coupled.gif)
 
-每套[公开结果](examples/results/index.json)包含生成输入（HST/RDF/MCN/RAO）、原生 RAO 数值文件、完整数组、质量摘要与文件哈希。参照构型已完成几何与执行验收；具体工程应用按实际线型、装载、约束、阻尼及参考响应补齐验证。该状态记录为 `engineering_acceptance.ready=false`，详见[结果说明](docs/results.md)。
+![半潜平台动态压力、总波面和散射波面](docs/assets/platform-coupled.gif)
 
-网格、荷载和参数文件属于正式交付物。[原生文件交付规范](docs/native-delivery.md)明确 .hst、.rdf、.mcn、.rao 及谱分析所需 .spc 的用途、依赖、执行顺序和状态。项目与本机 skill 均采用该要求，图表与各自实际计算文件保持对应。
+左图显示平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；右图为包含绕射和运动诱导辐射的散射波面，波面色标单位为 m。颜色保持实际物理数值，运动和波高各采用 6 倍观察倍率，压力图几何倍率为 1。所有视图采用同一物理相位，色标在整个周期内固定。
 
-后续可视化首先采用当前版本手册推荐的[原生与配套流程](docs/native-visualization.md)，包括 hview / hvisu、hsplt / StarViewer、gnplt、HyView、HSprv → ParaView 与 StarSpec 等适用入口。其他手册推荐路径按同一原则选用。脚本用于补充比较、科研排版、网页展示或格式转码，保留实际生成工具和官方核对状态。已发布图像和动画继续按各自记录标识其生成方式。
+场量来自经独立核对的 HSPRS 原生复数结果，使用 ParaView 命令保存帧序列后编码为 GIF。入射波解析解、完整复辐射重建、随体压力修正及外法向采样敏感性分别验收。HSprv 原始导出和版本兼容性诊断一并保存，展示字段明确指向已验收结果。[绕射与辐射动画](docs/assets/platform-components.gif)、[全部可视化数据](examples/visualization)和[导出方法](docs/native-visualization.md)可供复核；在线报告保留各类场量的切换。
 
-## 多来源复杂几何
+## 建模与原生文件交付
 
-面元生成首先识别结构特征。柱式与同轴扩底构型沿轴向分环、周向等角对应；船体沿站位和剖面建立连续网格带；多边形与贯通开口采用相容分块。四边形、渐变尺寸和局部过渡同时接受形状、翘曲、相邻尺度及几何误差检查。[面元建模方法](docs/panel-meshing.md)将这些选择、适用条件和验收要求固化为项目规范。
+面元布局沿结构特征布置。同轴柱体采用环带，船体采用站位带，多边形与贯通开口采用相容分块；四边形保留到原生求解文件，同时验收角度、翘曲、尺度过渡、CAD 体积与浮心、拓扑及自交。**常规新模型默认使用 3000 个全体等效总面元预算，包含湿面、水线面和对称展开。提高预算须按具体算例明确授权。** 已授权的密网格[研究参照](examples/geometry)保持既定配置。
 
-**常规新模型默认预算为 3000 个全体等效总面元，含湿面、水线面及对称展开。** 先在预算内优化网格，确需增加时按具体算例审阅并授权。当前批次的密网格按已授权配置保留为研究参照。配套 [HydroStar 建模 skill](skills/hydrostar-modeling/SKILL.md)与 AGENTS.md 使用相同规则。
+型值表、曲线、DXF、STEP/IGES/BREP 和表面网格可进入统一前处理；图像与 PDF 经尺寸标定、描线和独立尺寸核对后重建。使用 `python -m pip install -e ".[geometry]"` 安装可选依赖，具体入口和条件见[多来源建模](docs/geometry-sources.md)及[面元建模方法](docs/panel-meshing.md)。
 
-型值表、曲线、CAD 和表面网格可以经统一前处理建立湿表面，随后进入相同的原生计算链路。CSV/JSON 支持有折角的多边形剖面和平顺曲线放样；DXF 使用明确的图层与站位关系；STEP/IGES/BREP 接收闭合的外部排水实体；STL/OBJ/PLY/HST 采用显式单位与表面检查。图像和 PDF 先建立米制标定与剖面描线工作区，以独立尺寸点核对后再建模。
-
-![原创复杂几何与实际计算网格](docs/assets/geometry-source-cases.png)
-
-新增[复杂几何算例](examples/geometry/index.json)包括曲线站位船体、带贯通月池的多边形浮体，以及毫米制 STEP 导入的曲面 Spar 和有限厚升沉板。三类几何均由本项目独立构造，随包保存源资料、参数、CAD 与网格的体积/浮心核对、拓扑与自交检查、原生输入和六自由度数组。其 7 个频率与 4 个浪向用于核验建模和执行链路，目标峰区研究应加密频率并检查空间敏感性。
-
-| 保留的参照例 | 湿面四边形 / 三角形 | 含水线面的全体等效总面元 | CAD 体积相对差 |
-| --- | --- | --- | --- |
-| 曲线站位船体 | 9811 / 7 | 14962 | 0.100% |
-| 贯通月池浮体 | 728 / 0 | 1108 | 小于 0.001% |
-| 环带 Spar 与升沉板 | 9312 / 0 | 9955 | 0.195% |
-
-这批网格保持现有密度。比较中固定 v0.4.0 基线的质量、重心、惯性、恢复设置、阻尼和环境。[Spar 的两档环带计算](examples/geometry/mesh-comparison.json)保留 6800 与 9312 个湿面元的原生文件；采样范围内的最大复升沉差除以较粗网格升沉峰值为 3.70%。这是两档网格的响应敏感性记录，工程精度另需对应构型的空间收敛、峰区频率和参考响应证据。
-
-使用 `python -m pip install -e ".[geometry]"` 安装可选前处理依赖，运行 `geometry-inspect` 检查资料，再用 `geometry-build` 建立验收包。MCP 对应 `inspect_geometry_source` 和 `build_geometry` 两个工具；返回的 `case_geometry` 可接入 `prepare_case`，质量、重心、惯性、阻尼和海况由分析方案明确给出。[多来源建模说明](docs/geometry-sources.md)给出格式、完整步骤、硬性判据及不同海工结构的适用范围。
-
-图纸路径已覆盖图像/PDF 渲染、标定、独立尺寸和描线数据的后端验收；交互描线界面的人工操作验收仍待完成。
-
-## 表面动态压力、波面与运动
-
-![半潜表面动态压力与波面运动](docs/assets/semisub_oc4_style_coupled.gif)
-
-动图来自原生湿面压力与波面计算。左图显示平均湿表面的随体压力扰动，单位为 kPa；中图显示总波面与六自由度运动；右图保留原有散射波面，由复总场减去复入射场得到，包含绕射和运动诱导的辐射贡献。两类波面高程均以 m 表示。三幅图采用相同的物理相位，色标在整个周期内固定并保持实际数值。
-
-三维运动和波高使用已标明的 6 倍观察倍率。压力相对于平衡状态给出，静水基值独立存档。势流湿面按原生压力着色，干结构与 Morison 杆件单独标识。
-
-[集装箱船联动图](docs/assets/container_kcs_style_coupled.gif)和[油船联动图](docs/assets/tanker_kvlcc2_style_coupled.gif)采用相同格式。完整定义、采样稳定性与复现步骤见[表面压力说明](docs/surface-pressure.md)，原生数值见[压力数据索引](examples/pressures/index.json)。
-
-原有[总波面与散射波面](docs/assets/semisub_oc4_style_wave.gif)及[场点记录](examples/animations/index.json)继续保留，在线报告可在两类视图之间切换。
+实际计算使用的 HST、RDF、MCN、RAO、场量输入与任务所需 SPC 属于正式交付物，随包保存参数、单位、相对路径、执行顺序、状态和来源记录。[交付规范](docs/native-delivery.md)和[建模 skill](skills/hydrostar-modeling/SKILL.md)采用相同要求；已验证的报错原因与修复办法沉淀在[排错经验](skills/hydrostar-modeling/references/troubleshooting.md)。
 
 ## 安装与运行
 
@@ -87,8 +59,8 @@ python -m pip install -e ".[plot,test]"
 $env:HSTAR_PATH7 = 'C:\path\to\Hstar4Experts\v8.2.0'
 python -m hydrostar_mcp environment
 python -m hydrostar_mcp forms
-python -m hydrostar_mcp plan examples/semisub_oc4_style.json
-python -m hydrostar_mcp prepare examples/semisub_oc4_style.json
+python -m hydrostar_mcp plan examples/vessel/config.json
+python -m hydrostar_mcp prepare examples/vessel/config.json
 ~~~
 
 `prepare` 返回新的 `case_id`，将其代入后续命令：
@@ -97,10 +69,9 @@ python -m hydrostar_mcp prepare examples/semisub_oc4_style.json
 $caseId = '<prepare 返回的 case_id>'
 python -m hydrostar_mcp start $caseId
 python -m hydrostar_mcp result $caseId --dof heave
-python -m hydrostar_mcp plot $caseId
 ~~~
 
-`plot` 保存六自由度 PNG 与 PDF。`generate` 导出输入；`prepare` 完成网格与静力检查；`start` 执行辐射/绕射、运动求解和结果验收。命令行 `start` 等待结束，MCP `start_case` 异步返回。完整步骤见[快速开始](docs/quickstart.md)。
+`generate` 导出输入；`prepare` 完成网格与静力检查；`start` 执行辐射/绕射、运动求解和结果验收。命令行 `start` 等待结束，MCP `start_case` 异步返回。常规查看与导出优先采用[原生及手册推荐路径](docs/native-visualization.md)，`plot` 提供补充 PNG/PDF 制图。完整步骤见[快速开始](docs/quickstart.md)。
 
 ## MCP 接入
 

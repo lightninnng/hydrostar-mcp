@@ -6,79 +6,44 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-HydroStar MCP connects parametric geometry, mass properties and restraints to traceable first-order hydrodynamic calculations. It supports graduate coursework, method studies and simplified engineering analysis using HydroStar 8.2.0 on Windows, through a local MCP server or a shared command-line workflow.
+Build hydrodynamic models from parameters, sections and CAD, then verify panel quality, static equilibrium, native HydroStar execution and six-degree-of-freedom results. The project supports graduate coursework, method studies and simplified engineering analysis with explicit assumptions, through a Windows local MCP server and a shared CLI.
 
-Each case has an independent directory containing its inputs, quality checks, native logs, results and SHA-256 records. Public examples include source-informed geometry, six-degree-of-freedom responses, native wave fields and dynamic pressure on the wetted BEM surfaces.
+The [online scientific report](https://lightninnng.github.io/hydrostar-mcp/) retains a rotatable solved-mesh view and selectable configurations, headings, amplitude, phase and dynamic fields. See the [quickstart](docs/quickstart.md) for installation and replay, and the [modelling guide](docs/modeling-guide.md) for physical inputs and quality requirements.
 
-[Open the scientific results report](https://lightninnng.github.io/hydrostar-mcp/)
+## Computed examples
 
-![Generated meshes used in the native calculations](docs/assets/reference-geometry.png)
+The original curved hull is reconstructed from the project's own station table using corresponding longitudinal and sectional quadrilateral bands. Its wet mesh has 2018 quadrilaterals and 11 end-cap triangles, with 844 waterplane panels: **2873 full-equivalent total panels**. The native sweep covers **231 frequencies and 13 headings** within the default budget. Geometry acceptance and all six execution gates passed.
 
-## Computed reference configurations
+![Native six-DOF response of the curved station hull](docs/assets/vessel-response.png)
 
-The project generates its own nodes and panels from public scalar references and explicit shape assumptions. The names retain `style` to identify their reference-configuration scope. All three cases were solved with HydroStar 8.2.0 and passed the six execution gates.
+The manual-recommended Gnuplot route reads the original response files and exports high-resolution PNG, vector PDF and heading-selectable SVG. Translation amplitudes are in m/m, rotations in deg/m and phases in degrees. The [curved-hull package](examples/vessel) contains complete values, parameters and native inputs.
 
-| Configuration | Geometry represented | Angular-frequency grid (rad/s) | Half-body wetted and waterplane panels |
+| Configuration | Full-equivalent total panels, including waterplane | Frequency range and spacing (rad/s) | Frequencies and headings |
 | --- | --- | --- | --- |
-| [Container hull](examples/results/container_kcs_style) | KCS-informed particulars, parallel middle body, rounded bilges, bulbous bow and transom | 0.05–0.80, step 0.005; 151 frequencies | 727 and 128 |
-| [Full-form tanker](examples/results/tanker_kvlcc2_style) | KVLCC2-informed scalars, full middle body, broad flat bottom and tapered ends | 0.05–0.60, step 0.005; 111 frequencies | 660 and 206 |
-| [Column semisubmersible](examples/results/semisub_oc4_style) | OC4-informed centre column, three offset columns with enlarged bases, members and ballast | 0.02–1.20, step 0.005; 237 frequencies | 828 and 63 |
+| [Original curved hull](examples/vessel) | 2873 | 0.05–1.20, 0.005 | 231 × 13 |
+| [Container hull](examples/results/container_kcs_style) | 1710 | 0.05–0.80, 0.005 | 151 × 13 |
+| [Full-form tanker](examples/results/tanker_kvlcc2_style) | 1732 | 0.05–0.60, 0.005 | 111 × 13 |
+| [Semisubmersible](examples/results/semisub_oc4_style) | 1782 | 0.02–1.20, 0.005 | 237 × 13 |
 
-Each response dataset contains six DOFs and 13 headings from 0° to 360° in 30° increments. The ship cases use 80 m water depth; the semisubmersible uses 200 m. Density is 1025 kg/m³, gravity is 9.81 m/s², and forward speed is zero.
+The three reference configurations use public principal dimensions and explicit shape assumptions. The project generates its own nodes and panels. [Source notes](docs/reference-forms.md) document the dimensional references, reconstruction and physical idealizations.
 
-![Semisubmersible response amplitude operators](docs/assets/semisub_oc4_style_rao.png)
+## Dynamic pressure, waves and motion
 
-Scientific figures use colourblind-friendly line colours, distinct heading line styles, panel labels and explicit units. Both 300 dpi PNG and vector PDF are provided. [Container responses](docs/assets/container_kcs_style_rao.png) and [tanker responses](docs/assets/tanker_kvlcc2_style_rao.png) use the same format.
+![Curved hull pressure, total elevation and scattered elevation](docs/assets/vessel-coupled.gif)
 
-The [result packages](examples/results/index.json) contain generated HST/RDF/MCN/RAO inputs, original RAO files, complete amplitude/phase arrays, provenance and per-file hashes. For a specific engineering application, review the target geometry, loading, restraints, damping and benchmark responses. The current evidence status is retained explicitly as `engineering_acceptance.ready=false`.
+![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/platform-coupled.gif)
 
-Native mesh, load and parameter files are formal deliverables. The [native-file delivery requirements](docs/native-delivery.md) describe .hst, .rdf, .mcn, .rao and the .spc inputs used for spectral analysis, including dependencies, execution order and verification status. The modelling skill applies the same requirements; figures retain their own actual calculation provenance.
+The left view shows the body-following first-order pressure perturbation on the mean wetted panels in kPa. The centre shows total elevation and rigid-body motion. The right shows scattered elevation, including diffraction and motion-induced radiation; elevation colours are in metres. Colours retain physical values. Motion and wave height each use a stated 6× viewing gain; pressure geometry uses 1×. Views share the physical phase and fixed cycle-wide colour scales.
 
-Future visualization first follows the current manuals' [native and companion workflows](docs/native-visualization.md), including appropriate hview / hvisu, hsplt / StarViewer, gnplt, HyView, HSprv → ParaView and StarSpec routes. Other manual-recommended routes follow the same priority. Scripts supplement comparisons, scientific layout, web presentation or encoding. Each output records its actual renderer and official-workflow verification status; published media retain their existing provenance.
+The fields come from independently checked native HSPRS complex results. ParaView saves the frames by command, followed by GIF encoding. Checks cover analytical incident waves, full-complex radiation reconstruction, body-following pressure correction and outward-normal sampling sensitivity. Original HSprv exports and version diagnostics are retained, while display records identify the accepted fields. The [diffraction and radiation animation](docs/assets/platform-components.gif), [visualization data](examples/visualization) and [export methods](docs/native-visualization.md) support reproduction. All field views remain selectable in the online report.
 
-## Synchronized surface pressure, waves and motion
+## Modelling and native delivery
 
-![Semisubmersible surface pressure, wave elevation and rigid-body motion](docs/assets/semisub_oc4_style_coupled.gif)
+Panels follow structural features: axial rings for coaxial bodies, station bands for hulls, and conforming blocks for polygons and through openings. Quadrilaterals remain in the solved HST. Acceptance covers angles, warpage, size transitions, CAD volume and buoyancy centre, topology and intersections. **New models default to 3000 full-equivalent total panels, including wet and waterplane panels and symmetry expansion. Budget increases require explicit case-specific authorization.** Previously authorized dense [research references](examples/geometry) retain their configurations.
 
-The left view shows the body-following first-order dynamic pressure perturbation on the mean wetted BEM panels. The centre view shows native total wave elevation with the corresponding six-DOF motion. The right view retains the scattered wave elevation, computed as complex total minus complex incident elevation, including diffraction and motion-induced radiation. All three views use the same physical phase and wave reference.
+Sections, curves, DXF, STEP/IGES/BREP and surface meshes share the preprocessing workflow. Images and PDFs use dimensional calibration, reviewed traces and independent check dimensions. Install optional dependencies with `python -m pip install -e ".[geometry]"`; see [source-based modelling](docs/geometry-sources.md) and [panel meshing](docs/panel-meshing.md).
 
-Pressure colours are in kPa and wave colours are in m, at their physical values. The motion and three-dimensional wave height have a stated 6× viewing gain. Colour limits remain fixed throughout each cycle. Equilibrium hydrostatic pressure is stored separately, so signed pressure colours describe perturbations about that equilibrium. Dry structural context and Morison members are identified separately from the coloured BEM surfaces.
-
-| Configuration | Frequency (rad/s) | Heading and wave amplitude | Full-body pressure panels |
-| --- | --- | --- | --- |
-| Container hull | 0.5 | 60°, 0.5 m | 1454 |
-| Full-form tanker | 0.4 | 60°, 0.5 m | 1320 |
-| Column semisubmersible | 0.8 | 60°, 0.5 m | 1656 |
-
-[Container animation](docs/assets/container_kcs_style_coupled.gif), [tanker animation](docs/assets/tanker_kvlcc2_style_coupled.gif) and [pressure records](examples/pressures/index.json) are available for download. The native pressure calculation is checked against the finite-depth incident solution, the body-motion hydrostatic identity, and an outward-normal sampling sensitivity check. All native point records are archived with individual SHA-256 hashes.
-
-The separate [wave-field dataset](examples/animations/index.json) retains total and scattered elevation. Scattered elevation is computed as total minus incident in the complex domain, preserving diffraction and radiation phase relationships.
-
-The [online report](https://lightninnng.github.io/hydrostar-mcp/) provides model selection, a rotatable solved mesh, synchronized animations, heading selection, amplitude/phase plots and raw-sample inspection. Opening [docs/index.html](docs/index.html) after cloning also works offline, using its embedded numerical data and local media files.
-
-## General geometry from source data
-
-Panel topology follows the structure. Coaxial columns use equal-angle ring bands and radial shoulders; smooth hulls use matched station and section bands; polygonal bodies and through openings use conforming blocks. Native quadrilaterals retain their connectivity in the HST file. Shape, warpage, neighbouring size transitions and geometric fidelity are checked together. The [panel meshing method](docs/panel-meshing.md) records these choices and their applicable conditions as project guidance.
-
-**New models use a default budget of 3,000 full-equivalent total panels, including wetted and waterplane panels after symmetry expansion.** Optimize the layout within that budget; increases require explicit case-specific review and authorization. The existing dense studies retain their authorized configurations as research references. The [HydroStar modelling skill](skills/hydrostar-modeling/SKILL.md) and AGENTS.md apply the same rule.
-
-The optional geometry workflow accepts CSV/JSON sections, closed station curves in DXF, external displacement solids in STEP/IGES/BREP, and oriented surface meshes in STL/OBJ/PLY/HST. Explicit units, a right-handed frame and the mean waterline are recorded. Polygon corners are retained; interpolating splines and smooth longitudinal lofts represent curved forms. Image and PDF inputs produce a calibrated tracing workspace with independent metric checkpoints.
-
-![Original complex geometries used for native calculations](docs/assets/geometry-source-cases.png)
-
-The [general geometry examples](examples/geometry/index.json) contain an original vessel reconstructed from curved sections, a polygonal caisson with a through moonpool, and a millimetre STEP spar with a connected finite-thickness heave plate. Each package retains original source data, the accepted wetted mesh, CAD/mesh displacement and buoyancy-centre comparisons, topology and intersection checks, native inputs and complete six-DOF arrays. Their seven frequencies and four headings verify the geometry-to-solver chain; response-peak studies require separate grid refinement.
-
-| Retained reference | Wetted quads / triangles | Full-equivalent total including waterplane | CAD volume difference |
-| --- | --- | --- | --- |
-| Curved station hull | 9811 / 7 | 14962 | 0.100% |
-| Through-moonpool caisson | 728 / 0 | 1108 | Less than 0.001% |
-| Ring-band Spar and heave plate | 9312 / 0 | 9955 | 0.195% |
-
-These meshes retain their existing density. Comparisons hold the v0.4.0 baseline mass, CG, inertia, restoring settings, damping and environment fixed. The [two-ring-grid Spar study](examples/geometry/mesh-comparison.json) preserves native files for 6,800 and 9,312 wetted panels. Across the sampled grid, the maximum complex heave difference divided by the coarser-grid heave peak is 3.70%. This records sampled sensitivity; target-specific spatial convergence, peak-frequency and reference-response evidence remains to be established.
-
-Install with `python -m pip install -e ".[geometry]"`. Use `geometry-inspect` and `geometry-build`, or MCP tools `inspect_geometry_source` and `build_geometry`. The returned `case_geometry` feeds `prepare_case` with explicit mechanics and environment. Source hashes are checked when preparing and starting a case. The default CAD/mesh volume tolerance is 0.5%; the buoyancy-centre tolerance is max(0.002 m, 0.0005 × maximum wetted dimension).
-
-Geometry acceptance precedes all six native execution gates. A source mesh without an independent displacement reference retains `source_reference_pending` for fidelity. The [geometry guide](docs/geometry-sources.md) explains inputs, reconstruction assumptions and structure-specific scope. The drawing route has automated backend checks for rendering, calibration, independent dimensions and traced data; manual verification of the interactive tracing interface remains pending.
+Actual HST, RDF, MCN, RAO, field inputs and task-specific SPC files are formal deliverables, with units, relative paths, execution order, status and provenance. The [delivery requirements](docs/native-delivery.md) and [modelling skill](skills/hydrostar-modeling/SKILL.md) apply the same rules. Verified failures and repairs are retained in the skill's [troubleshooting reference](skills/hydrostar-modeling/references/troubleshooting.md).
 
 ## Install and run
 
@@ -94,8 +59,8 @@ python -m pip install -e ".[plot,test]"
 $env:HSTAR_PATH7 = 'C:\path\to\Hstar4Experts\v8.2.0'
 python -m hydrostar_mcp environment
 python -m hydrostar_mcp forms
-python -m hydrostar_mcp plan examples/semisub_oc4_style.json
-python -m hydrostar_mcp prepare examples/semisub_oc4_style.json
+python -m hydrostar_mcp plan examples/vessel/config.json
+python -m hydrostar_mcp prepare examples/vessel/config.json
 ~~~
 
 Use the `case_id` returned by `prepare`:
@@ -104,10 +69,9 @@ Use the `case_id` returned by `prepare`:
 $caseId = '<case_id returned by prepare>'
 python -m hydrostar_mcp start $caseId
 python -m hydrostar_mcp result $caseId --dof heave
-python -m hydrostar_mcp plot $caseId
 ~~~
 
-`generate` exports reviewable inputs. `prepare` builds or imports a new mesh and performs preparation checks. `start` runs radiation/diffraction, mechanics and RAO construction. The CLI waits for completion; MCP `start_case` returns asynchronously. `plot` writes a six-DOF PNG and PDF.
+`generate` exports reviewable inputs. `prepare` builds or imports a new mesh and performs preparation checks. `start` runs radiation/diffraction, mechanics and RAO construction. The CLI waits for completion; MCP `start_case` returns asynchronously. Routine visualization first follows the [native and manual-recommended routes](docs/native-visualization.md); `plot` provides supplementary PNG/PDF figures.
 
 Set `HS_WORKSPACE` or use the CLI `--workspace` option for another run directory. Set `HS_SOURCE_ROOT` or `--source-root` to control the permitted HST import root.
 

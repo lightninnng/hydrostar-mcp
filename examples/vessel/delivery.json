@@ -1,0 +1,91 @@
+{
+  "schema": "hydrostar-native-delivery-1",
+  "project": "vessel",
+  "source_case_id": "vessel-b7d4ca49076c4685",
+  "input_files": {
+    "inputs/vessel.hst": {
+      "status": "validated",
+      "purpose": "Accepted native wet mesh; hslec then hschk",
+      "sha256": "eba5ef60d1b03d7caae5f2bcc5d7416968cc3f68236fb934f32f116f1bbe485e"
+    },
+    "inputs/vessel.rdf": {
+      "status": "validated",
+      "purpose": "231 wave frequencies, 13 headings; hsrdf",
+      "sha256": "18cb8c9910d4074a997e34f3cefa0433fd2674d16b02e4745e8c2220912adfce"
+    },
+    "inputs/vessel.mcn": {
+      "status": "validated",
+      "purpose": "Mass, CG, inertia, restoring and damping; hsmcn",
+      "sha256": "10b0a70b0d93c2a3cd24f60d0cc23b0a207612e17aab42284e4861cbfca3de5b"
+    },
+    "inputs/vessel.rao": {
+      "status": "validated",
+      "purpose": "Six-DOF response extraction commands; hsrao",
+      "sha256": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2"
+    }
+  },
+  "output_files": {
+    "rao/surge.rao": {
+      "status": "validated",
+      "unit": "m/m",
+      "sha256": "a6e87686e2d6ca4ca055a20c44c413681741dd4d7429a3c02c1af08358e0a601"
+    },
+    "rao/sway.rao": {
+      "status": "validated",
+      "unit": "m/m",
+      "sha256": "b3cde0452f94b06cbc3744d9c33e4fc46155da444e4e10d29e6933f9c41b3cb5"
+    },
+    "rao/heave.rao": {
+      "status": "validated",
+      "unit": "m/m",
+      "sha256": "ea95ec3289f8767035755e267efbe4c09b69e99b9657859d1a7d61e9b1205ecb"
+    },
+    "rao/roll.rao": {
+      "status": "validated",
+      "unit": "deg/m",
+      "sha256": "a3b4be8d9c1b3842625d50ebb353dd7dd71655c65606d4d1f96c3aed86d313e2"
+    },
+    "rao/pitch.rao": {
+      "status": "validated",
+      "unit": "deg/m",
+      "sha256": "61e5663dc499466bd6266b5efe42657c09656b5bdfe9069d48097abfd9100a44"
+    },
+    "rao/yaw.rao": {
+      "status": "validated",
+      "unit": "deg/m",
+      "sha256": "b344025e823e1633656ace0d42f9b12e3afd00fb7eeb0ce40a1a1fd4f560337d"
+    }
+  },
+  "spc": {
+    "status": "not_applicable",
+    "reason": "Regular-wave first-order responses; StarSpec statistics require specified sea states and an actual .spc input."
+  },
+  "native_database": {
+    "status": "regenerate_for_further_native_postprocessing",
+    "replay_order": [
+      "hslec",
+      "hschk",
+      "hsrdf",
+      "hsmcn",
+      "hsrao"
+    ],
+    "directory_setup": [
+      "bin",
+      "hdf",
+      "rao",
+      "tmp"
+    ]
+  },
+  "parameters": "config.json",
+  "geometry": "geometry/geometry-report.json",
+  "resource_policy": {
+    "default_full_equivalent_total_budget": 3000,
+    "configured_case_budget": 3000,
+    "wet_panels": 2029,
+    "waterplane_panels": 844,
+    "symmetry": 0,
+    "full_equivalent_total": 2873,
+    "nproc": 2,
+    "scope": "Default-budget course and simplified first-order study"
+  }
+}

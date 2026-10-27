@@ -4988,7 +4988,7 @@
     "version": "8.2.0",
     "automation_version": "0.2.1"
   },
-  "publication_version": "0.2.1",
+  "publication_version": "0.6.0",
   "quality_gates": {
     "semantic_input": "passed",
     "static_equilibrium": "passed",

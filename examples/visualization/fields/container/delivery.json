@@ -1,0 +1,77 @@
+{
+  "schema": "hydrostar-native-delivery-1",
+  "project": "container_wave",
+  "inputs": {
+    "inputs/container_wave.hst": {
+      "status": "validated",
+      "sha256": "dbd48ee53743779bb0757d5746d7e8c434a956ee5c671f7cd1942576754b5942"
+    },
+    "inputs/container_wave.mcn": {
+      "status": "validated",
+      "sha256": "8dbf1f0bca8d66fb88ed75e87c3414bac73eafe7a2254d7dca8441a04ec362ec"
+    },
+    "inputs/container_wave.rao": {
+      "status": "validated",
+      "sha256": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2"
+    },
+    "inputs/container_wave.rdf": {
+      "status": "validated",
+      "sha256": "dd7f034f8ad3ef1d33c35bc2dda0902d33dc555d1e60aeeef70f2a0afeeecd90"
+    },
+    "animation.prv": {
+      "status": "validated",
+      "sha256": "604f8090570cfe1f4358e5fea1c87ab0786f779ee0181017ca46eb9f1398c36b"
+    },
+    "wave.prs": {
+      "status": "validated",
+      "sha256": "b2b19a6a179202ffceaa8347570adcffc8baf75f71266cc529b4f83d4cb222c3"
+    },
+    "wave.rao": {
+      "status": "validated",
+      "sha256": "c64bb55ed35b0587d7bc6f729ff059e01327c50eaff2afc5a08967abde57a5fa"
+    }
+  },
+  "field_units": "Complex wave elevation and pressure head per unit incident amplitude; rendered elevation in m and pressure in kPa",
+  "pressure_data": "examples/pressures/container_kcs_style/pressure.json",
+  "pressure_data_sha256": "6935be3d20c03163216acf37126869c356e98e062bf8cfd3cb8762b971d356c2",
+  "native_databases": {
+    "status": "regenerate_from_delivered_inputs",
+    "directories": [
+      "bin",
+      "hdf",
+      "rao",
+      "tmp"
+    ]
+  },
+  "sequence": [
+    "hslec inputs/container_wave.hst container_wave",
+    "hschk - container_wave",
+    "hsrdf inputs/container_wave.rdf container_wave",
+    "hsmcn inputs/container_wave.mcn container_wave",
+    "hsrao inputs/container_wave.rao container_wave",
+    "hsprv animation.prv container_wave",
+    "hsprs wave.prs container_wave",
+    "hsrao wave.rao container_wave"
+  ],
+  "hsprv": {
+    "status": "archived_as_diagnostic",
+    "file": "native.zip",
+    "accepted_geometry_and_motion": true,
+    "display_total": "Use accepted waves.json, not the diagnostic old-format total"
+  },
+  "complex_fields": {
+    "status": "validated",
+    "data": "waves.json",
+    "raw": "wave-raos.jsonl.gz",
+    "phase": "Re(H exp(+i omega t)); physical wave amplitude applied once"
+  },
+  "spc": {
+    "status": "not_applicable",
+    "reason": "First-order regular-wave fields; spectral statistics require specified sea states and an actual SPC input."
+  },
+  "figures": {
+    "status": "validated",
+    "record": "render.json",
+    "settings": "condition.json"
+  }
+}

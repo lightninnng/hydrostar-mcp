@@ -12,11 +12,13 @@ graft examples/results
 graft examples/animations
 graft examples/pressures
 graft examples/geometry
+graft examples/vessel
+graft examples/visualization
 include docs/*.md docs/.nojekyll docs/index.html
 include docs/data/showcase.json
 include docs/data/geometry.json
 include docs/references/basic-form-catalog.json docs/references/sources.json
-recursive-include docs/assets *.png *.pdf *.gif
+recursive-include docs/assets *.png *.pdf *.gif *.svg
 include scripts/check_pressures.py scripts/pressure_study.py
 include scripts/check_wavefields.py
 include scripts/check_local.py scripts/check_release.py scripts/build_gallery.py scripts/export_showcase.py
@@ -25,3 +27,7 @@ include scripts/wavefield_study.py
 include scripts/reference_form_study.py scripts/templates/gallery.html
 include scripts/geometry_source_study.py scripts/export_geometry.py scripts/check_geometry.py
 include scripts/export_mesh_comparison.py
+include scripts/gallery_data.py scripts/export_native_curves.py
+include scripts/native_animation_study.py scripts/prepare_native_media.py scripts/validated_field_study.py
+include scripts/render_native_views.py scripts/encode_native_media.py scripts/vessel_wave_study.py
+include scripts/paraview-environment.yml scripts/check_native_media.py

@@ -478,6 +478,75 @@ def _cap_mesh(gmsh, arc, direction):
         gmsh.model.setCurrent(original)
 
 
+def _adaptive_station_rings(stations, sample, section_cells, cap_panels, request):
+    """Refine local longitudinal intervals while preserving the requested panel cap."""
+    import numpy as np
+
+    stations = list(map(float, stations))
+    cache = {}
+    inserted = []
+    limits = request.panel_quality
+    initial = (len(stations) - 1) * section_cells + cap_panels
+    if initial > request.max_panels:
+        raise ValueError(
+            f"初始站位需要 {initial} 个湿面元，超过本次 {request.max_panels} 预算"
+        )
+    for iteration in range(16):
+        rings = [cache.setdefault(x, None) for x in stations]
+        for i, x in enumerate(stations):
+            if rings[i] is None:
+                cache[x] = rings[i] = np.asarray(sample(x), dtype=float)
+        refine = set()
+        maximum_warp = 0.0
+        for j, (left, right) in enumerate(zip(rings, rings[1:])):
+            p = np.stack((left[:-1], right[:-1], right[1:], left[1:]), axis=1)
+            a = np.cross(p[:, 1] - p[:, 0], p[:, 2] - p[:, 0])
+            b = np.cross(p[:, 2] - p[:, 0], p[:, 3] - p[:, 0])
+            denominator = np.linalg.norm(a, axis=1) * np.linalg.norm(b, axis=1)
+            if np.any(denominator <= 1e-24):
+                raise ValueError("自适应站位出现退化面元，需要复核剖面对应")
+            warp = np.degrees(
+                np.arccos(np.clip(np.sum(a * b, axis=1) / denominator, -1, 1))
+            )
+            maximum_warp = max(maximum_warp, float(max(warp)))
+            long_edges = np.maximum(
+                np.linalg.norm(p[:, 1] - p[:, 0], axis=1),
+                np.linalg.norm(p[:, 2] - p[:, 3], axis=1),
+            )
+            arc_edges = np.minimum(
+                np.linalg.norm(p[:, 2] - p[:, 1], axis=1),
+                np.linalg.norm(p[:, 3] - p[:, 0], axis=1),
+            )
+            if max(warp) > 0.95 * limits.max_warpage_deg or np.any(
+                long_edges > limits.max_edge_ratio * arc_edges
+            ):
+                refine.add(j)
+        widths = np.diff(stations)
+        for j, (a, b) in enumerate(zip(widths, widths[1:])):
+            if max(a, b) > 3.0 * min(a, b):
+                refine.add(j if a > b else j + 1)
+        if not refine:
+            return (
+                stations,
+                rings,
+                dict(
+                    inserted_stations_m=inserted,
+                    passes=iteration + 1,
+                    maximum_band_warpage_deg=maximum_warp,
+                    longitudinal_width_ratio_limit=3.0,
+                ),
+            )
+        proposed = (len(stations) - 1 + len(refine)) * section_cells + cap_panels
+        if proposed > request.max_panels:
+            raise ValueError(
+                f"自适应站位需要 {proposed} 个湿面元，超过本次 {request.max_panels} 预算；请调整分区或剖面离散"
+            )
+        extra = [(stations[j] + stations[j + 1]) / 2 for j in sorted(refine)]
+        inserted.extend(extra)
+        stations = sorted(stations + extra)
+    raise ValueError("自适应站位未在限定次数内达到形状与渐变目标")
+
+
 def station_bands(gmsh, wet, low, high, profiles, request):
     import numpy as np
 
@@ -509,8 +578,26 @@ def station_bands(gmsh, wet, low, high, profiles, request):
         (stations[-2] + stations[-1]) / 2,
         stations[-1],
     ]
+
+    def sample(x):
+        return _axial_wet_arc(gmsh, wet, float(x), low, high, count)
+
+    refinement = None
+    if request.adaptive_stations:
+        ends = [sample(stations[0]), sample(stations[-1])]
+        caps = [
+            _cap_mesh(gmsh, ring, direction) for ring, direction in zip(ends, (-1, 1))
+        ]
+        stations, rings, refinement = _adaptive_station_rings(
+            stations, sample, count, sum(len(f) for _, f in caps), request
+        )
+    else:
+        rings = [sample(x) for x in stations]
+        caps = [
+            _cap_mesh(gmsh, ring, direction)
+            for ring, direction in ((rings[0], -1), (rings[-1], 1))
+        ]
     longitudinal = len(stations) - 1
-    rings = [_axial_wet_arc(gmsh, wet, float(x), low, high, count) for x in stations]
     vertices = [p.tolist() for ring in rings for p in ring]
     faces = []
     width = count + 1
@@ -524,8 +611,7 @@ def station_bands(gmsh, wet, low, high, profiles, request):
                     j * width + i + 1,
                 ]
             )
-    for ring, direction in ((rings[0], -1), (rings[-1], 1)):
-        cap_v, cap_f = _cap_mesh(gmsh, ring, direction)
+    for cap_v, cap_f in caps:
         shift = len(vertices)
         vertices.extend(cap_v)
         faces.extend([[i + shift for i in face] for face in cap_f])
@@ -538,7 +624,8 @@ def station_bands(gmsh, wet, low, high, profiles, request):
             longitudinal_grading_blend=blend,
             finite_end_interval_subdivisions=2,
             wet_section_cells=count,
-            stations_m=stations.tolist(),
+            stations_m=list(map(float, stations)),
+            adaptive_station_refinement=refinement,
             source_shape="Original loft CAD cross-sections, sampled on each side of the keel",
             local_triangles="Planar finite end-cap transitions only",
         ),

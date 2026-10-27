@@ -42,7 +42,33 @@
 
 可视化记录准确标明画面的生成方式：原生导出、官方配套查看器导出、已导出帧转码或自定义渲染，并分别列出官方核对状态。历史脚本绘图与动画继续保留其真实生成工具和来源；采用新流程后，根据实际完成的查看或导出更新状态。
 
-## 正式交付与验收
+## 当前发布图的命令复现
+
+响应图通过 `scripts/export_native_curves.py` 读取原生 RAO，沿 Gnuplot 路径保存 PNG、PDF 和 SVG。场量由 HSPRS 与 HSRAO 提取完整复数系数，通过 ParaView 命令渲染，再由 `scripts/encode_native_media.py` 添加科研图注并编码为 GIF。公开目录保存原生输入、原始数值、HSprv 数据、图像来源、参数和实际执行记录。
+
+本机 8.2.0 的旧格式 HSprv 导出经过独立核对：入射和绕射分量可以匹配，运动相关总波面与完整复响应存在差异。当前展示使用已通过 HSPRS 复场量核对的总波、入射与绕射；散射和辐射在复数域相减后按相同物理相位重建。原始 HSprv 导出继续作为诊断保存，复核包括六个单位速度辐射系数与完整复运动的乘积。具体数值和处理经验见[排错记录](../skills/hydrostar-modeling/references/troubleshooting.md)。
+
+表面压力使用随体一阶扰动，保留平均湿表面的实际 HST 面元边界；静水基值另存。转为 kPa 时使用原生压力头、密度、重力和本次波幅。压力与波面颜色保持实际物理量，波高和运动采用 6 倍观察倍率，平均湿面压力图为 1 倍几何比例。纯绕射图固定于平均姿态，辐射图显示对应的运动贡献。
+
+已有公开数据可以直接重建图片，无需再次调用求解器。在克隆的完整仓库中，按本机已安装的命令运行。例如：
+
+```powershell
+conda env create -f scripts/paraview-environment.yml
+conda activate hydrostar-visuals
+pvpython --force-offscreen-rendering scripts/render_native_views.py examples/visualization/fields/vessel --output tmp/pv-vessel
+```
+
+编码 GIF 使用安装了项目 plot 依赖的 Python 环境：
+
+```powershell
+python scripts/encode_native_media.py --case vessel
+python scripts/export_native_curves.py --gnuplot C:/path/to/gnuplot.exe --case vessel
+python scripts/build_gallery.py
+```
+
+环境文件记录了已实际执行的 Windows ParaView/VTK ABI 组合，完整依赖版本见[可视化数据目录](../examples/visualization)。原生场量重算按各数据目录的交付清单执行。详细扫频的动画采用同网格、同物理参数的单频配套计算，并与完整扫频的六自由度复响应逐项核对。
+
+## 交付记录
 
 交付清单保存手册依据、工具名称和版本、项目名、相对数据路径、输入及数据库哈希、命令或界面操作、视图设置、场量与工况、色标、单位、倍率、时间/帧率、导出格式和媒体哈希。原生绘图设置、场点输入、实际 .prv、所用 Anim/ 索引及数据、宏/会话设置、原始导出文件和必要的转码设置按采用的路径交付；数据库可随包保存，或清楚记录由交付输入再生成的方法。
 

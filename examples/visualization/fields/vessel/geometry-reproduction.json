@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "version": "0.6.0",
+  "method": "Rebuild the delivered geometry source and request with the released LF-normalized generator, followed by full geometry acceptance and byte-for-byte HST comparison",
+  "accepted_mesh_sha256": "eba5ef60d1b03d7caae5f2bcc5d7416968cc3f68236fb934f32f116f1bbe485e",
+  "rebuilt_mesh_sha256": "eba5ef60d1b03d7caae5f2bcc5d7416968cc3f68236fb934f32f116f1bbe485e",
+  "request_sha256": "7ae132abe81b7afd92f453eef3efe87927c23c2ea788bdd0f16f707658d90fc6",
+  "source_sha256": "83ad53aab1b9112a4b6fac7cdab212d0eeb3a386581b02f71f32be95dbbe811b",
+  "generator_sources": {
+    "geometry_worker.py": "0b7346a84b9eac9ca49a0f0f9b01c8bd1ef48a0bcf8731af4da70299042ed67d",
+    "geometry_kernel.py": "3d14ac3e9c73a3f710f25e7f9cd811fded0109bb5a294fb317f08194bdb022a6",
+    "geometry_sources.py": "177ab5528529e60ef01e2c72fa972c2e2bf9d6f81767f441ba2df29a99dfa5d4",
+    "surface_checks.py": "5419c47ea0828c8d30ec52ea597fdc84d6cdbb97e2d2e9d6f70810b0b30beb3d",
+    "panel_checks.py": "acf37c29f360d308895bf9db9efa0b9708f01ee6000fb60a649e4e1de5c60c57",
+    "structured_panels.py": "30b7d0b172dddff674c49d6115b1b6087c21df300671e0012c2fd8b36268be4d"
+  }
+}

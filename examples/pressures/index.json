@@ -3,17 +3,17 @@
   "cases": [
     {
       "form_id": "container_kcs_style",
-      "verification_sha256": "7172a74063477858bc80d032d49fc7a388776db2b68adcf25868cb89e0929fa8",
+      "verification_sha256": "42f32fd159523665b60055f3007d083c051f518bf5c30e5b3097a514ae32fd2e",
       "gif_sha256": "698a66de99acce16e068a18c88db2d00aa6034a5905a55278337fde06e02f19a"
     },
     {
       "form_id": "tanker_kvlcc2_style",
-      "verification_sha256": "44c63bb21d282c03b9b67185041943426f29a352448390550e03da41f8bf1a58",
+      "verification_sha256": "b3685b7ce3171aac9a42833414312abd685f3158c6b00edaefb7ff540ea027b5",
       "gif_sha256": "545b77735424e883c01fb387df09d66879b199013b770d0656a40764d8a77192"
     },
     {
       "form_id": "semisub_oc4_style",
-      "verification_sha256": "1f47381f03965d1a460a8083a04d2b294aeaa455e705ab9ac9c4156810e0066f",
+      "verification_sha256": "a07d957a272546543e5b55bb05f211430849c9668c493fc0d29d811eb2260a48",
       "gif_sha256": "a929e9eefa79d04cb1690981662a1d96ad2a7cbd97f0f7ca475dcebbcead5bd7"
     }
   ]

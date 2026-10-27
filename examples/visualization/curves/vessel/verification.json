@@ -1,0 +1,190 @@
+{
+  "schema": "hydrostar-native-curve-export-1",
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "status": "verified",
+  "source": "examples/vessel",
+  "native_summary_sha256": "24b2a97ab47bd8e31a61b92c0794c086f0dafcecec5f396380ef58f3ef823757",
+  "project": "vessel",
+  "display_name": "Curved station hull",
+  "frequency_count": 231,
+  "heading_count": 13,
+  "phase_display": "Modulo 360 in [-180,180); native samples shown as points without lines across phase wraps",
+  "figures": {
+    "vessel-amplitude-0.svg": {
+      "heading_deg": 0.0,
+      "mode": "amplitude",
+      "sha256": "51d282b13015fc00fa2bf5918a6ea4429898ee44e040c0754f40e09a1a4dd7c8"
+    },
+    "vessel-phase-0.svg": {
+      "heading_deg": 0.0,
+      "mode": "phase",
+      "sha256": "0eca0c05f28a2372f06a8ead239b00d3da7fcd18c951036750f85f3243645887"
+    },
+    "vessel-amplitude-30.svg": {
+      "heading_deg": 30.0,
+      "mode": "amplitude",
+      "sha256": "1b6ca7e6a825f7846b48de82bc555d690cf14aebf54776036099aa5db46a8175"
+    },
+    "vessel-phase-30.svg": {
+      "heading_deg": 30.0,
+      "mode": "phase",
+      "sha256": "b122d2d9080ee785b434439f9436858482be07329ce2f1da78522ee34d8dc800"
+    },
+    "vessel-amplitude-60.svg": {
+      "heading_deg": 60.0,
+      "mode": "amplitude",
+      "sha256": "b689d3c14b82868030d10187cdf16b723ff81d6a458b768b3e229b282a0e3732"
+    },
+    "vessel-phase-60.svg": {
+      "heading_deg": 60.0,
+      "mode": "phase",
+      "sha256": "94347fa62e893ea321239e17b7174f996d9d1a7fbc9b4d101f30685a7f509b7a"
+    },
+    "vessel-amplitude-90.svg": {
+      "heading_deg": 90.0,
+      "mode": "amplitude",
+      "sha256": "e98eeb235ffdea02f569a146650297fddf6523e3b96cee6a2020b1531c428316"
+    },
+    "vessel-phase-90.svg": {
+      "heading_deg": 90.0,
+      "mode": "phase",
+      "sha256": "6568de0292793b904fd272167be3141117d8893e134e8443c22668cdaa06a780"
+    },
+    "vessel-amplitude-120.svg": {
+      "heading_deg": 120.0,
+      "mode": "amplitude",
+      "sha256": "ca59f00d8218800f0bd36f03d952d22e1bdf0d49429938b9562c3ad0f89f0961"
+    },
+    "vessel-phase-120.svg": {
+      "heading_deg": 120.0,
+      "mode": "phase",
+      "sha256": "5c3f301f772a4fd2eb98a1825b64801a9bd3d00bdf21230c120e2efa1a1ac50c"
+    },
+    "vessel-amplitude-150.svg": {
+      "heading_deg": 150.0,
+      "mode": "amplitude",
+      "sha256": "7fdc2b1b1da19dd50e1b2e9bdc9ee64565ce7680236912121802f218630253be"
+    },
+    "vessel-phase-150.svg": {
+      "heading_deg": 150.0,
+      "mode": "phase",
+      "sha256": "f89d5e0af42714a04d9e371fd9d9c92e0d22d39df5f61f5d02e9d79839f827d9"
+    },
+    "vessel-amplitude-180.svg": {
+      "heading_deg": 180.0,
+      "mode": "amplitude",
+      "sha256": "59ba4657966e1a14beed371a7d5db9a6def5461437a7626e3475aed1b575d18d"
+    },
+    "vessel-phase-180.svg": {
+      "heading_deg": 180.0,
+      "mode": "phase",
+      "sha256": "80b216e0a4badd20c8cd71d1a8939781bb279344c0ed1fe9bbd9c935a3c488c0"
+    },
+    "vessel-amplitude-210.svg": {
+      "heading_deg": 210.0,
+      "mode": "amplitude",
+      "sha256": "029d295334f799a0a17283c4edc7f7b4f78ea296eb63b65a00d64cade9ad2ede"
+    },
+    "vessel-phase-210.svg": {
+      "heading_deg": 210.0,
+      "mode": "phase",
+      "sha256": "88812500ab5adef06a59b8106735880a5514fe1addebc13296326a4db0843c82"
+    },
+    "vessel-amplitude-240.svg": {
+      "heading_deg": 240.0,
+      "mode": "amplitude",
+      "sha256": "89c64f5e35e21e0be4ae6862d0c9e33aa5b1789aaaaf1ad28c6adc932b194d3c"
+    },
+    "vessel-phase-240.svg": {
+      "heading_deg": 240.0,
+      "mode": "phase",
+      "sha256": "54055862592cde3494426f5f9b8059523650713b8134d8b9fc3344c553508ea6"
+    },
+    "vessel-amplitude-270.svg": {
+      "heading_deg": 270.0,
+      "mode": "amplitude",
+      "sha256": "466ac3721956c9544fb786e934e12aa984bb552cc433553f7f8559d289d3e97b"
+    },
+    "vessel-phase-270.svg": {
+      "heading_deg": 270.0,
+      "mode": "phase",
+      "sha256": "6da545b04c554f3269fb6a2eac10a38a5ab8f3c1a0a1ed1b8640a5e41e306ad8"
+    },
+    "vessel-amplitude-300.svg": {
+      "heading_deg": 300.0,
+      "mode": "amplitude",
+      "sha256": "e14f77ec8fc81457fbbc000df39efd98444d5c21c1bb34527e992c68cd71dd70"
+    },
+    "vessel-phase-300.svg": {
+      "heading_deg": 300.0,
+      "mode": "phase",
+      "sha256": "1d494d29aef16c187dd063dcd2cdd35789d0b6cedfc51edeb850c7bf8d22b4a5"
+    },
+    "vessel-amplitude-330.svg": {
+      "heading_deg": 330.0,
+      "mode": "amplitude",
+      "sha256": "a81615a92230017010b49d4b695c1726f52cd47abcbb730b7980ae2875279661"
+    },
+    "vessel-phase-330.svg": {
+      "heading_deg": 330.0,
+      "mode": "phase",
+      "sha256": "0fb9a80bb8fdcbbd6e5febe9c37baaeaa8ce5d47c80d49af58681bb2ec2cfbd1"
+    },
+    "vessel-amplitude-360.svg": {
+      "heading_deg": 360.0,
+      "mode": "amplitude",
+      "sha256": "1aba332859789f30f40577145b3b074392141142c154dc80b19a6603c7bf99c7"
+    },
+    "vessel-phase-360.svg": {
+      "heading_deg": 360.0,
+      "mode": "phase",
+      "sha256": "fa1581f0c82243f2cfc267391770018e8d14ed9dd730b85af12c7e330277e06d"
+    },
+    "vessel-response.png": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        90.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "def309c09603e92b88aec33703cf1ab64aaa5e0a83ce06513d65a256842177ac"
+    },
+    "vessel-response.pdf": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        90.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "acfea7886a5133baa900783664e82e2ad3365ee4a4721d95dfc04647e66325ce"
+    }
+  },
+  "command": [
+    "gnuplot",
+    "curves.gp"
+  ],
+  "files": {
+    "curves.gp": "6ec598c55aee7f987be725f7eac742b2a14db4100b606933e9bd58c031386553",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/heave.rao": "ea95ec3289f8767035755e267efbe4c09b69e99b9657859d1a7d61e9b1205ecb",
+    "data/pitch.rao": "61e5663dc499466bd6266b5efe42657c09656b5bdfe9069d48097abfd9100a44",
+    "data/roll.rao": "a3b4be8d9c1b3842625d50ebb353dd7dd71655c65606d4d1f96c3aed86d313e2",
+    "data/surge.rao": "a6e87686e2d6ca4ca055a20c44c413681741dd4d7429a3c02c1af08358e0a601",
+    "data/sway.rao": "b3cde0452f94b06cbc3744d9c33e4fc46155da444e4e10d29e6933f9c41b3cb5",
+    "data/yaw.rao": "b344025e823e1633656ace0d42f9b12e3afd00fb7eeb0ce40a1a1fd4f560337d"
+  },
+  "visual_review": {
+    "status": "passed",
+    "checks": [
+      "Scientific serif labels and heading legend",
+      "Explicit angular frequency and DOF units",
+      "Native sampling without phase-wrap lines",
+      "PNG/PDF amplitude overview and heading-selectable SVG"
+    ]
+  }
+}

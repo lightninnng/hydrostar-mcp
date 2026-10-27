@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 DEFAULT_ROOT = r"D:\Bureau Veritas\Hstar4Experts\v8.2.0"
 RECOMMENDED_MAX_PANELS = 3000
 MODULES = ("hsmsh", "hslec", "hschk", "hsrdf", "hsmcn", "hsrao", "mpiexec")
-POSTPROCESS_MODULES = ("hsprs",)
+POSTPROCESS_MODULES = ("hsprs", "hsprv")
 DOFS = ("surge", "sway", "heave", "roll", "pitch", "yaw")
 NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[EeDd][+-]?\d+)?"
 
@@ -98,7 +98,7 @@ def log_error(log):
         ),
         (
             "INPUT_ERROR",
-            r"\[ERROR\]|can't find (?:the )?input file|cannot open.*file|\*{3}\s*(?:error|can't|cannot)",
+            r"\[ERROR\]|(?m:^\s*ERROR\s*:)|can't find (?:the )?input file|cannot open.*file|\*{3}\s*(?:error|can't|cannot)",
         ),
         (
             "SOLVER_EQUILIBRIUM_FAILED",

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "frequency_rad_s": 0.65,
+  "heading_deg": 60,
+  "compared": "Single-frequency native companion against the accepted 231-frequency sweep; identical HST, mass, CG, inertia, restoring, damping and environment",
+  "normalized_complex_errors": {
+    "surge": 0.0,
+    "sway": 0.0,
+    "heave": 0.0,
+    "roll": 0.0,
+    "pitch": 0.0,
+    "yaw": 0.0
+  },
+  "limit": 1e-05,
+  "definition": "abs(H_single-H_sweep)/(1+abs(H_sweep)); native output unit for each DOF",
+  "parent_mesh_sha256": "eba5ef60d1b03d7caae5f2bcc5d7416968cc3f68236fb934f32f116f1bbe485e",
+  "parent_verification_sha256": "24b2a97ab47bd8e31a61b92c0794c086f0dafcecec5f396380ef58f3ef823757"
+}

@@ -1,0 +1,10 @@
+name: hydrostar-visuals
+channels:
+  - conda-forge
+dependencies:
+  # Validated Windows/Python 3.12 ABI combination; renderer smoke-tested.
+  - python=3.12
+  - paraview=6.2.0=py312hd8a066f_1
+  - vtk-base=9.7.0=py312h2124641_1
+  - libprotobuf=7.35.1=h1a71995_3
+  - libabseil=20260526.0

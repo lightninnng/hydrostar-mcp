@@ -34,6 +34,7 @@ class GeometryRequest(Model):
     structured_axis: Literal["x", "y", "z"] | None = None
     longitudinal_cells: Annotated[int, Field(ge=8, le=1000)] | None = None
     longitudinal_grading_blend: Annotated[float, Field(ge=0, le=1)] = 0.2
+    adaptive_stations: bool = False
     axis_center_xy_m: (
         Annotated[list[float], Field(min_length=2, max_length=2)] | None
     ) = None

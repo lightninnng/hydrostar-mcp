@@ -117,4 +117,3 @@ def test_readme_language_switch_is_bidirectional():
     english = (ROOT / "README.en.md").read_text(encoding="utf-8")
     assert "(README.en.md)" in chinese
     assert "(README.md)" in english
-    assert "## Synchronized surface pressure, waves and motion" in english

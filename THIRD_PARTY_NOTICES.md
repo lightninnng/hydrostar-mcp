@@ -34,6 +34,16 @@ See [reference configurations](docs/reference-forms.md) and the machine-readable
 [source index](docs/references/sources.json) for URLs, versions, and verification
 metadata. Python dependencies keep their own licenses.
 
+## Visualization software
+
+The published command exports use separately installed
+[Gnuplot](http://www.gnuplot.info/) and [ParaView](https://www.paraview.org/),
+following the HydroStar manual's plotting and companion-viewer workflows.
+Their executables and dependency runtimes are outside this distribution.
+The repository includes original plotting/rendering scripts, version records,
+generated native field data and scientific figures. Each software installation
+retains its own upstream terms.
+
 ## Optional geometry software
 
 The geometry extra uses separately installed software under its upstream terms:

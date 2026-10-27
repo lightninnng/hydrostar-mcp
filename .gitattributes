@@ -16,3 +16,8 @@ examples/animations/** -text -whitespace
 
 examples/pressures/** -text -whitespace
 examples/geometry/** -text -whitespace
+examples/vessel/** -text -whitespace
+examples/visualization/** -text -whitespace
+docs/assets/*.svg -text -whitespace
+*.zip binary
+*.gz binary

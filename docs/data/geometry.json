@@ -1,6 +1,6 @@
 {
   "schema": "hydrostar-general-geometry-study-1",
-  "publication_version": "0.5.0",
+  "publication_version": "0.6.0",
   "source_origin": "Original scalar construction in geometry_source_study.py; no external meshes",
   "cases": [
     {

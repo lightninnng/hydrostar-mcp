@@ -3,19 +3,19 @@
   "cases": [
     {
       "form_id": "container_kcs_style",
-      "verification_sha256": "64388299dcd5fbda07808466a41e87fb2787b35b57b1cc463a417f1e79ee7c5e",
+      "verification_sha256": "7f107f3c535781e213a79bdf8882648c57eea62a53f990107315b9fafd2c7f6a",
       "gif": "../../docs/assets/container_kcs_style_wave.gif",
       "gif_sha256": "4c5106e608ccea8706ce864f9ec12ef66dc2b8dca8918bbdf08b4e291ef55a60"
     },
     {
       "form_id": "tanker_kvlcc2_style",
-      "verification_sha256": "1b66e1fe998cc1e1bce5fd06b2723bb28e25d71c68c268b2f48989b12bb9ca3c",
+      "verification_sha256": "25a00de22c8ac6b0146cacc990a9ceb10d8566fb003530babc2c35aee7bc69eb",
       "gif": "../../docs/assets/tanker_kvlcc2_style_wave.gif",
       "gif_sha256": "10d5520cd4ebf6048606fe833f42efc5ca16fb77400562c0ac98334d1cd3ba44"
     },
     {
       "form_id": "semisub_oc4_style",
-      "verification_sha256": "159d1d581faa2fbc4663fd185085560b958d22004478ea0bbd2a360c90116404",
+      "verification_sha256": "8166c88089b43b0921584914dd10a9dbc7b129bc846db34edb4fd9193acb3752",
       "gif": "../../docs/assets/semisub_oc4_style_wave.gif",
       "gif_sha256": "1618766ff602168af880b6129cbd52ee01faa25330f477103c12b2b86076ff3d"
     }

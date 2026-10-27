@@ -1,0 +1,190 @@
+{
+  "schema": "hydrostar-native-curve-export-1",
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "status": "verified",
+  "source": "examples/results/semisub_oc4_style",
+  "native_summary_sha256": "6ad9c7cdfddfd88102e36a993d9001dec7f2d5b14dd4f6b29aaad5c7c6630eac",
+  "project": "oc4_style",
+  "display_name": "Column semisubmersible",
+  "frequency_count": 237,
+  "heading_count": 13,
+  "phase_display": "Modulo 360 in [-180,180); native samples shown as points without lines across phase wraps",
+  "figures": {
+    "platform-amplitude-0.svg": {
+      "heading_deg": 0.0,
+      "mode": "amplitude",
+      "sha256": "e0d9a85059decfa5ec31fc2542ca1a4fababa5e05cbde896aa7a439fa255973a"
+    },
+    "platform-phase-0.svg": {
+      "heading_deg": 0.0,
+      "mode": "phase",
+      "sha256": "300de797aefe42ac6bb42e4cff5e9294ebb7ee5010ce0730f69dcebcc8ac7b59"
+    },
+    "platform-amplitude-30.svg": {
+      "heading_deg": 30.0,
+      "mode": "amplitude",
+      "sha256": "9a39a7e24dbf2dc13731c6b4e13ed8c82ef348298d715c8d1fa1efafa83222e2"
+    },
+    "platform-phase-30.svg": {
+      "heading_deg": 30.0,
+      "mode": "phase",
+      "sha256": "62d420f1f77e16e52944a3a9075570777c0ff3b1056adb5ece14530232083156"
+    },
+    "platform-amplitude-60.svg": {
+      "heading_deg": 60.0,
+      "mode": "amplitude",
+      "sha256": "a1476227261006bc6f5878a0876d9f7c8806d20019db623d821e1c68c2a763a2"
+    },
+    "platform-phase-60.svg": {
+      "heading_deg": 60.0,
+      "mode": "phase",
+      "sha256": "426d582a491161e31227b28a0b1f673776870c9ec0888e5ff79af838c0fa5e49"
+    },
+    "platform-amplitude-90.svg": {
+      "heading_deg": 90.0,
+      "mode": "amplitude",
+      "sha256": "5b48809b263b2f216a9dd58338588fca3ed8b3c84660d6b04146b459dd37ff8e"
+    },
+    "platform-phase-90.svg": {
+      "heading_deg": 90.0,
+      "mode": "phase",
+      "sha256": "021014abb5275bc5ced295f9b3e79ca8a0b5963d9eea69a16cf4badb531ea3b4"
+    },
+    "platform-amplitude-120.svg": {
+      "heading_deg": 120.0,
+      "mode": "amplitude",
+      "sha256": "a7b01447daf40b7434f90b092e1e0cb441add295df34f5e1d4769743fc0fbfc7"
+    },
+    "platform-phase-120.svg": {
+      "heading_deg": 120.0,
+      "mode": "phase",
+      "sha256": "7ee5c7ae181530889eeb87983bf3b4c30b83febcb61af0baa97e1725507f880a"
+    },
+    "platform-amplitude-150.svg": {
+      "heading_deg": 150.0,
+      "mode": "amplitude",
+      "sha256": "f77064fa969e16ed3a5619d7b043277d6d658f18cfad4bf81f6b4211d4365061"
+    },
+    "platform-phase-150.svg": {
+      "heading_deg": 150.0,
+      "mode": "phase",
+      "sha256": "661934c160be3a2752461c2155641bd860fdf387596436d4feb796470bb37ac3"
+    },
+    "platform-amplitude-180.svg": {
+      "heading_deg": 180.0,
+      "mode": "amplitude",
+      "sha256": "7c90c0d687067b3f6e5d7622d900cf9a4b0586b39691dfa1f89dd52baa36eb5a"
+    },
+    "platform-phase-180.svg": {
+      "heading_deg": 180.0,
+      "mode": "phase",
+      "sha256": "86881b6a37f375d07450c505510a2a6eb880eff6700c3fb6deea9f08f4263c8f"
+    },
+    "platform-amplitude-210.svg": {
+      "heading_deg": 210.0,
+      "mode": "amplitude",
+      "sha256": "2ba8aae285194cb60153b4d63918395afd10acbe80fb6504fa5cd6b352d84173"
+    },
+    "platform-phase-210.svg": {
+      "heading_deg": 210.0,
+      "mode": "phase",
+      "sha256": "841f6a2125e34cce4f71a1c737565772a2cca43e785eff0eba49f9ded8ec164c"
+    },
+    "platform-amplitude-240.svg": {
+      "heading_deg": 240.0,
+      "mode": "amplitude",
+      "sha256": "1e8bf1d4f4f221dbd71c58f5cddbbf4438cb69d4d2552f06c658eac57e600027"
+    },
+    "platform-phase-240.svg": {
+      "heading_deg": 240.0,
+      "mode": "phase",
+      "sha256": "228fe5257bb85e35234ef8df16aaf02183e06a26ce07b610c45f2b7ed9b7cdf1"
+    },
+    "platform-amplitude-270.svg": {
+      "heading_deg": 270.0,
+      "mode": "amplitude",
+      "sha256": "6d33ca0d2ba1ab65664e039534a606aa7ae5cc051bf6d232485f06d4b28c41f5"
+    },
+    "platform-phase-270.svg": {
+      "heading_deg": 270.0,
+      "mode": "phase",
+      "sha256": "a6e23c7a761b963158400d673cd556801b9956d9276ffce1c1df83758fa9ee62"
+    },
+    "platform-amplitude-300.svg": {
+      "heading_deg": 300.0,
+      "mode": "amplitude",
+      "sha256": "2e2e077709ec91584bbafdab6e7435498d20ae7c4d6613c5d0f81ba36a6ffe6f"
+    },
+    "platform-phase-300.svg": {
+      "heading_deg": 300.0,
+      "mode": "phase",
+      "sha256": "b8d0718c4eb84f0c1f6afa3e18ca62b4b78abbb2b353998fd0d554b97feefaba"
+    },
+    "platform-amplitude-330.svg": {
+      "heading_deg": 330.0,
+      "mode": "amplitude",
+      "sha256": "6ccf7293e54a8444ad00caccd7de8ded4945a7d4ffcf86a75f08b8e1850ecad2"
+    },
+    "platform-phase-330.svg": {
+      "heading_deg": 330.0,
+      "mode": "phase",
+      "sha256": "0d60a579439af5d7052a4ac23559d79ae0fae4df81761ec1005d85c9507512d7"
+    },
+    "platform-amplitude-360.svg": {
+      "heading_deg": 360.0,
+      "mode": "amplitude",
+      "sha256": "5d51bb530a1ce30601379651f0998deac416d071cedd816f819cc4342912bd36"
+    },
+    "platform-phase-360.svg": {
+      "heading_deg": 360.0,
+      "mode": "phase",
+      "sha256": "bb834376e15b6ea54fc32ca0cce2f265308bb35266dd94aafe5c09890e6439ba"
+    },
+    "platform-response.png": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        90.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "9a3d65c1764a4f5535b6d17d7e992f7b1988286d7358ebe5c186e3064ba67126"
+    },
+    "platform-response.pdf": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        90.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "60546311744487b145107bab08d6b4506bb105eddef0aadf7dc44124d6f9794c"
+    }
+  },
+  "command": [
+    "gnuplot",
+    "curves.gp"
+  ],
+  "files": {
+    "curves.gp": "465a503a7cd2ccc741018e436cf68f482e1dcd145566bc5dc476ce8629c0f787",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/heave.rao": "f8be25c8a89b843b430266459dba85f7fadc1b3a15f5795b86eca6fa19a143a2",
+    "data/pitch.rao": "93855dac4c5287e99f21a6541de234f43eb7f094f304d84b6b4c04ee2fbddfb9",
+    "data/roll.rao": "f25c4c28a6c3668b8da65ca3e9f5ba54bc5c7ab2da55a3c4a4b3afcb0f7d0d46",
+    "data/surge.rao": "66d22a6b21fdea96952976ec1bbb978ad38715e3b9fa34700b3f3c249e64080e",
+    "data/sway.rao": "06b058e0848aeddd1c03b0e353c9c2eddbe3640da10b833c4b06383373eeaeee",
+    "data/yaw.rao": "8afe03b03deef038bbdc1c19a11940fb8a1ca7ab0a856ccb604d9e97b7d849bd"
+  },
+  "visual_review": {
+    "status": "passed",
+    "checks": [
+      "Scientific serif labels and heading legend",
+      "Explicit angular frequency and DOF units",
+      "Native sampling without phase-wrap lines",
+      "PNG/PDF amplitude overview and heading-selectable SVG"
+    ]
+  }
+}

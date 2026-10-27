@@ -1,0 +1,93 @@
+{
+  "schema": "hydrostar-native-delivery-1",
+  "project": "vessel_view",
+  "inputs": {
+    "inputs/vessel_view.hst": {
+      "status": "validated",
+      "sha256": "eba5ef60d1b03d7caae5f2bcc5d7416968cc3f68236fb934f32f116f1bbe485e"
+    },
+    "inputs/vessel_view.mcn": {
+      "status": "validated",
+      "sha256": "10b0a70b0d93c2a3cd24f60d0cc23b0a207612e17aab42284e4861cbfca3de5b"
+    },
+    "inputs/vessel_view.rao": {
+      "status": "validated",
+      "sha256": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2"
+    },
+    "inputs/vessel_view.rdf": {
+      "status": "validated",
+      "sha256": "9516322d0f1b62c72d8c73f6a89dec867d0343d4dacf0386b8e7a25c4d719b95"
+    },
+    "animation.prv": {
+      "status": "validated",
+      "sha256": "73fcadf762ce1b0a365ac1b2da7d09722614a8316024f1c2fd3ba11c085c1144"
+    },
+    "wave.prs": {
+      "status": "validated",
+      "sha256": "f10111f40d2c3e2844a7c048b650538c7ee3f0af60632d5115d660fbcf3f3eb4"
+    },
+    "wave.rao": {
+      "status": "validated",
+      "sha256": "973ce71acd324ae9e5d6a428e62e0ca0824f46901205f1f65c021e56edcc34df"
+    },
+    "following.prs": {
+      "status": "validated",
+      "sha256": "b6853b4597b7d958a54d70d89b73427f39f76a91f781bf89836cdb3b07943caa"
+    },
+    "following.rao": {
+      "status": "validated",
+      "sha256": "081cefe82c4bc5b2b5a2245f8650fbfdfe4e063327e06d10bca88710c9519797"
+    },
+    "eulerian.prs": {
+      "status": "validated",
+      "sha256": "891ec082603034e1fb10eb7d25a190124cbfec12d6c05dd5c303bbfc811b0cb7"
+    },
+    "eulerian.rao": {
+      "status": "validated",
+      "sha256": "75c80b80aa55238a31ba11557c20f150c09050d0ef24da60ba6aae1332899fec"
+    }
+  },
+  "field_units": "Complex wave elevation and pressure head per unit incident amplitude; rendered elevation in m and pressure in kPa",
+  "pressure_data": "examples/visualization/fields/vessel/pressure.json",
+  "pressure_data_sha256": "cbe982eb4ec751b469d4edd2e8eea9a81c4cf08e53a25d602ca68775eac0d3bd",
+  "native_databases": {
+    "status": "regenerate_from_delivered_inputs",
+    "directories": [
+      "bin",
+      "hdf",
+      "rao",
+      "tmp"
+    ]
+  },
+  "sequence": [
+    "hslec inputs/vessel_view.hst vessel_view",
+    "hschk - vessel_view",
+    "hsrdf inputs/vessel_view.rdf vessel_view",
+    "hsmcn inputs/vessel_view.mcn vessel_view",
+    "hsrao inputs/vessel_view.rao vessel_view",
+    "hsprv animation.prv vessel_view",
+    "hsprs wave.prs vessel_view",
+    "hsrao wave.rao vessel_view"
+  ],
+  "hsprv": {
+    "status": "archived_as_diagnostic",
+    "file": "native.zip",
+    "accepted_geometry_and_motion": true,
+    "display_total": "Use accepted waves.json, not the diagnostic old-format total"
+  },
+  "complex_fields": {
+    "status": "validated",
+    "data": "waves.json",
+    "raw": "wave-raos.jsonl.gz",
+    "phase": "Re(H exp(+i omega t)); physical wave amplitude applied once"
+  },
+  "spc": {
+    "status": "not_applicable",
+    "reason": "First-order regular-wave fields; spectral statistics require specified sea states and an actual SPC input."
+  },
+  "figures": {
+    "status": "validated",
+    "record": "render.json",
+    "settings": "condition.json"
+  }
+}

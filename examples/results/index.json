@@ -4,17 +4,17 @@
     {
       "form_id": "container_kcs_style",
       "path": "container_kcs_style/summary.json",
-      "summary_sha256": "90ab6802b9de5195b11458601896d0217ae28eba8b5cb7e7b3f42dddb22c8474"
+      "summary_sha256": "69f50344f99e7087c2330a25e517d320d14a988034ff83bfb98d26220961bc06"
     },
     {
       "form_id": "tanker_kvlcc2_style",
       "path": "tanker_kvlcc2_style/summary.json",
-      "summary_sha256": "42de90a417cf876ee3adefdfd75e3b04d2c0242e55c9d27084dfcb5ab8a6af79"
+      "summary_sha256": "a5857136ab49b3bfa29b57f0388dc99803ffb56f5e3e3f516d6af55b46c852bf"
     },
     {
       "form_id": "semisub_oc4_style",
       "path": "semisub_oc4_style/summary.json",
-      "summary_sha256": "18895b28d572a2b3c4f03f287f010815cab8449b14113bf35847f1c02abd41b8"
+      "summary_sha256": "6ad9c7cdfddfd88102e36a993d9001dec7f2d5b14dd4f6b29aaad5c7c6630eac"
     }
   ],
   "case_count": 3
