@@ -1,0 +1,30 @@
+{
+  "sources": {
+    "simman_kcs": {
+      "title": "SIMMAN2014 KCS geometry and conditions",
+      "url": "https://simman2014.dk/ship-data/moeri-container-ship/geometry-and-conditions-moeri-container-ship/",
+      "verified_date": "2026-10-27"
+    },
+    "simman_kvlcc2": {
+      "title": "SIMMAN2014 KVLCC2 geometry and conditions",
+      "url": "https://simman2014.dk/ship-data/moeri-kvlcc2-tanker/geometry-and-conditions-moeri-kvlcc2-tanker/",
+      "verified_date": "2026-10-27"
+    },
+    "oc4_hydrodyn": {
+      "title": "OpenFAST OC4 DeepCwind HydroDyn reference input",
+      "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_HydroDyn.dat",
+      "verified_date": "2026-10-27"
+    },
+    "oc4_elastodyn": {
+      "title": "OpenFAST OC4 DeepCwind structural and mass input",
+      "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_ElastoDyn.dat",
+      "verified_date": "2026-10-27"
+    },
+    "hydrodyn_modeling": {
+      "title": "OpenFAST HydroDyn modeling considerations",
+      "url": "https://openfast.readthedocs.io/en/main/source/user/hydrodyn/modeling_considerations.html",
+      "verified_date": "2026-10-27"
+    }
+  },
+  "verified_date": "2026-10-27"
+}

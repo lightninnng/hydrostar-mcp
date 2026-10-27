@@ -1,0 +1,12 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.html text eol=lf
+# Preserve byte-exact native records and their SHA-256 manifests on all platforms.
+examples/results/** -text -whitespace
+docs/data/showcase.json -text whitespace=cr-at-eol
+*.png binary
+*.pdf binary

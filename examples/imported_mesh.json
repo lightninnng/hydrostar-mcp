@@ -1,0 +1,118 @@
+{
+  "project": "imported_container",
+  "object_type": "ship",
+  "geometry": {
+    "type": "hst",
+    "path": "examples/results/container_kcs_style/inputs/container_style.hst",
+    "expected_volume_m3": 51777.88456809608
+  },
+  "environment": {
+    "frequency": {
+      "min": 0.05,
+      "max": 0.8,
+      "step": 0.005
+    },
+    "headings": {
+      "min": 0.0,
+      "max": 360.0,
+      "step": 30.0
+    },
+    "depth": 80.0,
+    "speed_m_s": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81
+  },
+  "mechanics": {
+    "model": "explicit",
+    "mass_kg": 53072331.68231133,
+    "cog_m": [
+      -3.4614117726976663,
+      0.0,
+      0.8604264667718239
+    ],
+    "gyradius_m": [
+      12.880000000000003,
+      57.5,
+      57.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "roll_damping_pct": 0.0,
+    "restraint": "free",
+    "stiffness_matrix": null,
+    "linear_damping_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        5295900.638878172,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        165841860.12363887,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        16136583638.578178,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "hydrostatics_method": "waterplane",
+    "components": [],
+    "morison": [],
+    "wave_amplitude_m": null,
+    "spectrum": null,
+    "vertical_external_force_n": 0.0,
+    "equilibrium_relative_tolerance": 0.01,
+    "cog_xy_tolerance_m": 0.05,
+    "source_note": "Import of this repository's generated container-hull example; loading and damping retained from the published native case."
+  },
+  "output_dofs": [
+    "surge",
+    "sway",
+    "heave",
+    "roll",
+    "pitch",
+    "yaw"
+  ],
+  "output_point_m": null,
+  "reference_form": null,
+  "recommended_max_panels": 3000,
+  "waterplane_estimate_factor": 1.1,
+  "nproc": 4,
+  "module_timeout_s": 1800.0
+}

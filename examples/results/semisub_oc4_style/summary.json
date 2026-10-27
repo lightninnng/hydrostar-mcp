@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "form_id": "semisub_oc4_style",
+  "label": "圆柱扩底半潜基本构型 · OC4资料参照",
+  "source_case_id": "oc4_style-c50f5000809e4550",
+  "backend": {
+    "name": "HydroStar",
+    "version": "8.2.0",
+    "automation_version": "0.2.0"
+  },
+  "publication_version": "0.2.0",
+  "computed_at_utc": "2026-10-27T04:02:08.748698+00:00",
+  "frequency_count": 237,
+  "heading_count": 13,
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 13556.75769841414,
+    "cb": [
+      1.706372907694793e-11,
+      0.0,
+      -13.153467354157149
+    ],
+    "wetted_area": 5766.7809463645435,
+    "n_nodes": 862,
+    "n_panels": 828,
+    "sym": 1,
+    "max_edge": 3.1506133470392452,
+    "max_aspect_ratio": 3.8306487884055755,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "mesh": {
+    "bodies": 1,
+    "symmetry": 1,
+    "hull_panels": 828,
+    "waterline_segments": 48,
+    "waterplane_panels": 63,
+    "above_waterline": 0,
+    "cb_x": 0.0
+  },
+  "topology": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      7.229444,
+      7.229444
+    ]
+  },
+  "mechanics": {
+    "mass_kg": 14267302.947436247,
+    "cog_m": [
+      0.0,
+      0.0,
+      -9.958756764154128
+    ],
+    "gyradius_m": [
+      28.685360858687268,
+      28.68536085868727,
+      30.15675378407595,
+      -9.140797929796874e-08,
+      0.0,
+      0.0
+    ],
+    "total_displacement_m3": 13919.319948729079,
+    "total_cb_m": [
+      1.6619230438864792e-11,
+      4.083778451115938e-18,
+      -13.174633020744348
+    ],
+    "equilibrium_relative_error": 7.750694187759001e-13
+  },
+  "reference_model": {
+    "form_id": "semisub_oc4_style",
+    "label": "圆柱扩底半潜基本构型 · OC4资料参照",
+    "sources": {
+      "oc4_hydrodyn": {
+        "title": "OpenFAST OC4 DeepCwind HydroDyn reference input",
+        "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_HydroDyn.dat",
+        "verified_date": "2026-10-27"
+      },
+      "oc4_elastodyn": {
+        "title": "OpenFAST OC4 DeepCwind structural and mass input",
+        "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_ElastoDyn.dat",
+        "verified_date": "2026-10-27"
+      },
+      "hydrodyn_modeling": {
+        "title": "OpenFAST HydroDyn modeling considerations",
+        "url": "https://openfast.readthedocs.io/en/main/source/user/hydrodyn/modeling_considerations.html",
+        "verified_date": "2026-10-27"
+      }
+    },
+    "source_values": {
+      "draft_m": 20.0,
+      "offset_side_m": 50.0,
+      "center_diameter_m": 6.5,
+      "upper_diameter_m": 12.0,
+      "base_diameter_m": 24.0,
+      "base_height_m": 6.0,
+      "connector_diameter_m": 1.6,
+      "reference_total_volume_m3": 13917.0,
+      "unballasted_structure_mass_kg": 3852180.0,
+      "unballasted_cog_z_m": -8.6588
+    },
+    "features": [
+      "中心承塔柱与三偏置柱",
+      "大直径基柱及环形肩部",
+      "三角形/径向上下连接杆",
+      "斜撑、灌水压载与系泊平衡"
+    ],
+    "model_level": "OC4几何标量重建与面元/Morison混合近似；采用零静态预载平衡配载，单独记录与原系统差异",
+    "acceptance_scope": "标量、构型特征与网格质量分别核验；门禁通过记录为数值链路验收，工程用途另按目标海况/装载/阻尼和基准响应验收",
+    "engineering_acceptance": {
+      "ready": false,
+      "status": "reference_configuration_available",
+      "required_evidence": [
+        "目标用途与海况/航速范围",
+        "实际线型/部件尺度及几何敏感性",
+        "装载、重心与惯性资料",
+        "系泊刚度/预载和平衡姿态",
+        "阻尼或衰减试验依据",
+        "周期与RAO参考数据对照"
+      ]
+    },
+    "scalar_comparison": {
+      "bem_volume_m3": 13556.757698403351,
+      "physical_rod_volume_m3": 362.5622503149394,
+      "total_volume_relative": 0.00016669890912490715
+    },
+    "static_model": "零静态预载近似：保留结构与灌水压载来源，增加对称配载使当前排水量平衡；原OC4系统的预张力与整机耦合另行验收。"
+  },
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.234
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.453
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 91.062
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 4.86
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.25
+    }
+  ],
+  "provenance": {
+    "geometry_origin": "project_parameter_generator",
+    "external_mesh_files": [],
+    "parameter_sha256": "d0a5b99dd7b1f4db58b6affeca36ce5c0d1a529d9c505b4cf7db58f2cf82a6ee",
+    "original_generator_sha256": "d7bbd96be56f6131aabaa4081fbf804e3dbda966aed670d77ecaebd70e7a790c",
+    "additional_generator_sources": {
+      "forms_geometry.py": "0aed5304f6d3782ec64ada473594365811ba4840cdd953a308c789a7870b5a2d"
+    }
+  },
+  "files": {
+    "config.json": "af5f34799ad3108b0e3e53e75faa011e722a4ded0d94cbd975ac7515433c8ef7",
+    "inputs/oc4_style.hst": "6348f8d37874476c31488692da55cdce9ceb5f95cd6f53cdb138d4fae66ae0e8",
+    "inputs/oc4_style.mcn": "e750ffc2e1bd331dc370fd193973e469cae5d0c54e8766da4f9d4ad9a449b122",
+    "inputs/oc4_style.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/oc4_style.rdf": "2fff175a875f081eb1f413d0abf0c4035f4cf4d26858af81a4ce68e58e3813e1",
+    "motions.json": "0be46e472a0a5a3af4e9425653ae63c3d84e01b9dccb35cbe7ef5372e0c32bb0",
+    "rao/heave.rao": "f8be25c8a89b843b430266459dba85f7fadc1b3a15f5795b86eca6fa19a143a2",
+    "rao/pitch.rao": "93855dac4c5287e99f21a6541de234f43eb7f094f304d84b6b4c04ee2fbddfb9",
+    "rao/roll.rao": "f25c4c28a6c3668b8da65ca3e9f5ba54bc5c7ab2da55a3c4a4b3afcb0f7d0d46",
+    "rao/surge.rao": "66d22a6b21fdea96952976ec1bbb978ad38715e3b9fa34700b3f3c249e64080e",
+    "rao/sway.rao": "06b058e0848aeddd1c03b0e353c9c2eddbe3640da10b833c4b06383373eeaeee",
+    "rao/yaw.rao": "8afe03b03deef038bbdc1c19a11940fb8a1ca7ab0a856ccb604d9e97b7d849bd"
+  }
+}

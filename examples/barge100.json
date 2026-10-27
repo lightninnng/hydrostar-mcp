@@ -1,0 +1,21 @@
+{
+  "project": "barge100",
+  "geometry": {
+    "type": "barge",
+    "length": 100.0,
+    "beam": 30.0,
+    "draft": 6.0,
+    "n_length": 48,
+    "n_half_beam": 10,
+    "n_draft": 4
+  },
+  "environment": {
+    "frequency": {"min": 0.05, "max": 1.8, "step": 0.05},
+    "headings": {"min": 0.0, "max": 360.0, "step": 30.0},
+    "depth": "INF",
+    "speed_m_s": 0.0
+  },
+  "mechanics": {"model": "uniform_box_demo", "roll_damping_pct": 6.0},
+  "output_point_m": [50.0, 0.0, 0.0],
+  "nproc": 4
+}

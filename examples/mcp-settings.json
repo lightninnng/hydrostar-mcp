@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "hydrostar": {
+      "command": "C:/path/to/hydrostar-mcp/.venv/Scripts/python.exe",
+      "args": ["-m", "hydrostar_mcp.server"],
+      "env": {
+        "HSTAR_PATH7": "C:/path/to/Hstar4Experts/v8.2.0",
+        "HS_WORKSPACE": "C:/HydroStarCases",
+        "HS_SOURCE_ROOT": "C:/path/to/hydrostar-mcp"
+      }
+    }
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "form_id": "container_kcs_style",
+  "label": "集装箱船基本构型 · KCS资料参照",
+  "source_case_id": "container_style-475b011b39074d6d",
+  "backend": {
+    "name": "HydroStar",
+    "version": "8.2.0",
+    "automation_version": "0.2.0"
+  },
+  "publication_version": "0.2.0",
+  "computed_at_utc": "2026-10-27T03:59:37.814154+00:00",
+  "frequency_count": 151,
+  "heading_count": 13,
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 51777.88456809608,
+    "cb": [
+      -3.4614117726971596,
+      0.0,
+      -4.999315535026276
+    ],
+    "wetted_area": 9306.289238335507,
+    "n_nodes": 599,
+    "n_panels": 727,
+    "sym": 1,
+    "max_edge": 7.935131465785654,
+    "max_aspect_ratio": 4.301639427600823,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "mesh": {
+    "bodies": 1,
+    "symmetry": 1,
+    "hull_panels": 727,
+    "waterline_segments": 57,
+    "waterplane_panels": 128,
+    "above_waterline": 0,
+    "cb_x": -3.460007
+  },
+  "topology": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      0.598346,
+      286.540107
+    ]
+  },
+  "mechanics": {
+    "mass_kg": 53072331.68231133,
+    "cog_m": [
+      -3.4614117726976663,
+      0.0,
+      0.8604264667718239
+    ],
+    "gyradius_m": [
+      12.880000000000003,
+      57.5,
+      57.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "total_displacement_m3": 51777.88456809608,
+    "total_cb_m": [
+      -3.4614117726971596,
+      0.0,
+      -4.999315535026276
+    ],
+    "equilibrium_relative_error": 2.421326192687131e-13
+  },
+  "reference_model": {
+    "form_id": "container_kcs_style",
+    "label": "集装箱船基本构型 · KCS资料参照",
+    "sources": {
+      "simman_kcs": {
+        "title": "SIMMAN2014 KCS geometry and conditions",
+        "url": "https://simman2014.dk/ship-data/moeri-container-ship/geometry-and-conditions-moeri-container-ship/",
+        "verified_date": "2026-10-27"
+      }
+    },
+    "source_values": {
+      "length_m": 230.0,
+      "beam_m": 32.2,
+      "draft_m": 10.8,
+      "volume_m3": 52030.0,
+      "block_coefficient": 0.651,
+      "midship_coefficient": 0.985,
+      "lcb_fraction": -0.0148,
+      "gm_m": 0.6,
+      "roll_radius_over_beam": 0.4,
+      "yaw_radius_over_length": 0.25
+    },
+    "features": [
+      "平行中体与平底圆舭",
+      "艏艉不同的剖面面积分布",
+      "球鼻艏与倾斜首柱",
+      "艉部抬升、收缩与艉封板"
+    ],
+    "model_level": "资料驱动的裸船体参数化近似；排水量和LCB标量拟合；线型与RAO仍需基准对照",
+    "acceptance_scope": "标量、构型特征与网格质量分别核验；门禁通过记录为数值链路验收，工程用途另按目标海况/装载/阻尼和基准响应验收",
+    "engineering_acceptance": {
+      "ready": false,
+      "status": "reference_configuration_available",
+      "required_evidence": [
+        "目标用途与海况/航速范围",
+        "实际线型/部件尺度及几何敏感性",
+        "装载、重心与惯性资料",
+        "系泊刚度/预载和平衡姿态",
+        "阻尼或衰减试验依据",
+        "周期与RAO参考数据对照"
+      ]
+    },
+    "scalar_comparison": {
+      "volume_relative": -0.004845578164354825,
+      "block_coefficient": 0.6473465529464174,
+      "lcb_fraction": -0.015049616403033332,
+      "lcb_error_percent_length": -0.024961640303333178
+    }
+  },
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.094
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.296
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 69.281
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 3.547
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.922
+    }
+  ],
+  "provenance": {
+    "geometry_origin": "project_parameter_generator",
+    "external_mesh_files": [],
+    "parameter_sha256": "9c3eb96a0fc844d1feffea13863d797e44af2a082875cdab139d7880f282f251",
+    "original_generator_sha256": "d7bbd96be56f6131aabaa4081fbf804e3dbda966aed670d77ecaebd70e7a790c",
+    "additional_generator_sources": {
+      "forms_geometry.py": "0aed5304f6d3782ec64ada473594365811ba4840cdd953a308c789a7870b5a2d"
+    }
+  },
+  "files": {
+    "config.json": "2eef561bfa8de3f11b0603a4c15262073efab903357ed6a979144164d59b6387",
+    "inputs/container_style.hst": "482805ecc4c4864e6616a30f05fdc081f1e0d5603836e6f1116cab102472dd0c",
+    "inputs/container_style.mcn": "dadc5bdbfc3c6e58413eaaabfacc6199800a406d065b7ab9c39e8aa608b24f9b",
+    "inputs/container_style.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/container_style.rdf": "d9f053743e51a396c94c0d31c94f0d2dd427d0004a0cb5b862dff79b5f409ab7",
+    "motions.json": "460cc7c1fb5af87a5986092c3068082f1acfbd6d65237d5423b28abec898e361",
+    "rao/heave.rao": "a32a28ea693c6d525e2c0257739a43cd420b6fb05039b8223843ae3f59c958b0",
+    "rao/pitch.rao": "12bb56db8cc05ee720da8639c9c2c5e6f266b6140ea7d343a1d5c72fa077f23e",
+    "rao/roll.rao": "1da6b6d6ba50198c72f26efa81cb3e3d5699a07cdaef09a08b2b05650d21d361",
+    "rao/surge.rao": "ecfb505c949d3fc8d9bfee3fd60ba2016ac112f1e909031c6175467aafa15326",
+    "rao/sway.rao": "0917bfb77961a873422654d5091f522f127f14031c6fc3b1a67f64e0bb97cc58",
+    "rao/yaw.rao": "d58d0c1b81c9138b0817bd8c458c23a37b158ff744c34b867345d0872c6b01ec"
+  }
+}

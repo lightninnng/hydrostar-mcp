@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "form_id": "tanker_kvlcc2_style",
+  "label": "肥大型油船基本构型 · KVLCC2资料参照",
+  "source_case_id": "tanker_style-37ede11850a24140",
+  "backend": {
+    "name": "HydroStar",
+    "version": "8.2.0",
+    "automation_version": "0.2.0"
+  },
+  "publication_version": "0.2.0",
+  "computed_at_utc": "2026-10-27T04:00:31.479475+00:00",
+  "frequency_count": 111,
+  "heading_count": 13,
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 311130.21949667495,
+    "cb": [
+      10.982501313176854,
+      0.0,
+      -9.724050586915885
+    ],
+    "wetted_area": 28283.21429201058,
+    "n_nodes": 599,
+    "n_panels": 660,
+    "sym": 1,
+    "max_edge": 14.5,
+    "max_aspect_ratio": 3.9511131979301113,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "mesh": {
+    "bodies": 1,
+    "symmetry": 1,
+    "hull_panels": 660,
+    "waterline_segments": 57,
+    "waterplane_panels": 206,
+    "above_waterline": 0,
+    "cb_x": 10.984787
+  },
+  "topology": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      5.708755,
+      359.525696
+    ]
+  },
+  "mechanics": {
+    "mass_kg": 318908474.98414505,
+    "cog_m": [
+      10.982501313205647,
+      0.0,
+      -2.796111228160407
+    ],
+    "gyradius_m": [
+      23.200000000000003,
+      80.0,
+      80.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "total_displacement_m3": 311130.21949667495,
+    "total_cb_m": [
+      10.982501313176854,
+      0.0,
+      -9.724050586915885
+    ],
+    "equilibrium_relative_error": 1.668972351326387e-13
+  },
+  "reference_model": {
+    "form_id": "tanker_kvlcc2_style",
+    "label": "肥大型油船基本构型 · KVLCC2资料参照",
+    "sources": {
+      "simman_kvlcc2": {
+        "title": "SIMMAN2014 KVLCC2 geometry and conditions",
+        "url": "https://simman2014.dk/ship-data/moeri-kvlcc2-tanker/geometry-and-conditions-moeri-kvlcc2-tanker/",
+        "verified_date": "2026-10-27"
+      }
+    },
+    "source_values": {
+      "length_m": 320.0,
+      "beam_m": 58.0,
+      "draft_m": 20.8,
+      "volume_m3": 312622.0,
+      "block_coefficient": 0.8098,
+      "midship_coefficient": 0.998,
+      "lcb_fraction": 0.0348,
+      "gm_m": 5.71,
+      "roll_radius_over_beam": 0.4,
+      "yaw_radius_over_length": 0.25
+    },
+    "features": [
+      "较长平行中体与较高剖面丰满度",
+      "小圆舭半径、宽平底",
+      "丰满艏部和球鼻过渡",
+      "保留艉部收缩与艉封板"
+    ],
+    "model_level": "资料驱动的肥大裸船体参数化近似；标量参数与具体线型验证分别记录",
+    "acceptance_scope": "标量、构型特征与网格质量分别核验；门禁通过记录为数值链路验收，工程用途另按目标海况/装载/阻尼和基准响应验收",
+    "engineering_acceptance": {
+      "ready": false,
+      "status": "reference_configuration_available",
+      "required_evidence": [
+        "目标用途与海况/航速范围",
+        "实际线型/部件尺度及几何敏感性",
+        "装载、重心与惯性资料",
+        "系泊刚度/预载和平衡姿态",
+        "阻尼或衰减试验依据",
+        "周期与RAO参考数据对照"
+      ]
+    },
+    "scalar_comparison": {
+      "volume_relative": -0.004771834686212562,
+      "block_coefficient": 0.8059366179768497,
+      "lcb_fraction": 0.03432031660376765,
+      "lcb_error_percent_length": -0.04796833962323471
+    }
+  },
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.219
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.344
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 48.375
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.719
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.25
+    }
+  ],
+  "provenance": {
+    "geometry_origin": "project_parameter_generator",
+    "external_mesh_files": [],
+    "parameter_sha256": "f40352c53d814d31a4d9d118bf2d53ec15fe827f1777aa1ede8c600ffc819eb8",
+    "original_generator_sha256": "d7bbd96be56f6131aabaa4081fbf804e3dbda966aed670d77ecaebd70e7a790c",
+    "additional_generator_sources": {
+      "forms_geometry.py": "0aed5304f6d3782ec64ada473594365811ba4840cdd953a308c789a7870b5a2d"
+    }
+  },
+  "files": {
+    "config.json": "0dbce44f183bef091cbcfee706c8595efe243f87897bb41645ca33133ca87180",
+    "inputs/tanker_style.hst": "e540200065d13f61c9667cd7e31ccd3105e7ac23dd364856348deef587082df3",
+    "inputs/tanker_style.mcn": "1d77b042af7480b6e2f08bf3e1a1d26c1dddd9b842f72f0ebafd47ac7f3b01b5",
+    "inputs/tanker_style.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/tanker_style.rdf": "00bab2f4d9387aeb98b81bee32e95c4e3910f6d3df0aef0ca18a4ad89c254c52",
+    "motions.json": "6b16d7391b39b634b13274dab244deed0fef0d83bc21dbb4c8fc25d3157941bf",
+    "rao/heave.rao": "225a848c85ddcd461d0ca74dce46d65aa8c4683aa3715ebfa26b543dd9316d4d",
+    "rao/pitch.rao": "ccfacb7eb6d387780114fe053cadd07e1c669328fb09ef37187a5c13749c6c4e",
+    "rao/roll.rao": "dc81f803abce03e1ca719872755e75171b0395ad2519d3965c26e088d2f06ce1",
+    "rao/surge.rao": "818936dfb1c1276540989619610531d2dc128bab04384891898efd59022a56a3",
+    "rao/sway.rao": "d1a7ba1525bfa9c091478761d96f613a109c107e40f147594e959b3e58dc61eb",
+    "rao/yaw.rao": "f973c324d5064071b5dcb37c4166b7d15a26bbb616cf85f33debab85f4f83246"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "project": "barge_explicit",
+  "geometry": {"type": "barge", "length": 100, "beam": 30, "draft": 6, "n_length": 48, "n_half_beam": 10, "n_draft": 4},
+  "mechanics": {
+    "model": "explicit",
+    "mass_kg": 18450000,
+    "cog_m": [0, 0, -1],
+    "gyradius_m": [8.8, 28.9, 30.1, 0, 0, 0],
+    "roll_damping_pct": 6,
+    "source_note": "Illustrative user-supplied mass data; replace with the actual loading report before engineering use"
+  }
+}

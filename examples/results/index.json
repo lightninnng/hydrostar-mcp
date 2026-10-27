@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "form_id": "container_kcs_style",
+      "path": "container_kcs_style/summary.json",
+      "summary_sha256": "b23da38eb480a88ce748b328e3b348ea16cbdf16f90de2ed9961730a7bb52ec2"
+    },
+    {
+      "form_id": "tanker_kvlcc2_style",
+      "path": "tanker_kvlcc2_style/summary.json",
+      "summary_sha256": "1c85248940a6239a99cb24d18ce0eeaceb4d03121686fbf1d7fa9513b5ed4b19"
+    },
+    {
+      "form_id": "semisub_oc4_style",
+      "path": "semisub_oc4_style/summary.json",
+      "summary_sha256": "d8716ae0cf3a1d2a8c362f7326a37b3a00137843dc35629ac871e05ead17eb70"
+    }
+  ],
+  "case_count": 3
+}

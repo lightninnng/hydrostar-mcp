@@ -1,0 +1,14 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md run_mcp.py
+recursive-include hydrostar_mcp *.py
+recursive-include tests *.py
+include examples/barge100.json examples/barge_explicit.json examples/semisub.json examples/curved_hull.json
+include examples/container_kcs_style.json examples/tanker_kvlcc2_style.json examples/semisub_oc4_style.json
+include examples/imported_mesh.json examples/mcp-settings.json
+graft examples/results
+include docs/*.md docs/.nojekyll docs/index.html
+include docs/data/showcase.json
+include docs/references/basic-form-catalog.json docs/references/sources.json
+recursive-include docs/assets *.png *.pdf
+include scripts/check_local.py scripts/check_release.py scripts/build_gallery.py scripts/export_showcase.py
+include scripts/mesh_study.py scripts/parametric_study.py scripts/frequency_study.py scripts/peak_study.py
+include scripts/reference_form_study.py scripts/templates/gallery.html

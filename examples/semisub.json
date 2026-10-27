@@ -1,0 +1,291 @@
+{
+  "project": "own_semisub",
+  "object_type": "floating_structure",
+  "geometry": {
+    "type": "semisub",
+    "pontoon_length": 36.0,
+    "pontoon_width": 6.0,
+    "pontoon_height": 4.0,
+    "draft": 14.0,
+    "column_x": 12.0,
+    "pontoon_y": 12.0,
+    "column_width": 4.0,
+    "crossbeam_height": 2.0,
+    "freeboard": 6.0,
+    "deck_width": 32.0,
+    "deck_thickness": 2.0,
+    "target_panel_m": 1.5
+  },
+  "environment": {
+    "frequency": {
+      "min": 0.05,
+      "max": 1.4,
+      "step": 0.025
+    },
+    "headings": {
+      "min": 0.0,
+      "max": 360.0,
+      "step": 30.0
+    },
+    "depth": 80.0,
+    "speed_m_s": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81
+  },
+  "mechanics": {
+    "model": "components",
+    "mass_kg": 2722400.0,
+    "cog_m": null,
+    "gyradius_m": null,
+    "roll_damping_pct": 0.0,
+    "restraint": "moored",
+    "stiffness_matrix": [
+      [
+        50000.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        50000.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8000000.0
+      ]
+    ],
+    "linear_damping_matrix": [
+      [
+        36894.44402616741,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        36894.44402616741,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        132361.7167613053,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        14607524.01058989,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        14100647.319633886,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7400011.387378626
+      ]
+    ],
+    "components": [
+      {
+        "name": "pontoon_-12",
+        "mass_fraction": 0.3,
+        "size_m": [
+          36.0,
+          6.0,
+          4.0
+        ],
+        "center_m": [
+          0.0,
+          -12.0,
+          -12.0
+        ]
+      },
+      {
+        "name": "column_-12_-12",
+        "mass_fraction": 0.0625,
+        "size_m": [
+          4.0,
+          4.0,
+          16.0
+        ],
+        "center_m": [
+          -12.0,
+          -12.0,
+          -2.0
+        ]
+      },
+      {
+        "name": "column_+12_-12",
+        "mass_fraction": 0.0625,
+        "size_m": [
+          4.0,
+          4.0,
+          16.0
+        ],
+        "center_m": [
+          12.0,
+          -12.0,
+          -2.0
+        ]
+      },
+      {
+        "name": "pontoon_+12",
+        "mass_fraction": 0.3,
+        "size_m": [
+          36.0,
+          6.0,
+          4.0
+        ],
+        "center_m": [
+          0.0,
+          12.0,
+          -12.0
+        ]
+      },
+      {
+        "name": "column_-12_+12",
+        "mass_fraction": 0.0625,
+        "size_m": [
+          4.0,
+          4.0,
+          16.0
+        ],
+        "center_m": [
+          -12.0,
+          12.0,
+          -2.0
+        ]
+      },
+      {
+        "name": "column_+12_+12",
+        "mass_fraction": 0.0625,
+        "size_m": [
+          4.0,
+          4.0,
+          16.0
+        ],
+        "center_m": [
+          12.0,
+          12.0,
+          -2.0
+        ]
+      },
+      {
+        "name": "crossbeam_-12",
+        "mass_fraction": 0.05,
+        "size_m": [
+          4.0,
+          18.0,
+          2.0
+        ],
+        "center_m": [
+          -12.0,
+          0.0,
+          -13.0
+        ]
+      },
+      {
+        "name": "crossbeam_+12",
+        "mass_fraction": 0.05,
+        "size_m": [
+          4.0,
+          18.0,
+          2.0
+        ],
+        "center_m": [
+          12.0,
+          0.0,
+          -13.0
+        ]
+      },
+      {
+        "name": "effective_deck",
+        "mass_fraction": 0.05,
+        "size_m": [
+          32.0,
+          32.0,
+          2.0
+        ],
+        "center_m": [
+          0.0,
+          0.0,
+          7.0
+        ]
+      }
+    ],
+    "morison": [],
+    "wave_amplitude_m": null,
+    "spectrum": null,
+    "vertical_external_force_n": 0.0,
+    "equilibrium_relative_tolerance": 0.01,
+    "cog_xy_tolerance_m": 0.05,
+    "source_note": "本项目自行选定教学假设：浮筒/压载60%，四立柱25%，横梁10%，有效甲板5%；各分量按均匀有效长方体和平行轴定理求惯性。总质量按解析排水量平衡，K11=K22=50kN/m，K66=8MN·m/rad，无静态预载。 附加线性阻尼取各自由度干质量、未耦合静刚度参考临界值的5%，矩阵固定用于全部网格；辐射阻尼另由求解器计算。"
+  },
+  "output_dofs": [
+    "surge",
+    "sway",
+    "heave",
+    "roll",
+    "pitch",
+    "yaw"
+  ],
+  "output_point_m": null,
+  "recommended_max_panels": 3000,
+  "waterplane_estimate_factor": 1.1,
+  "nproc": 4,
+  "module_timeout_s": 1800.0
+}

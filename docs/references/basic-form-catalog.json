@@ -1,0 +1,118 @@
+{
+  "forms": {
+    "container_kcs_style": {
+      "label": "集装箱船基本构型 · KCS资料参照",
+      "geometry_type": "section_hull",
+      "sources": [
+        "simman_kcs"
+      ],
+      "source_values": {
+        "length_m": 230.0,
+        "beam_m": 32.2,
+        "draft_m": 10.8,
+        "volume_m3": 52030.0,
+        "block_coefficient": 0.651,
+        "midship_coefficient": 0.985,
+        "lcb_fraction": -0.0148,
+        "gm_m": 0.6,
+        "roll_radius_over_beam": 0.4,
+        "yaw_radius_over_length": 0.25
+      },
+      "features": [
+        "平行中体与平底圆舭",
+        "艏艉不同的剖面面积分布",
+        "球鼻艏与倾斜首柱",
+        "艉部抬升、收缩与艉封板"
+      ],
+      "model_level": "资料驱动的裸船体参数化近似；排水量和LCB标量拟合；线型与RAO仍需基准对照"
+    },
+    "tanker_kvlcc2_style": {
+      "label": "肥大型油船基本构型 · KVLCC2资料参照",
+      "geometry_type": "section_hull",
+      "sources": [
+        "simman_kvlcc2"
+      ],
+      "source_values": {
+        "length_m": 320.0,
+        "beam_m": 58.0,
+        "draft_m": 20.8,
+        "volume_m3": 312622.0,
+        "block_coefficient": 0.8098,
+        "midship_coefficient": 0.998,
+        "lcb_fraction": 0.0348,
+        "gm_m": 5.71,
+        "roll_radius_over_beam": 0.4,
+        "yaw_radius_over_length": 0.25
+      },
+      "source_correction": "原网页全尺度Bwl单元写作580；同页1:100模型Bwl=0.5800 m及排水量/CB共同支持B=58 m，采用跨尺度一致值并保留异常记录。",
+      "features": [
+        "较长平行中体与较高剖面丰满度",
+        "小圆舭半径、宽平底",
+        "丰满艏部和球鼻过渡",
+        "保留艉部收缩与艉封板"
+      ],
+      "model_level": "资料驱动的肥大裸船体参数化近似；标量参数与具体线型验证分别记录"
+    },
+    "semisub_oc4_style": {
+      "label": "圆柱扩底半潜基本构型 · OC4资料参照",
+      "geometry_type": "column_semisub",
+      "sources": [
+        "oc4_hydrodyn",
+        "oc4_elastodyn",
+        "hydrodyn_modeling"
+      ],
+      "source_values": {
+        "draft_m": 20.0,
+        "offset_side_m": 50.0,
+        "center_diameter_m": 6.5,
+        "upper_diameter_m": 12.0,
+        "base_diameter_m": 24.0,
+        "base_height_m": 6.0,
+        "connector_diameter_m": 1.6,
+        "reference_total_volume_m3": 13917.0,
+        "unballasted_structure_mass_kg": 3852180.0,
+        "unballasted_cog_z_m": -8.6588
+      },
+      "features": [
+        "中心承塔柱与三偏置柱",
+        "大直径基柱及环形肩部",
+        "三角形/径向上下连接杆",
+        "斜撑、灌水压载与系泊平衡"
+      ],
+      "model_level": "OC4几何标量重建与面元/Morison混合近似；采用零静态预载平衡配载，单独记录与原系统差异"
+    }
+  },
+  "sources": {
+    "simman_kcs": {
+      "title": "SIMMAN2014 KCS geometry and conditions",
+      "url": "https://simman2014.dk/ship-data/moeri-container-ship/geometry-and-conditions-moeri-container-ship/",
+      "verified_date": "2026-10-27"
+    },
+    "simman_kvlcc2": {
+      "title": "SIMMAN2014 KVLCC2 geometry and conditions",
+      "url": "https://simman2014.dk/ship-data/moeri-kvlcc2-tanker/geometry-and-conditions-moeri-kvlcc2-tanker/",
+      "verified_date": "2026-10-27"
+    },
+    "oc4_hydrodyn": {
+      "title": "OpenFAST OC4 DeepCwind HydroDyn reference input",
+      "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_HydroDyn.dat",
+      "verified_date": "2026-10-27"
+    },
+    "oc4_elastodyn": {
+      "title": "OpenFAST OC4 DeepCwind structural and mass input",
+      "url": "https://github.com/OpenFAST/r-test/blob/dd5feaaaa500ba7283140107806300d551cff0a7/glue-codes/openfast/5MW_OC4Semi_WSt_WavesWN/NRELOffshrBsline5MW_OC4DeepCwindSemi_ElastoDyn.dat",
+      "verified_date": "2026-10-27"
+    },
+    "hydrodyn_modeling": {
+      "title": "OpenFAST HydroDyn modeling considerations",
+      "url": "https://openfast.readthedocs.io/en/main/source/user/hydrodyn/modeling_considerations.html",
+      "verified_date": "2026-10-27"
+    }
+  },
+  "baseline_models": {
+    "barge": "矩形解析校验体",
+    "curved_hull": "椭球解析校验体",
+    "semisub": "方体并集校验体"
+  },
+  "interpretation": "执行门禁验证数值链路；参考构型验证还需排水量、SAC/水线/剖面、静力、周期/阻尼及RAO对照。"
+}

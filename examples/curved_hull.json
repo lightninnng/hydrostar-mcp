@@ -1,0 +1,214 @@
+{
+  "project": "own_curved_hull",
+  "object_type": "ship",
+  "geometry": {
+    "type": "curved_hull",
+    "length": 72.0,
+    "beam": 14.0,
+    "draft": 4.5,
+    "n_length": 56,
+    "n_section": 12
+  },
+  "environment": {
+    "frequency": {
+      "min": 0.05,
+      "max": 1.8,
+      "step": 0.025
+    },
+    "headings": {
+      "min": 0.0,
+      "max": 360.0,
+      "step": 30.0
+    },
+    "depth": 80.0,
+    "speed_m_s": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81
+  },
+  "mechanics": {
+    "model": "components",
+    "mass_kg": 2434420.1472667307,
+    "cog_m": null,
+    "gyradius_m": null,
+    "roll_damping_pct": 0.0,
+    "restraint": "free",
+    "stiffness_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "linear_damping_matrix": [
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        440219.63555340667,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        5263414.586521559,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        123073360.33492406,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "components": [
+      {
+        "name": "hull_and_ballast",
+        "mass_fraction": 0.6,
+        "size_m": [
+          57.6,
+          11.200000000000001,
+          2.025
+        ],
+        "center_m": [
+          0.0,
+          0.0,
+          -2.9250000000000003
+        ]
+      },
+      {
+        "name": "deck_and_equipment",
+        "mass_fraction": 0.25,
+        "size_m": [
+          43.199999999999996,
+          8.4,
+          2.0
+        ],
+        "center_m": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "name": "machinery_-14.4",
+        "mass_fraction": 0.075,
+        "size_m": [
+          12.959999999999999,
+          7.0,
+          2.25
+        ],
+        "center_m": [
+          -14.4,
+          0.0,
+          -1.8
+        ]
+      },
+      {
+        "name": "machinery_+14.4",
+        "mass_fraction": 0.075,
+        "size_m": [
+          12.959999999999999,
+          7.0,
+          2.25
+        ],
+        "center_m": [
+          14.4,
+          0.0,
+          -1.8
+        ]
+      }
+    ],
+    "morison": [],
+    "wave_amplitude_m": null,
+    "spectrum": null,
+    "vertical_external_force_n": 0.0,
+    "equilibrium_relative_tolerance": 0.01,
+    "cog_xy_tolerance_m": 0.05,
+    "source_note": "本项目自行选定教学假设：船壳/压载60%，甲板设备25%，艏艉机器各7.5%；均匀有效分量和平行轴定理求惯性，总质量按解析排水量固定；曲面为下半椭球解析船型，零航速、自由浮态。 附加线性阻尼取各自由度干质量、未耦合静刚度参考临界值的5%，矩阵固定用于全部网格；辐射阻尼另由求解器计算。"
+  },
+  "output_dofs": [
+    "surge",
+    "sway",
+    "heave",
+    "roll",
+    "pitch",
+    "yaw"
+  ],
+  "output_point_m": null,
+  "recommended_max_panels": 3000,
+  "waterplane_estimate_factor": 1.2,
+  "nproc": 4,
+  "module_timeout_s": 1800.0
+}
