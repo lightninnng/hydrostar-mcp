@@ -73,8 +73,10 @@ def check_files(files):
         ".html",
         ".toml",
         ".yml",
+        ".yaml",
         ".hst",
         ".rdf",
+        ".spc",
         ".mcn",
         ".prs",
         ".rao",
@@ -91,7 +93,7 @@ def check_files(files):
         )
         if path.suffix.lower() in {".png", ".pdf", ".gif"}:
             reviewed_geometry = re.fullmatch(
-                r"examples/geometry/(lofted_vessel|moonpool_caisson|cad_spar)/geometry/geometry-qa\.png",
+                r"examples/geometry/(lofted_vessel|moonpool_caisson|cad_spar|sensitivity/cad_spar_coarse)/geometry/geometry-qa\.png",
                 name,
             )
             require(

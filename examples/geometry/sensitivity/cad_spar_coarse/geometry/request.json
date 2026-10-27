@@ -1,0 +1,50 @@
+{
+  "project": "cad_spar_rings",
+  "path": "examples/geometry/sources/stepped-spar.step",
+  "units": "file",
+  "waterline_z_m": 0.0,
+  "rho_kg_m3": 1025.0,
+  "gravity_m_s2": 9.81,
+  "axis_map": [
+    "x",
+    "y",
+    "z"
+  ],
+  "translation_m": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "mesh_size_m": 0.8,
+  "panel_layout": "ring_bands",
+  "structured_axis": "z",
+  "axis_center_xy_m": [
+    0.0,
+    0.0
+  ],
+  "minimum_quad_fraction": 1.0,
+  "panel_quality": {
+    "max_edge_ratio": 4.0,
+    "min_corner_deg": 20.0,
+    "max_corner_deg": 150.0,
+    "max_warpage_deg": 2.0,
+    "max_neighbor_size_ratio": 1.8
+  },
+  "curvature_samples": 80,
+  "curve_tolerance_m": 0.005,
+  "weld_tolerance_m": 1e-08,
+  "section_axis": "x",
+  "section_curve": "polyline",
+  "longitudinal_ruled": true,
+  "spline_seam": "source",
+  "mirror_half_sections": false,
+  "station_layers": {},
+  "expected_volume_m3": null,
+  "volume_tolerance_relative": 0.005,
+  "expected_wet_components": 1,
+  "flip_normals": false,
+  "max_panels": 12000,
+  "timeout_s": 600.0,
+  "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
+  "pdf_page": 0
+}

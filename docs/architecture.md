@@ -24,6 +24,8 @@ flowchart LR
 | [geometry_workflow.py](../hydrostar_mcp/geometry_workflow.py) | 来源边界、快照、独立进程和包哈希 |
 | [geometry_kernel.py](../hydrostar_mcp/geometry_kernel.py) | CAD、曲线放样、网格转换和水线裁剪 |
 | [surface_checks.py](../hydrostar_mcp/surface_checks.py) | 全体湿面拓扑、方向与全局自交 |
+| [structured_panels.py](../hydrostar_mcp/structured_panels.py) | CAD 环带、规则底面、站位对应和多边形相容分块 |
+| [panel_checks.py](../hydrostar_mcp/panel_checks.py) | 原生面元比例、凸性、角度、翘曲及相邻尺度门禁 |
 | [drawing.py](../hydrostar_mcp/drawing.py) | 图像与 PDF 渲染、米制描线工作区 |
 | [geometry.py](../hydrostar_mcp/geometry.py) | 基准几何、拓扑、组合质量 |
 | [forms_geometry.py](../hydrostar_mcp/forms_geometry.py) | 分段船型和圆柱半潜 |

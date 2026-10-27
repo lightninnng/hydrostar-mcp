@@ -28,16 +28,55 @@ RECIPES = {
         section_curve="spline",
         longitudinal_ruled=False,
         spline_seam="lowest_z",
+        panel_layout="station_bands",
+        structured_axis="x",
+        curvature_samples=48,
+        longitudinal_cells=192,
+        max_panels=12000,
+        minimum_quad_fraction=0.95,
+        panel_quality=dict(
+            max_edge_ratio=5,
+            min_corner_deg=20,
+            max_corner_deg=155,
+            max_warpage_deg=5,
+            max_neighbor_size_ratio=1.8,
+        ),
         depth=80.0,
     ),
     "moonpool_caisson": dict(
-        file="moonpool-sections.json", units="m", mesh_size_m=4.0, depth=100.0
+        file="moonpool-sections.json",
+        units="m",
+        mesh_size_m=4.0,
+        depth=100.0,
+        panel_layout="polygon_blocks",
+        max_panels=12000,
+        structured_axis="z",
+        minimum_quad_fraction=1.0,
+        panel_quality=dict(
+            max_edge_ratio=5,
+            min_corner_deg=15,
+            max_corner_deg=165,
+            max_warpage_deg=2,
+            max_neighbor_size_ratio=1.8,
+        ),
     ),
     "cad_spar": dict(
         file="stepped-spar.step",
         units="file",
-        mesh_size_m=1.4,
-        curvature_samples=64,
+        mesh_size_m=0.7,
+        curvature_samples=96,
+        panel_layout="ring_bands",
+        structured_axis="z",
+        axis_center_xy_m=[0.0, 0.0],
+        minimum_quad_fraction=1.0,
+        max_panels=12000,
+        panel_quality=dict(
+            max_edge_ratio=4,
+            min_corner_deg=20,
+            max_corner_deg=150,
+            max_warpage_deg=2,
+            max_neighbor_size_ratio=1.8,
+        ),
         depth=150.0,
     ),
 }
@@ -220,6 +259,16 @@ def build_case(key, folder):
 
 
 def native_config(key, folder):
+    existing = folder / "config.json"
+    if existing.is_file():
+        cfg = json.loads(existing.read_text(encoding="utf-8"))
+        cfg["geometry"]["path"] = (
+            (folder / "geometry/model.hst").relative_to(ROOT).as_posix()
+        )
+        cfg["geometry"]["source_manifest"] = (
+            (folder / "geometry/geometry-report.json").relative_to(ROOT).as_posix()
+        )
+        return CaseConfig.model_validate(cfg)
     report = json.loads(
         (folder / "geometry/geometry-report.json").read_text(encoding="utf-8")
     )
@@ -240,7 +289,6 @@ def native_config(key, folder):
     return CaseConfig.model_validate(
         dict(
             project=key,
-            recommended_max_panels=10000,
             object_type="ship" if key == "lofted_vessel" else "floating_structure",
             geometry=dict(
                 type="hst",
@@ -304,8 +352,8 @@ def execute(key, folder, study):
         directory = Path(report["directory"])
         for extension in ("hst", "rdf", "mcn", "rao"):
             shutil.copyfile(
-                directory / (key + "." + extension),
-                folder / "inputs" / (key + "." + extension),
+                directory / (cfg.project + "." + extension),
+                folder / "inputs" / (cfg.project + "." + extension),
             )
         motions = {}
         for dof in ("surge", "sway", "heave", "roll", "pitch", "yaw"):
@@ -371,6 +419,16 @@ def main():
                 if file_hash(source) != accepted["files"][snapshot]:
                     raise ValueError(
                         "Source differs from the accepted bundle; create a separate geometry study"
+                    )
+                controls = {
+                    k: v for k, v in RECIPES[key].items() if k not in {"file", "depth"}
+                }
+                actual = GeometryRequest.model_validate(
+                    accepted["request"]
+                ).model_dump()
+                if any(actual[k] != value for k, value in controls.items()):
+                    raise ValueError(
+                        "Mesh recipe differs from the accepted bundle; build the changed study in a separate directory"
                     )
                 print(key + ": reusing verified geometry bundle", flush=True)
             else:

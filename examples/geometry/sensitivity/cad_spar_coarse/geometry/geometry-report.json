@@ -1,0 +1,204 @@
+{
+  "schema": "hydrostar-geometry-bundle-1",
+  "version": "0.4.0",
+  "status": "geometry_accepted",
+  "request": {
+    "project": "cad_spar_rings",
+    "path": "examples/geometry/sources/stepped-spar.step",
+    "units": "file",
+    "waterline_z_m": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81,
+    "axis_map": [
+      "x",
+      "y",
+      "z"
+    ],
+    "translation_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mesh_size_m": 0.8,
+    "panel_layout": "ring_bands",
+    "structured_axis": "z",
+    "axis_center_xy_m": [
+      0.0,
+      0.0
+    ],
+    "minimum_quad_fraction": 1.0,
+    "panel_quality": {
+      "max_edge_ratio": 4.0,
+      "min_corner_deg": 20.0,
+      "max_corner_deg": 150.0,
+      "max_warpage_deg": 2.0,
+      "max_neighbor_size_ratio": 1.8
+    },
+    "curvature_samples": 80,
+    "curve_tolerance_m": 0.005,
+    "weld_tolerance_m": 1e-08,
+    "section_axis": "x",
+    "section_curve": "polyline",
+    "longitudinal_ruled": true,
+    "spline_seam": "source",
+    "mirror_half_sections": false,
+    "station_layers": {},
+    "expected_volume_m3": null,
+    "volume_tolerance_relative": 0.005,
+    "expected_wet_components": 1,
+    "flip_normals": false,
+    "max_panels": 12000,
+    "timeout_s": 600.0,
+    "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
+    "pdf_page": 0
+  },
+  "quality": {
+    "passed": true,
+    "nodes": 6841,
+    "panels": 6800,
+    "wetted_components": 1,
+    "expected_wet_components": 1,
+    "component_volume_m3": [
+      1720.734163859707
+    ],
+    "zero_area_panels": [],
+    "duplicate_faces": 0,
+    "above_water_panels": [],
+    "waterplane_panels": [],
+    "invalid_edges": [],
+    "cut_edges": 80,
+    "invalid_waterline_vertices": [],
+    "self_intersections": [],
+    "nonpositive_components": [],
+    "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap",
+    "checking_triangles": 13600,
+    "quadrilaterals": 6800,
+    "triangles": 0,
+    "panel_quality": {
+      "passed": true,
+      "quadrilaterals": 6800,
+      "triangles": 0,
+      "quad_fraction": 1.0,
+      "limits": {
+        "max_edge_ratio": 4.0,
+        "min_corner_deg": 20.0,
+        "max_corner_deg": 150.0,
+        "max_warpage_deg": 2.0,
+        "max_neighbor_size_ratio": 1.8
+      },
+      "edge_ratio": {
+        "p50": 1.2262652665124418,
+        "p95": 2.2689953293859575,
+        "max": 2.797259428100846
+      },
+      "warpage_deg": {
+        "p50": 0.017137331493805624,
+        "p95": 0.24409238678866035,
+        "max": 0.35275436995716397
+      },
+      "minimum_corner_deg": 48.8033873841041,
+      "maximum_corner_deg": 137.25570821626366,
+      "adjacent_size_ratio": {
+        "p50": 1.0027482264515712,
+        "p95": 1.0430554913039776,
+        "max": 1.3394742316965915
+      },
+      "invalid_convexity": [],
+      "shape_violations": [],
+      "adjacent_size_violations": [],
+      "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+      "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+    },
+    "quad_fraction_required": 1.0,
+    "quad_fraction_passed": true
+  },
+  "generator_sources": {
+    "geometry_worker.py": "3f5d7e2098165e281f58bb5eb2fbd1e70867dcbf9fa0782b1bfa5734d1cd4097",
+    "geometry_kernel.py": "d4382381166766d9795ccdf6751739574cc1a0c99a01f7d25988eaa5983a5176",
+    "geometry_sources.py": "b4866cc5f3087c8b10dcc68d1304234a9bd7e49a5393c4c9babda36e256720ec",
+    "surface_checks.py": "12d92d403a486af9e58616e0cc62f4968bac3e5f54b6c27e38516b3b1fc573c7",
+    "panel_checks.py": "acf37c29f360d308895bf9db9efa0b9708f01ee6000fb60a649e4e1de5c60c57",
+    "structured_panels.py": "df9481e89e58d32be5c792f61bc154f760416196366ae58c75a0dd7fb39a6adc"
+  },
+  "fidelity": {
+    "cad_volume_relative_error": 0.0022664294508134564,
+    "cad_cb_distance_m": 0.00940650899072779,
+    "cad_cb_tolerance_m": 0.01
+  },
+  "hydrostatics": {
+    "volume": 1720.734163859647,
+    "cb": [
+      5.711288757685457e-05,
+      4.3924514572016577e-05,
+      -12.486827384937442
+    ],
+    "wetted_area": 1070.6746829674134,
+    "n_nodes": 6841,
+    "n_panels": 6800,
+    "sym": 0,
+    "max_edge": 0.7459358477984689,
+    "max_aspect_ratio": 2.7972594281004692,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "reference": {
+    "kernel": "OpenCASCADE/Gmsh",
+    "gmsh_version": "4.15.2",
+    "mesh_controls": {
+      "algorithm": "CAD axial sections, equal-angle rings, mapped radial shoulders and four-block O-grid bottom",
+      "azimuth_cells": 80,
+      "axial_intervals": [
+        {
+          "z0_m": -20.0,
+          "z1_m": -19.0,
+          "axial_cells": 3
+        },
+        {
+          "z0_m": -19.0,
+          "z1_m": -18.2,
+          "axial_cells": 3
+        },
+        {
+          "z0_m": -18.2,
+          "z1_m": 0.0,
+          "axial_cells": 46
+        }
+      ],
+      "ring_count": 70,
+      "target_axial_radial_spacing_m": 0.4,
+      "axis_center_xy_m": [
+        0.0,
+        0.0
+      ],
+      "section_sampling": "1024 samples per original CAD curve; periodic polar interpolation",
+      "source_shape": "Original CAD sections retained; horizontal plate boundaries taken from CAD face loops"
+    },
+    "cad_volume_m3": 1724.642945423292,
+    "cad_cb_m": [
+      0.006449317559903611,
+      5.856633954218298e-05,
+      -12.493728248393321
+    ],
+    "source_profiles": null,
+    "wet_solids": 1,
+    "orientation_method": "Counterclockwise section bands, outward horizontal shoulders and downward O-grid bottom; independently checked edges and signed volume"
+  },
+  "geometry_gates": {
+    "source_units": "passed",
+    "coordinate_frame": "passed",
+    "waterline_clipping": "passed",
+    "topology": "passed",
+    "self_intersection": "passed",
+    "orientation": "passed",
+    "fidelity": "passed"
+  },
+  "physics_status": "Geometry accepted; use prepare_case and start_case for native hydrodynamic validation",
+  "files": {
+    "geometry-qa.png": "246625ffd62a26171c8a0a88c9b58b1145b60d011a9d579431392a9c7b5edc62",
+    "model.hst": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838",
+    "request.json": "0bce7b8dea1af9291766c3d903f28be0e6a8de4feb3c77ecfdced4363d524416",
+    "source.step": "e9bdc57225e06b49cfe93d34af44cbd5bf174874f6ae5a57f489f581405b2fb3",
+    "surface.json": "943a238abc59ee9c2fa1b906878ab2ee584640e10ff6cf3ef15f836f3638b225"
+  }
+}

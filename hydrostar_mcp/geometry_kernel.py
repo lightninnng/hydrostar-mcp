@@ -174,7 +174,7 @@ def orient_cad_faces(gmsh, surface, faces, nodes, volumes, span):
 
     if not faces:
         return faces
-    triangles = np.array([[nodes[i] for i in face] for face in faces])
+    triangles = np.array([[nodes[i] for i in face[:3]] for face in faces])
     normals = np.cross(
         triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0]
     )
@@ -182,7 +182,7 @@ def orient_cad_faces(gmsh, surface, faces, nodes, volumes, span):
     for index in np.argsort(areas)[-3:][::-1]:
         if areas[index] <= 1e-16:
             continue
-        center = triangles[index].mean(axis=0)
+        center = np.mean([nodes[i] for i in faces[index]], axis=0)
         closest, uv = gmsh.model.getClosestPoint(2, surface, center.tolist())
         normal = np.array(gmsh.model.getNormal(surface, uv))
         normal /= np.linalg.norm(normal)
@@ -316,6 +316,8 @@ def cad_surface(path, request):
                         dict(
                             solid=solid.name,
                             operation=solid.operation,
+                            curve=solid.curve,
+                            ruled=solid.ruled,
                             position=profile.position,
                             points_m=coords,
                         )
@@ -366,10 +368,61 @@ def cad_surface(path, request):
             / cad_volume
             for k in range(3)
         ]
+        partition_axis = request.structured_axis
+        if request.panel_layout in {"ring_bands", "polygon_blocks", "station_bands"}:
+            from .structured_panels import ring_bands, polygon_blocks, station_bands
+
+            if request.panel_layout == "ring_bands":
+                vertices, faces, controls = ring_bands(
+                    gmsh, wet, low, high, request, cad_cb
+                )
+            elif request.panel_layout == "polygon_blocks":
+                vertices, faces, controls = polygon_blocks(source_profiles, request)
+            else:
+                vertices, faces, controls = station_bands(
+                    gmsh, wet, low, high, source_profiles, request
+                )
+            return (
+                vertices,
+                faces,
+                dict(
+                    kernel="OpenCASCADE/Gmsh",
+                    gmsh_version=gmsh.__version__,
+                    mesh_controls=controls,
+                    cad_volume_m3=cad_volume,
+                    cad_cb_m=cad_cb,
+                    source_profiles=source_profiles,
+                    wet_solids=len(wet),
+                    orientation_method="Consistent mapped surface bands; independently checked oriented edges, component closure and signed volume",
+                ),
+            )
+        if request.panel_layout == "quad_dominant" and partition_axis is not None:
+            axis = "xyz".index(partition_axis)
+            planes = []
+            wet_low, wet_high = low.copy(), high.copy()
+            wet_high[2] = min(0.0, wet_high[2])
+            for normal_axis in range(3):
+                if normal_axis == axis:
+                    continue
+                directions = [k for k in range(3) if k != normal_axis]
+                center = (wet_low + wet_high) / 2
+                points = []
+                for signs in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+                    p = center.copy()
+                    for k, sign in zip(directions, signs):
+                        p[k] += sign * (wet_high[k] - wet_low[k] + 2 * pad) / 2
+                    points.append(occ.addPoint(*p))
+                curves = [
+                    occ.addLine(a, b) for a, b in zip(points, points[1:] + points[:1])
+                ]
+                planes.append((2, occ.addPlaneSurface([occ.addWire(curves)])))
+            fragments, _ = occ.fragment(wet, planes, removeObject=True, removeTool=True)
+            wet = [(dim, tag) for dim, tag in fragments if dim == 3]
+            occ.synchronize()
         # Remove leftover construction entities that are outside all final volumes.
         oriented = {
             abs(tag): (1 if tag > 0 else -1)
-            for _, tag in gmsh.model.getBoundary(wet, combined=False, oriented=True)
+            for _, tag in gmsh.model.getBoundary(wet, combined=True, oriented=True)
         }
         final_boundary = set(oriented)
         gmsh.option.setNumber("Mesh.MeshSizeMin", request.mesh_size_m * 0.03)
@@ -409,10 +462,18 @@ def cad_surface(path, request):
                 gmsh.model.mesh.field.setNumber(threshold, name, value)
             gmsh.model.mesh.field.setAsBackgroundMesh(threshold)
         gmsh.option.setNumber("Mesh.ElementOrder", 1)
-        gmsh.option.setNumber("Mesh.Algorithm", 6)
+        quad = request.panel_layout == "quad_dominant"
+        gmsh.option.setNumber("Mesh.Algorithm", 8 if quad else 6)
+        gmsh.option.setNumber("Mesh.RecombineAll", int(quad))
+        gmsh.option.setNumber("Mesh.RecombinationAlgorithm", 1)
+        gmsh.option.setNumber("Mesh.RecombineMinimumQuality", 0.2)
+        if quad:
+            gmsh.model.mesh.setTransfiniteAutomatic(
+                [(2, tag) for tag in final_boundary], cornerAngle=2.8, recombine=True
+            )
         gmsh.option.setNumber("Mesh.Smoothing", 20)
         for tag in final_boundary:
-            if gmsh.model.getType(2, tag) == "Plane":
+            if not quad and gmsh.model.getType(2, tag) == "Plane":
                 gmsh.model.mesh.setAlgorithm(2, tag, 5)
         gmsh.model.mesh.generate(2)
         tags, coords, _ = gmsh.model.mesh.getNodes()
@@ -425,9 +486,11 @@ def cad_surface(path, request):
             surface_faces = []
             kinds, _, elements = gmsh.model.mesh.getElements(2, tag)
             for kind, connectivity in zip(kinds, elements):
-                if kind != 2:
-                    raise ValueError("CAD 离散采用一阶三角面元")
-                for triangle in np.array(connectivity).reshape(-1, 3):
+                if kind not in (2, 3):
+                    raise ValueError("CAD 离散采用一阶三角或四边形面元")
+                for triangle in np.array(connectivity).reshape(
+                    -1, 3 if kind == 2 else 4
+                ):
                     if all(
                         abs(nodes[int(i)][2]) <= request.weld_tolerance_m * 10
                         for i in triangle
@@ -451,7 +514,11 @@ def cad_surface(path, request):
                     max_size_m=request.mesh_size_m,
                     min_size_factor=0.03,
                     curvature_samples=request.curvature_samples,
-                    algorithm="Frontal-Delaunay; planar Delaunay",
+                    algorithm="Transfinite patches and Frontal-Delaunay for Quads"
+                    if quad
+                    else "Frontal-Delaunay; planar Delaunay",
+                    panel_layout=request.panel_layout,
+                    structured_axis=partition_axis,
                     smoothing_steps=20,
                     short_edge_distance_field=True,
                 ),
@@ -490,25 +557,9 @@ def source_surface(path, request):
                     f"表面网格采用三角形或四边形面元，请先转换 {block.type}"
                 )
             polygons.extend(block.data.tolist())
-    faces = []
-    for polygon in polygons:
-        if len(polygon) == 4:
-            import numpy as np
-
-            p = np.array([vertices[i] for i in polygon])
-            normal = np.cross(p[1] - p[0], p[2] - p[0])
-            norm = float(np.linalg.norm(normal))
-            if (
-                norm < request.weld_tolerance_m**2
-                or abs(np.dot(normal, p[3] - p[0])) / norm > request.curve_tolerance_m
-            ):
-                raise ValueError("输入四边形的平面性超出给定曲线容差")
-        faces += [
-            [polygon[0], polygon[i], polygon[i + 1]] for i in range(1, len(polygon) - 1)
-        ]
     return (
         vertices,
-        faces,
+        polygons,
         dict(kernel="source_surface", source_panel_count=len(polygons)),
     )
 
@@ -553,9 +604,12 @@ def clip_and_weld(vertices, faces, tolerance):
         if len(clipped) < 3 or all(abs(p[2]) <= tolerance for p in clipped):
             continue
         ids = list(dict.fromkeys(node(p) for p in clipped))
-        for i in range(1, len(ids) - 1):
-            if len({ids[0], ids[i], ids[i + 1]}) == 3:
-                triangles.append([ids[0], ids[i], ids[i + 1]])
+        if len(ids) in (3, 4):
+            triangles.append(ids)
+        else:
+            for i in range(1, len(ids) - 1):
+                if len({ids[0], ids[i], ids[i + 1]}) == 3:
+                    triangles.append([ids[0], ids[i], ids[i + 1]])
     return output, triangles
 
 

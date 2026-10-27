@@ -1,5 +1,4 @@
 {
-  "source_case_id": "moonpool_caisson-fa66df8717a54754",
   "quality_gates": {
     "semantic_input": "passed",
     "static_equilibrium": "passed",
@@ -9,18 +8,18 @@
     "rao_integrity": "passed"
   },
   "hydrostatics": {
-    "volume": 23600.00000000004,
+    "volume": 23599.99999999801,
     "cb": [
-      3.776865825738374e-15,
-      -1.608355633233241e-15,
-      -4.999999999999994
+      4.4486237669138487e-13,
+      5.931225379014896e-16,
+      -5.0000000000000355
     ],
-    "wetted_area": 4965.685424949242,
-    "n_nodes": 464,
-    "n_panels": 860,
+    "wetted_area": 4965.685424948471,
+    "n_nodes": 784,
+    "n_panels": 728,
     "sym": 0,
-    "max_edge": 5.4901394584870795,
-    "max_aspect_ratio": 1.703777197422323,
+    "max_edge": 3.99999999999832,
+    "max_aspect_ratio": 3.5455080629598443,
     "free_surface": 0.0,
     "rho": 1025.0,
     "gravity": 9.81
@@ -28,9 +27,9 @@
   "hslec": {
     "bodies": 1,
     "symmetry": 0,
-    "hull_panels": 860,
-    "waterline_segments": 68,
-    "waterplane_panels": 132,
+    "hull_panels": 728,
+    "waterline_segments": 112,
+    "waterplane_panels": 380,
     "above_waterline": 0,
     "cb_x": 0.0
   },
@@ -48,35 +47,75 @@
     "balanced": true,
     "relative_error_pct": null,
     "gm_roll_pitch_m": [
-      14.230898,
-      40.495095
+      14.249423,
+      40.469963
     ]
   },
   "geometry_source_validation": {
     "schema": "hydrostar-geometry-bundle-1",
     "quality": {
       "passed": true,
-      "nodes": 464,
-      "panels": 860,
+      "nodes": 784,
+      "panels": 728,
       "wetted_components": 1,
       "expected_wet_components": 1,
       "component_volume_m3": [
-        23600.0
+        23599.999999998225
       ],
       "zero_area_panels": [],
       "duplicate_faces": 0,
       "above_water_panels": [],
       "waterplane_panels": [],
       "invalid_edges": [],
-      "cut_edges": 68,
+      "cut_edges": 112,
       "invalid_waterline_vertices": [],
       "self_intersections": [],
       "nonpositive_components": [],
-      "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap"
+      "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap",
+      "checking_triangles": 1456,
+      "quadrilaterals": 728,
+      "triangles": 0,
+      "panel_quality": {
+        "passed": true,
+        "quadrilaterals": 728,
+        "triangles": 0,
+        "quad_fraction": 1.0,
+        "limits": {
+          "max_edge_ratio": 5.0,
+          "min_corner_deg": 15.0,
+          "max_corner_deg": 165.0,
+          "max_warpage_deg": 2.0,
+          "max_neighbor_size_ratio": 1.8
+        },
+        "edge_ratio": {
+          "p50": 1.6291624804627833,
+          "p95": 3.1818181818146978,
+          "max": 3.545508062959819
+        },
+        "warpage_deg": {
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 8.537736462515939e-07
+        },
+        "minimum_corner_deg": 34.92450222426985,
+        "maximum_corner_deg": 149.0362434679145,
+        "adjacent_size_ratio": {
+          "p50": 1.0000000000000016,
+          "p95": 1.2015781608674403,
+          "max": 1.3245323570650445
+        },
+        "invalid_convexity": [],
+        "shape_violations": [],
+        "adjacent_size_violations": [],
+        "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+        "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+      },
+      "quad_fraction_required": 1.0,
+      "quad_fraction_passed": true
     },
     "fidelity": {
-      "cad_volume_relative_error": 1.7763568394002505e-15,
-      "cad_cb_distance_m": 8.571805279148366e-15,
+      "cad_volume_relative_error": 8.415490526658687e-14,
+      "cad_cb_distance_m": 4.449116835971564e-13,
       "cad_cb_tolerance_m": 0.035
     },
     "geometry_gates": {
@@ -91,6 +130,31 @@
     "reference": {
       "kernel": "OpenCASCADE/Gmsh",
       "gmsh_version": "4.15.2",
+      "mesh_controls": {
+        "algorithm": "Feature-ray matching, mapped polygon annulus and conforming vertical blocks",
+        "perimeter_cells": 56,
+        "axial_cells": 3,
+        "radial_cells": 7,
+        "feature_edge_segments": [
+          3,
+          2,
+          13,
+          2,
+          3,
+          5,
+          3,
+          2,
+          13,
+          2,
+          3,
+          5
+        ],
+        "center_xy_m": [
+          -0.0,
+          -0.0
+        ],
+        "source_shape": "Original polygon vertices and a through prismatic opening"
+      },
       "cad_volume_m3": 23599.999999999996,
       "cad_cb_m": [
         1.2329160390610735e-15,
@@ -247,70 +311,76 @@
           ]
         }
       ],
-      "boundary_orientations": [
-        -1,
-        1
-      ],
-      "orientation_method": "CAD closest-point normals anchored by solid inside/outside probes; independently checked oriented edges",
       "wet_solids": 1,
-      "curve_fit": "source curves/polyline"
+      "orientation_method": "Consistent mapped surface bands; independently checked oriented edges, component closure and signed volume"
     }
   },
+  "source_case_id": "moonpool_blocks-65aac1993ef9424e",
+  "producer_version": "0.4.0",
   "steps": [
     {
       "module": "hslec",
       "ok": true,
       "rc": 0,
-      "seconds": 0.141
+      "seconds": 0.25
     },
     {
       "module": "hschk",
       "ok": true,
       "rc": 0,
-      "seconds": 0.329
+      "seconds": 0.422
     },
     {
       "module": "hsrdf",
       "ok": true,
       "rc": 0,
-      "seconds": 6.203
+      "seconds": 6.438
     },
     {
       "module": "hsmcn",
       "ok": true,
       "rc": 0,
-      "seconds": 2.406
+      "seconds": 2.531
     },
     {
       "module": "hsrao",
       "ok": true,
       "rc": 0,
-      "seconds": 0.172
+      "seconds": 0.156
     }
   ],
   "engineering_acceptance": {
     "ready": false,
-    "scope": "Own geometry and simplified rigid-body assumptions; target-specific validation remains an evidence requirement."
+    "scope": "Original geometry, fixed v0.4.0 baseline mechanics and a sampled first-order response grid; target-specific spatial, peak-frequency and reference-response evidence remains to be supplied."
+  },
+  "resource_policy": {
+    "default_full_equivalent_total_budget": 3000,
+    "configured_case_budget": 12000,
+    "full_equivalent_total": 1108,
+    "nproc": 4,
+    "scope": "This specifically retained dense reference study; new models use the default 3000-panel budget and case-specific review for increases."
   },
   "files": {
-    "config.json": "affd1c88996696c73171987946c425a86ce7634e78f71f997cabcf2b9508a8ad",
-    "motions.json": "6e60948668f89a1b809a15b36d8bb079c32433bb4ce8dc159da7cb9cb4ff2511",
-    "geometry/geometry-qa.png": "29b3d2e95037ce7e2bc38af21c4d13ebeeb1969643489899e08f0e36c6a923dd",
-    "geometry/geometry-report.json": "a82293f78b8c12d2f351eeeb929a48a4090598ee82b71813c9a4bbabf3aed3e4",
-    "geometry/model.hst": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
-    "geometry/request.json": "4f4dc84636a62b445770bfb14183e862e08e986bee57b564fa3ed09828f81aa1",
+    "config.json": "5419f1f259167bff4c13c6c38098b8fdce4a0ae14673071e236379f2ec8f61e3",
+    "delivery.json": "840662ff270a05fde04f9801bb60054383de28e663c48dc7aa2fcaeeced1d3a7",
+    "motions.json": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741",
+    "README.md": "88024c809ad6f40defc2862c34c0e00b410ac5f454f7f7aad8f1ba8eb5259a2f",
+    "geometry/geometry-qa.png": "f7783467d7b37f7aed99eeca15e54ba07d19a172746fdca067fc7cf310e755c4",
+    "geometry/geometry-report.json": "295cf8f017d08735c35021822634d164c3764ed080e51b0132ccade5db8c726b",
+    "geometry/model.hst": "7efc33258f5ef1020cdf91aaae4375cb9fa63fe476f3b7dcc2283e44e91e5875",
+    "geometry/request.json": "f9dac692e94cceeab6d7996420d9b044a929e6ce29134cbdee076ba767c623eb",
     "geometry/source.json": "996e6358fa99a402a321540c31d16193f1857813e4c46d3f5508132c3c67712c",
-    "geometry/surface.json": "c2ee89294a3163066fbea7fe447526bf3bc7cc98cea2ab12c04647cf87927bc2",
-    "inputs/moonpool_caisson.hst": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
-    "inputs/moonpool_caisson.mcn": "6237e9f50a26d03a429ef339f0f0b2706fe219d00bcb55b4865268c179e5067b",
-    "inputs/moonpool_caisson.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
-    "inputs/moonpool_caisson.rdf": "58b107d25bbbef8aaa11fe241b7cd773ecf5cd0a29c68b66eab824f84fdc0fc8",
-    "rao/heave.rao": "b1290db70c67ad7c139c70a588e5acb8f0978491f87601823843449f2a994823",
-    "rao/pitch.rao": "06906642e24abf3e10f6f9930fcc2ff3dd68b630f5cbab62e90666ba3ec2b8c4",
-    "rao/roll.rao": "ddfd4e7c62189bd7427fd77477294204ff5b4ea3e85029db25683fc14ce7427d",
-    "rao/surge.rao": "3e0d17fa74849a076e49b7699ab7e523683945e05928021457595e339b5c38db",
-    "rao/sway.rao": "90018855c2a90ced9ae12199e17f1e4a62d1348c394d6b87c5af8bfcc817ad67",
-    "rao/yaw.rao": "e13b09c38676ca44e22e64eed06a7fa15299de244c2cff839fc590db744f6db4"
+    "geometry/surface.json": "ce66a238b59ddf7378108d9d4f73d7173e03866ac3807dd54dac5e5f2ecf7686",
+    "inputs/moonpool_blocks.hst": "7efc33258f5ef1020cdf91aaae4375cb9fa63fe476f3b7dcc2283e44e91e5875",
+    "inputs/moonpool_blocks.mcn": "6237e9f50a26d03a429ef339f0f0b2706fe219d00bcb55b4865268c179e5067b",
+    "inputs/moonpool_blocks.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/moonpool_blocks.rdf": "58b107d25bbbef8aaa11fe241b7cd773ecf5cd0a29c68b66eab824f84fdc0fc8",
+    "rao/heave.rao": "c7016d245584b3760fbf3688af92ab67bdf8b85333a48af4b7c742a856da2273",
+    "rao/pitch.rao": "fdb5646a50ee63d46597414a48131cd74c61a2b09c81b579d19272dfa34041d9",
+    "rao/roll.rao": "c0a498ac9791a8b67f263e2be048640986310a0ce7585181c850ac3776d65679",
+    "rao/surge.rao": "27fb0f454325d5aef3d3066bb5f6c7d0eff3c9b3327e4fa68a3b8cd0844306fd",
+    "rao/sway.rao": "d00ab73d9862401fb9910d9a5af77b7b2a31aaea6e8727003b29fc8b00719ccc",
+    "rao/yaw.rao": "371ddc3911fba347544bd4a15ab36029ecae642f9a0ea22b54d3ef3bfb149c98"
   },
-  "publication_version": "0.4.0"
+  "publication_version": "0.5.0"
 }

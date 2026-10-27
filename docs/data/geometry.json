@@ -1,6 +1,6 @@
 {
   "schema": "hydrostar-general-geometry-study-1",
-  "publication_version": "0.4.0",
+  "publication_version": "0.5.0",
   "source_origin": "Original scalar construction in geometry_source_study.py; no external meshes",
   "cases": [
     {
@@ -9,12 +9,49 @@
       "label_en": "Vessel reconstructed from curved sections",
       "geometry_figure": "assets/lofted_vessel_geometry.png",
       "rao_figure": "assets/lofted_vessel_rao.png",
-      "volume_m3": 13344.017393347116,
+      "volume_m3": 13392.816463359217,
       "cad_volume_m3": 13406.263634846833,
-      "volume_relative_error": 0.0046430715667802325,
-      "cb_distance_m": 0.01234233880696695,
-      "panels": 6120,
-      "waterplane_panels": 1572,
+      "volume_relative_error": 0.0010030513985017642,
+      "cb_distance_m": 0.0011111354407566903,
+      "panels": 9818,
+      "panel_layout": "station_bands",
+      "panel_quality": {
+        "passed": true,
+        "quadrilaterals": 9811,
+        "triangles": 7,
+        "quad_fraction": 0.9992870238337747,
+        "limits": {
+          "max_edge_ratio": 5.0,
+          "min_corner_deg": 20.0,
+          "max_corner_deg": 155.0,
+          "max_warpage_deg": 5.0,
+          "max_neighbor_size_ratio": 1.8
+        },
+        "edge_ratio": {
+          "p50": 1.3345445832934062,
+          "p95": 2.021290201835848,
+          "max": 2.1618157253302317
+        },
+        "warpage_deg": {
+          "p50": 0.21377501107934405,
+          "p95": 1.5282896664685575,
+          "max": 4.176374410373662
+        },
+        "minimum_corner_deg": 45.76792994261151,
+        "maximum_corner_deg": 134.73562859503937,
+        "adjacent_size_ratio": {
+          "p50": 1.0019396153790299,
+          "p95": 1.0543756123292984,
+          "max": 1.714331160980481
+        },
+        "invalid_convexity": [],
+        "shape_violations": [],
+        "adjacent_size_violations": [],
+        "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+        "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+      },
+      "waterplane_panels": 5144,
+      "full_equivalent_total": 14962,
       "quality_gates": {
         "semantic_input": "passed",
         "static_equilibrium": "passed",
@@ -31,8 +68,8 @@
         "step": 0.1
       },
       "summary": "examples/geometry/lofted_vessel/verification.json",
-      "summary_sha256": "96bc4e6924571de8939d36c144c4693ae34ffefb638990c2cd14a2f4a29f358e",
-      "source_case_id": "lofted_vessel-521f3bb8fbc849f4"
+      "summary_sha256": "3eba738be66463160a2cd2f816d5dd9c35e65eee63b3c15bed366d2a7bd6bd8f",
+      "source_case_id": "vessel_bands-1fae6ee253f2493a"
     },
     {
       "key": "moonpool_caisson",
@@ -40,12 +77,49 @@
       "label_en": "Polygonal caisson with a through moonpool",
       "geometry_figure": "assets/moonpool_caisson_geometry.png",
       "rao_figure": "assets/moonpool_caisson_rao.png",
-      "volume_m3": 23600.00000000004,
+      "volume_m3": 23599.99999999801,
       "cad_volume_m3": 23599.999999999996,
-      "volume_relative_error": 1.7763568394002505e-15,
-      "cb_distance_m": 8.571805279148366e-15,
-      "panels": 860,
-      "waterplane_panels": 132,
+      "volume_relative_error": 8.415490526658687e-14,
+      "cb_distance_m": 4.449116835971564e-13,
+      "panels": 728,
+      "panel_layout": "polygon_blocks",
+      "panel_quality": {
+        "passed": true,
+        "quadrilaterals": 728,
+        "triangles": 0,
+        "quad_fraction": 1.0,
+        "limits": {
+          "max_edge_ratio": 5.0,
+          "min_corner_deg": 15.0,
+          "max_corner_deg": 165.0,
+          "max_warpage_deg": 2.0,
+          "max_neighbor_size_ratio": 1.8
+        },
+        "edge_ratio": {
+          "p50": 1.6291624804627833,
+          "p95": 3.1818181818146978,
+          "max": 3.545508062959819
+        },
+        "warpage_deg": {
+          "p50": 0.0,
+          "p95": 0.0,
+          "max": 8.537736462515939e-07
+        },
+        "minimum_corner_deg": 34.92450222426985,
+        "maximum_corner_deg": 149.0362434679145,
+        "adjacent_size_ratio": {
+          "p50": 1.0000000000000016,
+          "p95": 1.2015781608674403,
+          "max": 1.3245323570650445
+        },
+        "invalid_convexity": [],
+        "shape_violations": [],
+        "adjacent_size_violations": [],
+        "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+        "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+      },
+      "waterplane_panels": 380,
+      "full_equivalent_total": 1108,
       "quality_gates": {
         "semantic_input": "passed",
         "static_equilibrium": "passed",
@@ -62,8 +136,8 @@
         "step": 0.1
       },
       "summary": "examples/geometry/moonpool_caisson/verification.json",
-      "summary_sha256": "1ebad9dd32da2f07d767694f021bc8a565b1db4d01206e50f5ca71ffa2896689",
-      "source_case_id": "moonpool_caisson-fa66df8717a54754"
+      "summary_sha256": "1406ac85addb441be6e5e305634ddc1e08614c5ae9205bbdc93bba5ceb02c09c",
+      "source_case_id": "moonpool_blocks-65aac1993ef9424e"
     },
     {
       "key": "cad_spar",
@@ -71,12 +145,49 @@
       "label_en": "Curved CAD spar with a finite heave plate",
       "geometry_figure": "assets/cad_spar_geometry.png",
       "rao_figure": "assets/cad_spar_rao.png",
-      "volume_m3": 1720.426942011799,
+      "volume_m3": 1721.2878638519103,
       "cad_volume_m3": 1724.642945423292,
-      "volume_relative_error": 0.0024445659448996127,
-      "cb_distance_m": 0.009264877617078239,
-      "panels": 7793,
-      "waterplane_panels": 283,
+      "volume_relative_error": 0.0019453774940982882,
+      "cb_distance_m": 0.009278287697324979,
+      "panels": 9312,
+      "panel_layout": "ring_bands",
+      "panel_quality": {
+        "passed": true,
+        "quadrilaterals": 9312,
+        "triangles": 0,
+        "quad_fraction": 1.0,
+        "limits": {
+          "max_edge_ratio": 4.0,
+          "min_corner_deg": 20.0,
+          "max_corner_deg": 150.0,
+          "max_warpage_deg": 2.0,
+          "max_neighbor_size_ratio": 1.8
+        },
+        "edge_ratio": {
+          "p50": 1.271878183036488,
+          "p95": 2.179837654435163,
+          "max": 2.38912753111909
+        },
+        "warpage_deg": {
+          "p50": 0.012570245172528544,
+          "p95": 0.2124307464432259,
+          "max": 0.30273577940049995
+        },
+        "minimum_corner_deg": 47.83139074506766,
+        "maximum_corner_deg": 137.2557082162637,
+        "adjacent_size_ratio": {
+          "p50": 1.0023904033647932,
+          "p95": 1.0364377386988546,
+          "max": 1.3439070339428747
+        },
+        "invalid_convexity": [],
+        "shape_violations": [],
+        "adjacent_size_violations": [],
+        "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+        "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+      },
+      "waterplane_panels": 643,
+      "full_equivalent_total": 9955,
       "quality_gates": {
         "semantic_input": "passed",
         "static_equilibrium": "passed",
@@ -93,24 +204,30 @@
         "step": 0.1
       },
       "summary": "examples/geometry/cad_spar/verification.json",
-      "summary_sha256": "f169f716860aedba4cd4ad3889da4b8c66830a06d23050c1e5d3fc24c09e87bc",
-      "source_case_id": "cad_spar-49ca2d0ed2f447d1"
+      "summary_sha256": "a5d37eb0c0e64b44fe8f2a9f73afc45c0635af687595e87d08c8bb8a8909a54a",
+      "source_case_id": "cad_spar_rings_fine-1d4bc80488514848"
     }
   ],
   "figures": {
-    "cad_spar_geometry.pdf": "67ece06ff5cca2efdab6858e96901cc3858106e98f20efd9624c2d2e0911cdab",
-    "cad_spar_geometry.png": "503fe0f67a0c5c720e37a31de6440db32b8222236a850010eb1d7e4377c30d1a",
-    "cad_spar_rao.pdf": "8dea737aac92ac92df303880efce2ab1642f2a3da07c7ed0308b32fc906854b5",
-    "cad_spar_rao.png": "5717d0411f7d15f641a262a9f4c3fc0fe71baaef730bd3305f98064951613b04",
-    "geometry-source-cases.pdf": "b0f94cc8f39abd9b08a635067bbe49a462af479ef160ae06f7473ede423b6102",
-    "geometry-source-cases.png": "c32f9eb11f4b839da987b9e969c909acfb627b9ecf9136e5ed59b25a923f58c4",
-    "lofted_vessel_geometry.pdf": "f31407a7fb4afc0d8cb586e8930b659fe53c6cd1b2f274f661abd4354063551b",
-    "lofted_vessel_geometry.png": "a2e99bae5571f7d71be469cefa30ecd799c1a7e6c1eafcac666503b04c1b09b5",
-    "lofted_vessel_rao.pdf": "d4aa091dd4f46fee0984cedfc90ec66bf453168523c8bb59d86ddfaf326bed7c",
-    "lofted_vessel_rao.png": "c5aa85a9a8a1de418f73c00d3ff9f0bcc10835836519ccff09d2834ae2821d94",
-    "moonpool_caisson_geometry.pdf": "594ac28650382a467a2e9867b3a6d53441a4b59ae3a9da7cb1148a8b5d612de5",
-    "moonpool_caisson_geometry.png": "7dc2a84250e8fbf66483fa401af3192bb32a2ffe1876887415b212df12f7c457",
-    "moonpool_caisson_rao.pdf": "3fcf44f80dba05c379e58d3da75fbae6a5ca81f21377e492245d8f4fa2904656",
-    "moonpool_caisson_rao.png": "bb18bd6a4840f173a28ac91c6647a685c2e2029ada1a377ff3cfdeb815620c47"
+    "cad_spar_geometry.pdf": "011ad23b1798fe9e97d47419975376b56270c42dd369911089e6361e8fcfe154",
+    "cad_spar_geometry.png": "f06fc474c3f0a42cfa84e8b075d5bb59385f094e0ec8de33969f10ce27ecf647",
+    "cad_spar_rao.pdf": "1e07a8fc8227f7c6b7104cdef2b688865a61969dabc8cbe68b8aaa21f1cc25df",
+    "cad_spar_rao.png": "9a210938ba258d7c0275c2ee57eb54b10a350b5c091c1a85b08ad8af2292e2ac",
+    "geometry-source-cases.pdf": "e67bf1fa3f8cf90956df34ea502b60e9713aba5747491843e3b96d86d2123263",
+    "geometry-source-cases.png": "5fb0e7525889b33ccf7b838e52b1e40d04c80edbed2717b699d27074ccdd3b4c",
+    "lofted_vessel_geometry.pdf": "974e2b342ee858bedf630e6a96fc481cc0aa9c797c4009e5d22488d4a71f55f1",
+    "lofted_vessel_geometry.png": "8c41ffdcbc1ee942af9d04bf405a46229d6a558265be44bdfc882c09fbf1e2a8",
+    "lofted_vessel_rao.pdf": "a2bd12a7fc5f494bcdcee4fb7d76e98522f96cb171611d0bca17647bd4a44cf9",
+    "lofted_vessel_rao.png": "199217e5d17b5d2bc931e6fa5beee8ba3d19f10cde0ec49f52ad3f6ed050373b",
+    "moonpool_caisson_geometry.pdf": "1177eaad2fa7826c3ddb523fab51aa9bb496932747f2d77a74ceb8d6ac5a4d79",
+    "moonpool_caisson_geometry.png": "f7783467d7b37f7aed99eeca15e54ba07d19a172746fdca067fc7cf310e755c4",
+    "moonpool_caisson_rao.pdf": "1897e42eac7d74e28a060db1c69de421d84b216dd9f21d2265640326edc6f195",
+    "moonpool_caisson_rao.png": "04f1e53938cfba8e54ffdd9005d245d52927f082f031644d3b92771a5a500026",
+    "cad_spar_mesh_comparison.png": "7d1b459947846e5e5b722622befd53dc02a82a4b97855f7f4e02a450417e5bd0",
+    "cad_spar_mesh_comparison.pdf": "324b8dd9a7dc907aa4a6ce8cd7aa31dfca01080d33ff47ca68eb005b0a410a2f"
+  },
+  "mesh_comparison": {
+    "path": "examples/geometry/mesh-comparison.json",
+    "sha256": "f5c504b2fa5d873255a005a00d8ed31ce5154d8d989d38ac0ee95bb26b16d92c"
   }
 }

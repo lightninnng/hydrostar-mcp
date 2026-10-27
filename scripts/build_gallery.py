@@ -14,13 +14,14 @@ def geometry_section():
     data = json.loads((ROOT / "docs/data/geometry.json").read_text(encoding="utf-8"))
     parts = [
         '<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">5. 多来源复杂几何与原生计算</h2>',
-        "<p>以下三个原创算例使用统一几何前处理，分别验证曲线型值表、带贯通开口的多边形放样和毫米制 STEP 组合实体。湿面经过单位、坐标、水线、法向、拓扑、自交以及 CAD 体积与浮心核对，再由 HydroStar 完成单刚体一阶频域计算。</p>",
+        "<p>以下三个原创算例分别采用站位网格带、贯通开口的相容分块及同轴环带。四边形保留到实际求解的 HST 文件。湿面经过形状、翘曲、相邻尺度、单位、坐标、水线、法向、拓扑、自交以及 CAD 体积与浮心核对，再由 HydroStar 完成单刚体一阶频域计算。</p><p>新模型按 3000 个全体等效总面元规划，包含水线面及对称展开，增加预算按具体算例审阅。本页这批密网格按既定配置保留为研究参照。</p>",
         '<figure><img class="motion-image" src="assets/geometry-source-cases.png" loading="lazy" alt="三个原创复杂几何的实际求解湿表面"><figcaption>图 4. 曲线站位船体、带月池的多边形浮体及带有限厚升沉板的 Spar。坐标采用米，体积与 CAD 偏差按各自实际网格积分给出。完整参数和来源文件随算例保存。</figcaption></figure>',
     ]
     for c in data["cases"]:
         key, label = c["key"], html.escape(c["label"])
+        q = c["panel_quality"]
         parts.append(
-            f"<h3>{label}</h3><p>本算例采用 {c['panels']:,} 个全体湿面元及 {c['waterplane_panels']:,} 个水线面元。湿面排水体积为 {c['volume_m3']:,.3f} m³，与 CAD 实体的相对差为 {100 * c['volume_relative_error']:.3f}%，浮心距离偏差为 {c['cb_distance_m']:.4f} m。六项原生执行质量门禁均通过。</p>"
+            f"<h3>{label}</h3><p>本算例采用 {q['quadrilaterals']:,} 个四边形及 {q['triangles']} 个局部三角形湿面元，另有 {c['waterplane_panels']:,} 个水线面元，全体等效总数为 {c['full_equivalent_total']:,}。湿面排水体积为 {c['volume_m3']:,.3f} m³，与 CAD 实体的相对差为 {100 * c['volume_relative_error']:.3f}%，浮心距离偏差为 {c['cb_distance_m']:.4f} m。最大边长比为 {q['edge_ratio']['max']:.2f}，最大翘曲为 {q['warpage_deg']['max']:.2f}°，相邻尺度比最大为 {q['adjacent_size_ratio']['max']:.2f}。各项几何门限及六项原生执行质量门禁均通过。</p>"
         )
         parts.append(
             f'<details><summary>查看{label}的几何验收与六自由度响应图</summary><figure><img class="motion-image" src="{c["geometry_figure"]}" loading="lazy" alt="{label}的几何验收"><figcaption>平均水线以下的完整湿表面及投影。剖面资料使用橙色显示。</figcaption></figure><figure><img class="motion-image" src="{c["rao_figure"]}" loading="lazy" alt="{label}的原生六自由度响应"><figcaption>0.2–0.8 rad/s、步长 0.1 rad/s，浪向为 0°、60°、120° 和 180°。折线连接原生频率点。</figcaption></figure></details>'
@@ -29,7 +30,20 @@ def geometry_section():
             f'<p class="data-links"><a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/geometry/{key}">源资料、参数、原生输入、完整数组与验收记录</a>随公开仓库保存。</p>'
         )
     parts.append(
-        '<p>这组频率用于核验几何到计算的链路。装载采用网格排水配平、浮心以下 1 m 的重心、包络尺度估算的回转半径和 5% 附加横摇阻尼，均为显式示例假设。具体工程用途应补充实际质量惯性、约束与阻尼、峰区和空间敏感性以及参考响应。</p><p>型值表、DXF、CAD、表面网格与标定图纸的输入方法见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/geometry-sources.md">多来源几何建模与验收</a>。当前物理编排采用单刚体，结构柔性、多体运动和实际系泊预载按目标问题扩展。</p></section>'
+        "<p>这组频率用于核验几何到计算的链路。质量、重心、惯性、恢复设置、阻尼与环境保持 v0.4.0 基线参数，以便比较面元策略。基线采用排水配平、浮心以下 1 m 的重心、包络尺度估算的回转半径及 5% 附加横摇阻尼，均为显式课程分析假设。新网格的平衡与初稳性另经原生检查。</p>"
+    )
+    comparison = json.loads(
+        (ROOT / "examples/geometry/mesh-comparison.json").read_text(encoding="utf-8")
+    )
+    heave = (
+        100
+        * comparison["spar_ring_pair"]["metrics"]["heave"][
+            "max_complex_difference_over_reference_peak"
+        ]
+    )
+    parts.append(
+        f'<h3>Spar 面元策略的响应敏感性</h3><p>同一 CAD 排水实体分别采用 6800 与 9312 个环带四边形湿面元，并与 v0.4.0 的三角形基线比较。在七个频率、四个浪向的采样范围内，两档环带网格的最大复升沉差除以较粗网格升沉峰值为 {heave:.2f}%。该结果记录采样敏感性；对应工程用途还需空间收敛、峰区频率与参考响应证据。</p><figure><img class="motion-image" src="assets/cad_spar_mesh_comparison.png" loading="lazy" alt="固定质量与物理参数的 Spar 原生响应对比"><figcaption>60° 浪向的六自由度原生幅值。标记对应实际计算频率，折线连接采样点；所有比较保持相同的质量、重心、惯性、恢复设置、阻尼与环境。</figcaption></figure><p><a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/examples/geometry/mesh-comparison.json">完整幅值、相位与复数指标</a>及较粗环带的原生文件均随仓库保存。</p>'
+        '<p>原生网格、荷载与参数文件按<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-delivery.md">文件交付规范</a>保存。型值表、DXF、CAD、表面网格与标定图纸的输入方法见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/geometry-sources.md">多来源几何建模与验收</a>。当前物理编排采用单刚体，结构柔性、多体运动和实际系泊预载按目标问题扩展。</p></section>'
     )
     return "\n".join(parts)
 

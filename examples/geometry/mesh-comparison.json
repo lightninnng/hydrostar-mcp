@@ -1,0 +1,259 @@
+{
+  "schema": "hydrostar-sampled-mesh-comparison-1",
+  "baseline_release": "v0.4.0",
+  "baseline_sha256": "046edc087be650df0906835f355fa5d12127a1981551e6193591d490d792e2d9",
+  "normalization": "Maximum complex response difference across all sampled frequencies/headings, divided by the reference peak of that DOF.",
+  "phase_convention": "Complex RAO = amplitude * exp(i * phase_deg * pi / 180).",
+  "scope": "Sampled panel-layout sensitivity at seven frequencies and four headings, with fixed mass, CG, inertia, restoring settings, damping and environment. Two ring grids; target-specific spatial convergence, peak-frequency and benchmark evidence remain to be established.",
+  "baseline_to_structured": {
+    "lofted_vessel": {
+      "baseline_case_id": "lofted_vessel-521f3bb8fbc849f4",
+      "baseline_mesh_sha256": "0dfa7d8d1c4bf84567c1fd149b5550bb60558150c8453013a8eacece830a6b55",
+      "baseline_wetted_panels": 6120,
+      "candidate_case_id": "vessel_bands-1fae6ee253f2493a",
+      "candidate_mesh_sha256": "f0a3a9b1d078918fb9e30dac6f14db7d6084f5580a282abe3af200f6312a142a",
+      "candidate_wetted_panels": 9818,
+      "native_summary_sha256": "3eba738be66463160a2cd2f816d5dd9c35e65eee63b3c15bed366d2a7bd6bd8f",
+      "responses_sha256": "36e846c1ff190cfbcf911aec4629fd1273f85388cd8e6367e9b878ed6a6171d2",
+      "mechanics_fixed": true,
+      "environment_fixed": true,
+      "metrics": {
+        "surge": {
+          "max_complex_difference_over_reference_peak": 0.003416294758366155,
+          "max_amplitude_difference_over_reference_peak": 0.0034160581003790155,
+          "max_phase_difference_deg_above_5pct_peak": 0.5068000000000012,
+          "reference_peak": 1.7889039999999998,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "sway": {
+          "max_complex_difference_over_reference_peak": 0.0019969103965848957,
+          "max_amplitude_difference_over_reference_peak": 0.0019968828835800335,
+          "max_phase_difference_deg_above_5pct_peak": 0.35700000000002086,
+          "reference_peak": 1.576457,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "heave": {
+          "max_complex_difference_over_reference_peak": 0.010336769531196797,
+          "max_amplitude_difference_over_reference_peak": 0.002652251267008164,
+          "max_phase_difference_deg_above_5pct_peak": 0.9598000000000004,
+          "reference_peak": 0.9963233999999999,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "roll": {
+          "max_complex_difference_over_reference_peak": 0.013795357252600813,
+          "max_amplitude_difference_over_reference_peak": 0.011656943936299199,
+          "max_phase_difference_deg_above_5pct_peak": 0.43090000000002177,
+          "reference_peak": 4.258406,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "pitch": {
+          "max_complex_difference_over_reference_peak": 0.013409296160070975,
+          "max_amplitude_difference_over_reference_peak": 0.006499644568641208,
+          "max_phase_difference_deg_above_5pct_peak": 0.7008000000000061,
+          "reference_peak": 2.610912,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "yaw": {
+          "max_complex_difference_over_reference_peak": 0.0017375806590377548,
+          "max_amplitude_difference_over_reference_peak": 0.001722873380764804,
+          "max_phase_difference_deg_above_5pct_peak": 0.04230000000003352,
+          "reference_peak": 0.6773568,
+          "unit": "deg/m",
+          "sample_count": 28
+        }
+      }
+    },
+    "moonpool_caisson": {
+      "baseline_case_id": "moonpool_caisson-fa66df8717a54754",
+      "baseline_mesh_sha256": "17be2925478435783b7834d00294fd5b6390ceb84f1b50dc7f7de25f256104c1",
+      "baseline_wetted_panels": 860,
+      "candidate_case_id": "moonpool_blocks-65aac1993ef9424e",
+      "candidate_mesh_sha256": "7efc33258f5ef1020cdf91aaae4375cb9fa63fe476f3b7dcc2283e44e91e5875",
+      "candidate_wetted_panels": 728,
+      "native_summary_sha256": "1406ac85addb441be6e5e305634ddc1e08614c5ae9205bbdc93bba5ceb02c09c",
+      "responses_sha256": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741",
+      "mechanics_fixed": true,
+      "environment_fixed": true,
+      "metrics": {
+        "surge": {
+          "max_complex_difference_over_reference_peak": 0.011062877986970145,
+          "max_amplitude_difference_over_reference_peak": 0.006538736072690043,
+          "max_phase_difference_deg_above_5pct_peak": 2.259899999999993,
+          "reference_peak": 1.632135,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "sway": {
+          "max_complex_difference_over_reference_peak": 0.0039153957077783744,
+          "max_amplitude_difference_over_reference_peak": 0.0015724660340169362,
+          "max_phase_difference_deg_above_5pct_peak": 0.6929999999999614,
+          "reference_peak": 1.423115,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "heave": {
+          "max_complex_difference_over_reference_peak": 0.03473756939432076,
+          "max_amplitude_difference_over_reference_peak": 0.03286971031933486,
+          "max_phase_difference_deg_above_5pct_peak": 1.6524000000000216,
+          "reference_peak": 1.4035109999999997,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "roll": {
+          "max_complex_difference_over_reference_peak": 0.03136322978985884,
+          "max_amplitude_difference_over_reference_peak": 0.02404499038933026,
+          "max_phase_difference_deg_above_5pct_peak": 1.1678999999999955,
+          "reference_peak": 3.821794,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "pitch": {
+          "max_complex_difference_over_reference_peak": 0.04258205265560051,
+          "max_amplitude_difference_over_reference_peak": 0.01884840423349431,
+          "max_phase_difference_deg_above_5pct_peak": 2.28010000000002,
+          "reference_peak": 6.702265000000001,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "yaw": {
+          "max_complex_difference_over_reference_peak": 0.0021040546237685344,
+          "max_amplitude_difference_over_reference_peak": 0.002103902750693294,
+          "max_phase_difference_deg_above_5pct_peak": 0.050800000000003814,
+          "reference_peak": 0.5012300000000001,
+          "unit": "deg/m",
+          "sample_count": 28
+        }
+      }
+    },
+    "cad_spar": {
+      "baseline_case_id": "cad_spar-49ca2d0ed2f447d1",
+      "baseline_mesh_sha256": "a400811b5dbfb7e4e751c3554fe4f6d30568027be2af78937d3e1e28640b5237",
+      "baseline_wetted_panels": 7793,
+      "candidate_case_id": "cad_spar_rings_fine-1d4bc80488514848",
+      "candidate_mesh_sha256": "9a9c321bb0d3742a60b7900d6e8c10cd1932a366f0f3dd521648b99d56957abb",
+      "candidate_wetted_panels": 9312,
+      "native_summary_sha256": "a5d37eb0c0e64b44fe8f2a9f73afc45c0635af687595e87d08c8bb8a8909a54a",
+      "responses_sha256": "32b52fa95b005102af40dfc5ce161dbc85ce8730c76843c77332903719b94071",
+      "mechanics_fixed": true,
+      "environment_fixed": true,
+      "metrics": {
+        "surge": {
+          "max_complex_difference_over_reference_peak": 0.0016904353684631692,
+          "max_amplitude_difference_over_reference_peak": 0.0004992433605159534,
+          "max_phase_difference_deg_above_5pct_peak": 0.32740000000000413,
+          "reference_peak": 1.369873,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "sway": {
+          "max_complex_difference_over_reference_peak": 0.0007915971778443787,
+          "max_amplitude_difference_over_reference_peak": 0.0007266895185438814,
+          "max_phase_difference_deg_above_5pct_peak": 0.06839999999997957,
+          "reference_peak": 1.187211,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "heave": {
+          "max_complex_difference_over_reference_peak": 0.037030346405710686,
+          "max_amplitude_difference_over_reference_peak": 0.03676615493325336,
+          "max_phase_difference_deg_above_5pct_peak": 0.25790000000002605,
+          "reference_peak": 11.26498,
+          "unit": "m/m",
+          "sample_count": 28
+        },
+        "roll": {
+          "max_complex_difference_over_reference_peak": 0.019262375438208284,
+          "max_amplitude_difference_over_reference_peak": 0.017191111873520244,
+          "max_phase_difference_deg_above_5pct_peak": 0.5043000000000212,
+          "reference_peak": 2.844784,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "pitch": {
+          "max_complex_difference_over_reference_peak": 0.028497084161007467,
+          "max_amplitude_difference_over_reference_peak": 0.017625616620103982,
+          "max_phase_difference_deg_above_5pct_peak": 2.877900000000016,
+          "reference_peak": 3.0020509999999994,
+          "unit": "deg/m",
+          "sample_count": 28
+        },
+        "yaw": {
+          "max_complex_difference_over_reference_peak": 0.03457129095281853,
+          "max_amplitude_difference_over_reference_peak": 0.03456591685495675,
+          "max_phase_difference_deg_above_5pct_peak": 0.37799999999998146,
+          "reference_peak": 0.01761909,
+          "unit": "deg/m",
+          "sample_count": 28
+        }
+      }
+    }
+  },
+  "spar_ring_pair": {
+    "reference_case_id": "cad_spar_rings-24d1062e0815442e",
+    "candidate_case_id": "cad_spar_rings_fine-1d4bc80488514848",
+    "reference_wetted_panels": 6800,
+    "candidate_wetted_panels": 9312,
+    "reference_summary": "sensitivity/cad_spar_coarse/verification.json",
+    "reference_summary_sha256": "2fafc88a10baf41e3480fbf08481b5c28958386aa933a0c7a1d3d89812315f2e",
+    "reference_responses_sha256": "248aa3fea1cbb3ce37c0d04460b2af6182b8fc952837dadadf2b93e1a54db291",
+    "metrics": {
+      "surge": {
+        "max_complex_difference_over_reference_peak": 0.0004219366420327166,
+        "max_amplitude_difference_over_reference_peak": 0.0004219353849859507,
+        "max_phase_difference_deg_above_5pct_peak": 0.0017999999999927753,
+        "reference_peak": 1.370115,
+        "unit": "m/m",
+        "sample_count": 28
+      },
+      "sway": {
+        "max_complex_difference_over_reference_peak": 0.00041008486597637433,
+        "max_amplitude_difference_over_reference_peak": 0.0004022379115969055,
+        "max_phase_difference_deg_above_5pct_peak": 0.007799999999951763,
+        "reference_peak": 1.187357,
+        "unit": "m/m",
+        "sample_count": 28
+      },
+      "heave": {
+        "max_complex_difference_over_reference_peak": 0.03700641920763287,
+        "max_amplitude_difference_over_reference_peak": 0.03700564134861021,
+        "max_phase_difference_deg_above_5pct_peak": 0.013500000000047438,
+        "reference_peak": 10.46381,
+        "unit": "m/m",
+        "sample_count": 28
+      },
+      "roll": {
+        "max_complex_difference_over_reference_peak": 0.001519270872502899,
+        "max_amplitude_difference_over_reference_peak": 0.0015071387866262887,
+        "max_phase_difference_deg_above_5pct_peak": 0.030400000000055754,
+        "reference_peak": 2.795363,
+        "unit": "deg/m",
+        "sample_count": 28
+      },
+      "pitch": {
+        "max_complex_difference_over_reference_peak": 0.0015629924745365607,
+        "max_amplitude_difference_over_reference_peak": 0.0015629915067631815,
+        "max_phase_difference_deg_above_5pct_peak": 0.0018000000000054869,
+        "reference_peak": 2.950112,
+        "unit": "deg/m",
+        "sample_count": 28
+      },
+      "yaw": {
+        "max_complex_difference_over_reference_peak": 0.0008783796516247174,
+        "max_amplitude_difference_over_reference_peak": 0.0008783015757446355,
+        "max_phase_difference_deg_above_5pct_peak": 0.0031000000000001426,
+        "reference_peak": 0.01762151,
+        "unit": "deg/m",
+        "sample_count": 28
+      }
+    }
+  },
+  "figures": {
+    "cad_spar_mesh_comparison.png": "7d1b459947846e5e5b722622befd53dc02a82a4b97855f7f4e02a450417e5bd0",
+    "cad_spar_mesh_comparison.pdf": "324b8dd9a7dc907aa4a6ce8cd7aa31dfca01080d33ff47ca68eb005b0a410a2f"
+  }
+}

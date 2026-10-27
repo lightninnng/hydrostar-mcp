@@ -1,5 +1,5 @@
 {
-  "project": "lofted_vessel",
+  "project": "vessel_bands",
   "path": "examples/geometry/sources/vessel-stations.csv",
   "units": "mm",
   "waterline_z_m": 0.0,
@@ -16,6 +16,20 @@
     0.0
   ],
   "mesh_size_m": 4.5,
+  "panel_layout": "station_bands",
+  "structured_axis": "x",
+  "longitudinal_cells": 192,
+  "longitudinal_grading_blend": 0.2,
+  "axis_center_xy_m": null,
+  "minimum_quad_fraction": 0.95,
+  "panel_quality": {
+    "max_edge_ratio": 5.0,
+    "min_corner_deg": 20.0,
+    "max_corner_deg": 155.0,
+    "max_warpage_deg": 5.0,
+    "max_neighbor_size_ratio": 1.8
+  },
+  "curvature_samples": 48,
   "curve_tolerance_m": 0.005,
   "weld_tolerance_m": 1e-08,
   "section_axis": "x",

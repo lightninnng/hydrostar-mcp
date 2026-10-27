@@ -1,0 +1,71 @@
+{
+  "project": "cad_spar_rings",
+  "object_type": "floating_structure",
+  "geometry": {
+    "type": "hst",
+    "path": "examples/geometry/sensitivity/cad_spar_coarse/geometry/model.hst",
+    "expected_volume_m3": 1724.642945423292,
+    "volume_relative_tolerance": 0.005,
+    "source_manifest": "examples/geometry/sensitivity/cad_spar_coarse/geometry/geometry-report.json"
+  },
+  "environment": {
+    "frequency": {
+      "min": 0.2,
+      "max": 0.8,
+      "step": 0.1
+    },
+    "headings": {
+      "min": 0.0,
+      "max": 180.0,
+      "step": 60.0
+    },
+    "depth": 150.0,
+    "speed_m_s": 0.0,
+    "rho_kg_m3": 1025.0,
+    "gravity_m_s2": 9.81
+  },
+  "mechanics": {
+    "model": "explicit",
+    "mass_kg": 1763437.615562094,
+    "cog_m": [
+      0.00011115080494183834,
+      1.675067096982703e-05,
+      -13.486970745089911
+    ],
+    "gyradius_m": [
+      7.963458210266862,
+      7.963458210266862,
+      7.756717518813397,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "roll_damping_pct": 5.0,
+    "restraint": "free",
+    "stiffness_matrix": null,
+    "linear_damping_matrix": null,
+    "hydrostatics_method": "hull",
+    "components": [],
+    "morison": [],
+    "wave_amplitude_m": null,
+    "spectrum": null,
+    "vertical_external_force_n": 0.0,
+    "equilibrium_relative_tolerance": 0.01,
+    "cog_xy_tolerance_m": 0.05,
+    "source_note": "Course/simplified-analysis assumption: mass balanced to the accepted mesh displacement, CG 1 m below integrated CB, bounding-envelope gyradii and 5% additional roll damping; zero speed and static external preload. Physical parameters held fixed at the published v0.4.0 triangular-mesh baseline for the panel-layout comparison."
+  },
+  "output_dofs": [
+    "surge",
+    "sway",
+    "heave",
+    "roll",
+    "pitch",
+    "yaw"
+  ],
+  "output_point_m": null,
+  "reference_form": null,
+  "recommended_max_panels": 12000,
+  "waterplane_estimate_factor": 1.2,
+  "nproc": 4,
+  "module_timeout_s": 1800.0
+}

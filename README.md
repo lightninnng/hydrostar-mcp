@@ -33,13 +33,27 @@ Local MCP automation for HydroStar, with source-informed geometry and reproducib
 
 每套[公开结果](examples/results/index.json)包含生成输入（HST/RDF/MCN/RAO）、原生 RAO 数值文件、完整数组、质量摘要与文件哈希。参照构型已完成几何与执行验收；具体工程应用按实际线型、装载、约束、阻尼及参考响应补齐验证。该状态记录为 `engineering_acceptance.ready=false`，详见[结果说明](docs/results.md)。
 
+网格、荷载和参数文件属于正式交付物。[原生文件交付规范](docs/native-delivery.md)明确 .hst、.rdf、.mcn、.rao 及谱分析所需 .spc 的用途、依赖、执行顺序和状态。项目与本机 skill 均采用该要求，图表与各自实际计算文件保持对应。
+
 ## 多来源复杂几何
+
+面元生成首先识别结构特征。柱式与同轴扩底构型沿轴向分环、周向等角对应；船体沿站位和剖面建立连续网格带；多边形与贯通开口采用相容分块。四边形、渐变尺寸和局部过渡同时接受形状、翘曲、相邻尺度及几何误差检查。[面元建模方法](docs/panel-meshing.md)将这些选择、适用条件和验收要求固化为项目规范。
+
+**常规新模型默认预算为 3000 个全体等效总面元，含湿面、水线面及对称展开。** 先在预算内优化网格，确需增加时按具体算例审阅并授权。当前批次的密网格按已授权配置保留为研究参照。配套 [HydroStar 建模 skill](skills/hydrostar-modeling/SKILL.md)与 AGENTS.md 使用相同规则。
 
 型值表、曲线、CAD 和表面网格可以经统一前处理建立湿表面，随后进入相同的原生计算链路。CSV/JSON 支持有折角的多边形剖面和平顺曲线放样；DXF 使用明确的图层与站位关系；STEP/IGES/BREP 接收闭合的外部排水实体；STL/OBJ/PLY/HST 采用显式单位与表面检查。图像和 PDF 先建立米制标定与剖面描线工作区，以独立尺寸点核对后再建模。
 
 ![原创复杂几何与实际计算网格](docs/assets/geometry-source-cases.png)
 
 新增[复杂几何算例](examples/geometry/index.json)包括曲线站位船体、带贯通月池的多边形浮体，以及毫米制 STEP 导入的曲面 Spar 和有限厚升沉板。三类几何均由本项目独立构造，随包保存源资料、参数、CAD 与网格的体积/浮心核对、拓扑与自交检查、原生输入和六自由度数组。其 7 个频率与 4 个浪向用于核验建模和执行链路，目标峰区研究应加密频率并检查空间敏感性。
+
+| 保留的参照例 | 湿面四边形 / 三角形 | 含水线面的全体等效总面元 | CAD 体积相对差 |
+| --- | --- | --- | --- |
+| 曲线站位船体 | 9811 / 7 | 14962 | 0.100% |
+| 贯通月池浮体 | 728 / 0 | 1108 | 小于 0.001% |
+| 环带 Spar 与升沉板 | 9312 / 0 | 9955 | 0.195% |
+
+这批网格保持现有密度。比较中固定 v0.4.0 基线的质量、重心、惯性、恢复设置、阻尼和环境。[Spar 的两档环带计算](examples/geometry/mesh-comparison.json)保留 6800 与 9312 个湿面元的原生文件；采样范围内的最大复升沉差除以较粗网格升沉峰值为 3.70%。这是两档网格的响应敏感性记录，工程精度另需对应构型的空间收敛、峰区频率和参考响应证据。
 
 使用 `python -m pip install -e ".[geometry]"` 安装可选前处理依赖，运行 `geometry-inspect` 检查资料，再用 `geometry-build` 建立验收包。MCP 对应 `inspect_geometry_source` 和 `build_geometry` 两个工具；返回的 `case_geometry` 可接入 `prepare_case`，质量、重心、惯性、阻尼和海况由分析方案明确给出。[多来源建模说明](docs/geometry-sources.md)给出格式、完整步骤、硬性判据及不同海工结构的适用范围。
 
@@ -115,7 +129,7 @@ python -m hydrostar_mcp.server
 | `module_execution` | 模块正常完成，授权、Fortran、平衡及收敛诊断通过 |
 | `rao_integrity` | 输出齐全、频率和浪向一致、数值有限、文件哈希匹配 |
 
-门禁失败会停止后续依赖步骤。3000 个全体等效面板、波长与面元尺度比、面元长宽比作为建模建议；超出建议时返回具体数值与确认 token，由使用者审阅后继续。详见[建模流程](docs/modeling-guide.md)。
+门禁失败会停止后续依赖步骤。常规默认执行预算为 3000 个全体等效总面元，提高预算须按具体算例明确授权。波长与面元尺度比、长宽比另作几何筛查；超限时返回具体数值与确认 token，由使用者审阅后继续。详见[建模流程](docs/modeling-guide.md)。
 
 ## 模型与验证
 
@@ -139,6 +153,7 @@ python scripts/check_local.py
 - [快速开始与 MCP 配置](docs/quickstart.md)
 - [模型思路、参数与质量检查](docs/modeling-guide.md)
 - [型值表、CAD、网格和图纸建模](docs/geometry-sources.md)
+- [环带、站位与分块面元方法](docs/panel-meshing.md)
 - [KCS / KVLCC2 / OC4 构型和资料来源](docs/reference-forms.md)
 - [公开计算结果与读图说明](docs/results.md)
 - [验证、复现与敏感性分析](docs/verification.md)

@@ -29,7 +29,10 @@ def write_hst(path, request, vertices, faces):
         for i, point in enumerate(vertices, 1)
     )
     lines += ["ENDCOORDINATES", "PANEL TYPE 0"]
-    lines.extend(" ".join(str(i + 1) for i in face + face[-1:]) for face in faces)
+    lines.extend(
+        " ".join(str(i + 1) for i in (face if len(face) == 4 else face + face[-1:]))
+        for face in faces
+    )
     path.write_text("\n".join(lines + ["ENDPANEL", "ENDFILE", ""]), encoding="ascii")
 
 
@@ -55,7 +58,7 @@ def plot_surface(folder, vertices, faces, reference, output_name="geometry-qa.pn
     axis = fig.add_axes([0.015, 0.18, 0.50, 0.66], projection="3d")
     axis.add_collection3d(
         Poly3DCollection(
-            v[np.array(faces)],
+            [v[face] for face in faces],
             facecolor="#4e819c",
             edgecolor="#334b5c",
             lw=0.18,
@@ -123,6 +126,7 @@ def plot_surface(folder, vertices, faces, reference, output_name="geometry-qa.pn
 def run(folder):
     from .geometry_kernel import build_surface
     from .surface_checks import inspect_surface
+    from .panel_checks import inspect_panels
 
     request = GeometryRequest.model_validate_json(
         (folder / "request.json").read_text(encoding="utf-8")
@@ -148,13 +152,39 @@ def run(folder):
     quality = inspect_surface(
         vertices, faces, request.expected_wet_components, request.weld_tolerance_m * 10
     )
+    topology_passed = quality["passed"]
+    quality["panel_quality"] = inspect_panels(
+        vertices, faces, request.panel_quality.model_dump()
+    )
+    if (
+        request.panel_layout
+        in {"quad_dominant", "ring_bands", "polygon_blocks", "station_bands"}
+        and reference["kernel"] == "OpenCASCADE/Gmsh"
+    ):
+        quality["quad_fraction_required"] = request.minimum_quad_fraction
+        quality["quad_fraction_passed"] = (
+            quality["panel_quality"]["quad_fraction"] >= request.minimum_quad_fraction
+        )
+    quality["passed"] = (
+        quality["passed"]
+        and quality["panel_quality"]["passed"]
+        and quality.get("quad_fraction_passed", True)
+    )
     if not quality["passed"]:
+        save_json(
+            folder / "candidate-surface.json",
+            dict(vertices=vertices, faces=faces, reference=reference),
+        )
         return dict(
             status="failed",
             quality=quality,
             error=dict(
-                code="GEOMETRY_TOPOLOGY_FAILED",
-                detail="湿表面拓扑、边界、方向或自交检查失败",
+                code="GEOMETRY_PANEL_QUALITY_FAILED"
+                if topology_passed
+                else "GEOMETRY_TOPOLOGY_FAILED",
+                detail="面元比例、形状或相邻尺度未通过本次显式门限"
+                if topology_passed
+                else "湿表面拓扑、边界、方向或自交检查失败",
             ),
         )
     hst = folder / "model.hst"
@@ -218,6 +248,8 @@ def run(folder):
                 "geometry_kernel.py",
                 "geometry_sources.py",
                 "surface_checks.py",
+                "panel_checks.py",
+                "structured_panels.py",
             )
         },
         fidelity=fidelity,
@@ -230,6 +262,8 @@ def run(folder):
             topology="passed",
             self_intersection="passed",
             orientation="passed",
+            panel_shape="passed",
+            panel_layout="passed",
             fidelity="passed" if fidelity else "source_reference_pending",
         ),
         physics_status="Geometry accepted; use prepare_case and start_case for native hydrodynamic validation",

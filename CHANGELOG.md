@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 - 2026-10-27
+
+- Add topology-led quadrilateral layouts for coaxial ring bands, smooth hull stations and polygonal through openings, retaining native HST connectivity.
+- Enforce explicit quadrilateral fraction, edge ratio, corner angle, warpage and neighbouring size limits alongside CAD fidelity and topology gates.
+- Distinguish native panels from internal checking triangles and correct near-tangent shared-node intersection classification at floating-point roundoff scale.
+- Recompute the three original complex-geometry examples with their accepted structured meshes and fixed baseline physical parameters.
+- Preserve a second computed Spar ring grid and the versioned triangular baseline for reproducible sampled response comparisons.
+- Establish a default 3,000 full-equivalent total-panel budget, including waterplane panels and symmetry expansion; retain the specifically authorized dense reference studies.
+- Package the HydroStar modelling skill and native-file delivery requirements for HST, RDF, MCN, RAO and task-specific SPC/load inputs.
+
 ## 0.4.0 - 2026-10-27
 
 - Add unit-aware section, DXF, CAD and surface-mesh preprocessing through isolated geometry workers and two new MCP tools.

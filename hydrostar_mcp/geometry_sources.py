@@ -5,7 +5,15 @@ from __future__ import annotations
 from typing import Annotated, Literal
 from pydantic import Field, model_validator
 from .models import Model, Positive, Vector3
-from .core import identifier
+from .core import identifier, RECOMMENDED_MAX_PANELS
+
+
+class PanelQuality(Model):
+    max_edge_ratio: Annotated[float, Field(ge=1, le=20)] = 8.0
+    min_corner_deg: Annotated[float, Field(gt=0, le=45)] = 10.0
+    max_corner_deg: Annotated[float, Field(ge=135, lt=180)] = 170.0
+    max_warpage_deg: Annotated[float, Field(gt=0, le=15)] = 5.0
+    max_neighbor_size_ratio: Annotated[float, Field(gt=1, le=5)] = 2.0
 
 
 class GeometryRequest(Model):
@@ -20,6 +28,17 @@ class GeometryRequest(Model):
     )
     translation_m: Vector3 = Field(default_factory=lambda: [0.0, 0.0, 0.0])
     mesh_size_m: Positive = 3.0
+    panel_layout: Literal[
+        "quad_dominant", "ring_bands", "polygon_blocks", "station_bands", "triangular"
+    ] = "quad_dominant"
+    structured_axis: Literal["x", "y", "z"] | None = None
+    longitudinal_cells: Annotated[int, Field(ge=8, le=1000)] | None = None
+    longitudinal_grading_blend: Annotated[float, Field(ge=0, le=1)] = 0.2
+    axis_center_xy_m: (
+        Annotated[list[float], Field(min_length=2, max_length=2)] | None
+    ) = None
+    minimum_quad_fraction: Annotated[float, Field(ge=0, le=1)] = 0.8
+    panel_quality: PanelQuality = Field(default_factory=PanelQuality)
     curvature_samples: Annotated[int, Field(ge=16, le=128)] = 32
     curve_tolerance_m: Annotated[float, Field(gt=0, le=0.1)] = 0.005
     weld_tolerance_m: Annotated[float, Field(gt=0, le=0.0001)] = 1e-8
@@ -33,7 +52,7 @@ class GeometryRequest(Model):
     volume_tolerance_relative: Annotated[float, Field(gt=0, le=0.05)] = 0.005
     expected_wet_components: Annotated[int, Field(ge=1, le=100)] = 1
     flip_normals: bool = False
-    max_panels: Annotated[int, Field(ge=20, le=50000)] = 12000
+    max_panels: Annotated[int, Field(ge=20, le=50000)] = RECOMMENDED_MAX_PANELS
     timeout_s: Annotated[float, Field(gt=0, le=1800)] = 600.0
     source_note: str = Field(min_length=10, max_length=2000)
     pdf_page: Annotated[int, Field(ge=0)] = 0
@@ -89,6 +108,13 @@ def format_catalog():
         "mesh": "Oriented surface triangles/quads, clipped at the mean waterline",
         "drawing": "Calibrated tracing workspace; metric sections are reviewed before meshing",
         "physics": "Geometry feeds the existing single-rigid-body first-order BEM/Morison workflow",
+        "panel_layouts": {
+            "ring_bands": "Coaxial CAD sections, equal-angle ring bands, radial shoulders and an O-grid bottom",
+            "station_bands": "One smooth x-axis loft, matched keel/waterline profiles and graded longitudinal stations",
+            "polygon_blocks": "One constant z-axis polygon prism with one through opening; feature-matched blocks",
+            "quad_dominant": "General CAD transfinite patches and quadrilateral-oriented recombination; explicit quality gates",
+            "triangular": "Explicit triangular layout for comparison and locally suitable topology",
+        },
     }
 
 

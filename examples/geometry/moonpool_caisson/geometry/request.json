@@ -1,5 +1,5 @@
 {
-  "project": "moonpool_caisson",
+  "project": "moonpool_blocks",
   "path": "examples/geometry/sources/moonpool-sections.json",
   "units": "m",
   "waterline_z_m": 0.0,
@@ -16,6 +16,18 @@
     0.0
   ],
   "mesh_size_m": 4.0,
+  "panel_layout": "polygon_blocks",
+  "structured_axis": "z",
+  "axis_center_xy_m": null,
+  "minimum_quad_fraction": 1.0,
+  "panel_quality": {
+    "max_edge_ratio": 5.0,
+    "min_corner_deg": 15.0,
+    "max_corner_deg": 165.0,
+    "max_warpage_deg": 2.0,
+    "max_neighbor_size_ratio": 1.8
+  },
+  "curvature_samples": 32,
   "curve_tolerance_m": 0.005,
   "weld_tolerance_m": 1e-08,
   "section_axis": "x",

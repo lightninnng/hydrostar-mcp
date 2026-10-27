@@ -1,5 +1,5 @@
 {
-  "project": "lofted_vessel",
+  "project": "vessel_bands",
   "object_type": "ship",
   "geometry": {
     "type": "hst",
@@ -52,7 +52,7 @@
     "vertical_external_force_n": 0.0,
     "equilibrium_relative_tolerance": 0.01,
     "cog_xy_tolerance_m": 0.05,
-    "source_note": "Course/simplified-analysis assumption: mass balanced to the accepted mesh displacement, CG 1 m below integrated CB, bounding-envelope gyradii and 5% additional roll damping; zero speed and static external preload."
+    "source_note": "Course/simplified-analysis assumption: mass balanced to the accepted mesh displacement, CG 1 m below integrated CB, bounding-envelope gyradii and 5% additional roll damping; zero speed and static external preload. Physical parameters held fixed at the published v0.4.0 triangular-mesh baseline for the panel-layout comparison."
   },
   "output_dofs": [
     "surge",
@@ -64,8 +64,8 @@
   ],
   "output_point_m": null,
   "reference_form": null,
-  "recommended_max_panels": 10000,
+  "recommended_max_panels": 16000,
   "waterplane_estimate_factor": 1.2,
-  "nproc": 4,
-  "module_timeout_s": 1800.0
+  "nproc": 1,
+  "module_timeout_s": 3600.0
 }

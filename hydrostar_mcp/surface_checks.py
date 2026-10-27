@@ -6,6 +6,42 @@ from collections import defaultdict
 
 
 def inspect_surface(vertices, faces, expected_components=1, tolerance=1e-8):
+    triangles = []
+    owner = []
+    for index, face in enumerate(faces):
+        if len(face) not in (3, 4) or len(set(face)) != len(face):
+            raise ValueError("湿面元采用三角形或四个不同节点的四边形")
+        for i in range(1, len(face) - 1):
+            triangles.append([face[0], face[i], face[i + 1]])
+            owner.append(index + 1)
+    report = _inspect_triangles(vertices, triangles, expected_components, tolerance)
+    for name in ("zero_area_panels", "above_water_panels", "waterplane_panels"):
+        report[name] = sorted({owner[i] for i in report[name]})
+    report["self_intersections"] = [
+        list(pair)
+        for pair in sorted(
+            {
+                tuple(sorted((owner[a - 1], owner[b - 1])))
+                for a, b in report["self_intersections"]
+            }
+        )
+    ]
+    report["invalid_edges"] = [[a + 1, b + 1] for a, b in report["invalid_edges"]]
+    report["invalid_waterline_vertices"] = [
+        i + 1 for i in report["invalid_waterline_vertices"]
+    ]
+    report.update(
+        panels=len(faces),
+        checking_triangles=len(triangles),
+        quadrilaterals=sum(len(p) == 4 for p in faces),
+        triangles=sum(len(p) == 3 for p in faces),
+        duplicate_faces=len(faces) - len({tuple(sorted(row)) for row in faces}),
+        diagnostic_indexing="Native HST panel and node numbers start at 1; checking triangles are internal only",
+    )
+    return report
+
+
+def _inspect_triangles(vertices, faces, expected_components=1, tolerance=1e-8):
     import numpy as np
 
     v = np.asarray(vertices, dtype=float)
@@ -124,12 +160,16 @@ def triangle_intersections(vertices, faces, tolerance):
 
     def plane_cut(triangle, signed):
         points = []
+        # The welding tolerance is a length bound for acceptance. Plane cuts
+        # use roundoff-scale distances so nearly tangent neighbours do not
+        # acquire artificial intersection segments of length tolerance/angle.
+        epsilon = 64 * np.finfo(float).eps * max(1.0, float(np.max(np.abs(triangle))))
         for p, d, q, e in zip(
             triangle, signed, np.roll(triangle, -1, axis=0), np.roll(signed, -1)
         ):
-            if abs(d) <= tolerance:
+            if abs(d) <= epsilon:
                 points.append(p)
-            if (d < -tolerance and e > tolerance) or (d > tolerance and e < -tolerance):
+            if (d < -epsilon and e > epsilon) or (d > epsilon and e < -epsilon):
                 points.append(p + d / (d - e) * (q - p))
         return points
 

@@ -133,6 +133,24 @@ def test_geometry_timeout_preserves_log_and_reaps_owned_descendants(tmp_path):
     assert not owner_is_alive(int(pid_path.read_text()))
 
 
+def test_nearly_tangent_bands_meet_only_at_the_shared_node():
+    np = pytest.importorskip("numpy")
+    pytest.importorskip("shapely")
+    from hydrostar_mcp.surface_checks import triangle_intersections
+
+    points = np.array(
+        [
+            [-7.5368254668108, 5.783209553032808, -19.0],
+            [-7.536825408822079, 5.78320957861862, -18.733333333333334],
+            [-7.898939978198227, 5.27790291307552, -18.733333333333334],
+            [-7.536825408822079, 5.78320957861862, -18.466666666666665],
+            [-7.898939978198227, 5.27790291307552, -18.466666666666665],
+        ]
+    )
+    # Opposite z intervals meet at exactly one node, including CAD roundoff.
+    assert not triangle_intersections(points, np.array([[0, 2, 1], [1, 4, 3]]), 1e-7)
+
+
 def evidence():
     return {
         "source_sha256": "a" * 64,
@@ -140,6 +158,107 @@ def evidence():
         "calibration": [{"pixel": p, "uv_m": p} for p in ([0, 0], [10, 0], [0, 10])],
         "checkpoints": [{"pixel": p, "uv_m": p} for p in ([10, 10], [5, 5])],
     }
+
+
+def test_panel_shape_warpage_and_size_transition_gates():
+    pytest.importorskip("numpy")
+    from hydrostar_mcp.geometry_sources import PanelQuality
+    from hydrostar_mcp.panel_checks import inspect_panels
+
+    limits = PanelQuality().model_dump()
+    vertices = [[0, 0, -1], [1, 0, -1], [1, 1, -1], [0, 1, -1], [3, 0, -1], [3, 1, -1]]
+    faces = [[0, 1, 2, 3], [1, 4, 5, 2]]
+    good = inspect_panels(vertices, faces, limits)
+    assert good["passed"] and good["quad_fraction"] == 1
+    assert good["warpage_deg"]["max"] == pytest.approx(0)
+    assert good["adjacent_size_ratio"]["max"] == pytest.approx(2**0.5)
+    assert not inspect_panels(
+        vertices, faces, {**limits, "max_neighbor_size_ratio": 1.3}
+    )["passed"]
+    vertices[2][2] = -0.8
+    assert not inspect_panels(vertices, faces, limits)["passed"]
+    bow = [[0, 0, 0], [1, 1, 0], [0, 1, 0], [1, 0, 0]]
+    assert inspect_panels(bow, [[0, 1, 2, 3]], limits)["invalid_convexity"]
+
+
+def test_ring_bottom_ogrid_closes_without_pole_fan(tmp_path):
+    np = pytest.importorskip("numpy")
+    pytest.importorskip("shapely")
+    from hydrostar_mcp.structured_panels import _cap_ogrid
+    from hydrostar_mcp.geometry_kernel import clip_and_weld
+    from hydrostar_mcp.geometry_worker import write_hst
+    from hydrostar_mcp.surface_checks import inspect_surface
+    from hydrostar_mcp.panel_checks import inspect_panels
+    from hydrostar_mcp.geometry_sources import PanelQuality
+
+    count = 64
+    theta = -np.pi / 4 + 2 * np.pi * np.arange(count) / count
+    bottom = np.column_stack([3 * np.cos(theta), 3 * np.sin(theta), np.full(count, -5)])
+    cap_v, cap_f = _cap_ogrid(bottom, 0.5, np.array([0, 0]))
+    v = [
+        p.tolist()
+        for z in np.linspace(-5, 0, 11)
+        for p in np.column_stack([bottom[:, :2], np.full(count, z)])
+    ]
+    f = [
+        [
+            j * count + i,
+            j * count + (i + 1) % count,
+            (j + 1) * count + (i + 1) % count,
+            (j + 1) * count + i,
+        ]
+        for j in range(10)
+        for i in range(count)
+    ]
+    shift = len(v)
+    v.extend(cap_v)
+    f.extend([[i + shift for i in p] for p in cap_f])
+    v, f = clip_and_weld(v, f, 1e-8)
+    assert all(len(p) == 4 for p in f)
+    assert inspect_surface(v, f)["passed"]
+    assert inspect_panels(v, f, PanelQuality().model_dump())["passed"]
+    from collections import Counter
+
+    incidence = Counter(i for p in f for i in p)
+    assert max(incidence.values()) <= 5
+    path = tmp_path / "ring.hst"
+    write_hst(path, request(), v, f)
+    assert core.hydrostatics(path)["volume"] == pytest.approx(45 * np.pi, rel=0.002)
+
+
+def test_polygon_blocks_keep_corners_and_open_moonpool(tmp_path):
+    pytest.importorskip("numpy")
+    pytest.importorskip("shapely")
+    from hydrostar_mcp.structured_panels import polygon_blocks
+    from hydrostar_mcp.geometry_kernel import clip_and_weld
+    from hydrostar_mcp.geometry_worker import write_hst
+    from hydrostar_mcp.surface_checks import inspect_surface
+    from hydrostar_mcp.panel_checks import inspect_panels
+    from hydrostar_mcp.geometry_sources import PanelQuality
+
+    outer = [[-10, -5], [10, -5], [10, 5], [-10, 5]]
+    inner = [[-2, -1], [2, -1], [2, 1], [-2, 1]]
+    profiles = [
+        dict(operation=operation, points_m=[[x, y, z] for x, y in points])
+        for operation, points, levels in (
+            ("add", outer, (-5, 3)),
+            ("cut", inner, (-7, 5)),
+        )
+        for z in levels
+    ]
+    v, f, _ = polygon_blocks(profiles, request(mesh_size_m=2))
+    v, f = clip_and_weld(v, f, 1e-8)
+    assert inspect_surface(v, f)["passed"]
+    assert inspect_panels(v, f, PanelQuality().model_dump())["passed"]
+    assert all(len(p) == 4 for p in f)
+    path = tmp_path / "moonpool.hst"
+    write_hst(path, request(), v, f)
+    assert core.hydrostatics(path)["volume"] == pytest.approx(960)
+    assert all(
+        not (-2 + 1e-8 < x < 2 - 1e-8 and -1 + 1e-8 < y < 1 - 1e-8)
+        for x, y, z in v
+        if z < 0
+    )
 
 
 def test_drawing_independent_scale_checks_and_residuals():
@@ -316,9 +435,17 @@ def test_surface_adapters_preserve_displacement(tmp_path, extension):
     else:
         import numpy as np
 
+        cells = (
+            (
+                "triangle",
+                [[p[0], p[k], p[k + 1]] for p in f for k in range(1, len(p) - 1)],
+            )
+            if extension == ".stl"
+            else ("quad", f)
+        )
         meshio.write(
             source,
-            meshio.Mesh(np.array(v) * 1000, [("triangle", f)]),
+            meshio.Mesh(np.array(v) * 1000, [cells]),
             **({"binary": True} if extension == ".stl" else {}),
         )
         r = GeometryRequest(

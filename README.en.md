@@ -32,6 +32,8 @@ Scientific figures use colourblind-friendly line colours, distinct heading line 
 
 The [result packages](examples/results/index.json) contain generated HST/RDF/MCN/RAO inputs, original RAO files, complete amplitude/phase arrays, provenance and per-file hashes. For a specific engineering application, review the target geometry, loading, restraints, damping and benchmark responses. The current evidence status is retained explicitly as `engineering_acceptance.ready=false`.
 
+Native mesh, load and parameter files are formal deliverables. The [native-file delivery requirements](docs/native-delivery.md) describe .hst, .rdf, .mcn, .rao and the .spc inputs used for spectral analysis, including dependencies, execution order and verification status. The modelling skill applies the same requirements; figures retain their own actual calculation provenance.
+
 ## Synchronized surface pressure, waves and motion
 
 ![Semisubmersible surface pressure, wave elevation and rigid-body motion](docs/assets/semisub_oc4_style_coupled.gif)
@@ -54,11 +56,23 @@ The [online report](https://lightninnng.github.io/hydrostar-mcp/) provides model
 
 ## General geometry from source data
 
+Panel topology follows the structure. Coaxial columns use equal-angle ring bands and radial shoulders; smooth hulls use matched station and section bands; polygonal bodies and through openings use conforming blocks. Native quadrilaterals retain their connectivity in the HST file. Shape, warpage, neighbouring size transitions and geometric fidelity are checked together. The [panel meshing method](docs/panel-meshing.md) records these choices and their applicable conditions as project guidance.
+
+**New models use a default budget of 3,000 full-equivalent total panels, including wetted and waterplane panels after symmetry expansion.** Optimize the layout within that budget; increases require explicit case-specific review and authorization. The existing dense studies retain their authorized configurations as research references. The [HydroStar modelling skill](skills/hydrostar-modeling/SKILL.md) and AGENTS.md apply the same rule.
+
 The optional geometry workflow accepts CSV/JSON sections, closed station curves in DXF, external displacement solids in STEP/IGES/BREP, and oriented surface meshes in STL/OBJ/PLY/HST. Explicit units, a right-handed frame and the mean waterline are recorded. Polygon corners are retained; interpolating splines and smooth longitudinal lofts represent curved forms. Image and PDF inputs produce a calibrated tracing workspace with independent metric checkpoints.
 
 ![Original complex geometries used for native calculations](docs/assets/geometry-source-cases.png)
 
 The [general geometry examples](examples/geometry/index.json) contain an original vessel reconstructed from curved sections, a polygonal caisson with a through moonpool, and a millimetre STEP spar with a connected finite-thickness heave plate. Each package retains original source data, the accepted wetted mesh, CAD/mesh displacement and buoyancy-centre comparisons, topology and intersection checks, native inputs and complete six-DOF arrays. Their seven frequencies and four headings verify the geometry-to-solver chain; response-peak studies require separate grid refinement.
+
+| Retained reference | Wetted quads / triangles | Full-equivalent total including waterplane | CAD volume difference |
+| --- | --- | --- | --- |
+| Curved station hull | 9811 / 7 | 14962 | 0.100% |
+| Through-moonpool caisson | 728 / 0 | 1108 | Less than 0.001% |
+| Ring-band Spar and heave plate | 9312 / 0 | 9955 | 0.195% |
+
+These meshes retain their existing density. Comparisons hold the v0.4.0 baseline mass, CG, inertia, restoring settings, damping and environment fixed. The [two-ring-grid Spar study](examples/geometry/mesh-comparison.json) preserves native files for 6,800 and 9,312 wetted panels. Across the sampled grid, the maximum complex heave difference divided by the coarser-grid heave peak is 3.70%. This records sampled sensitivity; target-specific spatial convergence, peak-frequency and reference-response evidence remains to be established.
 
 Install with `python -m pip install -e ".[geometry]"`. Use `geometry-inspect` and `geometry-build`, or MCP tools `inspect_geometry_source` and `build_geometry`. The returned `case_geometry` feeds `prepare_case` with explicit mechanics and environment. Source hashes are checked when preparing and starting a case. The default CAD/mesh volume tolerance is 0.5%; the buoyancy-centre tolerance is max(0.002 m, 0.0005 × maximum wetted dimension).
 
@@ -124,7 +138,7 @@ python -m hydrostar_mcp.server
 | `module_execution` | Normal completion and acceptable licensing, Fortran, equilibrium and convergence diagnostics |
 | `rao_integrity` | Complete requested outputs, matching grids, finite values and valid file hashes |
 
-A failed hard gate stops dependent work. Panel budget, wavelength-to-panel scale and panel aspect ratio are modelling recommendations. When a recommendation is exceeded, the workflow reports its concrete values and a confirmation token for review.
+A failed hard gate stops dependent work. The default execution budget is 3,000 full-equivalent total panels; increasing it requires explicit review for the specific case. Wavelength-to-panel scale and aspect ratio provide additional geometric screening. Exceedances return concrete values and a confirmation token for review.
 
 The models describe one rigid body, small motions and first-order frequency-domain behaviour. Executable cases use zero static external preload. Semisubmersible modelling combines BEM surfaces, Morison members, component mass properties, added stiffness and linearized drag. Model-specific evidence and sensitivity studies establish the intended engineering use.
 

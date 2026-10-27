@@ -1,4 +1,6 @@
 include README.en.md
+include AGENTS.md
+recursive-include skills/hydrostar-modeling *.md *.yaml
 include README.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md run_mcp.py
 recursive-include hydrostar_mcp *.py
 recursive-include hydrostar_mcp *.html
@@ -22,3 +24,4 @@ include scripts/mesh_study.py scripts/parametric_study.py scripts/frequency_stud
 include scripts/wavefield_study.py
 include scripts/reference_form_study.py scripts/templates/gallery.html
 include scripts/geometry_source_study.py scripts/export_geometry.py scripts/check_geometry.py
+include scripts/export_mesh_comparison.py

@@ -43,6 +43,7 @@ def test_real_stdio_builds_a_frozen_geometry_bundle(tmp_path):
                                 "units": "m",
                                 "expected_volume_m3": 80,
                                 "timeout_s": 60,
+                                "panel_quality": {"max_neighbor_size_ratio": 3.0},
                                 "source_note": "Original closed wet box for actual MCP geometry transport",
                             }
                         },
@@ -56,6 +57,8 @@ def test_real_stdio_builds_a_frozen_geometry_bundle(tmp_path):
                 report = result.structuredContent
                 assert report["status"] == "geometry_accepted", report
                 assert report["quality"]["passed"]
+                assert report["quality"]["quadrilaterals"] == 5
+                assert report["quality"]["triangles"] == 0
                 assert report["hydrostatics"]["volume"] == pytest.approx(80)
                 assert Path(report["case_geometry"]["source_manifest"]).is_file()
 

@@ -1,0 +1,82 @@
+{
+  "schema": "hydrostar-native-delivery-1",
+  "project": "moonpool_blocks",
+  "source_case_id": "moonpool_blocks-65aac1993ef9424e",
+  "input_files": {
+    "inputs/moonpool_blocks.hst": {
+      "status": "validated",
+      "purpose": "hslec; hschk: validated native quadrilateral/triangle mesh",
+      "sha256": "7efc33258f5ef1020cdf91aaae4375cb9fa63fe476f3b7dcc2283e44e91e5875"
+    },
+    "inputs/moonpool_blocks.rdf": {
+      "status": "validated",
+      "purpose": "hsrdf: radiation/diffraction frequencies, headings, depth and speed",
+      "sha256": "58b107d25bbbef8aaa11fe241b7cd773ecf5cd0a29c68b66eab824f84fdc0fc8"
+    },
+    "inputs/moonpool_blocks.mcn": {
+      "status": "validated",
+      "purpose": "hsmcn: mass, CG, inertia, damping and motion parameters",
+      "sha256": "6237e9f50a26d03a429ef339f0f0b2706fe219d00bcb55b4865268c179e5067b"
+    },
+    "inputs/moonpool_blocks.rao": {
+      "status": "validated",
+      "purpose": "hsrao: response extraction instructions; distinct from rao/*.rao output",
+      "sha256": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2"
+    }
+  },
+  "output_files": {
+    "rao/surge.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "m/m",
+      "sha256": "27fb0f454325d5aef3d3066bb5f6c7d0eff3c9b3327e4fa68a3b8cd0844306fd"
+    },
+    "rao/sway.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "m/m",
+      "sha256": "d00ab73d9862401fb9910d9a5af77b7b2a31aaea6e8727003b29fc8b00719ccc"
+    },
+    "rao/heave.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "m/m",
+      "sha256": "c7016d245584b3760fbf3688af92ab67bdf8b85333a48af4b7c742a856da2273"
+    },
+    "rao/roll.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "deg/m",
+      "sha256": "c0a498ac9791a8b67f263e2be048640986310a0ce7585181c850ac3776d65679"
+    },
+    "rao/pitch.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "deg/m",
+      "sha256": "fdb5646a50ee63d46597414a48131cd74c61a2b09c81b579d19272dfa34041d9"
+    },
+    "rao/yaw.rao": {
+      "status": "validated",
+      "purpose": "Native response amplitude and phase",
+      "unit": "deg/m",
+      "sha256": "371ddc3911fba347544bd4a15ab36029ecae642f9a0ea22b54d3ef3bfb149c98"
+    }
+  },
+  "spc": {
+    "status": "not_applicable",
+    "reason": "This case computes regular-wave first-order RAOs. Sea-state spectral statistics are outside this study; a StarSpec stage requires its sea states and an actual .spc input."
+  },
+  "native_database": {
+    "status": "regenerate_for_further_native_postprocessing",
+    "reason": "Run the delivered inputs in order to regenerate the binary databases; the portable archive includes original inputs and text RAO outputs."
+  },
+  "parameters": "config.json",
+  "geometry": "geometry/geometry-report.json",
+  "resource_policy": {
+    "default_full_equivalent_total_budget": 3000,
+    "configured_case_budget": 12000,
+    "full_equivalent_total": 1108,
+    "nproc": 4,
+    "scope": "This specifically retained dense reference study; new models use the default 3000-panel budget and case-specific review for increases."
+  }
+}

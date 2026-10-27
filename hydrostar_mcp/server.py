@@ -22,6 +22,7 @@ mcp = FastMCP(
         "HydroStar local automation: plan_case -> prepare_case -> start_case -> case_status -> read_rao. "
         "Present needs_confirmation warnings with the concrete plan, then use its token after human agreement. "
         "Use explicit mass parameters and provenance for imported meshes. "
+        "New models use a default budget of 3000 full-equivalent total panels, including waterplane panels and symmetry expansion; obtain case-specific human agreement before increasing that budget. "
         "For CAD, station tables, DXF curves, surface meshes or drawings, use inspect_geometry_source and build_geometry. "
         "Use the returned case_geometry with explicit mechanics; retain source_manifest through prepare_case. "
         "Drawing inputs require metric calibration, independent checkpoints and reviewed tracing before meshing. "
@@ -53,6 +54,9 @@ async def build_geometry(request: GeometryRequest) -> dict[str, Any]:
     CAD and section data use an isolated OpenCASCADE/Gmsh process. Drawing inputs
     produce a metric tracing workspace. Use case_geometry from accepted output
     in prepare_case, with explicit mass, CG, inertia and the desired wave conditions.
+    Choose panel_layout by topology: ring_bands for coaxial columns, station_bands
+    for smooth x-axis lofts, polygon_blocks for a prismatic through opening, or
+    quad_dominant for general CAD patches. Quality limits are explicit and frozen.
     """
     return await asyncio.to_thread(
         GeometryService(service.root / "geometry", service.source_root).build, request

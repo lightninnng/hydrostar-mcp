@@ -52,11 +52,11 @@ def export():
         )
         motions = json.loads((folder / "motions.json").read_text(encoding="utf-8"))
         cfg = json.loads((folder / "config.json").read_text(encoding="utf-8"))
-        v, f = np.array(surface["vertices"]), np.array(surface["faces"])
+        v, f = np.array(surface["vertices"]), surface["faces"]
         ax = fig.add_axes([0.035 + index * 0.33, 0.30, 0.28, 0.48], projection="3d")
         ax.add_collection3d(
             Poly3DCollection(
-                v[f],
+                [v[face] for face in f],
                 facecolor="#6891a6",
                 edgecolor="#355369",
                 linewidth=0.12,
@@ -93,7 +93,7 @@ def export():
         fig.text(
             0.04 + index * 0.33,
             0.14,
-            f"{len(f):,} wetted panels\nWet extents = "
+            f"{sum(len(p) == 4 for p in f):,} quadrilaterals; {sum(len(p) == 3 for p in f)} triangles\nWet extents = "
             + " × ".join(f"{d:.1f}" for d in high - low)
             + f" m\nVolume = {volume:,.3f} m³\nCAD/mesh volume difference = {100 * error:.3f}%",
             fontsize=9.5,
@@ -126,7 +126,10 @@ def export():
                 volume_relative_error=error,
                 cb_distance_m=report["fidelity"]["cad_cb_distance_m"],
                 panels=len(f),
+                panel_layout=report["request"]["panel_layout"],
+                panel_quality=report["quality"]["panel_quality"],
                 waterplane_panels=native["hslec"]["waterplane_panels"],
+                full_equivalent_total=native["resource_policy"]["full_equivalent_total"],
                 quality_gates=native["quality_gates"],
                 frequency_count=len(motions["heave"]["omega"]),
                 heading_count=len(motions["heave"]["headings"]),
@@ -166,6 +169,9 @@ def export():
     }
     save_json(ROOT / "examples/geometry/index.json", payload)
     save_json(ROOT / "docs/data/geometry.json", payload)
+    from scripts.export_mesh_comparison import export_comparison
+
+    export_comparison()
     print("Published geometry cases:", len(cases))
 
 

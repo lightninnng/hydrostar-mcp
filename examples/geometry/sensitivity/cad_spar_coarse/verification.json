@@ -1,0 +1,240 @@
+{
+  "quality_gates": {
+    "semantic_input": "passed",
+    "static_equilibrium": "passed",
+    "mesh_geometry": "passed",
+    "mesh_topology": "passed",
+    "module_execution": "passed",
+    "rao_integrity": "passed"
+  },
+  "hydrostatics": {
+    "volume": 1720.734163859647,
+    "cb": [
+      5.711288757685457e-05,
+      4.3924514572016577e-05,
+      -12.486827384937442
+    ],
+    "wetted_area": 1070.6746829674134,
+    "n_nodes": 6841,
+    "n_panels": 6800,
+    "sym": 0,
+    "max_edge": 0.7459358477984689,
+    "max_aspect_ratio": 2.7972594281004692,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "hslec": {
+    "bodies": 1,
+    "symmetry": 0,
+    "hull_panels": 6800,
+    "waterline_segments": 80,
+    "waterplane_panels": 436,
+    "above_waterline": 0,
+    "cb_x": 5.7e-05
+  },
+  "hschk": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "solver_mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      1.138092,
+      1.158017
+    ]
+  },
+  "geometry_source_validation": {
+    "schema": "hydrostar-geometry-bundle-1",
+    "quality": {
+      "passed": true,
+      "nodes": 6841,
+      "panels": 6800,
+      "wetted_components": 1,
+      "expected_wet_components": 1,
+      "component_volume_m3": [
+        1720.734163859707
+      ],
+      "zero_area_panels": [],
+      "duplicate_faces": 0,
+      "above_water_panels": [],
+      "waterplane_panels": [],
+      "invalid_edges": [],
+      "cut_edges": 80,
+      "invalid_waterline_vertices": [],
+      "self_intersections": [],
+      "nonpositive_components": [],
+      "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap",
+      "checking_triangles": 13600,
+      "quadrilaterals": 6800,
+      "triangles": 0,
+      "panel_quality": {
+        "passed": true,
+        "quadrilaterals": 6800,
+        "triangles": 0,
+        "quad_fraction": 1.0,
+        "limits": {
+          "max_edge_ratio": 4.0,
+          "min_corner_deg": 20.0,
+          "max_corner_deg": 150.0,
+          "max_warpage_deg": 2.0,
+          "max_neighbor_size_ratio": 1.8
+        },
+        "edge_ratio": {
+          "p50": 1.2262652665124418,
+          "p95": 2.2689953293859575,
+          "max": 2.797259428100846
+        },
+        "warpage_deg": {
+          "p50": 0.017137331493805624,
+          "p95": 0.24409238678866035,
+          "max": 0.35275436995716397
+        },
+        "minimum_corner_deg": 48.8033873841041,
+        "maximum_corner_deg": 137.25570821626366,
+        "adjacent_size_ratio": {
+          "p50": 1.0027482264515712,
+          "p95": 1.0430554913039776,
+          "max": 1.3394742316965915
+        },
+        "invalid_convexity": [],
+        "shape_violations": [],
+        "adjacent_size_violations": [],
+        "size_definition": "sqrt(panel area); adjacent panels share a complete native edge",
+        "warpage_definition": "angle between normals of triangles (0,1,2) and (0,2,3)"
+      },
+      "quad_fraction_required": 1.0,
+      "quad_fraction_passed": true
+    },
+    "fidelity": {
+      "cad_volume_relative_error": 0.0022664294508134564,
+      "cad_cb_distance_m": 0.00940650899072779,
+      "cad_cb_tolerance_m": 0.01
+    },
+    "geometry_gates": {
+      "source_units": "passed",
+      "coordinate_frame": "passed",
+      "waterline_clipping": "passed",
+      "topology": "passed",
+      "self_intersection": "passed",
+      "orientation": "passed",
+      "fidelity": "passed"
+    },
+    "reference": {
+      "kernel": "OpenCASCADE/Gmsh",
+      "gmsh_version": "4.15.2",
+      "mesh_controls": {
+        "algorithm": "CAD axial sections, equal-angle rings, mapped radial shoulders and four-block O-grid bottom",
+        "azimuth_cells": 80,
+        "axial_intervals": [
+          {
+            "z0_m": -20.0,
+            "z1_m": -19.0,
+            "axial_cells": 3
+          },
+          {
+            "z0_m": -19.0,
+            "z1_m": -18.2,
+            "axial_cells": 3
+          },
+          {
+            "z0_m": -18.2,
+            "z1_m": 0.0,
+            "axial_cells": 46
+          }
+        ],
+        "ring_count": 70,
+        "target_axial_radial_spacing_m": 0.4,
+        "axis_center_xy_m": [
+          0.0,
+          0.0
+        ],
+        "section_sampling": "1024 samples per original CAD curve; periodic polar interpolation",
+        "source_shape": "Original CAD sections retained; horizontal plate boundaries taken from CAD face loops"
+      },
+      "cad_volume_m3": 1724.642945423292,
+      "cad_cb_m": [
+        0.006449317559903611,
+        5.856633954218298e-05,
+        -12.493728248393321
+      ],
+      "source_profiles": null,
+      "wet_solids": 1,
+      "orientation_method": "Counterclockwise section bands, outward horizontal shoulders and downward O-grid bottom; independently checked edges and signed volume"
+    }
+  },
+  "source_case_id": "cad_spar_rings-24d1062e0815442e",
+  "producer_version": "0.4.0",
+  "steps": [
+    {
+      "module": "hslec",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.609
+    },
+    {
+      "module": "hschk",
+      "ok": true,
+      "rc": 0,
+      "seconds": 22.797
+    },
+    {
+      "module": "hsrdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 146.906
+    },
+    {
+      "module": "hsmcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.625
+    },
+    {
+      "module": "hsrao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.203
+    }
+  ],
+  "engineering_acceptance": {
+    "ready": false,
+    "scope": "Original geometry, fixed v0.4.0 baseline mechanics and a sampled first-order response grid; target-specific spatial, peak-frequency and reference-response evidence remains to be supplied."
+  },
+  "resource_policy": {
+    "default_full_equivalent_total_budget": 3000,
+    "configured_case_budget": 12000,
+    "full_equivalent_total": 7236,
+    "nproc": 4,
+    "scope": "This specifically retained dense reference study; new models use the default 3000-panel budget and case-specific review for increases."
+  },
+  "files": {
+    "config.json": "7ff95dad299effc45395afcd4ce6ba40d965378b667bab104039e2f895a5aeed",
+    "delivery.json": "0edeec03042429e7ca99938a3cd5293a8e547b746cdb8b4ca5e3265e86461619",
+    "motions.json": "248aa3fea1cbb3ce37c0d04460b2af6182b8fc952837dadadf2b93e1a54db291",
+    "README.md": "8ab11ed11cbb0c754e4da81824c3a64754e6951a784277d112c342106727f867",
+    "geometry/geometry-qa.png": "246625ffd62a26171c8a0a88c9b58b1145b60d011a9d579431392a9c7b5edc62",
+    "geometry/geometry-report.json": "592f0076bc8c37c5b0b1644f3c47cdbd14bea08bcd8a7f08002f5974622a2f4b",
+    "geometry/model.hst": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838",
+    "geometry/request.json": "0bce7b8dea1af9291766c3d903f28be0e6a8de4feb3c77ecfdced4363d524416",
+    "geometry/source.step": "e9bdc57225e06b49cfe93d34af44cbd5bf174874f6ae5a57f489f581405b2fb3",
+    "geometry/surface.json": "943a238abc59ee9c2fa1b906878ab2ee584640e10ff6cf3ef15f836f3638b225",
+    "inputs/cad_spar_rings.hst": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838",
+    "inputs/cad_spar_rings.mcn": "2f3787fce00a339523b165699bb690775724972c1fd4d4bcb6df9c2564e993b4",
+    "inputs/cad_spar_rings.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
+    "inputs/cad_spar_rings.rdf": "9908a84082793cc66406c91512ad8d731ed3eeda0662d3e24974aba4e46a5127",
+    "rao/heave.rao": "d7766cdfc7846d1b941b36b2cc6c4c2f9ba44ec861cea7059f9ed30bb73a8d0f",
+    "rao/pitch.rao": "2d5e2232513c741bc4d2f109711f6aed3f958a9029b0daa99eea8e2fc7832e68",
+    "rao/roll.rao": "00e8cea4596dd8a63b4afe87f5cfd06f8fddcb9d2309977f30d6d80d000651fa",
+    "rao/surge.rao": "7241d9a5b9ff3442b9ebdb71710b012f5ee6d7794b0b2e9d65fb0944ec3945cc",
+    "rao/sway.rao": "6f4eac28abdfa950f16557f0b35f01d4fe8c0e2ae63ff9079641a4facdcd3653",
+    "rao/yaw.rao": "4cbaf2cc7412341d6586b44ea9be5704339f11b4089267b8c9c3b434c4f6b902"
+  }
+}

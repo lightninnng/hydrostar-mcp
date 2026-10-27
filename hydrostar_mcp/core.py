@@ -446,7 +446,7 @@ def assess_budget(bud, recommended_max=RECOMMENDED_MAX_PANELS, wp_factor=1.2):
         estimate_source="max(configured factor, rectangular waterplane reference where available); verify with hslec",
         recommended_max=recommended_max,
         omega_max_this_mesh=bud["omega_max"],
-        message=f"全体船体 {bud['full']}，含水线面估算 {estimate}；推荐值 {recommended_max}（非硬上限）。",
+        message=f"全体船体 {bud['full']}，含水线面估算 {estimate}；本次预算 {recommended_max}，常规默认预算 {RECOMMENDED_MAX_PANELS}，超出本次预算时须审阅确认。",
         options=(
             [
                 {"id": "revise", "label": "修改分段数后重新规划"},
