@@ -34,6 +34,8 @@ The [result packages](examples/results/index.json) contain generated HST/RDF/MCN
 
 Native mesh, load and parameter files are formal deliverables. The [native-file delivery requirements](docs/native-delivery.md) describe .hst, .rdf, .mcn, .rao and the .spc inputs used for spectral analysis, including dependencies, execution order and verification status. The modelling skill applies the same requirements; figures retain their own actual calculation provenance.
 
+Future visualization first follows the current manuals' [native and companion workflows](docs/native-visualization.md), including appropriate hview / hvisu, hsplt / StarViewer, gnplt, HyView, HSprv → ParaView and StarSpec routes. Other manual-recommended routes follow the same priority. Scripts supplement comparisons, scientific layout, web presentation or encoding. Each output records its actual renderer and official-workflow verification status; published media retain their existing provenance.
+
 ## Synchronized surface pressure, waves and motion
 
 ![Semisubmersible surface pressure, wave elevation and rigid-body motion](docs/assets/semisub_oc4_style_coupled.gif)

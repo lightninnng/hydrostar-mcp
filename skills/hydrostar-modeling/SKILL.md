@@ -1,6 +1,6 @@
 ---
 name: hydrostar-modeling
-description: "Build and verify HydroStar hydrodynamic models from parameters, sections, CAD or meshes, using structure-aligned quadrilaterals and a default 3000-panel total budget. Use for geometry, meshing, quality checks, native single-body calculations and delivery of native mesh, load, parameter and result files."
+description: "Build and verify HydroStar models from parameters, sections, CAD or meshes with structure-aligned quadrilaterals, a default 3000-panel total budget and manual-recommended native or companion visualization first. Use for modelling, quality checks, native single-body calculations, result visualization and native file delivery."
 ---
 
 # HydroStar 建模与验收
@@ -42,6 +42,16 @@ build_geometry / geometry-build 产生独立几何包。检查原生面元比例
 
 原生求解顺序执行并按机器内存选择 MPI 进程数。冻结输入与来源哈希；网格改变后，用新网格重算对应结果。比较离散时固定质量、重心、惯性、恢复、阻尼和环境，分别报告网格质量与响应敏感性。
 
+## 原生与手册推荐的可视化路径优先
+
+将原生工具及当前版本手册默认、推荐的可视化路径作为必须遵循的第一选择，范围覆盖本次分析章节中的官方流程。开展可视化时先阅读[可视化方法](references/native-visualization.md)，再查配套手册与教程，核对入口、数据依赖、版本兼容及实际导出能力。
+
+网格优先 hview 或手册适用的 hvisu / Visu4D；响应、荷载及谱曲线优先 hsplt / StarViewer，按当前版本使用 gnplt 等官方绘图入口；谱统计采用 StarSpec 手册的相应绘图流程。运动、波面、压力云图和 GIF/视频优先 hview / HyView，或手册规定的 HSprv → ParaView / Hstar2Paraview 流程。官方输出接配套查看器同属第一选择。其他手册规定的可视化路径按同一原则选用。
+
+官方链路可用并覆盖需求时，须先沿该流程完成查看、核对和导出，再安排论文排版、曲线比较或网页展示。复用已经计算且来源一致的原生结果，记录手册依据、工具版本、项目、数据文件、命令或界面操作、视角、物理工况、色标、单位和倍率。输出须实际打开并检查，原生/官方查看与导出状态和求解验收状态分别记录。
+
+遇到版本、授权、数据兼容或导出格式限制时，记录具体限制和已核实的尝试，再使用可复核的外部制图补充。原生或官方配套流程导出的帧/视频可以编码为 GIF，并注明画面来源和转码步骤。自定义渲染图标明渲染工具及数据来源，保留官方核对记录；科研排版与转码保持原始场值、相位、色标和实际面元连接。
+
 ## 原生文件属于正式交付物
 
 每次交付同时提供可编辑、可检查、可继续计算的 HydroStar 原生文件。图表、动画和 JSON 报告与这些文件逐一对应。按当前安装版本的手册和教程核对文件格式及调用顺序，具体要求见[原生文件交付](references/native-delivery.md)。
@@ -56,6 +66,8 @@ build_geometry / geometry-build 产生独立几何包。检查原生面元比例
 | 其他实际使用的输入 | 如 .mri 建网指令、压力/场点输入、荷载与构件参数文件，以及几何源资料 |
 
 同一算例使用一致的项目名、相对路径和文件引用；随包给出目录清单、关键参数与单位、执行顺序、质量门禁、文件哈希及结果来源。区分原生输入、求解器生成的中间文件和原生输出，保存复算或后续分析必需的文件。
+
+可视化交付还保存实际采用的原生查看/绘图设置、场点输入、所需数据库或其再生成步骤，以及导出的图、帧或视频。GIF 由原生画面转码时保存编码设置；清单说明生成工具、原生核对状态和最终媒体哈希。
 
 逐项记录文件状态为已生成、已执行、已验证、待补充或本次不适用。包含谱统计的交付必须有实际 .spc；海况资料缺失时明确待补充参数，补齐后再完成该阶段。缺少本次分析需要的网格、荷载或参数文件时，交付尚未完成。已验证状态须有对应的实际执行与检查记录。
 

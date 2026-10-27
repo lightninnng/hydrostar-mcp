@@ -35,6 +35,8 @@ Local MCP automation for HydroStar, with source-informed geometry and reproducib
 
 网格、荷载和参数文件属于正式交付物。[原生文件交付规范](docs/native-delivery.md)明确 .hst、.rdf、.mcn、.rao 及谱分析所需 .spc 的用途、依赖、执行顺序和状态。项目与本机 skill 均采用该要求，图表与各自实际计算文件保持对应。
 
+后续可视化首先采用当前版本手册推荐的[原生与配套流程](docs/native-visualization.md)，包括 hview / hvisu、hsplt / StarViewer、gnplt、HyView、HSprv → ParaView 与 StarSpec 等适用入口。其他手册推荐路径按同一原则选用。脚本用于补充比较、科研排版、网页展示或格式转码，保留实际生成工具和官方核对状态。已发布图像和动画继续按各自记录标识其生成方式。
+
 ## 多来源复杂几何
 
 面元生成首先识别结构特征。柱式与同轴扩底构型沿轴向分环、周向等角对应；船体沿站位和剖面建立连续网格带；多边形与贯通开口采用相容分块。四边形、渐变尺寸和局部过渡同时接受形状、翘曲、相邻尺度及几何误差检查。[面元建模方法](docs/panel-meshing.md)将这些选择、适用条件和验收要求固化为项目规范。

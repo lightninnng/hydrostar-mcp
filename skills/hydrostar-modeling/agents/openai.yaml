@@ -1,4 +1,4 @@
 interface:
   display_name: "HydroStar 建模与验收"
-  short_description: "四边形建模、3000 面元预算、原生验收与文件交付"
-  default_prompt: "使用 $hydrostar-modeling 按结构特征建立四边形优先模型，在 3000 个全体等效总面元预算内完成预检与原生计算，并交付 HST、RDF、MCN、RAO 及本次需要的 SPC 等原生文件。"
+  short_description: "四边形建模、3000 面元预算、手册可视化与原生文件交付"
+  default_prompt: "使用 $hydrostar-modeling 在 3000 个全体等效总面元预算内建模和验收，首先沿本机手册推荐的原生或配套流程查看并导出科研图与动画，同时交付 HST、RDF、MCN、RAO 及本次所需 SPC 等原生文件和可视化复现材料。"

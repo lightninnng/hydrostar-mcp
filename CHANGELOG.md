@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Require current manual-recommended visualization first in the modelling skill, covering native tools and official companion routes such as HSprv → ParaView and StarSpec plotting.
+- Record native verification, actual media provenance, export settings and documented fallback or encoding steps with the native-file deliverables.
+
 ## 0.5.0 - 2026-10-27
 
 - Add topology-led quadrilateral layouts for coaxial ring bands, smooth hull stations and polygonal through openings, retaining native HST connectivity.
