@@ -9,7 +9,7 @@ description: "Build and verify HydroStar models from parameters, sections, CAD o
 
 ## 3000 面元预算
 
-新模型默认使用 3000 个全体等效总面元预算，包含湿面、水线面与对称展开。计数采用 N_total=(N_wet+N_waterplane)×2^sym，其中 sym=0、1、2 分别表示全体、半体和四分之一体。独立自交检查内部使用的三角形数量另行记录。
+新模型默认使用 3000 个全体等效总面元预算，包含湿面、水线面与对称展开。计数采用 N_total=(N_wet+N_waterplane)×2^sym，其中 sym=0、1、2 分别表示全体、半体和四分之一体。二阶计算另含外部积分自由面，计数为 N_total=(N_wet+N_waterplane+N_exterior)×2^sym。独立自交检查内部使用的三角形数量另行记录。
 
 保留 CaseConfig.recommended_max_panels=3000，GeometryRequest.max_panels 默认不高于 3000。初始网格从适合课程或简化分析的较低数量开始，为自动水线面预留预算；优先改善分区、对应关系、局部尺寸与模型简化。
 
@@ -32,7 +32,7 @@ description: "Build and verify HydroStar models from parameters, sections, CAD o
 
 使用 inspect_geometry_source 或 geometry-inspect 识别格式、单位和来源。型值表确认轮廓顺序与站位，CAD 确认闭合的外部排水实体。图像/PDF 经尺寸标定、独立检查点和经审阅描线后重建；缺失尺寸和形状假设写入来源说明。
 
-显式给出质量、重心、惯性、约束、阻尼与环境。当前编排采用单刚体一阶频域分析。按目标问题说明 BEM 与 Morison 分工，保留实际几何、装载和耗散的证据状态。
+显式给出质量、重心、惯性、约束、阻尼与环境。当前编排采用单刚体一阶频域分析。二阶平均漂移与完整差频 QTF 按[二阶计算与外域验收](references/second-order.md)扩展原生流程，并按分量记录收敛证据。按目标问题说明 BEM 与 Morison 分工，保留实际几何、装载和耗散的证据状态。
 
 ## 验收与执行
 

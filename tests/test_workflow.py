@@ -155,6 +155,19 @@ def test_measured_budget_cannot_be_hidden_by_low_estimate(service, solver):
     assert service.start(report["case_id"])["status"] == "needs_confirmation"
 
 
+def test_exterior_integration_surface_is_included_in_native_budget(service, solver):
+    solver.hslec_log = (
+        "Nb of bodies to be analysed 1\nNb symmetry of hull geometry 1\n"
+        "Nb panels on hulls 752\nNb panels on the waterplanes 24\n"
+        "Nb panels over the free surface 800\n"
+    )
+    report = service.prepare(CaseConfig())
+    assert report["status"] == "needs_confirmation"
+    assert report["mesh_screening"]["full_equivalent_panels"] == 3152
+    assert service.start(report["case_id"])["status"] == "needs_confirmation"
+    assert "hsrdf" not in solver.calls
+
+
 def test_input_tampering_requires_prepare_again(service, solver):
     report = service.prepare(CaseConfig())
     path = Path(report["directory"]) / "barge100.mcn"

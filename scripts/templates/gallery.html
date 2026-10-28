@@ -16,10 +16,10 @@
 <body>
 <header><div class="brand">HydroStar MCP<span class="version">计算示例报告 __VERSION__</span></div><nav aria-label="项目资料"><a href="https://github.com/lightninnng/hydrostar-mcp">项目源码</a><a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/README.en.md">English</a></nav></header>
 <main>
-<h1>船舶与半潜平台的一阶水动力计算</h1>
-<p class="subtitle">First-order hydrodynamics of ships and a semisubmersible platform</p>
-<div class="abstract"><p>本报告展示原创曲线船体、半潜平台、集装箱船与丰满油船的建模和水动力结果。四种构型分别给出实际求解网格、六自由度频率响应、表面压力与波面，以及绕射与辐射分量，与项目 README 采用相同的计算数据和原生导出。</p><p>前面的三维模型可旋转和缩放。曲线船体在 3000 个总面元预算内采用 231 个频率点和 13 个浪向；各算例用于研究生课程、方法研究与所列假设下的工程简化分析，计算资料保存了原生输入、完整数值和验收记录。响应曲线通过 Gnuplot 导出，场量经独立复数核对后由 ParaView 批处理保存。</p></div>
-<nav class="report-nav" aria-label="报告章节"><a href="#model-heading">交互模型与网格</a><a href="#case-vessel">曲线船体</a><a href="#case-platform">半潜平台</a><a href="#case-container">集装箱船</a><a href="#case-tanker">丰满油船</a><a href="#verification-heading">验收与适用条件</a></nav>
+<h1>船舶与半潜平台水动力计算</h1>
+<p class="subtitle">Hydrodynamics of ships and a semisubmersible platform</p>
+<div class="abstract"><p>本报告展示原创曲线船体、半潜平台、集装箱船与丰满油船的建模和水动力结果。四种构型分别给出实际求解网格、六自由度频率响应、表面压力与波面，以及绕射与辐射分量，与项目 README 采用相同的计算数据和原生导出。半潜平台另给出平均漂移荷载与完整差频二阶结果。</p><p>前面的三维模型可旋转和缩放。曲线船体在 3000 个总面元预算内采用 231 个频率点和 13 个浪向；各算例用于研究生课程、方法研究与所列假设下的工程简化分析，计算资料保存了原生输入、完整数值和验收记录。响应曲线通过 Gnuplot 导出，场量经独立复数核对后由 ParaView 批处理保存。</p></div>
+<nav class="report-nav" aria-label="报告章节"><a href="#model-heading">交互模型与网格</a><a href="#case-vessel">曲线船体</a><a href="#case-platform">半潜平台</a><a href="#case-container">集装箱船</a><a href="#case-tanker">丰满油船</a><a href="#second-order">二阶差频荷载</a><a href="#verification-heading">验收与适用条件</a></nav>
 
 <section aria-labelledby="model-heading"><h2 id="model-heading">1. 计算对象与参数</h2>
 <div class="controls"><label class="field">计算对象<select id="model" aria-label="计算对象"></select></label></div>
@@ -30,10 +30,12 @@
 
 __RESULT_SECTIONS__
 
-<section aria-labelledby="verification-heading"><h2 id="verification-heading">6. 计算验收与适用条件</h2>
+__SECOND_ORDER_SECTION__
+
+<section aria-labelledby="verification-heading"><h2 id="verification-heading">7. 计算验收与适用条件</h2>
 <p>各算例执行相同的硬性门禁，输入、静力平衡、网格、模块执行和结果完整性通过后进入展示。场量另经入射波解析解、总场分解、运动匹配与时间序列检查，色标在整个周期内保持一致。</p>
 <div class="table-wrap"><table><thead><tr><th scope="col">检查项目</th><th scope="col">曲线船体</th><th scope="col">半潜平台</th><th scope="col">集装箱船</th><th scope="col">丰满油船</th></tr></thead><tbody>__ACCEPTANCE_ROWS__</tbody></table></div>
-<p class="source">这些结果采用单刚体、小运动的一阶频域模型。面向具体工程对象时，结合实际几何、装载、阻尼和约束条件，补充空间收敛及参考响应证据。质量门禁与目标用途的精度证据在<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/verification.md">验证说明</a>中分别记录。</p>
+<p class="source">四构型的响应与场量采用单刚体、小运动的一阶频域模型，半潜平台二阶差频荷载采用所列势流展开与分量验收。面向具体工程对象时，结合实际几何、装载、阻尼和约束条件，补充空间收敛及参考响应证据。质量门禁与目标用途的精度证据在<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/verification.md">验证说明</a>中分别记录。</p>
 <details><summary>复现方法与原生交付</summary><p class="source">完整数值与来源记录随计算资料保存。原生文件的内容与执行顺序见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-delivery.md">交付规范</a>，命令式绘图与动画导出见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-visualization.md">可视化方法</a>。<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/README.md">中文 README</a> 与 <a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/README.en.md">English README</a> 采用相同的四构型结果和展示工况。</p></details></section>
 __GEOMETRY_STUDY__
 </main><footer>项目代码按 MIT 许可发布。HydroStar 软件与授权由使用者独立配置，计算输入、假设和验证资料随公开仓库保存。</footer>

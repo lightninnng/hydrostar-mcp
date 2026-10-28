@@ -1,0 +1,27 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSamg - Restructuring first-order solutions.
+
+ ******* 64-bit version *******
+ Near-field formulation is chosen.
+ Truncation of free-surface  : Rt =    110.000000000201     
+  1/ 13 Frequency=   0.5000(rad/s)    1 Headings    0.000s remaining (step 1)
+  7/ 13 Frequency=   0.8000(rad/s)    1 Headings    0.000s remaining (step 1)
+  2/ 13 Frequency=   0.5500(rad/s)    1 Headings    7.095s remaining (step 1)
+  8/ 13 Frequency=   0.8500(rad/s)    1 Headings    9.216s remaining (step 1)
+  3/ 13 Frequency=   0.6000(rad/s)    1 Headings    5.600s remaining (step 1)
+  9/ 13 Frequency=   0.9000(rad/s)    1 Headings    8.160s remaining (step 1)
+  4/ 13 Frequency=   0.6500(rad/s)    1 Headings    4.032s remaining (step 1)
+ 10/ 13 Frequency=   0.9500(rad/s)    1 Headings    6.340s remaining (step 1)
+  5/ 13 Frequency=   0.7000(rad/s)    1 Headings    2.594s remaining (step 1)
+ 11/ 13 Frequency=   1.0000(rad/s)    1 Headings    4.821s remaining (step 1)
+  6/ 13 Frequency=   0.7500(rad/s)    1 Headings    1.358s remaining (step 1)
+ 12/ 13 Frequency=   1.0500(rad/s)    1 Headings    2.984s remaining (step 1)
+ 13/ 13 Frequency=   1.1000(rad/s)    1 Headings    1.503s remaining (step 1)
+Merge amg results
+  1/  2 Frequency=   0.0500(rad/s)    6 Radiations    0.000s remaining (step 2)
+  2/  2 Frequency=   0.1000(rad/s)    6 Radiations    0.000s remaining (step 2)
+Merge rad results
+Total clock time of operation was       14.07 s 

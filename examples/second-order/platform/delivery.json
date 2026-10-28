@@ -1,0 +1,289 @@
+{
+  "schema": "hydrostar-native-second-order-delivery-1",
+  "status": "verified_with_component_limitations",
+  "files": [
+    {
+      "path": "inputs/platform2.hst",
+      "purpose": "Actual wet and exterior integration mesh; metres; symmetry=1",
+      "status": "executed_and_verified",
+      "sha256": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1"
+    },
+    {
+      "path": "inputs/platform2.mcn",
+      "purpose": "Fixed mass kg, CG metres, inertia and restoring/damping in native units",
+      "status": "executed_and_verified",
+      "sha256": "e750ffc2e1bd331dc370fd193973e469cae5d0c54e8766da4f9d4ad9a449b122"
+    },
+    {
+      "path": "inputs/platform2.rdf",
+      "purpose": "First-order and difference frequencies; rad/s; heading degrees; depth metres",
+      "status": "executed_and_verified",
+      "sha256": "0403fb1ee645d570a683a13b4fa40ce13737bafaf7aa01b61987b24281bac888"
+    },
+    {
+      "path": "inputs/drift.dft",
+      "purpose": "Mean drift, near-field and far-field formulations",
+      "status": "executed_and_verified",
+      "sha256": "9796a6562015f84efb0da150c77b73801db2c24e6a70c50c713b4c8d3b376b85"
+    },
+    {
+      "path": "inputs/full.qtf",
+      "purpose": "Full difference-frequency QTF; near-field; QUADPACK; NBES=30",
+      "status": "executed_and_verified",
+      "sha256": "d6dd5ca33711ddd2d390400aceb44581f17c390c69b8a25b1506e450e04df197"
+    },
+    {
+      "path": "inputs/results.rao",
+      "purpose": "Extraction instructions for six motions, drift and complex QTFs",
+      "status": "executed_and_verified",
+      "sha256": "ac3ca3e321dd8b17e979378d05ebb058e75f39b8018608410e38682d26c392c3"
+    },
+    {
+      "path": "rao/drift_fx_far.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "defad4467cac4f470a3896b2f733332258bd02a6ffbf86aea75f6ff7de57c02b"
+    },
+    {
+      "path": "rao/drift_fx_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "6e96c4808509d53de46e11829377d448d0782d4d98461ccc2b48adb0b58df8f5"
+    },
+    {
+      "path": "rao/drift_fy_far.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "a35223b5260944630be86f02c3d3311077a35e116706f6ae05bcd830e0b21f5d"
+    },
+    {
+      "path": "rao/drift_fy_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "76666a18f372435924347c3d18b2f47f28ddde027cf7accbbf96ae2a0c6b3bb6"
+    },
+    {
+      "path": "rao/drift_fz_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "ff705f844932aeaa6e865fc0413e2182d192b2056d604f7b716c2ee6b221199c"
+    },
+    {
+      "path": "rao/drift_mx_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "931e6fb0b5e7e9b67d17f40731559fb4f95951185ce4fd3cb85822efec60f8f8"
+    },
+    {
+      "path": "rao/drift_my_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "f55cad0e3276ced81f1dfe2c8f7116956db340e1dd2b573448b91b149f7cc6f4"
+    },
+    {
+      "path": "rao/drift_mz_far.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "0e2fdce3aaab3b816a898b6456861a72bbdda658202dc1800573eb72c52ca2d1"
+    },
+    {
+      "path": "rao/drift_mz_near.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "c4ddae40159adea5a8c45b96df5521e0f2bd2f243e0df4b2547a7f8c497cdaa5"
+    },
+    {
+      "path": "rao/heave.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "50f30612b39a94ebad734973b2e8248ca2d05ed1b7166aaf8cb68d2160e281de"
+    },
+    {
+      "path": "rao/pitch.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "4f47a090977df59d024313cf65e4267964d4c57a8cc6938f93e7fbb8b69ea59f"
+    },
+    {
+      "path": "rao/qtf_fx.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "bc270b6da0962f05fc83e88f0d84e3e5dd85522259a4242939b7fb602847432c"
+    },
+    {
+      "path": "rao/qtf_fy.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "98377e9cee3f03a7221103779d75d26bb1d087fd3a8155e0e75c4fba69f50514"
+    },
+    {
+      "path": "rao/qtf_fz.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "4dc9a6ba870820213dbfda5af902efdbd6da5feb62bbc94c5146ed04cb845c77"
+    },
+    {
+      "path": "rao/qtf_mx.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "2e076024915fc87a7b6b0fabacc0ee2a914798a739d1c270a5c7b4e3b2ca02ad"
+    },
+    {
+      "path": "rao/qtf_my.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "c036a19fffa1a34385301665d6ef036be8e30fe186b78b2850f66ec224bf5df1"
+    },
+    {
+      "path": "rao/qtf_mz.qtf",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "21dbdd6d569550281769c293abb8501bd537fe817dc0e5f37562fd7d2167be71"
+    },
+    {
+      "path": "rao/roll.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "4a332cdfc1bd43604cc9db2a482d6e5be84b664a85783d47dd90a760dd1616ae"
+    },
+    {
+      "path": "rao/surge.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "d6408fbd2879bf0a6ca22811f31c7ff0659eb6e1e4f6744c6bdd9d8d8a802dfa"
+    },
+    {
+      "path": "rao/sway.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "ba356db93e6be1733fe09cf02d125a46c5658eb9aba6aa21f015734fabcab6ff"
+    },
+    {
+      "path": "rao/yaw.rao",
+      "purpose": "Native complex load or motion output; see file heading and verification scope",
+      "status": "generated_and_verified",
+      "sha256": "890641719453584e1d7c50a355d0ee21665ace6548c597643ca4e281823750e8"
+    }
+  ],
+  "working_directory": "Copy inputs/* into a new working directory; native databases and rao/ are generated there",
+  "execution_order": [
+    {
+      "module": "hslec",
+      "arguments": [
+        "platform2.hst",
+        "platform2"
+      ],
+      "mpi_processes": 1,
+      "status": "verified"
+    },
+    {
+      "module": "hschk",
+      "arguments": [
+        "-",
+        "platform2"
+      ],
+      "mpi_processes": 1,
+      "status": "verified"
+    },
+    {
+      "module": "hsrdf",
+      "arguments": [
+        "platform2.rdf",
+        "platform2"
+      ],
+      "mpi_processes": 2,
+      "status": "verified"
+    },
+    {
+      "module": "hsmcn",
+      "arguments": [
+        "platform2.mcn",
+        "platform2"
+      ],
+      "mpi_processes": 1,
+      "status": "verified"
+    },
+    {
+      "module": "hsdft",
+      "arguments": [
+        "drift.dft",
+        "platform2"
+      ],
+      "mpi_processes": 2,
+      "status": "verified"
+    },
+    {
+      "module": "hsamg",
+      "arguments": [
+        "full.qtf",
+        "platform2"
+      ],
+      "mpi_processes": 2,
+      "status": "verified"
+    },
+    {
+      "module": "hsqtf",
+      "arguments": [
+        "full.qtf",
+        "platform2"
+      ],
+      "mpi_processes": 2,
+      "status": "verified"
+    },
+    {
+      "module": "hsrao",
+      "arguments": [
+        "results.rao",
+        "platform2"
+      ],
+      "mpi_processes": 1,
+      "status": "verified"
+    }
+  ],
+  "budget": {
+    "default_limit": 3000,
+    "full_equivalent_total": 2946,
+    "includes": [
+      "wet body",
+      "waterplane",
+      "exterior integration surface",
+      "symmetry expansion"
+    ]
+  },
+  "mesh_acceptance_limits": {
+    "minimum_quad_fraction": 0.8,
+    "min_corner_deg": 10,
+    "max_corner_deg": 170,
+    "max_edge_ratio": 8,
+    "max_neighbor_size_ratio": 2,
+    "max_overlap_m2": 1e-06,
+    "max_uncovered_or_extra_m2": 1e-06,
+    "waterline_conformity": "Every native wet waterline edge shares node IDs and a complete integration edge",
+    "internal_seams": 0,
+    "nonconvex": 0,
+    "integration_plane_z_m": 0
+  },
+  "units": {
+    "coordinates": "m",
+    "frequency": "rad/s",
+    "headings": "deg",
+    "force_qtf": "N/m^2",
+    "moment_qtf": "N m/m^2",
+    "translation_rao": "m/m",
+    "rotation_rao": "deg/m"
+  },
+  "complex_convention": "Native CPLXTYPE 0: real, imaginary; omega2=omega1+difference",
+  "spc": {
+    "status": "not_applicable",
+    "reason": "Regular-wave mean drift and difference-frequency loads; spectral statistics require a separate sea-state input"
+  },
+  "databases": {
+    "status": "regenerable_from_delivered_inputs",
+    "paths": [
+      "bin/",
+      "hdf/"
+    ],
+    "native_mesh_check": "geometry/native-surface-check.json"
+  },
+  "acceptance": "verification.json at the main package; yaw moment requires further own-scale convergence before engineering load use"
+}

@@ -1,0 +1,73 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSqtf - QTF of low-frequency wave loads.
+
+ ******* 64-bit version *******
+wavf :   0.5000  1.1000  0.0500
+diff :   0.0000  0.1000  0.0500
+FSINTEGRAL : YES (Free-surface Haskind integral enable)
+    the free-surface integral is calculated using the complex variables theory
+    nfmethod = complex integral with quadpack (nf2)
+    NB_INTER = 300
+    NB_CMPLX = 100
+    INF_CMPLX =    15.00000
+ NBES =           30
+ nbmod =            0
+ Use phi_zz
+ HomHull =  F
+ HomFs   =  F
+ Fd3out =  T
+ Fd3in  =  T
+Only  1= F
+Only  2= F
+Only  3= F
+Only  4= F
+Only  5= F
+Only  6= F
+Only  7= F
+Only  8= F
+Only  9= F
+ Fd3 =            2
+ Eps Seg=   1.000000000000000E-002
+ Near-field formulation is chosen.
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.80000     0.80000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.85000     0.85000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.90000     0.90000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.95000     0.95000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     1.00000     1.00000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     1.05000     1.05000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     1.10000     1.10000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.80000     0.85000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.85000     0.90000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.90000     0.95000
+ Truncation of free-surface  : Rt =    110.000000000201     
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.50000     0.50000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.55000     0.55000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.60000     0.60000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.65000     0.65000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.70000     0.70000
+DeltaOmega=     0.00000 Omega_1,Omega_2=     0.75000     0.75000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.50000     0.55000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.95000     1.00000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.55000     0.60000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.60000     0.65000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     1.00000     1.05000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.65000     0.70000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.70000     0.75000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     1.05000     1.10000
+DeltaOmega=     0.05000 Omega_1,Omega_2=     0.75000     0.80000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.80000     0.90000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.50000     0.60000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.55000     0.65000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.85000     0.95000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.60000     0.70000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.65000     0.75000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.90000     1.00000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.70000     0.80000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.95000     1.05000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     0.75000     0.85000
+DeltaOmega=     0.10000 Omega_1,Omega_2=     1.00000     1.10000
+merging the results
+Total clock time of operation was       11.46 s 

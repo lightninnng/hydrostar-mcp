@@ -111,6 +111,31 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 
 点击响应图打开矢量 PDF。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[原生曲线导出包](examples/visualization/curves)。
 
+## 二阶平均漂移与差频荷载
+
+半潜平台已完成 **HSdft → HSamg → HSqtf** 原生二阶计算，提供平均漂移荷载及包含自由面积分的完整差频 QTF。水深为 200 m，浪向为 60°，差频为 0、0.05、0.10 rad/s，共保留 **36 对有效波频、216 个复数荷载系数**。
+
+![半潜平台与规则环带外部积分网格](docs/assets/platform-second-order-mesh.png)
+
+外部水域采用 72 个等角分段与 9 层渐变四边形环带，近体分区按平台对称性对应。主网格为 **2946 个全体总面元**，计入湿面、水线面、外部自由面和对称展开；对照为 2898。湿面、质量、惯性、恢复与阻尼保持一致，两档均重新完成原生计算。
+
+[![半潜平台六分量二阶平均漂移荷载](docs/assets/platform-second-order-drift.png)](docs/assets/platform-second-order-drift.pdf)
+
+[![半潜平台完整差频 QTF 幅值](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
+
+力系数单位为 kN/m²，力矩系数为 kN m/m²；图中保留原生频率采样。QTF 对角项与平均漂移结果的最大归一差异为 0.032%，水平漂移力的近远场差异最高为 3.76%。两档外部积分离散的三个力分量复数差异最高为 0.41%，横摇和纵摇力矩最高为 0.083%。**艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量标为需继续收敛研究，完成验证后再用于工程荷载。** 当前比较固定湿面与外部域半径，目标工程用途还需相应的空间、外部域、频率与参考结果证据。
+
+<details>
+<summary>查看复数 QTF 与积分网格敏感性</summary>
+
+[![差频 0.10 rad/s 的 QTF 实部与虚部](docs/assets/platform-second-order-complex.png)](docs/assets/platform-second-order-complex.pdf)
+
+[![两档外部积分网格的差频荷载比较](docs/assets/platform-second-order-sensitivity.png)](docs/assets/platform-second-order-sensitivity.pdf)
+
+</details>
+
+[二阶分析方法与复算](docs/second-order.md)说明积分域、频率配对和验收范围。[原生二阶计算包](examples/second-order/platform)保存 HST、RDF、MCN、DFT、QTF、RAO、八阶段日志、复数输出与正式交付清单；本例的 SPC 谱统计输入为本次不适用。四种构型的前述动态图展示各自的一阶压力、波场与运动。
+
 ## 建模与原生文件交付
 
 面元布局沿结构特征布置。同轴柱体采用环带，船体采用站位带，多边形与贯通开口采用相容分块；四边形保留到原生求解文件，同时验收角度、翘曲、尺度过渡、CAD 体积与浮心、拓扑及自交。**常规新模型默认使用 3000 个全体等效总面元预算，包含湿面、水线面和对称展开。提高预算须按具体算例明确授权。** 已授权的密网格[研究参照](examples/geometry)保持既定配置。
@@ -180,14 +205,14 @@ python -m hydrostar_mcp.server
 
 ## 模型与验证
 
-采用单刚体、小运动、一阶频域模型；支持参数化箱体、曲面船体、分段船型、两类半潜和单体 HST 导入。半潜支持面元与 Morison 分工、显式质量组合、附加刚度与阻力线性化。当前执行姿态采用零静态外载平衡。
+采用单刚体、小运动、一阶频域模型；支持参数化箱体、曲面船体、分段船型、两类半潜和单体 HST 导入。半潜支持面元与 Morison 分工、显式质量组合、附加刚度与阻力线性化。当前执行姿态采用零静态外载平衡。二阶研究脚本另提供已验证的半潜平台原生差频流程，输入与分量验收见上述计算包。
 
 通用几何入口补充了曲线放样、布尔组合、贯通开口和 CAD 导入。单刚体假设适用于相应的船舶与浮体理想化；多体、柔性结构、实际系泊预张力和平衡、月池黏性耗散等按目标问题扩展并验证。
 
 曲面几何和响应峰谷来自所建模型与原生计算；一阶 RAO 表达该工况下的线性频率响应。目标海况的有限幅运动、砰击、甲板上浪、黏性分离及系泊动态耦合需要相应的扩展分析。
 
 ~~~powershell
-python -m pip install -e ".[dev,plot]"
+python -m pip install -e ".[dev,plot,geometry]"
 python -m pytest -q -m "not integration" --basetemp .pytest-tmp
 python scripts/check_release.py
 python scripts/check_local.py
@@ -203,6 +228,7 @@ python scripts/check_local.py
 - [环带、站位与分块面元方法](docs/panel-meshing.md)
 - [KCS / KVLCC2 / OC4 构型和资料来源](docs/reference-forms.md)
 - [公开计算结果与读图说明](docs/results.md)
+- [二阶差频计算与原生复算](docs/second-order.md)
 - [验证、复现与敏感性分析](docs/verification.md)
 - [架构与数据流](docs/architecture.md)
 

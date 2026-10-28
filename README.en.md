@@ -111,6 +111,31 @@ Phase is in degrees, wrapped to −180° through 180°. Discrete points retain t
 
 Click a response figure for its vector PDF. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [native curve exports](examples/visualization/curves).
 
+## Second-order mean drift and difference-frequency loads
+
+The semisubmersible has completed native **HSdft → HSamg → HSqtf** calculations, providing mean drift loads and full difference-frequency QTFs including the free-surface integral. Water depth is 200 m, heading is 60°, and difference frequencies are 0, 0.05 and 0.10 rad/s: **36 valid wave-frequency pairs and 216 complex load coefficients**.
+
+![Semisubmersible and structured annular integration mesh](docs/assets/platform-second-order-mesh.png)
+
+The exterior domain uses 72 equal angular divisions and nine graded quadrilateral annuli, with corresponding near-body sectors. The main mesh has **2946 full-equivalent total panels**, including wet surfaces, waterplane, exterior free surface and symmetry expansion; the comparison has 2898. Both native calculations retain the same wet mesh, mass, inertia, restoring and damping.
+
+[![Six-component second-order mean drift loads](docs/assets/platform-second-order-drift.png)](docs/assets/platform-second-order-drift.pdf)
+
+[![Full difference-frequency QTF magnitudes](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
+
+Force coefficients use kN/m² and moment coefficients use kN m/m². Figures retain the native frequency samples. QTF diagonal terms agree with mean drift within 0.032% of the corresponding peak; horizontal near/far-field drift differs by at most 3.76%. Across the two exterior meshes, complex force differences reach 0.41%, and roll/pitch moments reach 0.083%. **Yaw moment changes by 23.37% of its own peak, with a 128.85% near/far-field mean-drift difference. It remains a numerical research component requiring further convergence before engineering load use.** This comparison fixes the wet mesh and exterior radius; engineering use needs corresponding spatial, domain, frequency and reference-result evidence.
+
+<details>
+<summary>Inspect complex QTFs and integration-mesh sensitivity</summary>
+
+[![Real and imaginary QTF at difference frequency 0.10 rad/s](docs/assets/platform-second-order-complex.png)](docs/assets/platform-second-order-complex.pdf)
+
+[![Difference-frequency loads on the two exterior meshes](docs/assets/platform-second-order-sensitivity.png)](docs/assets/platform-second-order-sensitivity.pdf)
+
+</details>
+
+[Methods and replay](docs/second-order.md) describe the integration domain, frequency pairing and acceptance scope. The [native second-order package](examples/second-order/platform) includes HST, RDF, MCN, DFT, QTF and RAO inputs, eight execution logs, complex outputs and a delivery manifest. SPC spectral analysis is not applicable to this regular-wave study. The four configurations' animations above show their respective first-order pressure, waves and motion.
+
 ## Modelling and native delivery
 
 Panels follow structural features: axial rings for coaxial bodies, station bands for hulls, and conforming blocks for polygons and through openings. Quadrilaterals remain in the solved HST. Acceptance covers angles, warpage, size transitions, CAD volume and buoyancy centre, topology and intersections. **New models default to 3000 full-equivalent total panels, including wet and waterplane panels and symmetry expansion. Budget increases require explicit case-specific authorization.** Previously authorized dense [research references](examples/geometry) retain their configurations.
@@ -187,7 +212,7 @@ General geometry adds curved lofts, boolean combinations, through openings and C
 ## Reproduce and verify
 
 ~~~powershell
-python -m pip install -e ".[dev,plot]"
+python -m pip install -e ".[dev,plot,geometry]"
 python -m pytest -q -m "not integration" --basetemp .pytest-tmp
 python scripts/check_release.py
 python scripts/check_local.py
@@ -205,7 +230,7 @@ python scripts/build_gallery.py
 
 `wavefield_study.py --render` and `pressure_study.py --render` rebuild animations from published numerical data. Geometry and frequency sensitivity scripts are described in the verification guide. Their convergence conclusions apply to their own benchmark configurations.
 
-The detailed guides are currently written in Chinese: [quickstart](docs/quickstart.md), [modelling](docs/modeling-guide.md), [reference forms](docs/reference-forms.md), [surface pressure](docs/surface-pressure.md), [wave fields](docs/wavefields.md), [verification](docs/verification.md) and [architecture](docs/architecture.md).
+The detailed guides are currently written in Chinese: [quickstart](docs/quickstart.md), [modelling](docs/modeling-guide.md), [reference forms](docs/reference-forms.md), [surface pressure](docs/surface-pressure.md), [wave fields](docs/wavefields.md), [verification](docs/verification.md), [second-order loads](docs/second-order.md) and [architecture](docs/architecture.md).
 
 ## License and attribution
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Add real native mean-drift and full difference-frequency QTF results for the original semisubmersible, with 36 valid frequency pairs and explicit yaw convergence limits.
+- Replace the exterior integration domain with corresponding inner sectors and graded annular quadrilaterals; verify two native meshes within the 3000-panel total budget.
+- Deliver actual second-order inputs, complex outputs, logs, native mesh checks and reproducible scientific SVG/PDF/PNG figures.
+- Count exterior integration panels in execution budgets and reject missing-frequency native diagnostics, including zero-return-code cases.
+- Extend the scientific report and bilingual READMEs with the new mesh and load study, while retaining all four first-order response and dynamic-field chapters.
+- Record tested second-order, topology and vector-export procedures in the modelling skill.
+
 ## 0.6.0 - 2026-10-28
 
 - Add an original curved station hull with 2029 wetted and 844 waterplane panels, within the 3000-panel default budget, and a native 231-frequency, 13-heading response sweep.

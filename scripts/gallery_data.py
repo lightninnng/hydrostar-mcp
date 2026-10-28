@@ -252,7 +252,7 @@ def geometry_section():
             f'<tr><td><a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/geometry/{key}">{label}</a></td><td>{q["quadrilaterals"]:,} / {q["triangles"]}</td><td>{c["full_equivalent_total"]:,}</td><td>{100 * c["volume_relative_error"]:.3f}%</td></tr>'
         )
     return (
-        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">7. 其他构型与建模方法</h2>
+        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">8. 其他构型与建模方法</h2>
 <p>同轴柱体采用轴向环带与周向对应，船体采用站位与剖面网格带，多边形及贯通开口采用相容分块。四边形保留到实际求解文件，并同时检查形状、翘曲、尺度过渡、水线闭环、拓扑、自交以及 CAD 体积与浮心。</p>
 <p>下表保留已完成计算的几何研究参照。曲线船体和 Spar 的密网格沿用既定配置；前面的曲线船体展示采用新的 2873 个总面元方案。常规新模型按包含湿面、水线面和对称展开的 3000 个总面元预算规划，提高预算须按具体算例明确授权。</p>
 <div class="table-wrap"><table><thead><tr><th>研究参照构型</th><th>湿面四边形 / 三角形</th><th>全体总面元</th><th>CAD 体积差</th></tr></thead><tbody>"""
@@ -260,3 +260,70 @@ def geometry_section():
         + """</tbody></table></div>
 <p>型值表、曲线、DXF、CAD 和表面网格可沿统一流程进入湿表面建模。图像与 PDF 先完成尺寸标定和描线，再以独立尺寸点核对。资料接口及适用条件见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/geometry-sources.md">多来源建模说明</a>，结构分区与验收要求见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/panel-meshing.md">面元建模方法</a>。</p></section>"""
     )
+
+
+def second_order_section():
+    """Present the computed platform load study with component-level scope."""
+    record = read(ROOT / "examples/second-order/platform/verification.json")
+    surface = read(ROOT / "examples/second-order/platform/geometry/surface.json")
+    if record["status"] != "verified_with_component_limitations":
+        raise ValueError("Second-order acceptance scope required")
+    figures = []
+    for kind, letter, title, caption in (
+        (
+            "drift",
+            "b",
+            "二阶平均漂移荷载",
+            "近场六分量结果与可用的远场分量叠加比较。水平漂移力近远场差异最高为 3.76%；艏摇力矩的差异在下文单列。",
+        ),
+        (
+            "qtf",
+            "c",
+            "完整差频 QTF 幅值",
+            "展示差频为 0、0.05 和 0.10 rad/s 的六分量幅值。三条曲线采用共同有效区间 0.50–1.00 rad/s，完整数据保留全部有效配对。",
+        ),
+        (
+            "complex",
+            "d",
+            "差频荷载的实部与虚部",
+            "差频为 0.10 rad/s，实部与虚部共同保留原生复数荷载及其相位信息。",
+        ),
+        (
+            "sensitivity",
+            "e",
+            "外部积分网格敏感性",
+            "两档计算保持湿面、质量、重心、惯性、恢复、阻尼和外部域半径一致，改变近体自由面的积分离散。图示差频为 0.10 rad/s。",
+        ),
+    ):
+        figures.append(
+            f'<figure class="response-overview" data-second-order="{kind}"><h3>{title}</h3><a href="assets/platform-second-order-{kind}.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-{kind}.png" width="2400" height="1540" loading="lazy" decoding="async" alt="半潜平台，{title}，原生二阶计算"></a><figcaption>图 6{letter}。{caption}力系数单位为 kN/m²，力矩系数为 kN m/m²。点击图片查看矢量 PDF，也可查看<a href="assets/platform-second-order-{kind}.svg" target="_blank" rel="noopener">原生 SVG</a>。</figcaption></figure>'
+        )
+    rows = []
+    labels = dict(
+        fx="纵向力",
+        fy="横向力",
+        fz="垂向力",
+        mx="横摇力矩",
+        my="纵摇力矩",
+        mz="艏摇力矩",
+    )
+    for name, label in labels.items():
+        error = 100 * record["surface_sensitivity"][name]["relative_to_own_peak"]
+        accepted = record["component_acceptance"][name]
+        state = (
+            "通过本例 0.5% 敏感性门限"
+            if accepted == "passed_example_sensitivity_gate"
+            else "需继续收敛研究"
+        )
+        rows.append(
+            f'<tr><th scope="row">{label}</th><td>{error:.3f}%</td><td>{state}</td></tr>'
+        )
+    return f"""<section id="second-order" aria-labelledby="second-order-heading"><h2 id="second-order-heading">6. 半潜平台的二阶差频荷载</h2>
+<p>半潜平台进一步完成平均漂移与完整差频二阶势计算。采用近场表达式，包含内外自由面积分，外部积分使用 QUADPACK。水深为 200 m，浪向为 60°，波频为 0.50–1.10 rad/s，差频为 0、0.05、0.10 rad/s。原生计算覆盖 36 对有效波频，共 216 个复数荷载系数。</p>
+<figure class="mesh-plate"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格"></a><figcaption>图 6a。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。几何倍率为 1，坐标单位为 m。</figcaption></figure>
+<p>外部积分域已经检查完整覆盖、重叠、水线共边、内部接缝和面元形状，并从原生网格数据库独立核对实际使用的面元与向下法向。主网格外部自由面的内角范围为 {surface["panel_quality"]["min_corner_deg"]:.1f}°–{surface["panel_quality"]["max_corner_deg"]:.1f}°，最大边长比为 {surface["panel_quality"]["max_edge_ratio"]:.2f}。原有湿面和物理参数保持一致，一阶复响应与原算例在共同频率上逐项一致。</p>
+{figures[0]}{figures[1]}
+<details><summary>查看复数荷载及积分网格敏感性</summary>{figures[2]}{figures[3]}</details>
+<div class="table-wrap"><table><caption>两档外部积分网格的复数差异，以各分量自身峰值归一</caption><thead><tr><th scope="col">荷载分量</th><th scope="col">最大复数差异</th><th scope="col">本例验收范围</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+<p>QTF 对角项与平均漂移荷载的最大归一差异为 0.032%。三个力分量及横摇、纵摇力矩通过本例的外部积分网格敏感性门限。艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量保留作数值研究，完成进一步收敛验证后再用于工程荷载。当前比较固定湿面和外部域半径；目标工程用途需补充对应的空间、外部域、频率及参考结果证据。</p>
+<p class="data-links"><a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/second-order.md">方法与复算说明</a>介绍完整差频计算和有效配对；<a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/second-order/platform">原生二阶计算包</a>提供网格、物理参数、荷载输入、复数输出与八阶段日志。前面四种构型的动画展示各自的一阶压力、波面和运动。</p></section>"""

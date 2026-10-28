@@ -1,0 +1,11 @@
+{
+  "status": "verified",
+  "source_hst_sha256": "98cfdae3e7d395c3df331faa3c68f53fddbac0a95de128c20a80b7487101001f",
+  "native_database": "hdf/hslec_platform2.h5",
+  "native_database_sha256": "8f139ca27cff9ad6565382cb0b62d78a396c2675b2044be178d368b333768afa",
+  "half_domain_panels": 558,
+  "area_m2": 18796.28323091848,
+  "union_area_m2": 18796.283230918467,
+  "overlap_m2": 1.4551915228366852e-11,
+  "downward_normal_max_error": 0.0
+}

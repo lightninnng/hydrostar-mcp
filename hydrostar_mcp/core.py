@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 DEFAULT_ROOT = r"D:\Bureau Veritas\Hstar4Experts\v8.2.0"
 RECOMMENDED_MAX_PANELS = 3000
 MODULES = ("hsmsh", "hslec", "hschk", "hsrdf", "hsmcn", "hsrao", "mpiexec")
-POSTPROCESS_MODULES = ("hsprs", "hsprv")
+POSTPROCESS_MODULES = ("hsprs", "hsprv", "hsdft", "hsamg", "hsqtf", "hspg2")
 DOFS = ("surge", "sway", "heave", "roll", "pitch", "yaw")
 NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[EeDd][+-]?\d+)?"
 
@@ -107,6 +107,10 @@ def log_error(log):
         (
             "SOLVER_CONVERGENCE_FAILED",
             r"failed to converge|did not converge|not converged",
+        ),
+        (
+            "MISSING_FREQUENCY",
+            r"difference\s+frequen(?:cy|ce)\s+missing|wave\s+frequen(?:cy|ce)\s*\d*\s*=\s*[^\r\n]*cannot be found",
         ),
         (
             "INTERACTIVE_INPUT_REQUIRED",
@@ -760,6 +764,13 @@ def parse_hslec(log):
     for key, pattern in patterns.items():
         match = re.search(pattern + r"\s*(?:=|:)?\s*(\d+)", log, re.I)
         result[key] = int(match[1]) if match else None
+    exterior = re.findall(
+        r"Nb panels over the free surface\s*(?:=|:)?\s*(\d+)", log, re.I
+    )
+    if exterior and (len(exterior) != 1 or int(exterior[0]) > 0):
+        result["exterior_free_surface_panels"] = (
+            int(exterior[0]) if len(exterior) == 1 else None
+        )
     match = re.search(r"center of buoyancy x=\s*(" + NUMBER + ")", log, re.I)
     result["cb_x"] = number(match[1]) if match else None
     return result

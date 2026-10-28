@@ -1,0 +1,23 @@
+OUTPUTFOLDER rao
+GSURGE BODY 1 FILE surge.rao
+GSWAY BODY 1 FILE sway.rao
+GHEAVE BODY 1 FILE heave.rao
+GROLL BODY 1 FILE roll.rao
+GPITCH BODY 1 FILE pitch.rao
+GYAW BODY 1 FILE yaw.rao
+DRIFTFX BODY 1 FILE drift_fx_near.rao PRE COS
+DRIFTFY BODY 1 FILE drift_fy_near.rao PRE COS
+DRIFTFZ BODY 1 FILE drift_fz_near.rao PRE COS
+DRIFTMX BODY 1 FILE drift_mx_near.rao PRE COS
+DRIFTMY BODY 1 FILE drift_my_near.rao PRE COS
+DRIFTMZ BODY 1 FILE drift_mz_near.rao PRE COS
+DRIFTFX BODY 1 FILE drift_fx_far.rao MOM COS
+DRIFTFY BODY 1 FILE drift_fy_far.rao MOM COS
+DRIFTMZ BODY 1 FILE drift_mz_far.rao MOM COS
+QTFFX BODY 1 FILE qtf_fx.qtf
+QTFFY BODY 1 FILE qtf_fy.qtf
+QTFFZ BODY 1 FILE qtf_fz.qtf
+QTFMX BODY 1 FILE qtf_mx.qtf
+QTFMY BODY 1 FILE qtf_my.qtf
+QTFMZ BODY 1 FILE qtf_mz.qtf
+ENDFILE

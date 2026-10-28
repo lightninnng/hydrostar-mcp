@@ -1,0 +1,29 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSrao - RAOs constructions.
+
+GSURGE FILE surge.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+GSWAY FILE sway.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+GHEAVE FILE heave.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+GROLL FILE roll.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+GPITCH FILE pitch.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+GYAW FILE yaw.rao BODY 1 COORD   0.0000  0.0000 -9.9588
+DRIFTFX FILE drift_fx_near.rao BODY 1
+DRIFTFY FILE drift_fy_near.rao BODY 1
+DRIFTFZ FILE drift_fz_near.rao BODY 1
+DRIFTMX FILE drift_mx_near.rao BODY 1
+DRIFTMY FILE drift_my_near.rao BODY 1
+DRIFTMZ FILE drift_mz_near.rao BODY 1
+DRIFTFX FILE drift_fx_far.rao BODY 1
+DRIFTFY FILE drift_fy_far.rao BODY 1
+DRIFTMZ FILE drift_mz_far.rao BODY 1
+QTFFX FILE qtf_fx.qtf BODY 1
+QTFFY FILE qtf_fy.qtf BODY 1
+QTFFZ FILE qtf_fz.qtf BODY 1
+QTFMX FILE qtf_mx.qtf BODY 1
+QTFMY FILE qtf_my.qtf BODY 1
+QTFMZ FILE qtf_mz.qtf BODY 1
+ 
+Total clock time of operation was        0.06 s 

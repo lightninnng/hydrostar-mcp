@@ -1,0 +1,77 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSrdf - Radiation and diffraction computations.
+
+ ******* 64-bit version *******
+
+Project: platform2
+User   : PARAMETRIC_GENERATOR
+Nb of bodies to be analysed          1
+Nb panels on hulls                 828
+Nb geometric symmetry                1
+Nb segments along waterlines        48
+Nb panels over waterplanes          63
+Nb panels over the free surface    582
+
+Reference length                     1.000000
+Gravity acceleration                 9.810000
+Reference point of incident wave (   0.000000,   0.000000)
+
+Body 1: reference point x=    0.000000 center of buoyancy x=    0.000000
+                        y=    0.000000                    y=    0.000000
+                        z=  -13.153467                    z=  -13.153467
+
+Option - Elimination of irr. freq. : Yes
+Name of output files  :             platform2.rd1
+
+Method = Sources
+Linear system solved by LU decomposition 
+Calculation in open sea
+ INFINITE FREQUENCY = YES
+ Singularity method = SOURCE
+                 Water depth is  200.000 m ( 200.000)
+ 31 frequencies from   0.050 to    1.100
+  1 headings    from  60.000 to   60.000
+  1 speeds      from   0.000 to    0.000
+------------------------------------------------------------------
+processor   1 on LAPTOP-U6SC4LCC deals with frequencies from   1 to  16
+processor   0 on LAPTOP-U6SC4LCC deals with frequencies from   1 to  15
+             Wave frequency                    Comp-Time Rest-Time    Proc
+    1st/  16 Wave frequency =   0.725 r/s              -         -
+    1st/  15 Wave frequency =   0.050 r/s              -         -
+    2nd/  16 Wave frequency =   0.750 r/s              1        23     1
+    2nd/  15 Wave frequency =   0.100 r/s              1        21     0
+    3rd/  16 Wave frequency =   0.775 r/s              3        21     1
+    3rd/  15 Wave frequency =   0.400 r/s              3        20     0
+    4th/  16 Wave frequency =   0.800 r/s              4        20     1
+    4th/  15 Wave frequency =   0.425 r/s              4        18     0
+    5th/  15 Wave frequency =   0.450 r/s              6        17     0
+    5th/  16 Wave frequency =   0.825 r/s              6        19     1
+    6th/  15 Wave frequency =   0.475 r/s              7        16     0
+    6th/  16 Wave frequency =   0.850 r/s              7        17     1
+    7th/  15 Wave frequency =   0.500 r/s              9        13     0
+    7th/  16 Wave frequency =   0.875 r/s              9        15     1
+    8th/  15 Wave frequency =   0.525 r/s             10        12     0
+    8th/  16 Wave frequency =   0.900 r/s             10        13     1
+    9th/  15 Wave frequency =   0.550 r/s             12        10     0
+    9th/  16 Wave frequency =   0.925 r/s             12        12     1
+   10th/  15 Wave frequency =   0.575 r/s             13         8     0
+   10th/  16 Wave frequency =   0.950 r/s             14        10     1
+   11th/  15 Wave frequency =   0.600 r/s             15         7     0
+   11th/  16 Wave frequency =   0.975 r/s             15         9     1
+   12th/  15 Wave frequency =   0.625 r/s             16         5     0
+   12th/  16 Wave frequency =   1.000 r/s             16         7     1
+   13th/  16 Wave frequency =   1.025 r/s             18         4     1
+   13th/  15 Wave frequency =   0.650 r/s             18         3     0
+   14th/  16 Wave frequency =   1.050 r/s             19         3     1
+   14th/  15 Wave frequency =   0.675 r/s             19         2     0
+   15th/  16 Wave frequency =   1.075 r/s             20         2     1
+   15th/  15 Wave frequency =   0.700 r/s             20         1     0
+   16th/  16 Wave frequency =   1.100 r/s             21         1     1
+ INFFREQ
+   Gathering data ...         Deleting temporary binary and log files ...       Ok
+ Writing integrated results to HDF format...
+ Writing integrated results to ASCII format...
+Total clock time of operation was       25.89 s 

@@ -1,0 +1,22 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSchk - Checking input data.
+
+ It may take a few minutes ...
+    ... Consistence   checking finished.
+    ... Superposition checking finished.
+    ... Neighborhood  checking finished.
+
+ In total: nb of zero-area panels         =    0
+           nb of panels over free surface =    0
+           nb of panels at free surface   =    0
+           nb of superpositions           =    0
+           nb of inconsistences           =    0
+           nb of neighbor-absences        =    0
+           nb of symmetry problem         =    0
+ 
+ Congratulations! Felicitations! Parabens!
+Write visualisation files...  Done
+Total clock time of operation was        0.28 s 

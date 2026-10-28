@@ -1,0 +1,44 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSdft - Second-order drift load computations.
+
+ Haskind function based on the source distribution   is used.
+ Near-field formulation by Chen (2004)               is used.
+ Far-field formulation by Maruo-Newman (1960-1967)   is used.
+ Middle-field formulation                            is NOT used.
+  1/ 15 Frequency=   0.0500(rad/s)    1 Headings |      0.09s remaining.
+  1/ 16 Frequency=   0.7250(rad/s)    1 Headings |      0.11s remaining.
+  2/ 16 Frequency=   0.7500(rad/s)    1 Headings |      6.52s remaining.
+  2/ 15 Frequency=   0.1000(rad/s)    1 Headings |      6.34s remaining.
+  3/ 16 Frequency=   0.7750(rad/s)    1 Headings |      6.05s remaining.
+  3/ 15 Frequency=   0.4000(rad/s)    1 Headings |      5.82s remaining.
+  4/ 16 Frequency=   0.8000(rad/s)    1 Headings |      5.58s remaining.
+  4/ 15 Frequency=   0.4250(rad/s)    1 Headings |      5.32s remaining.
+  5/ 16 Frequency=   0.8250(rad/s)    1 Headings |      5.32s remaining.
+  5/ 15 Frequency=   0.4500(rad/s)    1 Headings |      4.93s remaining.
+  6/ 16 Frequency=   0.8500(rad/s)    1 Headings |      4.58s remaining.
+  6/ 15 Frequency=   0.4750(rad/s)    1 Headings |      4.33s remaining.
+  7/ 16 Frequency=   0.8750(rad/s)    1 Headings |      4.30s remaining.
+  7/ 15 Frequency=   0.5000(rad/s)    1 Headings |      3.92s remaining.
+  8/ 16 Frequency=   0.9000(rad/s)    1 Headings |      3.88s remaining.
+  8/ 15 Frequency=   0.5250(rad/s)    1 Headings |      3.59s remaining.
+  9/ 16 Frequency=   0.9250(rad/s)    1 Headings |      3.47s remaining.
+  9/ 15 Frequency=   0.5500(rad/s)    1 Headings |      3.11s remaining.
+ 10/ 16 Frequency=   0.9500(rad/s)    1 Headings |      2.88s remaining.
+ 10/ 15 Frequency=   0.5750(rad/s)    1 Headings |      2.62s remaining.
+ 11/ 16 Frequency=   0.9750(rad/s)    1 Headings |      2.47s remaining.
+ 11/ 15 Frequency=   0.6000(rad/s)    1 Headings |      2.09s remaining.
+ 12/ 16 Frequency=   1.0000(rad/s)    1 Headings |      2.04s remaining.
+ 12/ 15 Frequency=   0.6250(rad/s)    1 Headings |      1.68s remaining.
+ 13/ 16 Frequency=   1.0250(rad/s)    1 Headings |      1.64s remaining.
+ 13/ 15 Frequency=   0.6500(rad/s)    1 Headings |      1.26s remaining.
+ 14/ 16 Frequency=   1.0500(rad/s)    1 Headings |      1.69s remaining.
+ 14/ 15 Frequency=   0.6750(rad/s)    1 Headings |      1.07s remaining.
+ 15/ 16 Frequency=   1.0750(rad/s)    1 Headings |      1.36s remaining.
+ 15/ 15 Frequency=   0.7000(rad/s)    1 Headings |      0.62s remaining.
+ 16/ 16 Frequency=   1.1000(rad/s)    1 Headings |      0.70s remaining.
+ Merge f2_ file
+ Merge decomposed drifts
+Total clock time of operation was        9.88 s 

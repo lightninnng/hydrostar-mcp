@@ -1,0 +1,29 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSlec - Reading geometrical data.
+
+INPUT FILE : platform2.hst
+PROJECT NAME : platform2
+PROJECT : platform2                                                                       
+USER    : PARAMETRIC_GENERATOR                                                            
+
+
+Nb of bodies to be analysed            1
+Nb symmetry of hull geometry           1
+Nb panels on hulls                   828
+Nb segments along waterlines          48
+Nb panels on the waterplanes          63
+Nb panels over the free surface      582
+Nb hull panels over the waterline      0
+Nb thin plates panels                  0
+
+Reference length                     1.000000
+Gravity acceleration                 9.810000
+Reference point of incident wave (   0.000000,   0.000000)
+Body 1: reference point x=    0.000000 center of buoyancy x=    0.000000
+                        y=    0.000000                    y=    0.000000
+                        z=  -13.153467                    z=  -13.153467
+
+Total clock time of operation was        0.09 s 

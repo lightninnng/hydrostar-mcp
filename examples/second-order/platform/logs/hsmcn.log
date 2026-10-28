@@ -1,0 +1,51 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSmcn - Mechanical computations.
+
+
+Project: platform2
+User   : PARAMETRIC_GENERATOR
+Reference length                1.000000
+Gravity acceleration            9.810000
+Water mass density           1025.000000
+
+Ref. point of incident wave (   0.000000,   0.000000)
+Body 1: Reference point is  (   0.000000,   0.000000,  -9.958757)
+        Centre of gravity   (   0.000000,   0.000000,  -9.958757)
+        Centre of buoyance  (   0.000000,  -0.000000, -13.174633)
+        GMxx  , GMyy        (   7.229444,   7.229444)
+Wave_Freq :  0.0500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.1000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.4000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.4250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.4500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.4750  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.5000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.5250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.5500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.5750  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.6000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.6250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.6500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.6750  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.7000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.7250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.7500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.7750  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.8000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.8250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.8500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.8750  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.9000  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.9250  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.9500  1 Headings from   60.00 to  60.00
+Wave_Freq :  0.9750  1 Headings from   60.00 to  60.00
+Wave_Freq :  1.0000  1 Headings from   60.00 to  60.00
+Wave_Freq :  1.0250  1 Headings from   60.00 to  60.00
+Wave_Freq :  1.0500  1 Headings from   60.00 to  60.00
+Wave_Freq :  1.0750  1 Headings from   60.00 to  60.00
+Wave_Freq :  1.1000  1 Headings from   60.00 to  60.00
+Wave_Freq :999.0000  1 Headings from   60.00 to  60.00
+Total clock time of operation was        2.31 s 

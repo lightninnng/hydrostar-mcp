@@ -70,3 +70,7 @@ python scripts/peak_study.py
 按[原生文件交付规范](native-delivery.md)核对实际网格、工况、荷载/参数及输出。文件清单保留用途、执行顺序、状态与哈希；采用 StarSpec 的任务还保存实际 .spc 及对应谱统计记录。
 
 [返回 README](../README.md) · [公开结果](results.md)
+
+## 二阶差频交付检查
+
+`python scripts/check_second_order.py` 从正式原生输入和复数输出复核两档环带外域、区域覆盖与形状、36 对有效波频、216 个复数荷载系数、QTF 对角项、近远场结果、积分离散敏感性、媒体和来源。该检查已并入发布门禁。艏摇力矩按自身尺度记录需继续收敛，当前通过状态针对所列主要分量；[二阶研究说明](second-order.md)给出具体范围及原生复算方法。

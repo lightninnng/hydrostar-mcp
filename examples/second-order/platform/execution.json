@@ -1,0 +1,224 @@
+{
+  "project": "platform2",
+  "source_project": "oc4_style",
+  "source_wet_mesh_sha256": "6348f8d37874476c31488692da55cdce9ceb5f95cd6f53cdb138d4fae66ae0e8",
+  "input_hashes": {
+    "platform2.hst": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1",
+    "platform2.mcn": "e750ffc2e1bd331dc370fd193973e469cae5d0c54e8766da4f9d4ad9a449b122",
+    "platform2.rdf": "0403fb1ee645d570a683a13b4fa40ce13737bafaf7aa01b61987b24281bac888",
+    "drift.dft": "9796a6562015f84efb0da150c77b73801db2c24e6a70c50c713b4c8d3b376b85",
+    "full.qtf": "d6dd5ca33711ddd2d390400aceb44581f17c390c69b8a25b1506e450e04df197",
+    "results.rao": "ac3ca3e321dd8b17e979378d05ebb058e75f39b8018608410e38682d26c392c3"
+  },
+  "free_surface": {
+    "method": "Nine structured annular bands, 72 equal angular divisions; conforming 60-degree inner sector repeated by reflection and rotation",
+    "generator": "Gmsh 4.15.2",
+    "outer_radius_m": 110,
+    "half_domain_panels": 582,
+    "quadrilaterals": 570,
+    "triangles": 12,
+    "quad_fraction": 0.979381443298969,
+    "expected_half_area_m2": 18796.283230944475,
+    "overlap_m2": 7.275957614183426e-12,
+    "uncovered_or_extra_m2": 2.844896223554668e-12,
+    "outer_mesh_size_m": 6.5,
+    "waterline_mesh_size_m": 2.5,
+    "source_hst_sha256": "6348f8d37874476c31488692da55cdce9ceb5f95cd6f53cdb138d4fae66ae0e8",
+    "output_hst_sha256": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1",
+    "generator_script_sha256": "add6c9750619070ba6d8c092de16a97d461847740afcab5e2ceb56802132b2f3",
+    "full_equivalent_total_including_exterior": 2946,
+    "panel_quality": {
+      "min_corner_deg": 32.52526161297031,
+      "max_corner_deg": 166.381099209437,
+      "max_edge_ratio": 3.2703093338310945,
+      "max_neighbor_size_ratio": 1.980000127701474,
+      "nonconvex": 0
+    },
+    "shared_native_waterline_edges": 48,
+    "interior_seams": 0,
+    "triangle_transition_repairs": [],
+    "interior_relaxation": {
+      "method": "Sector quality checked before symmetry replication"
+    },
+    "quality_utility_sha256": "3618800c3d251b95fde6dc4e6da5e7615345e6dc75895029cc1644b84cb25176",
+    "angular_divisions_full": 72,
+    "annular_radii_m": [
+      50.0,
+      55.0,
+      60.416666666666664,
+      66.25,
+      72.5,
+      79.16666666666667,
+      86.25,
+      93.75,
+      101.66666666666667,
+      110.0
+    ],
+    "structured_annular_quadrilaterals_full": 648,
+    "fundamental_inner_panels": 86,
+    "fundamental_repairs": [
+      {
+        "triangle": 4,
+        "quadrilateral": 85,
+        "method": "Conforming tri/quad diagonal reselection; boundary vertices unchanged"
+      }
+    ],
+    "fundamental_relaxation": {
+      "iterations": 2,
+      "moved_vertices": 5,
+      "local_optimization": "Bounded interior-node L-BFGS-B; physical boundaries fixed",
+      "optimization_success": true,
+      "boundaries": "Every physical outer, symmetry and waterline boundary fixed"
+    },
+    "sector_degrees": 60
+  },
+  "method": "Full difference-frequency QTF, near-field, including the free-surface Haskind integral with QUADPACK and NBES=30",
+  "steps": [
+    {
+      "name": "mesh",
+      "module": "hslec",
+      "input": "platform2.hst",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.2649999999994179,
+      "error_code": null
+    },
+    {
+      "name": "topology",
+      "module": "hschk",
+      "input": "-",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.43800000000192085,
+      "error_code": null
+    },
+    {
+      "name": "first-order",
+      "module": "hsrdf",
+      "input": "platform2.rdf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 26.81199999999808,
+      "error_code": null
+    },
+    {
+      "name": "mechanics",
+      "module": "hsmcn",
+      "input": "platform2.mcn",
+      "ok": true,
+      "rc": 0,
+      "seconds": 2.5,
+      "error_code": null
+    },
+    {
+      "name": "mean-drift",
+      "module": "hsdft",
+      "input": "drift.dft",
+      "ok": true,
+      "rc": 0,
+      "seconds": 10.85899999999674,
+      "error_code": null
+    },
+    {
+      "name": "second-order-potential",
+      "module": "hsamg",
+      "input": "full.qtf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 15.625,
+      "error_code": null
+    },
+    {
+      "name": "full-qtf",
+      "module": "hsqtf",
+      "input": "full.qtf",
+      "ok": true,
+      "rc": 0,
+      "seconds": 12.43800000000192,
+      "error_code": null
+    },
+    {
+      "name": "extraction",
+      "module": "hsrao",
+      "input": "results.rao",
+      "ok": true,
+      "rc": 0,
+      "seconds": 0.2809999999954016,
+      "error_code": null
+    }
+  ],
+  "status": "computed",
+  "mesh": {
+    "bodies": 1,
+    "symmetry": 1,
+    "hull_panels": 828,
+    "waterline_segments": 48,
+    "waterplane_panels": 63,
+    "above_waterline": 0,
+    "exterior_free_surface_panels": 582,
+    "cb_x": 0.0,
+    "full_equivalent_total_including_exterior": 2946
+  },
+  "topology": {
+    "zero_area": 0,
+    "over_free_surface": 0,
+    "at_free_surface": 0,
+    "superposition": 0,
+    "inconsistence": 0,
+    "neighbor_absence": 0,
+    "symmetry_problem": 0,
+    "pass": true
+  },
+  "mechanics": {
+    "balanced": true,
+    "relative_error_pct": null,
+    "gm_roll_pitch_m": [
+      7.229444,
+      7.229444
+    ]
+  },
+  "result_files": {
+    "drift_fx_far.rao": "defad4467cac4f470a3896b2f733332258bd02a6ffbf86aea75f6ff7de57c02b",
+    "drift_fx_near.rao": "6e96c4808509d53de46e11829377d448d0782d4d98461ccc2b48adb0b58df8f5",
+    "drift_fy_far.rao": "a35223b5260944630be86f02c3d3311077a35e116706f6ae05bcd830e0b21f5d",
+    "drift_fy_near.rao": "76666a18f372435924347c3d18b2f47f28ddde027cf7accbbf96ae2a0c6b3bb6",
+    "drift_fz_near.rao": "ff705f844932aeaa6e865fc0413e2182d192b2056d604f7b716c2ee6b221199c",
+    "drift_mx_near.rao": "931e6fb0b5e7e9b67d17f40731559fb4f95951185ce4fd3cb85822efec60f8f8",
+    "drift_my_near.rao": "f55cad0e3276ced81f1dfe2c8f7116956db340e1dd2b573448b91b149f7cc6f4",
+    "drift_mz_far.rao": "0e2fdce3aaab3b816a898b6456861a72bbdda658202dc1800573eb72c52ca2d1",
+    "drift_mz_near.rao": "c4ddae40159adea5a8c45b96df5521e0f2bd2f243e0df4b2547a7f8c497cdaa5",
+    "heave.rao": "50f30612b39a94ebad734973b2e8248ca2d05ed1b7166aaf8cb68d2160e281de",
+    "pitch.rao": "4f47a090977df59d024313cf65e4267964d4c57a8cc6938f93e7fbb8b69ea59f",
+    "qtf_fx.qtf": "bc270b6da0962f05fc83e88f0d84e3e5dd85522259a4242939b7fb602847432c",
+    "qtf_fy.qtf": "98377e9cee3f03a7221103779d75d26bb1d087fd3a8155e0e75c4fba69f50514",
+    "qtf_fz.qtf": "4dc9a6ba870820213dbfda5af902efdbd6da5feb62bbc94c5146ed04cb845c77",
+    "qtf_mx.qtf": "2e076024915fc87a7b6b0fabacc0ee2a914798a739d1c270a5c7b4e3b2ca02ad",
+    "qtf_my.qtf": "c036a19fffa1a34385301665d6ef036be8e30fe186b78b2850f66ec224bf5df1",
+    "qtf_mz.qtf": "21dbdd6d569550281769c293abb8501bd537fe817dc0e5f37562fd7d2167be71",
+    "roll.rao": "4a332cdfc1bd43604cc9db2a482d6e5be84b664a85783d47dd90a760dd1616ae",
+    "surge.rao": "d6408fbd2879bf0a6ca22811f31c7ff0659eb6e1e4f6744c6bdd9d8d8a802dfa",
+    "sway.rao": "ba356db93e6be1733fe09cf02d125a46c5658eb9aba6aa21f015734fabcab6ff",
+    "yaw.rao": "890641719453584e1d7c50a355d0ee21665ace6548c597643ca4e281823750e8"
+  },
+  "first_order_complex_error": {
+    "surge": 0.0,
+    "sway": 0.0,
+    "heave": 0.0,
+    "roll": 0.0,
+    "pitch": 0.0,
+    "yaw": 0.0
+  },
+  "qtf_diagonal_mean_drift_error": {
+    "fx": 6.391614202166757e-05,
+    "fy": 3.68887987162698e-05,
+    "fz": 0.0002803476310625175,
+    "mx": 0.00031235358425737937,
+    "my": 0.00029233190915223744,
+    "mz": 2.540799374572095e-05
+  },
+  "near_far_mean_drift_error": {
+    "fx": 0.03730552797087057,
+    "fy": 0.037577170817485045,
+    "mz": 1.2885427943951253
+  }
+}

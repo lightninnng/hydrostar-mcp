@@ -24,6 +24,7 @@ dependencies = ["mcp>=1.28,<2", "pydantic>=2.11,<3"]
 test = ["pytest>=8,<9"]
 plot = ["matplotlib>=3.8,<4", "numpy>=1.24,<3", "Pillow>=10,<13"]
 geometry = ["gmsh>=4.15,<5", "ezdxf>=1.4,<2", "meshio>=5.3,<6", "shapely>=2,<3", "scipy>=1.11,<2", "matplotlib>=3.8,<4", "Pillow>=10,<13", "pypdfium2>=4.30,<6"]
+native-export = ["h5py>=3.10,<4", "reportlab>=4.2,<6", "svglib>=1.5,<3", "pypdfium2>=4.30,<6"]
 dev = ["pytest>=8,<9", "ruff>=0.11,<1", "build>=1.2,<2"]
 
 [project.urls]

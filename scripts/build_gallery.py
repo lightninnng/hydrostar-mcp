@@ -13,6 +13,7 @@ from scripts.gallery_data import (
     overview_table,
     presentation_data,
     result_sections,
+    second_order_section,
 )
 
 
@@ -34,6 +35,7 @@ def main():
         .replace("__VERSION__", __version__)
         .replace("__GEOMETRY_STUDY__", geometry_section())
         .replace("__RESULT_SECTIONS__", result_sections(dataset))
+        .replace("__SECOND_ORDER_SECTION__", second_order_section())
         .replace("__OVERVIEW_ROWS__", overview_table(dataset))
         .replace("__ACCEPTANCE_ROWS__", acceptance_table(dataset))
     )

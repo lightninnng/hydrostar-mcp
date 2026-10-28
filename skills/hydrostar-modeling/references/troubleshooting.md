@@ -60,6 +60,25 @@ ParaView 6.2.0 的多视口高清截图默认按放大比例缩放文字。本�
 
 修复后已通过 `pvpython --force-offscreen-rendering` 读取 HSprv 的 wave.pvd，并以 ParaView SaveScreenshot 实际导出 PNG。保留环境版本清单、最小读取/导出日志和图片，再进入批量任务。PE 检查大体积 VTK 库时，注意分析工具可能默认截断导出符号表；应核对其警告和符号上限，避免把分析器截断误判为真实缺失。
 
+
+## 二阶频率覆盖与返回码
+
+HydroStar 8.2.0beta 的 HSamg/HSqtf 在缺少差频时曾报告 `Difference frequency missing` 并终止；当配对的一阶波频缺失时，可输出 `Wave frequence 2=... cannot be found.` 并返回 0，结果文件部分填零。修复时将差频和两侧波频共同加入 RDF，核对 HSamg/HSqtf 频率范围。执行器将这两类日志识别为 MISSING_FREQUENCY；另以原生计算日志核对每个有效配对，排除未求解的边界填零。
+
+## hschk 参数与外部自由面
+
+本机 8.2.0beta 的标准湿面检查采用 `hschk - 项目名`。将 .hst 作为控制面文件参数传入时，曾在七项湿面计数全为零之后进入错误的控制面读取路径并发生 Fortran access violation。按正确参数在同一正式 HST 上重新执行，返回正常且七项计数完整为零后通过；保留原失败日志。
+
+同版本的多水线半潜在 AUTOMATIC_SURF 加 RING 的外域生成中，曾产生约 3483.61 m² 的半域面元重叠，湿面 hschk 七项计数仍为零。该结果用于诊断，验收采用独立覆盖与重叠检查。修复为按实际水线共边的显式外域，并在 HSLEC 的 PROPZERO 顶点、面积、法向中复核。圆形外域进一步采用规则环带与对称基本分区；修复后原生计算重新运行，记录新网格和结果来源。
+
+## Gnuplot Cairo 多面板图的裁切
+
+本机 Gnuplot 5.2 patchlevel 8 的 Cairo 多面板导出曾出现面板标题、横轴文字或刻度被裁切，进程仍正常返回。显式筛选显示频段、端点外预留空白和独立终端进程改善了部分输出，PDF 复验仍发现裁切。因此本次采用 Gnuplot 原生 SVG 导出，随后通过 Svglib/ReportLab 转为矢量 PDF，并用 PDFium 生成 PNG，原生 SVG 与转换版本、哈希一起保存。数据文件保持原样，绘图筛选仅控制显示范围。
+
+SVG 转换器对增强文本的相对 tspan 位移和 Symbol 字体曾出现布局与字形差异。本次使用 noenhanced 终端、单一文本标签与已检查的字形，横轴使用 ω1，单位使用 m²，并实际查看原生 SVG、PDF 渲染及 PNG。选择能稳定转换的标记后再完成图形验收，文字存在于 PDF 提取结果并不能证明最终图上完整可见。
+
+ParaView 6.2.0 的 Wireframe 表示在本次 TrivialProducer 无标量网格上需要同时设置 AmbientColor；只设置 DiffuseColor 时曾出现白底上网格不可见。修复后按实际 HST 连接关系核对环带、局部过渡和法向，并检查最终导出图。
+
 ## 新经验的记录方式
 
 ParaView 的 TrivialProducer 直接替换客户端输出后，需要同时使服务器管理代理失效并更新管线。本项目曾出现 PNG 文件字节及时间文字变化、各场量视口像素却保持不变的情况；使用客户端 Modified、代理 `SMProxy.MarkModified(SMProxy)` 和 UpdatePipeline 后，五种场量均随相位更新。复验逐视图的 RGB 像素变化，并在最终 GIF 中排除标题和时间文字区域再次检查；PNG 文件哈希不同本身不能证明动图场量正在变化。

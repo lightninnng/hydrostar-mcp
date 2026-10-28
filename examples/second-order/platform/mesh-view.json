@@ -1,0 +1,16 @@
+{
+  "renderer": "ParaView",
+  "source": "examples/second-order/platform/inputs/platform2.hst",
+  "source_sha256": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1",
+  "wet_panels": 1656,
+  "exterior_panels": 1164,
+  "native_exterior_quadrilaterals": 1140,
+  "native_exterior_triangles": 24,
+  "method": "Actual native HST panel connectivity, symmetry expanded; global oblique view and local plan view",
+  "geometry_gain": 1,
+  "script_sha256": "8cc11acfa59a1defcbc1f4bffc3556cda87dfa49f0310686c638d3c367511f72",
+  "output": "docs/assets/platform-second-order-mesh.png",
+  "output_sha256": "5429aa856c24b6a548fd58f939fef7dad8ab8970242476dc8f3fe8caad30c90c",
+  "visual_review": "verified",
+  "review_notes": "Actual native connectivity visible; regular outer annuli, compatible near-body transitions, complete titles, units and geometry gain"
+}

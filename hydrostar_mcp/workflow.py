@@ -808,6 +808,22 @@ class CaseService:
                 return report
             measured = core.parse_hslec(r.log)
             report["hslec"] = measured
+            has_exterior = bool(
+                re.search(
+                    r"(?mi)^\s*(?:NFREESURFACE|AUTOMATIC_SURF)\b",
+                    target.read_text(encoding="utf-8-sig"),
+                )
+            )
+            if (has_exterior and not measured.get("exterior_free_surface_panels")) or (
+                "exterior_free_surface_panels" in measured
+                and measured["exterior_free_surface_panels"] is None
+            ):
+                return self._fail(
+                    directory,
+                    report,
+                    "INCOMPLETE_MESH_REPORT",
+                    "外部自由面须有完整的 hslec 面元统计，并计入全体总面元预算",
+                )
             if any(
                 measured[k] is None
                 for k in ("bodies", "symmetry", "hull_panels", "waterplane_panels")
@@ -843,7 +859,9 @@ class CaseService:
                 "semantic checks, independent geometry integration and hslec/hschk passed; solver not yet run"
             )
             effective = (
-                measured["hull_panels"] + measured["waterplane_panels"]
+                measured["hull_panels"]
+                + measured["waterplane_panels"]
+                + measured.get("exterior_free_surface_panels", 0)
             ) * 2 ** hyd["sym"]
             warnings = self._warnings(
                 cfg, hyd["max_edge"], effective, hyd["max_aspect_ratio"]

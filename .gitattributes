@@ -21,3 +21,5 @@ examples/visualization/** -text -whitespace
 docs/assets/*.svg -text -whitespace
 *.zip binary
 *.gz binary
+
+examples/second-order/** -text -whitespace

@@ -85,6 +85,9 @@ def check_files(files):
         ".prv",
         ".gp",
         ".svg",
+        ".qtf",
+        ".dft",
+        ".log",
     }
     for name in files:
         path = ROOT / name
@@ -163,19 +166,41 @@ def check_gallery_media():
     document = Media()
     document.feed((ROOT / "docs/index.html").read_text(encoding="utf-8"))
     cases = {"vessel", "platform", "container", "tanker"}
-    require(set(document.cases) == cases and len(document.cases) == 4, "Four visible result chapters required")
-    previews = {item["preview"].removeprefix("docs/") for item in read_json(ROOT / "examples/visualization/readme-media.json")["media"]}
+    require(
+        set(document.cases) == cases and len(document.cases) == 4,
+        "Four visible result chapters required",
+    )
+    previews = {
+        item["preview"].removeprefix("docs/")
+        for item in read_json(ROOT / "examples/visualization/readme-media.json")[
+            "media"
+        ]
+    }
     animated = [image for image in document.images if "data-animation" in image]
-    require({image["data-animation"] for image in animated} == previews and len(animated) == 8, "Gallery and bilingual README dynamic media differ")
+    require(
+        {image["data-animation"] for image in animated} == previews
+        and len(animated) == 8,
+        "Gallery and bilingual README dynamic media differ",
+    )
     sources = [image.get("src", "") for image in document.images]
-    require("assets/readme-meshes.png" in sources, "Native four-model mesh plate required")
+    require(
+        "assets/readme-meshes.png" in sources, "Native four-model mesh plate required"
+    )
     for key in cases:
-        require(f"assets/{key}-response.png" in sources, "Native response overview missing: " + key)
-    for target in sources + [image["data-animation"] for image in animated] + document.links:
+        require(
+            f"assets/{key}-response.png" in sources,
+            "Native response overview missing: " + key,
+        )
+    for target in (
+        sources + [image["data-animation"] for image in animated] + document.links
+    ):
         if not target or target.startswith("#") or urlsplit(target).scheme:
             continue
         path = (ROOT / "docs" / unquote(urlsplit(target).path)).resolve()
-        require(path.is_relative_to(ROOT / "docs") and path.is_file(), "Missing gallery asset: " + target)
+        require(
+            path.is_relative_to(ROOT / "docs") and path.is_file(),
+            "Missing gallery asset: " + target,
+        )
     return dict(gallery_result_chapters=4, gallery_dynamic_views=8)
 
 
@@ -330,7 +355,7 @@ def check_results():
                 [node, "--check"],
                 input=script,
                 text=True,
-                    encoding="utf-8",
+                encoding="utf-8",
                 capture_output=True,
                 timeout=20,
             )
@@ -372,6 +397,9 @@ def main():
         from scripts.export_readme_media import check as check_readme_media
 
         results.update(check_readme_media())
+        from scripts.check_second_order import check_second_order
+
+        results.update(check_second_order())
         results.update(check_gallery_media())
         print(
             json.dumps(
