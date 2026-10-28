@@ -8,7 +8,8 @@
 <style>
 :root{color-scheme:light;--fg:#202b33;--muted:#53616c;--blue:#075f92;--rod:#80614c;--line:#d7dfe4}
 *{box-sizing:border-box}body{margin:0;color:var(--fg);background:white;font:16px/1.9 "Noto Serif SC","Source Han Serif SC",SimSun,"Times New Roman",serif}header,main,footer{max-width:1140px;margin:auto;padding:24px 34px}header{display:flex;justify-content:space-between;gap:24px;align-items:baseline;border-bottom:1px solid var(--line);font-family:system-ui,"Microsoft YaHei",sans-serif}.brand{font-size:17px;font-weight:600}.version{font-size:12px;color:var(--muted);margin-left:16px}nav{display:flex;gap:24px;font-size:13px}a{color:var(--blue);text-underline-offset:3px}h1{text-align:center;font-size:30px;line-height:1.5;font-weight:600;margin:30px 0 6px}.subtitle{text-align:center;color:var(--muted);font:17px/1.5 "Times New Roman",serif;margin:0 0 28px}h2{font-size:22px;font-weight:600;line-height:1.6;margin:42px 0 18px;border-bottom:1px solid var(--line);padding-bottom:8px}h3{font-size:18px;font-weight:600;margin:12px 0}p{margin:12px 0 18px}.abstract{max-width:960px;margin:auto}.source,figcaption,.data-links{font-size:14px;line-height:1.85;color:var(--muted)}.controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap;font:14px/1.5 system-ui,"Microsoft YaHei",sans-serif;margin:18px 0}.field{display:flex;align-items:center;gap:12px}select,button{font:14px/1.5 system-ui,"Microsoft YaHei",sans-serif;border:1px solid #afbbc4;background:white;color:var(--fg);border-radius:2px;padding:8px 12px;min-height:38px;max-width:100%}button{cursor:pointer}button[aria-pressed=true]{background:#edf3f7;border-color:#557a94;color:#194567}button:focus-visible,select:focus-visible{outline:2px solid #447d9c;outline-offset:3px}.geometry-grid{display:grid;grid-template-columns:1.18fr 1fr;gap:32px;align-items:start}figure{margin:0;min-width:0}.canvas-host{height:410px;border:1px solid #e0e7eb;background:#fcfdfe}canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}.mesh-controls{font:13px/1.7 system-ui,"Microsoft YaHei",sans-serif;margin:8px 0}.mesh-controls input{accent-color:var(--blue)}figcaption{margin:12px 0 20px}.facts{font-size:14px;margin:16px 0}.facts>div{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;padding:5px 0;border-bottom:1px solid #e1e6ea}.facts dt{color:#485762}.facts dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:18px 0}.tabs{display:flex;gap:8px;flex-wrap:wrap}.media-viewport{overflow-x:auto;border:1px solid #e1e6ea;background:white}.media-image{display:block;width:100%;height:auto}.curve{min-width:800px}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}th{border-top:1px solid #73838f;font-weight:600}details{margin:20px 0}summary{cursor:pointer;color:#385567;font-size:15px}.sources p{margin:8px 0}footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin-top:30px;padding-bottom:30px}[hidden]{display:none!important}
-@media(max-width:780px){header,main,footer{padding-left:20px;padding-right:20px}.geometry-grid{grid-template-columns:1fr;gap:16px}h1{font-size:25px;text-align:left}.subtitle{text-align:left}.version{display:block;margin-left:0}nav{gap:14px}.canvas-host{height:370px}.media-image{min-width:860px}.toolbar{align-items:start}h2{font-size:20px}}
+.report-nav{display:flex;flex-wrap:wrap;gap:10px 28px;margin:28px 0 34px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:14px/1.8 system-ui,"Microsoft YaHei",sans-serif}.report-nav a{text-decoration:none}section,section h2{scroll-margin-top:24px}.mesh-plate{margin:32px 0 22px}.mesh-plate .media-viewport{border:0}.sweep-overview{margin-top:26px}.case-report{margin-top:54px}.case-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);margin:42px 0 20px}.case-heading h2{margin:0;border:0;padding-bottom:8px}.case-heading>a{font-size:14px;flex-shrink:0}.response-overview{margin-top:26px}.response-overview h3{margin-bottom:16px}.response-overview>a{display:block}.response-detail{padding:0 0 16px;border-bottom:1px solid var(--line)}.figure-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin:26px 0 14px}.figure-toolbar h3{margin:0}.animation-toggle{font-size:13px;padding:6px 12px;min-height:34px}.native-animation{margin-top:28px}.case-condition{margin-top:28px}.viewing-note{font-size:14px;color:var(--muted)}.native-animation .media-image{background:white}
+@media(max-width:780px){header,main,footer{padding-left:20px;padding-right:20px}.geometry-grid{grid-template-columns:1fr;gap:16px}h1{font-size:25px;text-align:left}.subtitle{text-align:left}.version{display:block;margin-left:0}nav{gap:14px}.canvas-host{height:370px}.media-viewport .media-image{min-width:860px}.mesh-plate .media-image{min-width:720px}.toolbar{align-items:start}h2{font-size:20px}.case-heading{flex-wrap:wrap;gap:4px 18px}.case-heading>a{margin-bottom:12px}}
 @media(max-width:420px){header,main,footer{padding-left:16px;padding-right:16px}header{gap:12px}nav{font-size:12px;gap:10px}.brand{font-size:16px}body{font-size:15px}.canvas-host{height:320px}.tabs button{font-size:12px;padding:7px 9px}.field{flex-wrap:wrap}h1{font-size:24px}}
 </style>
 </head>
@@ -17,28 +18,23 @@
 <main>
 <h1>船舶与半潜平台的一阶水动力计算</h1>
 <p class="subtitle">First-order hydrodynamics of ships and a semisubmersible platform</p>
-<div class="abstract"><p>本报告展示原创曲线船体、两类资料参照船型及半潜平台的建模和水动力结果。几何、物理参数、网格验收与 HydroStar 原生计算形成完整链路；响应曲线通过 Gnuplot 导出，场量由 HydroStar 原生模块计算并独立核对，再由 ParaView 批处理导出。</p><p>曲线船体在 3000 个总面元预算内采用 231 个频率点和 13 个浪向，作为默认展示。各算例用于研究生课程、方法研究与所列假设下的工程简化分析，计算资料保存了复算所需的原生文件和完整验收记录。</p></div>
+<div class="abstract"><p>本报告展示原创曲线船体、半潜平台、集装箱船与丰满油船的建模和水动力结果。四种构型分别给出实际求解网格、六自由度频率响应、表面压力与波面，以及绕射与辐射分量，与项目 README 采用相同的计算数据和原生导出。</p><p>前面的三维模型可旋转和缩放。曲线船体在 3000 个总面元预算内采用 231 个频率点和 13 个浪向；各算例用于研究生课程、方法研究与所列假设下的工程简化分析，计算资料保存了原生输入、完整数值和验收记录。响应曲线通过 Gnuplot 导出，场量经独立复数核对后由 ParaView 批处理保存。</p></div>
+<nav class="report-nav" aria-label="报告章节"><a href="#model-heading">交互模型与网格</a><a href="#case-vessel">曲线船体</a><a href="#case-platform">半潜平台</a><a href="#case-container">集装箱船</a><a href="#case-tanker">丰满油船</a><a href="#verification-heading">验收与适用条件</a></nav>
 
 <section aria-labelledby="model-heading"><h2 id="model-heading">1. 计算对象与参数</h2>
 <div class="controls"><label class="field">计算对象<select id="model" aria-label="计算对象"></select></label></div>
-<div class="geometry-grid"><figure><div class="canvas-host"><canvas id="mesh" role="img" aria-label="用于求解的实际湿表面网格"></canvas></div><div class="mesh-controls"><label><input id="wire" type="checkbox" checked> 显示面元边界</label>。拖动旋转，滚轮缩放。</div><figcaption id="geometry-caption"></figcaption></figure><div><h3 id="label"></h3><p id="features" class="source"></p><dl id="facts" class="facts"></dl><p class="data-links"><a id="download" href="#">模型参数与原生计算文件</a>随公开仓库保存，可用于复核和重算。</p></div></div></section>
+<div class="geometry-grid"><figure><div class="canvas-host"><canvas id="mesh" role="img" aria-label="用于求解的实际湿表面网格"></canvas></div><div class="mesh-controls"><label><input id="wire" type="checkbox" checked> 显示面元边界</label>。拖动旋转，滚轮缩放。</div><figcaption id="geometry-caption"></figcaption></figure><div><h3 id="label"></h3><p id="features" class="source"></p><dl id="facts" class="facts"></dl><p class="data-links"><a id="download" href="#">模型参数与原生计算文件</a>随公开仓库保存，可用于复核和重算。</p></div></div>
+<figure class="mesh-plate"><div class="media-viewport"><a href="assets/readme-meshes.png" target="_blank" rel="noopener"><img class="media-image" src="assets/readme-meshes.png" width="2400" height="1520" loading="lazy" decoding="async" alt="曲线船体、半潜平台、集装箱船和丰满油船的实际求解湿面网格"></a></div><figcaption>图 1b。四种构型的原生湿面网格总览，由 ParaView 命令导出，保留实际四边形与局部三角形边界。蓝色为势流湿表面，灰色为干结构和细杆背景。坐标与尺寸采用 m，几何倍率为 1，各视图独立取景；总面元数包含图中未显示的水线面。点击查看高清原图。</figcaption></figure>
+<div class="table-wrap sweep-overview"><table><caption>四种构型的面元预算与原生扫频范围</caption><thead><tr><th scope="col">计算对象</th><th scope="col">全体总面元，含水线面</th><th scope="col">角频率范围（rad/s）</th><th scope="col">频率点 × 浪向</th></tr></thead><tbody>__OVERVIEW_ROWS__</tbody></table></div>
+<p class="viewing-note">下文按构型独立展示完整结果。进入视野的动图自动播放，每幅图可切换为静帧；系统启用减少动态效果时，从静帧开始。所有曲线和场量均可打开原始分辨率，窄屏可在图框内横向查看。</p></section>
 
-<section aria-labelledby="motion-heading"><h2 id="motion-heading">2. 表面压力、波面与运动</h2>
-<p id="motion-condition"></p><div class="toolbar"><div class="tabs" aria-label="场量视图"><button id="view-coupled" aria-pressed="true" type="button">压力与波面</button><button id="view-wave" aria-pressed="false" type="button">总波与散射波</button><button id="view-components" aria-pressed="false" type="button">绕射与辐射</button></div><button id="motion-toggle" aria-pressed="false" type="button">播放动图</button></div>
-<figure><div class="media-viewport"><img id="wave-gif" class="media-image" width="2160" height="810" alt="原生水动力场量"></div><figcaption id="motion-caption"></figcaption></figure>
-<p class="data-links"><a id="wave-full" href="#" target="_blank" rel="noopener">查看完整分辨率动画</a>，或<a id="wave-download" href="#">获取原生场量与导出设置</a>。图像由 ParaView 命令保存为帧序列，再编码为 GIF。</p></section>
+__RESULT_SECTIONS__
 
-<section aria-labelledby="rao-heading"><h2 id="rao-heading">3. 六自由度频率响应</h2>
-<p>幅值和相位直接采用原生响应输出。以下浪向可独立选择，动态云图采用上一节列出的固定规则波工况。</p>
-<div class="toolbar"><label class="field">响应浪向<select id="heading" aria-label="响应浪向"></select></label><div class="tabs"><button id="amplitude" type="button" aria-pressed="true">幅值</button><button id="phase" type="button" aria-pressed="false">相位</button></div></div>
-<figure><div class="media-viewport" id="charts"><img class="media-image curve" id="curve" width="1400" height="900" alt="Gnuplot 原生响应六联图"></div><figcaption id="curve-caption"></figcaption></figure>
-<p class="data-links"><a id="curve-full" href="#" target="_blank" rel="noopener">查看矢量原图</a>，或<a id="curve-pdf" href="#" target="_blank" rel="noopener">查看多浪向幅值对比</a>。窄屏可横向查看完整图幅。</p></section>
-
-<section aria-labelledby="verification-heading"><h2 id="verification-heading">4. 计算验收与适用条件</h2>
+<section aria-labelledby="verification-heading"><h2 id="verification-heading">6. 计算验收与适用条件</h2>
 <p>各算例执行相同的硬性门禁，输入、静力平衡、网格、模块执行和结果完整性通过后进入展示。场量另经入射波解析解、总场分解、运动匹配与时间序列检查，色标在整个周期内保持一致。</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">检查项目</th><th scope="col">验收结果</th></tr></thead><tbody id="validation"></tbody></table></div>
-<p id="assumptions" class="source"></p><p class="source">这些结果采用单刚体、小运动的一阶频域模型。面向具体工程对象时，结合实际几何、装载、阻尼和约束条件，补充空间收敛及参考响应证据。质量门禁与目标用途的精度证据在<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/verification.md">验证说明</a>中分别记录。</p>
-<details><summary>参考资料与复现方法</summary><div class="source sources" id="sources"></div><p class="source">完整数值与来源记录随计算资料保存。原生文件的内容与执行顺序见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-delivery.md">交付规范</a>，命令式绘图与动画导出见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-visualization.md">可视化方法</a>。</p></details></section>
+<div class="table-wrap"><table><thead><tr><th scope="col">检查项目</th><th scope="col">曲线船体</th><th scope="col">半潜平台</th><th scope="col">集装箱船</th><th scope="col">丰满油船</th></tr></thead><tbody>__ACCEPTANCE_ROWS__</tbody></table></div>
+<p class="source">这些结果采用单刚体、小运动的一阶频域模型。面向具体工程对象时，结合实际几何、装载、阻尼和约束条件，补充空间收敛及参考响应证据。质量门禁与目标用途的精度证据在<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/verification.md">验证说明</a>中分别记录。</p>
+<details><summary>复现方法与原生交付</summary><p class="source">完整数值与来源记录随计算资料保存。原生文件的内容与执行顺序见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-delivery.md">交付规范</a>，命令式绘图与动画导出见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/native-visualization.md">可视化方法</a>。<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/README.md">中文 README</a> 与 <a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/README.en.md">English README</a> 采用相同的四构型结果和展示工况。</p></details></section>
 __GEOMETRY_STUDY__
 </main><footer>项目代码按 MIT 许可发布。HydroStar 软件与授权由使用者独立配置，计算输入、假设和验证资料随公开仓库保存。</footer>
 <script type="application/json" id="data">__SHOWCASE_DATA__</script>
@@ -48,7 +44,7 @@ __GEOMETRY_STUDY__
   const data=JSON.parse(document.getElementById('data').textContent).cases;
   const $=id=>document.getElementById(id),repo='https://github.com/lightninnng/hydrostar-mcp';
   const canvas=$('mesh'),ctx=canvas.getContext('2d');
-  let model=data[0],playing=false,view='coupled',heading=60,mode='amplitude',yaw=-.85,pitch=.6,zoom=1,drag=null,scene=[];
+  let model=data[0],yaw=-.85,pitch=.6,zoom=1,drag=null,scene=[];
   const number=(v,n=5)=>Number(v).toLocaleString('en-US',{maximumSignificantDigits:n});
   function resolved(name){const p=document.createElement('span');p.style.color='var('+name+')';document.body.appendChild(p);const c=getComputedStyle(p).color;p.remove();return c;}
   const sub=(a,b)=>a.map((v,i)=>v-b[i]),add=(a,b)=>a.map((v,i)=>v+b[i]),mul=(a,s)=>a.map(v=>v*s);
@@ -61,21 +57,72 @@ __GEOMETRY_STUDY__
 
   function node(tag,text){const p=document.createElement(tag);p.textContent=text;return p;}
   function fact(label,value){const p=document.createElement('div');p.append(node('dt',label),node('dd',value));$('facts').appendChild(p);}
-  function curves(){const url='assets/'+model.key+'-'+mode+'-'+heading+'.svg';$('curve').src=url;$('curve-full').href=url;$('curve-pdf').href='assets/'+model.key+'-response.pdf';$('curve').alt=model.label+'，'+heading+' 度浪向，六自由度'+(mode==='amplitude'?'幅值':'相位');$('curve-caption').textContent=mode==='amplitude'?'图 3. 六自由度响应幅值。平移以 m/m 表示，转动以 deg/m 表示，横坐标为波浪角频率。折线连接原生计算频率点。':'图 3. 六自由度响应相位，单位为 deg。原生相位折回至 −180° 至 180°，使用实际采样点，保持周期边界处的清楚表达。';}
-  function motion(){const a=model.animation,stem='assets/'+model.key+'-'+view;$('wave-gif').src=stem+(playing?'.gif':'-frame.png');$('wave-gif').width=view==='coupled'?2160:1440;$('wave-gif').height=810;$('wave-full').href=stem+'.gif';$('wave-download').href=repo+'/tree/main/examples/visualization/fields/'+model.key;$('motion-toggle').textContent=playing?'显示静帧':'播放动图';$('motion-toggle').setAttribute('aria-pressed',String(playing));for(const name of ['coupled','wave','components'])$('view-'+name).setAttribute('aria-pressed',String(view===name));$('motion-condition').textContent='规则波采用波幅 '+a.wave_amplitude_m+' m、浪向 '+a.heading_deg+'° 和角频率 '+a.omega_rad_s+' rad/s，物理周期为 '+a.period_s.toFixed(3)+' s，水深为 '+a.depth_m+' m。所有视图采用相同的物理相位。';const text={coupled:'左图为平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；右图为散射波面，包含绕射和运动诱导的辐射贡献。',wave:'左图为总波面，右图为散射波面。散射场由同相位的总场减去入射场得到，包含绕射与运动诱导的辐射。',components:'左图为固定平均姿态下的绕射波面，右图为六自由度运动共同产生的辐射波面，分别采用原生波面分解结果。'};$('motion-caption').textContent='图 2. '+text[view]+'波面色标以 m 表示。颜色保留实际物理量，波高与运动分别采用 '+a.wave_height_gain+' 倍和 '+a.motion_gain+' 倍观察倍率；压力图的几何倍率为 1。各色标在整个周期内固定，结构水线内部的自由面采样已屏蔽，灰色干结构和细杆提供空间背景。';$('wave-gif').alt=model.label+'：'+text[view];}
   function update(){
-    $('label').textContent=model.label;$('features').textContent=model.features;$('facts').replaceChildren();
-    fact('总排水体积',number(model.mechanics.total_displacement_m3,6)+' m³');fact('结构总质量',number(model.mechanics.mass_kg/1000,6)+' t');fact('横向初稳性高',number(model.gm_roll_m)+' m');fact('全体湿表面元',number(model.wet_panels,6));fact('含水线面的总面元',number(model.total_panels,6));fact('水深',model.depth_m+' m');fact('响应采样',model.frequency_count+' 个频率，'+model.headings.length+' 个浪向');fact('角频率步长',model.frequency_step+' rad/s');
-    $('geometry-caption').textContent='图 1. '+model.label+'的实际求解湿表面。蓝色为势流面元，平台的灰色干结构与棕色杆件提供背景。G 和 B 分别标记组合重心与浮心，几何采用相同的空间比例。';$('download').href=repo+'/tree/main/'+model.package;$('assumptions').textContent=model.assumptions;
-    model.headings.includes(heading)||(heading=model.headings[0]);$('heading').replaceChildren();for(const h of model.headings){const p=node('option',h+'°');p.value=h;p.selected=h===heading;$('heading').appendChild(p);}
-    const names={semantic_input:'输入语义与质量惯性',static_equilibrium:'静力平衡',mesh_geometry:'网格几何',mesh_topology:'网格拓扑',module_execution:'原生模块执行',rao_integrity:'响应结果完整性'};$('validation').replaceChildren();for(const [k,v] of Object.entries(model.gates)){const p=document.createElement('tr');p.append(node('td',names[k]),node('td',v==='passed'?'通过':v));$('validation').appendChild(p);}
-    $('sources').replaceChildren();for(const s of model.source_links){const p=document.createElement('p'),a=node('a',s.title);a.href=s.url;a.rel='noreferrer';p.appendChild(a);$('sources').appendChild(p);}if(!model.source_links.length)$('sources').appendChild(node('p','曲线船体由本项目原创型值表重建，尺寸、曲线、坐标、单位和质量假设随计算资料保存。'));
-    buildScene();drawMesh();motion();curves();
+    $('label').textContent=model.label;
+    $('features').textContent=model.features;
+    $('facts').replaceChildren();
+    fact('总排水体积',number(model.mechanics.total_displacement_m3,6)+' m³');
+    fact('结构总质量',number(model.mechanics.mass_kg/1000,6)+' t');
+    fact('横向初稳性高',number(model.gm_roll_m)+' m');
+    fact('全体湿表面元',number(model.wet_panels,6));
+    fact('含水线面的总面元',number(model.total_panels,6));
+    fact('水深',model.depth_m+' m');
+    fact('响应采样',model.frequency_count+' 个频率，'+model.headings.length+' 个浪向');
+    fact('角频率步长',model.frequency_step+' rad/s');
+    $('geometry-caption').textContent='图 1a. '+model.label+'的实际求解湿表面。蓝色为势流面元，平台的灰色干结构与棕色杆件提供背景。G 和 B 分别标记组合重心与浮心，几何采用相同的空间比例。';
+    $('download').href=repo+'/tree/main/'+model.package;
+    buildScene();drawMesh();
   }
-  for(const m of data){const p=node('option',m.label);p.value=m.key;$('model').appendChild(p);}
-  $('model').addEventListener('change',()=>{model=data.find(m=>m.key===$('model').value);zoom=1;update();});$('wire').addEventListener('change',drawMesh);$('heading').addEventListener('change',()=>{heading=Number($('heading').value);curves();});
-  for(const name of ['amplitude','phase'])$(name).addEventListener('click',()=>{mode=name;for(const k of ['amplitude','phase'])$(k).setAttribute('aria-pressed',String(k===mode));curves();});
-  $('motion-toggle').addEventListener('click',()=>{playing=!playing;motion();});for(const name of ['coupled','wave','components'])$('view-'+name).addEventListener('click',()=>{view=name;motion();});
+  for(const key of ['vessel','platform','container','tanker']){
+    const m=data.find(item=>item.key===key),option=node('option',m.label);
+    option.value=m.key;$('model').appendChild(option);
+  }
+  $('model').addEventListener('change',()=>{model=data.find(m=>m.key===$('model').value);zoom=1;update();});
+  $('wire').addEventListener('change',drawMesh);
+  for(const link of document.querySelectorAll('[data-inspect-model]')){
+    link.addEventListener('click',()=>{
+      model=data.find(m=>m.key===link.dataset.inspectModel);
+      $('model').value=model.key;zoom=1;update();
+    });
+  }
+  for(const detail of document.querySelectorAll('[data-response-case]')){
+    const key=detail.dataset.responseCase,label=data.find(m=>m.key===key).label;
+    const select=detail.querySelector('.response-heading'),image=detail.querySelector('.response-curve');
+    const buttons=detail.querySelectorAll('[data-mode]');
+    let mode='amplitude';
+    function showResponse(){
+      const heading=Number(select.value),url='assets/'+key+'-'+mode+'-'+heading+'.svg';
+      image.src=url;image.alt=label+'，'+heading+' 度浪向，六自由度'+(mode==='amplitude'?'幅值':'相位');
+      detail.querySelector('.response-original').href=url;
+      detail.querySelector('.response-caption').textContent=mode==='amplitude'
+        ?'平移幅值单位为 m/m，转动幅值为 deg/m，横轴为波浪角频率（rad/s）。折线连接原生计算频率点。'
+        :'相位单位为 deg，按 −180° 至 180° 包裹显示。图中保留原生采样点，跨周期边界的相位跳变结合幅值和相位约定判断。';
+      for(const button of buttons)button.setAttribute('aria-pressed',String(button.dataset.mode===mode));
+    }
+    select.addEventListener('change',showResponse);
+    for(const button of buttons)button.addEventListener('click',()=>{mode=button.dataset.mode;showResponse();});
+  }
+  const mediaStates=new Map();
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function showMedia(state){
+    const playing=state.visible&&state.play;
+    const source=playing?state.image.dataset.animation:state.image.dataset.still;
+    if(state.image.getAttribute('src')!==source)state.image.src=source;
+    state.button.textContent=playing?'显示静帧':'播放动图';
+    state.button.setAttribute('aria-pressed',String(playing));
+    state.button.setAttribute('aria-label',state.label+'：'+(playing?'显示静帧':'播放动图'));
+  }
+  const mediaObserver='IntersectionObserver' in window?new IntersectionObserver(entries=>{
+    for(const entry of entries){const state=mediaStates.get(entry.target);state.visible=entry.isIntersecting;showMedia(state);}
+  },{rootMargin:'120px 0px',threshold:0.05}):null;
+  for(const figure of document.querySelectorAll('.native-animation')){
+    const state={image:figure.querySelector('img'),button:figure.querySelector('.animation-toggle'),
+      label:data.find(m=>m.key===figure.dataset.case).label+figure.querySelector('h3').textContent,
+      visible:false,play:!reducedMotion};
+    mediaStates.set(figure,state);
+    state.button.addEventListener('click',()=>{state.play=!(state.visible&&state.play);state.visible=true;showMedia(state);});
+    if(mediaObserver)mediaObserver.observe(figure);
+  }
   canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;pitch=Math.max(-1.1,Math.min(1.3,drag.pitch+(e.clientY-drag.y)*.006));drawMesh();});canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.7,Math.min(2.8,zoom*Math.exp(-e.deltaY*.001)));drawMesh();},{passive:false});new ResizeObserver(drawMesh).observe(document.querySelector('main'));update();document.documentElement.dataset.ready='true';
 })();
 </script></body></html>

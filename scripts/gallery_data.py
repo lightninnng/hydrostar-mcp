@@ -98,6 +98,10 @@ def presentation_data():
                 gm_roll_m=summary["solver_mechanics"]["gm_roll_pitch_m"][0],
                 depth_m=config["environment"]["depth"],
                 frequency_count=len(responses["heave"]["omega"]),
+                frequency_range_rad_s=[
+                    responses["heave"]["omega"][0],
+                    responses["heave"]["omega"][-1],
+                ],
                 headings=responses["heave"]["headings"],
                 frequency_step=config["environment"]["frequency"]["step"],
                 gates=summary["quality_gates"],
@@ -123,6 +127,122 @@ def presentation_data():
     return dict(version=__version__, cases=result)
 
 
+def result_sections(dataset):
+    """Build visible result chapters from the same accepted media as README."""
+    cases = {case["key"]: case for case in dataset["cases"]}
+    previews = {
+        item["preview"]: item
+        for item in read(ROOT / "examples/visualization/readme-media.json")["media"]
+    }
+    sections = []
+    for section, key in enumerate(("vessel", "platform", "container", "tanker"), 2):
+        case = cases[key]
+        label = html.escape(case["label"])
+        first, last = case["frequency_range_rad_s"]
+        animation = case["animation"]
+        headings = "".join(
+            f'<option value="{value:g}"'
+            + (" selected" if value == 60 else "")
+            + f">{value:g}°</option>"
+            for value in case["headings"]
+        )
+        condition = (
+            f"波幅为 {animation['wave_amplitude_m']:.2f} m，浪向为 "
+            f"{animation['heading_deg']:g}°，角频率为 {animation['omega_rad_s']:g} rad/s，"
+            f"物理周期为 {animation['period_s']:.3f} s，水深为 {animation['depth_m']:g} m。"
+        )
+        figures = []
+        for suffix, title, letter, caption in (
+            (
+                "coupled",
+                "表面压力、波面与运动",
+                "b",
+                "左图为平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；"
+                "右图为包含绕射与运动诱导辐射的散射波面。压力图几何倍率为 1。",
+            ),
+            (
+                "components",
+                "绕射与辐射波场",
+                "c",
+                "左图为固定平均姿态下的绕射波面，右图为六自由度运动共同产生的辐射波面。"
+                "分量在复数域分解后，采用同一物理相位重建。",
+            ),
+        ):
+            preview = f"docs/assets/readme-{key}-{suffix}.gif"
+            if preview not in previews:
+                raise ValueError("Accepted README preview required: " + preview)
+            native = previews[preview]
+            if native["source"] != f"docs/assets/{key}-{suffix}.gif":
+                raise ValueError("Native preview source differs: " + preview)
+            image_id = f"{key}-{suffix}"
+            still = f"assets/{key}-{suffix}-frame.png"
+            original_width = 2160 if suffix == "coupled" else 1440
+            figures.append(
+                f'''<figure class="native-animation" data-case="{key}" data-view="{suffix}">
+<div class="figure-toolbar"><h3>{title}</h3><button type="button" class="animation-toggle" aria-controls="{image_id}" aria-pressed="false" aria-label="{label}{title}：播放动图">播放动图</button></div>
+<div class="media-viewport"><img id="{image_id}" class="media-image" src="{still}" data-still="{still}" data-animation="{preview.removeprefix("docs/")}" width="{original_width}" height="810" loading="lazy" decoding="async" alt="{label}，{title}，原生计算场量"></div>
+<figcaption>图 {section}{letter}。{caption}波面色标为 m，波高和运动均采用 6 倍观察倍率。每个面板使用完整周期内固定的色标。<a href="assets/{key}-{suffix}.gif" target="_blank" rel="noopener">查看高清动图</a>。</figcaption></figure>'''
+            )
+        sources = "".join(
+            f'<p><a href="{html.escape(source["url"], quote=True)}" rel="noreferrer">{html.escape(source["title"])}</a></p>'
+            for source in case["source_links"]
+        )
+        if not sources:
+            sources = "<p>曲线船体使用本项目原创型值表，尺寸、坐标、单位、放样方法与装载假设随算例保存。</p>"
+        sections.append(
+            f'''<section class="case-report" id="case-{key}" data-result-case="{key}" aria-labelledby="{key}-heading">
+<div class="case-heading"><h2 id="{key}-heading">{section}. {label}</h2><a href="#model-heading" data-inspect-model="{key}">查看交互网格</a></div>
+<p>{html.escape(case["features"])}全体湿面共 {case["wet_panels"]:,} 个面元，包含水线面的总数为 {case["total_panels"]:,}。{html.escape(case["assumptions"])}</p>
+<figure class="response-overview"><h3>六自由度频率响应</h3><a href="assets/{key}-response.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/{key}-response.png" width="2400" height="1540" loading="lazy" decoding="async" alt="{label}，五个浪向的六自由度响应幅值"></a>
+<figcaption>图 {section}a。原生响应覆盖 {first:g}–{last:g} rad/s，步长为 {case["frequency_step"]:g} rad/s，共 {case["frequency_count"]} 个频率点和 {len(case["headings"])} 个浪向。图中叠加 0°、60°、90°、120° 和 180° 浪向；平移幅值为 m/m，转动幅值为 deg/m。点击图片查看矢量 PDF。</figcaption></figure>
+<details class="response-detail" data-response-case="{key}"><summary>按浪向查看幅值与相位</summary>
+<div class="toolbar"><label class="field">响应浪向<select class="response-heading" aria-label="{label}响应浪向">{headings}</select></label><div class="tabs" role="group" aria-label="{label}响应类型"><button type="button" data-mode="amplitude" aria-pressed="true">幅值</button><button type="button" data-mode="phase" aria-pressed="false">相位</button></div></div>
+<figure><div class="media-viewport"><img class="media-image curve response-curve" src="assets/{key}-amplitude-60.svg" width="1400" height="900" loading="lazy" alt="{label}，60 度浪向，六自由度幅值"></div><figcaption class="response-caption">平移幅值单位为 m/m，转动幅值为 deg/m，横轴为波浪角频率（rad/s）。</figcaption></figure><p class="data-links"><a class="response-original" href="assets/{key}-amplitude-60.svg" target="_blank" rel="noopener">查看当前矢量原图</a>。窄屏可横向查看完整图幅。</p></details>
+<p class="case-condition">本节动画采用同一规则波工况。{condition}</p>
+{"".join(figures)}
+<p class="source">每组动图完整保留 40 个物理相位，以 10 帧/秒循环播放，一次播放循环为 4 秒；真实物理时刻见 t 和 t/T。不同构型和面板采用各自标明的色标范围，颜色保持实际物理量。灰色干结构和细杆提供空间背景。</p>
+<p class="data-links">本构型的<a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/{case["package"]}">模型参数与原生计算文件</a>、<a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/visualization/fields/{key}">场量与导出设置</a>随仓库提供。<a href="assets/{key}-wave.gif" target="_blank" rel="noopener">总波与散射波的放大视图</a>可单独打开。</p>
+<details><summary>{label}的资料来源</summary><div class="source sources">{sources}</div></details></section>'''
+        )
+    return "\n".join(sections)
+
+
+def overview_table(dataset):
+    """Summarize the four native sweeps beside the native mesh plate."""
+    cases = {case["key"]: case for case in dataset["cases"]}
+    rows = []
+    for key in ("vessel", "platform", "container", "tanker"):
+        case = cases[key]
+        first, last = case["frequency_range_rad_s"]
+        rows.append(
+            f'<tr><th scope="row"><a href="#case-{key}">{html.escape(case["label"])}</a></th>'
+            f"<td>{case['total_panels']:,}</td><td>{first:g}–{last:g}</td>"
+            f"<td>{case['frequency_count']} × {len(case['headings'])}</td></tr>"
+        )
+    return "".join(rows)
+
+
+def acceptance_table(dataset):
+    cases = {case["key"]: case for case in dataset["cases"]}
+    names = dict(
+        semantic_input="输入语义与质量惯性",
+        static_equilibrium="静力平衡",
+        mesh_geometry="网格几何",
+        mesh_topology="网格拓扑",
+        module_execution="原生模块执行",
+        rao_integrity="响应结果完整性",
+    )
+    rows = []
+    for gate, label in names.items():
+        cells = []
+        for key in ("vessel", "platform", "container", "tanker"):
+            if cases[key]["gates"].get(gate) != "passed":
+                raise ValueError("Publication acceptance failed: " + key + ": " + gate)
+            cells.append("<td>通过</td>")
+        rows.append(f'<tr><th scope="row">{label}</th>{"".join(cells)}</tr>')
+    return "".join(rows)
+
+
 def geometry_section():
     rows = []
     for c in read(ROOT / "docs/data/geometry.json")["cases"]:
@@ -132,7 +252,7 @@ def geometry_section():
             f'<tr><td><a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/geometry/{key}">{label}</a></td><td>{q["quadrilaterals"]:,} / {q["triangles"]}</td><td>{c["full_equivalent_total"]:,}</td><td>{100 * c["volume_relative_error"]:.3f}%</td></tr>'
         )
     return (
-        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">5. 其他构型与建模方法</h2>
+        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">7. 其他构型与建模方法</h2>
 <p>同轴柱体采用轴向环带与周向对应，船体采用站位与剖面网格带，多边形及贯通开口采用相容分块。四边形保留到实际求解文件，并同时检查形状、翘曲、尺度过渡、水线闭环、拓扑、自交以及 CAD 体积与浮心。</p>
 <p>下表保留已完成计算的几何研究参照。曲线船体和 Spar 的密网格沿用既定配置；前面的曲线船体展示采用新的 2873 个总面元方案。常规新模型按包含湿面、水线面和对称展开的 3000 个总面元预算规划，提高预算须按具体算例明确授权。</p>
 <div class="table-wrap"><table><thead><tr><th>研究参照构型</th><th>湿面四边形 / 三角形</th><th>全体总面元</th><th>CAD 体积差</th></tr></thead><tbody>"""

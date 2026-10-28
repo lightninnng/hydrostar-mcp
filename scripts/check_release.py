@@ -10,6 +10,7 @@ import re
 import shutil
 import subprocess
 import sys
+from html.parser import HTMLParser
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -142,6 +143,40 @@ def check_links(files):
             )
             count += 1
     return count
+
+
+def check_gallery_media():
+    class Media(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.cases, self.images, self.links = [], [], []
+
+        def handle_starttag(self, tag, attributes):
+            attrs = dict(attributes)
+            if tag == "section" and "data-result-case" in attrs:
+                self.cases.append(attrs["data-result-case"])
+            if tag == "img":
+                self.images.append(attrs)
+            if tag == "a":
+                self.links.append(attrs.get("href", ""))
+
+    document = Media()
+    document.feed((ROOT / "docs/index.html").read_text(encoding="utf-8"))
+    cases = {"vessel", "platform", "container", "tanker"}
+    require(set(document.cases) == cases and len(document.cases) == 4, "Four visible result chapters required")
+    previews = {item["preview"].removeprefix("docs/") for item in read_json(ROOT / "examples/visualization/readme-media.json")["media"]}
+    animated = [image for image in document.images if "data-animation" in image]
+    require({image["data-animation"] for image in animated} == previews and len(animated) == 8, "Gallery and bilingual README dynamic media differ")
+    sources = [image.get("src", "") for image in document.images]
+    require("assets/readme-meshes.png" in sources, "Native four-model mesh plate required")
+    for key in cases:
+        require(f"assets/{key}-response.png" in sources, "Native response overview missing: " + key)
+    for target in sources + [image["data-animation"] for image in animated] + document.links:
+        if not target or target.startswith("#") or urlsplit(target).scheme:
+            continue
+        path = (ROOT / "docs" / unquote(urlsplit(target).path)).resolve()
+        require(path.is_relative_to(ROOT / "docs") and path.is_file(), "Missing gallery asset: " + target)
+    return dict(gallery_result_chapters=4, gallery_dynamic_views=8)
 
 
 def check_results():
@@ -337,6 +372,7 @@ def main():
         from scripts.export_readme_media import check as check_readme_media
 
         results.update(check_readme_media())
+        results.update(check_gallery_media())
         print(
             json.dumps(
                 dict(
