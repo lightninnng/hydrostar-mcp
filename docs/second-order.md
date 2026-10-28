@@ -44,6 +44,27 @@ QTF 计算的第一波频率为 0.50–1.10 rad/s，间隔 0.05 rad/s；差频�
 
 两档网格只改变外部积分离散，比较同一频率配对的复数结果。三个力分量的自身峰值归一差异最高为 0.406%，横摇和纵摇力矩最高为 0.083%；QTF 对角项与平均漂移的最大差异为 0.032%，水平漂移力近远场差异最高为 3.758%。**艏摇力矩的自身峰值归一差异为 23.374%，近远场平均漂移差异为 128.854%，标为需继续收敛研究，完成验证后再用于工程荷载。** 各分量的自身峰值归一误差和特征力矩归一误差随包分别记录。当前证据用于研究生课程、方法复现及所列假设下的工程简化研究；具体工程荷载仍按目标频带补充湿面、外部域范围、频率及参考结果验证。艏摇等较小分量需要自身尺度的收敛证据。
 
+## 二阶荷载系数动画
+
+已验收的原生复数 QTF 采用正时间基底，按 `q(t)=Qr cos(Δωt)−Qi sin(Δωt)` 重建归一化谐波系数。本机手册第 2.2 节给出 v7.00 之后的相位超前约定；此处明确写出重建公式、时间原点和单位。
+
+[![差频 QTF 动态相位云图](assets/platform-second-order-map.gif)](assets/platform-second-order-map.gif)
+
+动态矩阵的横轴为第一波角频率，纵轴为差频。36 对有效配对按原采样单元显示，边缘未求解配对留空；各分量的对称色标在整个周期内固定。零差频项保持恒定，0.05 和 0.10 rad/s 分量在 125.664 s 的物理周期内分别完成一和两个循环。
+
+[![选定频率对的六分量归一化谐波](assets/platform-second-order-harmonics.gif)](assets/platform-second-order-harmonics.gif)
+
+选定 ω₁=0.80、ω₂=0.90 rad/s，差频为 0.10 rad/s，物理周期为 62.832 s。灰线提供完整周期，蓝线与当前点跟随物理时间，纵轴保持固定。两组均保存 80 帧，以 10 帧/秒播放，循环为 8 s；力、力矩系数分别使用 kN/m²、kN m/m²，系数倍率为 1。
+
+这些图以频率和时间为坐标，展示二阶荷载系数的相位重建。实际双频波幅与有序配对合成、二阶压力场及慢漂运动分别保留对应的计算任务。艏摇系数继续按收敛研究分量显示。原生 QTF、Gnuplot 绘图脚本和 animation.json 保存来源与设置，数值验收检查均值、RMS、周期闭合、虚部符号及排除时间标题后的六视窗像素变化。
+
+~~~powershell
+python scripts/animate_second_order.py --gnuplot C:/path/to/gnuplot.exe
+# 实际查看生成的原生帧与两组 GIF 后记录视觉验收
+python scripts/animate_second_order.py --accept-review
+python scripts/animate_second_order.py --check
+~~~
+
 ## 原生文件与复算
 
 计算包的 inputs/ 包含 platform2.hst、platform2.rdf、platform2.mcn、drift.dft、full.qtf、results.rao；rao/ 保存六自由度运动、平均漂移荷载和复数 QTF。logs/ 保存八阶段日志，geometry/ 保存网格和求解器面元核对记录。delivery.json 记录用途、单位、状态、执行顺序与文件来源。当前任务为规则波差频荷载，SPC 谱统计输入记为本次不适用。

@@ -140,3 +140,18 @@ def read_integration_mesh(path):
         faces=[[index[i] for i in face] for face in faces],
         symmetry=int(meta["SYMMETRY_BODY"][0][1]),
     )
+
+
+def harmonic_value(real, imaginary, difference_rad_s, time_s):
+    """Phase-resolve a native complex coefficient under the positive-time basis.
+
+    This is Re[Q exp(i*Delta*t)], in coefficient units. Actual bichromatic
+    loads additionally require the native amplitude and ordered-pair convention.
+    """
+    real, imaginary, difference, time = map(
+        number, (real, imaginary, difference_rad_s, time_s)
+    )
+    if difference < 0:
+        raise ValueError("Difference frequency must be nonnegative")
+    phase = difference * time
+    return real * math.cos(phase) - imaginary * math.sin(phase)

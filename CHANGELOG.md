@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add two phase-resolved native-QTF coefficient GIFs with fixed colour/axis limits, explicit harmonic scope, 80 phases and per-panel pixel validation.
+
 - Add real native mean-drift and full difference-frequency QTF results for the original semisubmersible, with 36 valid frequency pairs and explicit yaw convergence limits.
 - Replace the exterior integration domain with corresponding inner sectors and graded annular quadrilaterals; verify two native meshes within the 3000-panel total budget.
 - Deliver actual second-order inputs, complex outputs, logs, native mesh checks and reproducible scientific SVG/PDF/PNG figures.

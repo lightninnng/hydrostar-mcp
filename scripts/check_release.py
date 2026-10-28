@@ -176,10 +176,14 @@ def check_gallery_media():
             "media"
         ]
     }
+    qtf_animations = read_json(ROOT / "examples/second-order/platform/animation.json")
+    previews.update(
+        item["gif"].removeprefix("docs/") for item in qtf_animations["media"].values()
+    )
     animated = [image for image in document.images if "data-animation" in image]
     require(
         {image["data-animation"] for image in animated} == previews
-        and len(animated) == 8,
+        and len(animated) == 10,
         "Gallery and bilingual README dynamic media differ",
     )
     sources = [image.get("src", "") for image in document.images]
@@ -201,7 +205,7 @@ def check_gallery_media():
             path.is_relative_to(ROOT / "docs") and path.is_file(),
             "Missing gallery asset: " + target,
         )
-    return dict(gallery_result_chapters=4, gallery_dynamic_views=8)
+    return dict(gallery_result_chapters=4, gallery_dynamic_views=10)
 
 
 def check_results():

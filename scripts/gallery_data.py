@@ -284,13 +284,13 @@ def second_order_section():
         ),
         (
             "complex",
-            "d",
+            "f",
             "差频荷载的实部与虚部",
             "差频为 0.10 rad/s，实部与虚部共同保留原生复数荷载及其相位信息。",
         ),
         (
             "sensitivity",
-            "e",
+            "g",
             "外部积分网格敏感性",
             "两档计算保持湿面、质量、重心、惯性、恢复、阻尼和外部域半径一致，改变近体自由面的积分离散。图示差频为 0.10 rad/s。",
         ),
@@ -323,7 +323,45 @@ def second_order_section():
 <figure class="mesh-plate"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格"></a><figcaption>图 6a。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。几何倍率为 1，坐标单位为 m。</figcaption></figure>
 <p>外部积分域已经检查完整覆盖、重叠、水线共边、内部接缝和面元形状，并从原生网格数据库独立核对实际使用的面元与向下法向。主网格外部自由面的内角范围为 {surface["panel_quality"]["min_corner_deg"]:.1f}°–{surface["panel_quality"]["max_corner_deg"]:.1f}°，最大边长比为 {surface["panel_quality"]["max_edge_ratio"]:.2f}。原有湿面和物理参数保持一致，一阶复响应与原算例在共同频率上逐项一致。</p>
 {figures[0]}{figures[1]}
+{second_order_animation_figures()}
 <details><summary>查看复数荷载及积分网格敏感性</summary>{figures[2]}{figures[3]}</details>
 <div class="table-wrap"><table><caption>两档外部积分网格的复数差异，以各分量自身峰值归一</caption><thead><tr><th scope="col">荷载分量</th><th scope="col">最大复数差异</th><th scope="col">本例验收范围</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 <p>QTF 对角项与平均漂移荷载的最大归一差异为 0.032%。三个力分量及横摇、纵摇力矩通过本例的外部积分网格敏感性门限。艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量保留作数值研究，完成进一步收敛验证后再用于工程荷载。当前比较固定湿面和外部域半径；目标工程用途需补充对应的空间、外部域、频率及参考结果证据。</p>
 <p class="data-links"><a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/second-order.md">方法与复算说明</a>介绍完整差频计算和有效配对；<a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/second-order/platform">原生二阶计算包</a>提供网格、物理参数、荷载输入、复数输出与八阶段日志。前面四种构型的动画展示各自的一阶压力、波面和运动。</p></section>"""
+
+
+def second_order_animation_figures():
+    """Keep normalized QTF-coefficient animations separate from spatial fields."""
+    record = read(ROOT / "examples/second-order/platform/animation.json")
+    if record["visual_review"] != "verified":
+        raise ValueError("Second-order harmonic animations require visual acceptance")
+    figures = []
+    for kind, letter, title, description in (
+        (
+            "map",
+            "d",
+            "差频荷载系数的动态相位云图",
+            "横轴为第一波角频率，纵轴为差频；原生 36 对有效频率按实际采样单元显示，未求解的边缘配对留空。各分量采用整个周期内固定的对称色标，零差频项保持恒定。",
+        ),
+        (
+            "harmonics",
+            "e",
+            "选定频率对的六分量谐波",
+            "选取 ω₁=0.80、ω₂=0.90 rad/s，差频为 0.10 rad/s。灰线提供完整周期，蓝线和当前点跟随物理时间，六个纵轴在整个周期内固定。",
+        ),
+    ):
+        media = record["media"][kind]
+        still, animation = (
+            media["still"].removeprefix("docs/"),
+            media["gif"].removeprefix("docs/"),
+        )
+        image_id = "second-order-" + kind
+        period = record["periods_s"][kind]
+        figures.append(f'''<figure class="native-animation" data-case="platform" data-second-order-animation="{kind}">
+<div class="figure-toolbar"><h3>{title}</h3><button type="button" class="animation-toggle" aria-controls="{image_id}" aria-pressed="false" aria-label="半潜平台{title}：播放动图">播放动图</button></div>
+<div class="media-viewport"><img id="{image_id}" class="media-image" src="{still}" data-still="{still}" data-animation="{animation}" width="1800" height="1152" loading="lazy" decoding="async" alt="半潜平台，原生二阶差频 QTF，{title}"></div>
+<figcaption>图 6{letter}。{description}物理周期为 {period:.3f} s，保留 80 个相位，以 10 帧/秒循环播放，播放周期为 8 s。力系数单位为 kN/m²，力矩系数为 kN m/m²，系数倍率为 1。<a href="{animation}" target="_blank" rel="noopener">查看完整动图</a>。</figcaption></figure>''')
+    return (
+        "<p>下列动图从原生复数 QTF 按 q(t)=Re[Q exp(iΔωt)] 重建归一化荷载系数，保留其幅值与相位。它们展示频率域系数及选定频率对的谐波；实际双频波幅与配对合成、二阶表面压力及慢漂位移分别对应后续计算任务。艏摇分量继续标明为收敛研究。</p>"
+        + "".join(figures)
+    )

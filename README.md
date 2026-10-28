@@ -123,6 +123,14 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 
 [![半潜平台完整差频 QTF 幅值](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
 
+**二阶荷载系数动画。** 下图从已验收的原生复数 QTF 按 `q(t)=Re[Q exp(iΔωt)]` 重建相位。第一组以波频和差频为坐标，显示 36 对有效频率的六分量系数；第二组选取 ω₁=0.80、ω₂=0.90 rad/s，显示差频为 0.10 rad/s 的六分量谐波。
+
+[![二阶差频荷载系数的动态相位云图](docs/assets/platform-second-order-map.gif)](docs/assets/platform-second-order-map.gif)
+
+[![选定频率对的二阶荷载系数谐波](docs/assets/platform-second-order-harmonics.gif)](docs/assets/platform-second-order-harmonics.gif)
+
+每组保留 80 个相位，以 10 帧/秒播放，循环为 8 s；对应物理周期分别为 125.664 s 和 62.832 s。力系数为 kN/m²，力矩系数为 kN m/m²，色标与纵轴在整个周期内固定，系数倍率为 1。这些视图表达归一化二阶荷载系数的相位变化，实际双频总荷载组合、二阶表面压力和慢漂位移各需相应求解与验收。艏摇分量保留收敛研究标识。
+
 力系数单位为 kN/m²，力矩系数为 kN m/m²；图中保留原生频率采样。QTF 对角项与平均漂移结果的最大归一差异为 0.032%，水平漂移力的近远场差异最高为 3.76%。两档外部积分离散的三个力分量复数差异最高为 0.41%，横摇和纵摇力矩最高为 0.083%。**艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量标为需继续收敛研究，完成验证后再用于工程荷载。** 当前比较固定湿面与外部域半径，目标工程用途还需相应的空间、外部域、频率与参考结果证据。
 
 <details>

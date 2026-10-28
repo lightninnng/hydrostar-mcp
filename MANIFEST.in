@@ -37,3 +37,4 @@ graft examples/second-order
 include scripts/second_order_study.py scripts/second_order_surface.py scripts/second_order_ring_surface.py
 include scripts/export_second_order.py scripts/render_second_order_mesh.py scripts/check_second_order.py
 include scripts/finalize_second_order_delivery.py
+include scripts/animate_second_order.py

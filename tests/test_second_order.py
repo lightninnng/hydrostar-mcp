@@ -79,3 +79,15 @@ ENDFILE
     )
     with pytest.raises(ValueError, match="incomplete"):
         read_integration_mesh(path)
+
+
+def test_qtf_harmonic_retains_native_imaginary_sign_and_static_diagonal():
+    import math
+    from hydrostar_mcp.second_order import harmonic_value
+
+    assert harmonic_value(2, 3, 0.1, 0) == 2
+    assert harmonic_value(2, 3, 0.1, math.pi / 0.2) == pytest.approx(-3)
+    assert harmonic_value(2, 3, 0.1, math.pi / 0.1) == pytest.approx(-2)
+    assert harmonic_value(2, 0, 0, 123) == 2
+    with pytest.raises(ValueError):
+        harmonic_value(2, float("nan"), 0.1, 0)

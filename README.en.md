@@ -123,6 +123,14 @@ The exterior domain uses 72 equal angular divisions and nine graded quadrilatera
 
 [![Full difference-frequency QTF magnitudes](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
 
+**Second-order coefficient animations.** Native complex QTFs are phase-resolved as `q(t)=Re[Q exp(iΔωt)]`. The first view maps six coefficients over the 36 valid frequency pairs. The second shows six harmonics for ω₁=0.80 and ω₂=0.90 rad/s, at difference frequency 0.10 rad/s.
+
+[![Phase-resolved difference-frequency load coefficients](docs/assets/platform-second-order-map.gif)](docs/assets/platform-second-order-map.gif)
+
+[![Six second-order coefficient harmonics for a selected frequency pair](docs/assets/platform-second-order-harmonics.gif)](docs/assets/platform-second-order-harmonics.gif)
+
+Each animation retains 80 phases at 10 frames/s, with an 8 s playback loop. Physical periods are 125.664 s and 62.832 s respectively. Force coefficients use kN/m² and moment coefficients use kN m/m²; colour and vertical-axis limits remain fixed, with coefficient gain 1. These views express normalized second-order load-coefficient phases. Actual bichromatic load assembly, second-order panel pressure and slow-drift displacement require their corresponding solutions and acceptance. Yaw remains marked as a convergence-study component.
+
 Force coefficients use kN/m² and moment coefficients use kN m/m². Figures retain the native frequency samples. QTF diagonal terms agree with mean drift within 0.032% of the corresponding peak; horizontal near/far-field drift differs by at most 3.76%. Across the two exterior meshes, complex force differences reach 0.41%, and roll/pitch moments reach 0.083%. **Yaw moment changes by 23.37% of its own peak, with a 128.85% near/far-field mean-drift difference. It remains a numerical research component requiring further convergence before engineering load use.** This comparison fixes the wet mesh and exterior radius; engineering use needs corresponding spatial, domain, frequency and reference-result evidence.
 
 <details>

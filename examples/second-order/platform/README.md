@@ -32,3 +32,5 @@ hsrao results.rao platform2
 bin/、hdf/ 由正式输入重新生成，rao/ 为提取输出。当前规则波研究的 SPC 谱统计文件记为本次不适用。需要波谱统计时提供独立海况与 .spc，再进行相应验收。
 
 从仓库根目录执行 `python scripts/check_second_order.py` 可离线核对交付。绘图时在本目录为每幅图单独运行 `gnuplot plots/qtf.gp` 等脚本，导出原生 SVG。发布脚本使用 Svglib/ReportLab 转为矢量 PDF，并由 PDFium 转为 PNG，转换版本及来源随 verification.json 保存。图形位于 [docs/assets](../../../docs/assets)，详细方法见[二阶计算说明](../../../docs/second-order.md)。
+
+二阶系数动图由 `python scripts/animate_second_order.py --gnuplot <可执行文件>` 生成：plots/animate_map.gp 和 animate_harmonics.gp 直接读取本包的原生复数 QTF。animation.json 记录正时间重建公式、有效配对、相位、单位、固定色标、转换及编码参数，并逐视窗验证变化。物理周期分别为 125.664 s、62.832 s，均以 80 帧、10 帧/秒播放。它们展示归一化荷载系数；实际双频总荷载、二阶压力与慢漂运动按相应任务另行计算。

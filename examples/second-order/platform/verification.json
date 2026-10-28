@@ -183,12 +183,13 @@
     ]
   ],
   "files": {
+    "animation.json": "74783daa0716243b8d31c55b5b233c2229e70e628aebc5d880682ac9c703f120",
     "delivery.json": "0a33f054e5946fad67481c808baa0d50aa41da8d5927d6e46ae0f09c04333868",
     "execution.json": "ee3cc013fa0e2cfdb7d1d0fd8b455f165db9cf6139bb0fe7118909e5627ed109",
     "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "mesh-view.json": "0a7ed49a52242817f6c564e8060de33d4e8b550b9dea95371bbaedc4c2acd811",
     "qtf.json": "94739a20f559ffaf6d472b458283a7002ee507e4eda4940ad7a2d4fdba6050e8",
-    "README.md": "a43f3705ac86701e2f67702a6240d0cab9c343c11c8ef78541762ac0d5e8e59d",
+    "README.md": "c2d38a1fbd84e7c995e406080dbde2801caf5f173f106e7399aa28a39172caed",
     "geometry/native-surface-check.json": "e6e6e1343cc0231ebbab6388ec0f6c86e18e6c83785311cbcd6b9ca630e0a6aa",
     "geometry/surface.json": "1b78f09073eef1bccede2f2692ae91766a6ed2ca438f5dca10f2cda6dca61501",
     "inputs/drift.dft": "9796a6562015f84efb0da150c77b73801db2c24e6a70c50c713b4c8d3b376b85",
@@ -205,6 +206,8 @@
     "logs/hsqtf.log": "82aee741384e9a11ce4f6d1de1902993595fc0fefd73f0ca8650c39e403c34d6",
     "logs/hsrao.log": "202f3b90fe881a43647dab4c5c31d5e408408d4478287e0807d3f0e1c0715add",
     "logs/hsrdf.log": "4ad51e81fbe3d29d8c399dacc764c474432d1a4cc40687dcac0796f5a0ca6fff",
+    "plots/animate_harmonics.gp": "75103cbb1424ed5252983bc300d218f5a98485b50f16d03b4348f91b051ac6ac",
+    "plots/animate_map.gp": "21d8aad5e819847b7ce025e9414bb7181a832ef9fb3659aa61a459647ba879b2",
     "plots/complex.gp": "869a8512877dbc016e076ed381da8ac55cbbf3d62ef782b7a3f6802c5360d685",
     "plots/drift.gp": "b83a55e01d92b5d6499aca4371ad33f7b399dbdc337164266dcf006e9b4b3e82",
     "plots/qtf.gp": "cb2d3c2f4aae6137bffa096a067d97690a11030676b202615c193499f16994cd",

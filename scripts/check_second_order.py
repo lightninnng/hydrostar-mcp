@@ -212,11 +212,14 @@ def check_second_order():
         and delivery["spc"]["status"] == "not_applicable",
         "Second-order native delivery scope",
     )
+    from scripts.animate_second_order import check_animations
+
     return dict(
         second_order_studies=2,
         valid_second_order_complex_coefficients=count,
         structured_exterior_total_panels=record["main_total_panels"],
         yaw_component="convergence_required",
+        **check_animations(),
     )
 
 
