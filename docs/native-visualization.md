@@ -68,6 +68,18 @@ python scripts/build_gallery.py
 
 环境文件记录了已实际执行的 Windows ParaView/VTK ABI 组合，完整依赖版本见[可视化数据目录](../examples/visualization)。原生场量重算按各数据目录的交付清单执行。详细扫频的动画采用同网格、同物理参数的单频配套计算，并与完整扫频的六自由度复响应逐项核对。
 
+## README 网格总览与动图预览
+
+中英文 README 展示四种已计算构型的实际湿面网格、压力与波面、绕射与辐射以及六自由度响应。网格总览直接使用通过验收的原生面元连接，几何倍率为 1，各视图独立取景；蓝色湿面与灰色干结构背景分别显示。
+
+```powershell
+pvpython --disable-registry --force-offscreen-rendering scripts/render_readme_meshes.py
+python scripts/export_readme_media.py
+python scripts/export_readme_media.py --check
+```
+
+预览从已验收的高清 ParaView 动图按原固定调色板缩放，完整保留 40 个物理相位、逐帧时长、色标、单位和观察倍率。点击 README 图片可以打开高清动图或矢量响应 PDF。发布检查核对原始图、预览、脚本与验收来源的一致性，并在排除时间标题后检查每个场量视窗的 40 个物理相位均有像素变化。导出与复核记录见 `examples/visualization/readme-meshes.json` 和 `readme-media.json`。
+
 ## 交付记录
 
 交付清单保存手册依据、工具名称和版本、项目名、相对数据路径、输入及数据库哈希、命令或界面操作、视图设置、场量与工况、色标、单位、倍率、时间/帧率、导出格式和媒体哈希。原生绘图设置、场点输入、实际 .prv、所用 Anim/ 索引及数据、宏/会话设置、原始导出文件和必要的转码设置按采用的路径交付；数据库可随包保存，或清楚记录由交付输入再生成的方法。

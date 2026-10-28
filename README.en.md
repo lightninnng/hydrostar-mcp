@@ -10,13 +10,13 @@ Build hydrodynamic models from parameters, sections and CAD, then verify panel q
 
 The [online scientific report](https://lightninnng.github.io/hydrostar-mcp/) retains a rotatable solved-mesh view and selectable configurations, headings, amplitude, phase and dynamic fields. See the [quickstart](docs/quickstart.md) for installation and replay, and the [modelling guide](docs/modeling-guide.md) for physical inputs and quality requirements.
 
-## Computed examples
+## Configurations and solved meshes
 
 The original curved hull is reconstructed from the project's own station table using corresponding longitudinal and sectional quadrilateral bands. Its wet mesh has 2018 quadrilaterals and 11 end-cap triangles, with 844 waterplane panels: **2873 full-equivalent total panels**. The native sweep covers **231 frequencies and 13 headings** within the default budget. Geometry acceptance and all six execution gates passed.
 
-![Native six-DOF response of the curved station hull](docs/assets/vessel-response.png)
+[![Actual solved wet meshes for the four configurations](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
 
-The manual-recommended Gnuplot route reads the original response files and exports high-resolution PNG, vector PDF and heading-selectable SVG. Translation amplitudes are in m/m, rotations in deg/m and phases in degrees. The [curved-hull package](examples/vessel) contains complete values, parameters and native inputs.
+This plate is exported by ParaView commands from the accepted solved connectivity, retaining quadrilaterals and local triangles. Blue surfaces are the potential-flow wet mesh; grey geometry supplies the platform's dry-structure and slender-member context. Geometry uses a 1× gain, and each view is fitted independently. Total counts include waterplane panels; the plate shows wet surfaces. The online report provides a rotatable view of each model.
 
 | Configuration | Full-equivalent total panels, including waterplane | Frequency range and spacing (rad/s) | Frequencies and headings |
 | --- | --- | --- | --- |
@@ -29,13 +29,87 @@ The three reference configurations use public principal dimensions and explicit 
 
 ## Dynamic pressure, waves and motion
 
-![Curved hull pressure, total elevation and scattered elevation](docs/assets/vessel-coupled.gif)
+All four configurations provide synchronized surface pressure, total elevation and scattered elevation. Incident amplitude is **0.50 m** and heading is **60°**. Each uses the selected frequency, physical period and depth below.
 
-![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/platform-coupled.gif)
+| Configuration | Angular frequency (rad/s) | Physical period (s) | Depth (m) |
+| --- | --- | --- | --- |
+| Curved station hull | 0.65 | 9.666 | 80 |
+| Semisubmersible | 0.80 | 7.854 | 200 |
+| Container hull | 0.50 | 12.566 | 80 |
+| Full-form tanker | 0.40 | 15.708 | 80 |
 
 The left view shows the body-following first-order pressure perturbation on the mean wetted panels in kPa. The centre shows total elevation and rigid-body motion. The right shows scattered elevation, including diffraction and motion-induced radiation; elevation colours are in metres. Colours retain physical values. Motion and wave height each use a stated 6× viewing gain; pressure geometry uses 1×. Views share the physical phase and fixed cycle-wide colour scales.
 
-The fields come from independently checked native HSPRS complex results. ParaView saves the frames by command, followed by GIF encoding. Checks cover analytical incident waves, full-complex radiation reconstruction, body-following pressure correction and outward-normal sampling sensitivity. Original HSprv exports and version diagnostics are retained, while display records identify the accepted fields. The [diffraction and radiation animation](docs/assets/platform-components.gif), [visualization data](examples/visualization) and [export methods](docs/native-visualization.md) support reproduction. All field views remain selectable in the online report.
+**Curved station hull.** The wet-surface pressure cycle is shown alongside total and scattered elevation and the corresponding six-DOF rigid-body motion.
+
+[![Curved hull pressure, total elevation and scattered elevation](docs/assets/readme-vessel-coupled.gif)](docs/assets/vessel-coupled.gif)
+
+**Semisubmersible.** The column arrangement and inter-column wave field appear together, with pressure attached to the actual wet panels.
+
+[![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/readme-platform-coupled.gif)](docs/assets/platform-coupled.gif)
+
+**Container hull.** This reference reconstruction includes a parallel midbody, rounded bilge, bulbous bow and transom. Its animation uses its own computed fields.
+
+[![Container hull pressure, total elevation and scattered elevation](docs/assets/readme-container-coupled.gif)](docs/assets/container-coupled.gif)
+
+**Full-form tanker.** The full midbody and continuously narrowing ends are shown with their computed surface pressure and exterior wave fields.
+
+[![Full-form tanker pressure, total elevation and scattered elevation](docs/assets/readme-tanker-coupled.gif)](docs/assets/tanker-coupled.gif)
+
+Click any preview to open its full-resolution export. Each retains all 40 physical phases and time annotations, playing at 10 frames/s. A playback cycle lasts four seconds; physical time is given by t, t/T and the periods above. Colour limits are stated separately for each panel and configuration.
+
+## Diffraction and radiation fields
+
+These animations decompose the scattered field into fixed-body diffraction and motion-induced radiation. The left view retains the mean body pose; the right shows radiation from that case's six-DOF response. Components are separated in the complex domain and reconstructed at a shared physical phase. Elevation is in metres, with 6× viewing gains for wave height and motion. Each panel retains its colour limits throughout the cycle.
+
+**Curved hull diffraction and radiation.**
+
+[![Curved hull fixed-body diffraction and motion-induced radiation](docs/assets/readme-vessel-components.gif)](docs/assets/vessel-components.gif)
+
+**Semisubmersible diffraction and radiation.**
+
+[![Semisubmersible fixed-body diffraction and motion-induced radiation](docs/assets/readme-platform-components.gif)](docs/assets/platform-components.gif)
+
+**Container hull diffraction and radiation.**
+
+[![Container hull fixed-body diffraction and motion-induced radiation](docs/assets/readme-container-components.gif)](docs/assets/container-components.gif)
+
+**Full-form tanker diffraction and radiation.**
+
+[![Full-form tanker fixed-body diffraction and motion-induced radiation](docs/assets/readme-tanker-components.gif)](docs/assets/tanker-components.gif)
+
+The fields come from independently checked native HSPRS complex results. ParaView saves frames by command, followed by GIF encoding. Checks cover analytical incident waves, full-complex radiation reconstruction, body-following pressure correction and outward-normal sampling sensitivity. Original HSprv exports and version diagnostics are retained, while display records identify the accepted fields. [Visualization data and export records](examples/visualization) and [command reproduction](docs/native-visualization.md) are included. Larger total/scattered wave views are available for the [curved hull](docs/assets/vessel-wave.gif), [semisubmersible](docs/assets/platform-wave.gif), [container hull](docs/assets/container-wave.gif) and [tanker](docs/assets/tanker-wave.gif).
+
+## Six-DOF frequency response
+
+The manual-recommended Gnuplot route reads the original response files and exports the curves by command. Each figure overlays headings of 0°, 60°, 90°, 120° and 180° for surge, sway, heave, roll, pitch and yaw. Angular frequency is in rad/s, translation amplitudes in m/m and rotation amplitudes in deg/m. Each case retains its own loading, damping, depth and frequency range.
+
+**Curved station hull.** The 231-point sweep covers 0.05–1.20 rad/s at 0.005 rad/s spacing, retaining the peaks and troughs in heave, roll, pitch and the other responses.
+
+[![Native six-DOF response of the curved station hull](docs/assets/vessel-response.png)](docs/assets/vessel-response.pdf)
+
+**Semisubmersible.** The 237-point sweep covers 0.02–1.20 rad/s with the published restoring and damping assumptions.
+
+[![Native six-DOF response of the semisubmersible](docs/assets/platform-response.png)](docs/assets/platform-response.pdf)
+
+**Container hull.** The 151-point sweep covers 0.05–0.80 rad/s.
+
+[![Native six-DOF response of the container hull](docs/assets/container-response.png)](docs/assets/container-response.pdf)
+
+**Full-form tanker.** The 111-point sweep covers 0.05–0.60 rad/s.
+
+[![Native six-DOF response of the full-form tanker](docs/assets/tanker-response.png)](docs/assets/tanker-response.pdf)
+
+<details>
+<summary>View the curved hull's six-DOF phase at a 60° heading</summary>
+
+Phase is in degrees, wrapped to −180° through 180°. Discrete points retain the native samples across the wrap boundary. Interpret phase jumps together with this convention and the corresponding amplitude.
+
+![Curved hull six-DOF phase at a 60-degree heading](docs/assets/vessel-phase-60.svg)
+
+</details>
+
+Click a response figure for its vector PDF. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [native curve exports](examples/visualization/curves).
 
 ## Modelling and native delivery
 

@@ -334,6 +334,9 @@ def main():
         from scripts.check_native_media import check_native_media
 
         results.update(check_native_media())
+        from scripts.export_readme_media import check as check_readme_media
+
+        results.update(check_readme_media())
         print(
             json.dumps(
                 dict(

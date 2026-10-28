@@ -10,13 +10,13 @@
 
 [在线计算报告](https://lightninnng.github.io/hydrostar-mcp/)可旋转实际求解网格，切换构型、浪向、幅值、相位及动态场量。[快速开始](docs/quickstart.md)介绍安装与复算，[建模说明](docs/modeling-guide.md)给出参数和质量要求。
 
-## 计算展示
+## 计算对象与求解网格
 
 曲线船体由本项目原创型值表重建，采用沿站位与剖面的四边形网格带。湿面包含 2018 个四边形和 11 个端部三角形，另有 844 个水线面元，全体合计 **2873 个面元**。在默认预算内完成 **231 个频率点和 13 个浪向**的真实计算，几何与六项原生执行门禁全部通过。
 
-![曲线船体六自由度原生响应](docs/assets/vessel-response.png)
+[![四种计算对象的实际湿面网格](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
 
-曲线通过手册推荐的 Gnuplot 路径读取原生响应文件并批量保存，提供高分辨率 PNG、矢量 PDF 及可切换浪向的 SVG。平移幅值单位为 m/m，转动为 deg/m，相位为 deg；完整数值与参数见[曲线船体算例](examples/vessel)。
+图中网格由 ParaView 命令读取已验收的实际求解面元连接并导出，保留四边形与局部三角形边界。蓝色为势流湿表面，灰色为平台干结构和细杆背景。几何采用 1 倍比例，各视图独立取景；总面元数包含水线面，图中展示湿面。在线报告可继续旋转和检查三维模型。
 
 | 计算对象 | 全体总面元，含水线面 | 频率范围与间隔（rad/s） | 频率点与浪向数 |
 | --- | --- | --- | --- |
@@ -29,13 +29,87 @@
 
 ## 动态压力、波面与运动
 
-![曲线船体动态压力、总波面和散射波面](docs/assets/vessel-coupled.gif)
+四种构型均提供表面压力、总波面和散射波面的同相位动画。共同入射波幅为 **0.50 m**，浪向为 **60°**；各自选定频率、物理周期和水深如下。
 
-![半潜平台动态压力、总波面和散射波面](docs/assets/platform-coupled.gif)
+| 计算对象 | 角频率（rad/s） | 物理周期（s） | 水深（m） |
+| --- | --- | --- | --- |
+| 曲线船体 | 0.65 | 9.666 | 80 |
+| 半潜平台 | 0.80 | 7.854 | 200 |
+| 集装箱船 | 0.50 | 12.566 | 80 |
+| 丰满油船 | 0.40 | 15.708 | 80 |
 
 左图显示平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；右图为包含绕射和运动诱导辐射的散射波面，波面色标单位为 m。颜色保持实际物理数值，运动和波高各采用 6 倍观察倍率，压力图几何倍率为 1。所有视图采用同一物理相位，色标在整个周期内固定。
 
-场量来自经独立核对的 HSPRS 原生复数结果，使用 ParaView 命令保存帧序列后编码为 GIF。入射波解析解、完整复辐射重建、随体压力修正及外法向采样敏感性分别验收。HSprv 原始导出和版本兼容性诊断一并保存，展示字段明确指向已验收结果。[绕射与辐射动画](docs/assets/platform-components.gif)、[全部可视化数据](examples/visualization)和[导出方法](docs/native-visualization.md)可供复核；在线报告保留各类场量的切换。
+**曲线船体。** 观察船体湿表面压力的周期变化，以及总波面、散射波面与六自由度运动之间的对应关系。
+
+[![曲线船体动态压力、总波面和散射波面](docs/assets/readme-vessel-coupled.gif)](docs/assets/vessel-coupled.gif)
+
+**半潜平台。** 多柱外形与柱间波场同时展示，压力着色沿实际湿面面元保存。
+
+[![半潜平台动态压力、总波面和散射波面](docs/assets/readme-platform-coupled.gif)](docs/assets/platform-coupled.gif)
+
+**集装箱船。** 参照构型包含平行中体、圆舭、球鼻艏和艉封板，动图使用该构型自身的计算结果。
+
+[![集装箱船动态压力、总波面和散射波面](docs/assets/readme-container-coupled.gif)](docs/assets/container-coupled.gif)
+
+**丰满油船。** 展示丰满中体和连续收缩艏艉所对应的湿表面压力与外部波场。
+
+[![丰满油船动态压力、总波面和散射波面](docs/assets/readme-tanker-coupled.gif)](docs/assets/tanker-coupled.gif)
+
+README 使用便于阅读的预览，点击动图打开高清原图。每组完整保留 40 个物理相位与时间标注，以 10 帧/秒循环播放；播放一周为 4 秒，实际物理周期见图中 t、t/T 及上表。不同面板和构型的色标范围分别标注。
+
+## 绕射与辐射波场
+
+以下动画将散射波场分解为固定体绕射和运动诱导辐射。左图保持平均姿态，右图显示该工况六自由度运动激发的辐射贡献。分量在复数域分解后按统一物理相位重建，波面色标为 m，波高和运动观察倍率均为 6。每个面板在完整周期内采用固定色标。
+
+**曲线船体的绕射与辐射。**
+
+[![曲线船体固定体绕射和运动诱导辐射](docs/assets/readme-vessel-components.gif)](docs/assets/vessel-components.gif)
+
+**半潜平台的绕射与辐射。**
+
+[![半潜平台固定体绕射和运动诱导辐射](docs/assets/readme-platform-components.gif)](docs/assets/platform-components.gif)
+
+**集装箱船的绕射与辐射。**
+
+[![集装箱船固定体绕射和运动诱导辐射](docs/assets/readme-container-components.gif)](docs/assets/container-components.gif)
+
+**丰满油船的绕射与辐射。**
+
+[![丰满油船固定体绕射和运动诱导辐射](docs/assets/readme-tanker-components.gif)](docs/assets/tanker-components.gif)
+
+场量来自经独立核对的 HSPRS 原生复数结果，使用 ParaView 命令保存帧序列后编码为 GIF。入射波解析解、完整复辐射重建、随体压力修正及外法向采样敏感性分别验收。HSprv 原始导出和版本兼容性诊断一并保存，展示字段明确指向已验收结果。[可视化数据与导出记录](examples/visualization)和[命令复现方法](docs/native-visualization.md)随仓库提供。单独放大的总波与散射波视图见[曲线船体](docs/assets/vessel-wave.gif)、[半潜平台](docs/assets/platform-wave.gif)、[集装箱船](docs/assets/container-wave.gif)和[丰满油船](docs/assets/tanker-wave.gif)。
+
+## 六自由度频率响应
+
+曲线通过手册推荐的 Gnuplot 路径读取原生响应文件并批量保存。下图分别叠加 0°、60°、90°、120° 和 180° 浪向，覆盖纵荡、横荡、升沉、横摇、纵摇和艏摇。横轴为角频率（rad/s），平移幅值单位为 m/m，转动为 deg/m。每组曲线对应其自身的装载、阻尼、水深和频率范围。
+
+**曲线船体。** 231 个频率点覆盖 0.05–1.20 rad/s，间隔为 0.005 rad/s，保留升沉、横摇与纵摇等响应的峰谷细节。
+
+[![曲线船体六自由度原生响应](docs/assets/vessel-response.png)](docs/assets/vessel-response.pdf)
+
+**半潜平台。** 237 个频率点覆盖 0.02–1.20 rad/s，展示多柱平台在所列恢复与阻尼设置下的响应。
+
+[![半潜平台六自由度原生响应](docs/assets/platform-response.png)](docs/assets/platform-response.pdf)
+
+**集装箱船。** 151 个频率点覆盖 0.05–0.80 rad/s。
+
+[![集装箱船六自由度原生响应](docs/assets/container-response.png)](docs/assets/container-response.pdf)
+
+**丰满油船。** 111 个频率点覆盖 0.05–0.60 rad/s。
+
+[![丰满油船六自由度原生响应](docs/assets/tanker-response.png)](docs/assets/tanker-response.pdf)
+
+<details>
+<summary>查看曲线船体在 60° 浪向下的六自由度相位</summary>
+
+相位单位为 deg，按 −180° 至 180° 包裹显示，跨边界采用离散点保留原生采样；相位跳变需结合包裹约定和相应幅值判断。
+
+![曲线船体在 60 度浪向下的六自由度相位](docs/assets/vessel-phase-60.svg)
+
+</details>
+
+点击响应图打开矢量 PDF。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[原生曲线导出包](examples/visualization/curves)。
 
 ## 建模与原生文件交付
 

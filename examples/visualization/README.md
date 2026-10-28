@@ -18,3 +18,7 @@ Each fields directory contains native inputs, field cards, full complex values, 
 完整复现命令见[可视化方法](../../docs/native-visualization.md)。工具依赖独立安装；[ParaView 版本清单](paraview-versions.json)及仓库中的环境文件记录了实际可用的 Windows 组合。
 
 See [visualization methods](../../docs/native-visualization.md) for replay commands. Tools are installed separately; the [version record](paraview-versions.json) and repository environment file identify the tested Windows combination.
+
+README 的四构型网格总览记录见 [readme-meshes.json](readme-meshes.json)，八组动态预览记录见 [readme-media.json](readme-media.json)。预览保留原动图的全部相位、时间、固定调色板与图例，点击后可查看原始高清导出。
+
+The README's four-model mesh plate is recorded in [readme-meshes.json](readme-meshes.json), and its eight dynamic previews in [readme-media.json](readme-media.json). Previews retain every source phase, timing, fixed palette and legend, with links to the original full-resolution exports.

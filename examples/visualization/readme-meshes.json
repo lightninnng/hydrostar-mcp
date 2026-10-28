@@ -1,0 +1,68 @@
+{
+  "renderer": "ParaView 6.2",
+  "method": "Actual accepted HST wet panel connectivity, symmetry expanded; native ParaView command export",
+  "geometry_gain": 1,
+  "views": "Orthographic, fitted independently; dry context in grey",
+  "waterplane": "Included in the total panel count; wet surface shown",
+  "cases": [
+    {
+      "key": "vessel",
+      "source": "examples/visualization/fields/vessel/pressure.json",
+      "source_sha256": "cbe982eb4ec751b469d4edd2e8eea9a81c4cf08e53a25d602ca68775eac0d3bd",
+      "wet_panels": 2029,
+      "total_panels": 2873,
+      "wet_extents_m": [
+        120.0000000000001,
+        22.130869057397803,
+        8.02889252921689
+      ],
+      "acceptance": "examples/vessel/verification.json",
+      "acceptance_sha256": "24b2a97ab47bd8e31a61b92c0794c086f0dafcecec5f396380ef58f3ef823757"
+    },
+    {
+      "key": "platform",
+      "source": "examples/pressures/semisub_oc4_style/pressure.json",
+      "source_sha256": "6757924d04443f14a716f2da35237bb4a8091359a03e81e9b8bcbd193557d231",
+      "wet_panels": 1656,
+      "total_panels": 1782,
+      "wet_extents_m": [
+        67.4390565864,
+        74.1377863972,
+        20.0
+      ],
+      "acceptance": "examples/results/semisub_oc4_style/summary.json",
+      "acceptance_sha256": "6ad9c7cdfddfd88102e36a993d9001dec7f2d5b14dd4f6b29aaad5c7c6630eac"
+    },
+    {
+      "key": "container",
+      "source": "examples/pressures/container_kcs_style/pressure.json",
+      "source_sha256": "6935be3d20c03163216acf37126869c356e98e062bf8cfd3cb8762b971d356c2",
+      "wet_panels": 1454,
+      "total_panels": 1710,
+      "wet_extents_m": [
+        235.248423725,
+        32.2,
+        10.800000000000002
+      ],
+      "acceptance": "examples/results/container_kcs_style/summary.json",
+      "acceptance_sha256": "69f50344f99e7087c2330a25e517d320d14a988034ff83bfb98d26220961bc06"
+    },
+    {
+      "key": "tanker",
+      "source": "examples/pressures/tanker_kvlcc2_style/pressure.json",
+      "source_sha256": "01f56c913c115089d07b27ea14b8024f62c94af3528ef06806cd5f684ffaefa5",
+      "wet_panels": 1320,
+      "total_panels": 1732,
+      "wet_extents_m": [
+        325.58902596300004,
+        61.9842446124,
+        20.800000000000004
+      ],
+      "acceptance": "examples/results/tanker_kvlcc2_style/summary.json",
+      "acceptance_sha256": "a5857136ab49b3bfa29b57f0388dc99803ffb56f5e3e3f516d6af55b46c852bf"
+    }
+  ],
+  "output": "docs/assets/readme-meshes.png",
+  "output_sha256": "9b0108a867efd22c6703f5a65e81d63e0706309dc52d2fe64a3a4ffcd3f4f4c8",
+  "renderer_script_sha256": "abfae9706f90130f013d86f551d651bd4efc5db694705a9c3778da72e7feddfc"
+}
