@@ -153,11 +153,14 @@ def check_gallery_media():
         def __init__(self):
             super().__init__()
             self.cases, self.images, self.links = [], [], []
+            self.geometry_cases = []
 
         def handle_starttag(self, tag, attributes):
             attrs = dict(attributes)
             if tag == "section" and "data-result-case" in attrs:
                 self.cases.append(attrs["data-result-case"])
+            if tag == "article" and "data-geometry-case" in attrs:
+                self.geometry_cases.append(attrs["data-geometry-case"])
             if tag == "img":
                 self.images.append(attrs)
             if tag == "a":
@@ -190,6 +193,23 @@ def check_gallery_media():
     require(
         "assets/readme-meshes.png" in sources, "Native four-model mesh plate required"
     )
+    geometry = read_json(ROOT / "docs/data/geometry.json")["cases"]
+    require(
+        set(document.geometry_cases) == {case["key"] for case in geometry}
+        and len(document.geometry_cases) == len(geometry)
+        and "#geometry-heading" in document.links,
+        "Complex geometry chapters and navigation required",
+    )
+    geometry_figures = ["assets/geometry-source-cases.png"] + [
+        case[field] for case in geometry for field in ("geometry_figure", "rao_figure")
+    ]
+    for source in geometry_figures:
+        require(source in sources, "Complex geometry figure missing: " + source)
+        for name in ("README.md", "README.en.md"):
+            require(
+                f"](docs/{source})" in (ROOT / name).read_text(encoding="utf-8"),
+                "Complex geometry figure missing in " + name + ": " + source,
+            )
     for key in cases:
         require(
             f"assets/{key}-response.png" in sources,
@@ -205,7 +225,11 @@ def check_gallery_media():
             path.is_relative_to(ROOT / "docs") and path.is_file(),
             "Missing gallery asset: " + target,
         )
-    return dict(gallery_result_chapters=4, gallery_dynamic_views=10)
+    return dict(
+        gallery_result_chapters=4,
+        gallery_dynamic_views=10,
+        gallery_geometry_chapters=len(geometry),
+    )
 
 
 def check_results():

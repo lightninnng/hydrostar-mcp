@@ -10,6 +10,8 @@
 
 [在线计算报告](https://lightninnng.github.io/hydrostar-mcp/)可旋转实际求解网格，切换构型、浪向、幅值、相位及动态场量。[快速开始](docs/quickstart.md)介绍安装与复算，[建模说明](docs/modeling-guide.md)给出参数和质量要求。
 
+[复杂建模展示](#多来源复杂几何与网格)另提供贯通月池浮体、曲线站位船体及带升沉板 Spar 的网格与响应图，[在线报告对应章节](https://lightninnng.github.io/hydrostar-mcp/#geometry-heading)可逐项查看。
+
 ## 计算对象与求解网格
 
 曲线船体由本项目原创型值表重建，采用沿站位与剖面的四边形网格带。湿面包含 2018 个四边形和 11 个端部三角形，另有 844 个水线面元，全体合计 **2873 个面元**。在默认预算内完成 **231 个频率点和 13 个浪向**的真实计算，几何与六项原生执行门禁全部通过。
@@ -143,6 +145,49 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 </details>
 
 [二阶分析方法与复算](docs/second-order.md)说明积分域、频率配对和验收范围。[原生二阶计算包](examples/second-order/platform)保存 HST、RDF、MCN、DFT、QTF、RAO、八阶段日志、复数输出与正式交付清单；本例的 SPC 谱统计输入为本次不适用。四种构型的前述动态图展示各自的一阶压力、波场与运动。
+
+## 多来源复杂几何与网格
+
+以下三个原创算例展示曲线放样、贯通开口与 CAD 导入的完整建模链路。网格沿结构特征布置，保留实际求解 HST 中的四边形与局部三角形；各例已通过所列几何验收和六项原生执行门禁。
+
+[![曲线站位船体、贯通月池浮体与带升沉板 Spar 的实际求解网格](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+
+| 研究参照构型 | 面元布局 | 湿面四边形 / 三角形 | 全体总面元，含水线面 | CAD 体积相对差 |
+| --- | --- | --- | --- | --- |
+| [曲线站位船体](examples/geometry/lofted_vessel) | 站位与剖面网格带 | 9811 / 7 | 14962 | 0.100% |
+| [贯通月池浮体](examples/geometry/moonpool_caisson) | 内外壁与底面相容分块 | 728 / 0 | 1108 | 小于 0.001% |
+| [曲面 Spar 与升沉板](examples/geometry/cad_spar) | 轴向环带与径向分区 | 9312 / 0 | 9955 | 0.195% |
+
+曲线站位船体和 Spar 保留原授权的密网格研究配置；前文展示的曲线船体采用 2873 个总面元方案。**新模型仍按 3000 个全体等效总面元规划。**
+
+**带贯通月池的多边形浮体。** 由外部实体减去贯通开口，外壁、月池内壁和连接底面采用相容分块，保留内外水线闭环。
+
+[![贯通月池浮体的实际湿面网格与几何投影](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+
+**曲线站位船体。** 由原创曲线站位资料放样，采用对应的纵向与剖面网格带；艏艉保留有记录的局部三角形过渡。
+
+[![曲线站位船体的实际湿面网格与源剖面对照](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+
+**带升沉板的曲面 Spar。** 导入本项目构造的毫米制 STEP，完成单位转换与水线裁剪，柱体环带与有限厚升沉板的径向分区相接。
+
+[![曲面 Spar 与升沉板的实际湿面网格及几何投影](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+
+几何图与响应图复用已发布的 Matplotlib 制图，读取各自的验收湿面与原生 RAO。坐标单位为 m，各三维视图采用相同空间比例，点击图片打开矢量 PDF。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
+
+<details>
+<summary>查看三个复杂几何算例的六自由度响应</summary>
+
+响应覆盖 0.2–0.8 rad/s、间隔 0.1 rad/s，浪向为 0°、60°、120° 和 180°；平移响应单位为 m/m，转动为 deg/m。
+
+[![贯通月池浮体的六自由度原生响应](docs/assets/moonpool_caisson_rao.png)](docs/assets/moonpool_caisson_rao.pdf)
+
+[![曲线站位船体的六自由度原生响应](docs/assets/lofted_vessel_rao.png)](docs/assets/lofted_vessel_rao.pdf)
+
+[![曲面 Spar 与升沉板的六自由度原生响应](docs/assets/cad_spar_rao.png)](docs/assets/cad_spar_rao.pdf)
+
+</details>
+
+这些采样已完成建模与原生计算链路验收。目标工程用途还需对应构型的空间收敛、峰区频率与参考响应证据；月池共振和黏性耗散需专门验证和标定。[复杂几何算例](examples/geometry)保存源资料、模型参数、原生输入、完整响应与交付清单，[在线报告](https://lightninnng.github.io/hydrostar-mcp/#geometry-heading)逐项列出几何质量与响应图。
 
 ## 建模与原生文件交付
 

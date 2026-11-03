@@ -10,6 +10,8 @@ Build hydrodynamic models from parameters, sections and CAD, then verify panel q
 
 The [online scientific report](https://lightninnng.github.io/hydrostar-mcp/) retains a rotatable solved-mesh view and selectable configurations, headings, amplitude, phase and dynamic fields. See the [quickstart](docs/quickstart.md) for installation and replay, and the [modelling guide](docs/modeling-guide.md) for physical inputs and quality requirements.
 
+The [complex geometry gallery](#complex-geometry-and-panel-layouts) also presents a through-moonpool caisson, curved-section hull and Spar with a heave plate. The [corresponding report chapter](https://lightninnng.github.io/hydrostar-mcp/#geometry-heading) includes their mesh and response figures.
+
 ## Configurations and solved meshes
 
 The original curved hull is reconstructed from the project's own station table using corresponding longitudinal and sectional quadrilateral bands. Its wet mesh has 2018 quadrilaterals and 11 end-cap triangles, with 844 waterplane panels: **2873 full-equivalent total panels**. The native sweep covers **231 frequencies and 13 headings** within the default budget. Geometry acceptance and all six execution gates passed.
@@ -143,6 +145,49 @@ Force coefficients use kN/m² and moment coefficients use kN m/m². Figures reta
 </details>
 
 [Methods and replay](docs/second-order.md) describe the integration domain, frequency pairing and acceptance scope. The [native second-order package](examples/second-order/platform) includes HST, RDF, MCN, DFT, QTF and RAO inputs, eight execution logs, complex outputs and a delivery manifest. SPC spectral analysis is not applicable to this regular-wave study. The four configurations' animations above show their respective first-order pressure, waves and motion.
+
+## Complex geometry and panel layouts
+
+Three original cases demonstrate curved-section lofting, through openings and CAD import. Panels follow structural features and retain the quadrilaterals and local triangles used in the solved HST. Each case passes its recorded geometry checks and all six native execution gates.
+
+[![Solved wet meshes of the curved-section hull, through-moonpool caisson and Spar with a heave plate](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+
+| Research reference | Panel layout | Wetted quads / triangles | Full-equivalent total, including waterplane | CAD volume difference |
+| --- | --- | --- | --- | --- |
+| [Curved-section hull](examples/geometry/lofted_vessel) | Matched station and section bands | 9811 / 7 | 14962 | 0.100% |
+| [Through-moonpool caisson](examples/geometry/moonpool_caisson) | Conforming outer wall, inner wall and bottom blocks | 728 / 0 | 1108 | Less than 0.001% |
+| [Curved Spar and heave plate](examples/geometry/cad_spar) | Axial rings and radial partitions | 9312 / 0 | 9955 | 0.195% |
+
+The curved-section hull and Spar retain their previously authorized dense research configurations. The vessel shown earlier uses 2873 total panels. **New models retain the default budget of 3000 full-equivalent total panels.**
+
+**Through-moonpool caisson.** A through opening is cut from the outer solid. Conforming blocks connect the outer wall, moonpool wall and bottom while preserving both waterline loops.
+
+[![Actual wet mesh and projections of the through-moonpool caisson](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+
+**Curved-section hull.** Original curved station data define a loft with matched longitudinal and section bands. Documented local triangles handle the end transitions.
+
+[![Actual wet mesh, projections and source sections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+
+**Curved Spar with a heave plate.** An original millimetre STEP solid is converted to metres and clipped at the waterline. Axial rings connect to radial partitions on the finite-thickness plate.
+
+[![Actual wet mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+
+These published Matplotlib figures read the accepted wet surfaces and native RAOs. Coordinates are in metres, with equal spatial scales within each 3D view. Click a figure for its vector PDF. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
+
+<details>
+<summary>View six-DOF responses for the three complex geometry cases</summary>
+
+Responses cover 0.2–0.8 rad/s in 0.1 rad/s steps at headings of 0°, 60°, 120° and 180°. Translation units are m/m; rotation units are deg/m.
+
+[![Native six-DOF responses of the through-moonpool caisson](docs/assets/moonpool_caisson_rao.png)](docs/assets/moonpool_caisson_rao.pdf)
+
+[![Native six-DOF responses of the curved-section hull](docs/assets/lofted_vessel_rao.png)](docs/assets/lofted_vessel_rao.pdf)
+
+[![Native six-DOF responses of the curved Spar and heave plate](docs/assets/cad_spar_rao.png)](docs/assets/cad_spar_rao.pdf)
+
+</details>
+
+The sampled grid verifies the modelling and native execution chain. Target-specific engineering use requires spatial convergence, peak-frequency refinement and reference-response evidence; moonpool resonance and viscous losses need dedicated validation and calibration. The [case packages](examples/geometry) retain source data, model parameters, native inputs, complete responses and delivery manifests. The [online report](https://lightninnng.github.io/hydrostar-mcp/#geometry-heading) presents each case's geometry quality and response figures.
 
 ## Modelling and native delivery
 

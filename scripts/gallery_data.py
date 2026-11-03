@@ -245,19 +245,48 @@ def acceptance_table(dataset):
 
 def geometry_section():
     rows = []
-    for c in read(ROOT / "docs/data/geometry.json")["cases"]:
+    figures = []
+    descriptions = {
+        "lofted_vessel": "由原创曲线站位资料放样，沿站位和剖面形成对应的四边形网格带，艏艉保留有记录的局部三角形过渡。",
+        "moonpool_caisson": "由外部多边形实体减去贯通开口，外壁、月池内壁和连接底面采用相容分块，保留内外水线闭环。",
+        "cad_spar": "导入本项目构造的毫米制 STEP，完成单位转换和水线裁剪；曲面柱体采用轴向环带，有限厚升沉板采用径向分区。",
+    }
+    for number, c in enumerate(read(ROOT / "docs/data/geometry.json")["cases"], 1):
         q = c["panel_quality"]
         key, label = c["key"], html.escape(c["label"])
-        rows.append(
-            f'<tr><td><a href="https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/geometry/{key}">{label}</a></td><td>{q["quadrilaterals"]:,} / {q["triangles"]}</td><td>{c["full_equivalent_total"]:,}</td><td>{100 * c["volume_relative_error"]:.3f}%</td></tr>'
+        package = (
+            "https://github.com/lightninnng/hydrostar-mcp/tree/main/examples/geometry/"
+            + key
         )
+        verification = (
+            "https://github.com/lightninnng/hydrostar-mcp/blob/main/examples/geometry/"
+            + key
+            + "/verification.json"
+        )
+        geometry, response = c["geometry_figure"], c["rao_figure"]
+        frequency = c["frequency_grid"]
+        if not q["passed"] or set(c["quality_gates"].values()) != {"passed"}:
+            raise ValueError("Geometry presentation requires accepted results: " + key)
+        rows.append(
+            f'<tr><th scope="row"><a href="#geometry-{key}">{label}</a></th><td>{q["quadrilaterals"]:,} / {q["triangles"]}</td><td>{c["full_equivalent_total"]:,}</td><td>{100 * c["volume_relative_error"]:.3f}%</td></tr>'
+        )
+        figures.append(f'''<article id="geometry-{key}" data-geometry-case="{key}">
+<h3>{label}</h3><p>{descriptions[key]}</p>
+<figure class="geometry-figure"><div class="media-viewport"><a href="{geometry.removesuffix(".png")}.pdf" target="_blank" rel="noopener"><img class="media-image" src="{geometry}" width="4080" height="2040" loading="lazy" decoding="async" alt="{label}的实际湿面网格、几何投影与源资料对照"></a></div><figcaption>图 7.{number}a。平均水线以下的实际湿表面及投影，保留四边形与局部三角形边界，并列出源剖面对照。坐标单位为 m，各三维视图采用相同空间比例。点击查看矢量 PDF。</figcaption></figure>
+<p class="source">湿面排水体积为 {c["volume_m3"]:,.3f} m³，CAD 体积相对差为 {100 * c["volume_relative_error"]:.3f}%，浮心距离偏差为 {c["cb_distance_m"]:.4f} m。最大边长比为 {q["edge_ratio"]["max"]:.2f}，内角范围为 {q["minimum_corner_deg"]:.1f}°–{q["maximum_corner_deg"]:.1f}°，最大翘曲为 {q["warpage_deg"]["max"]:.2f}°，相邻尺度比最大为 {q["adjacent_size_ratio"]["max"]:.2f}。已通过所列几何门限、拓扑与自交检查及六项原生执行门禁。</p>
+<details><summary>查看{label}的六自由度响应</summary><figure><a href="{response.removesuffix(".png")}.pdf" target="_blank" rel="noopener"><img class="media-image" src="{response}" width="3600" height="2700" loading="lazy" decoding="async" alt="{label}的原生六自由度响应，{c["frequency_count"]} 个频率和 {c["heading_count"]} 个浪向"></a><figcaption>图 7.{number}b。角频率为 {frequency["min"]:.1f}–{frequency["max"]:.1f} rad/s，间隔为 {frequency["step"]:.1f} rad/s，浪向为 0°、60°、120° 和 180°。折线连接原生采样点；平移响应单位为 m/m，转动为 deg/m。点击查看矢量 PDF。</figcaption></figure></details>
+<p class="data-links"><a href="{package}">源资料、模型参数、原生输入与完整响应</a> · <a href="{verification}">验收记录</a></p></article>''')
     return (
-        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">8. 其他构型与建模方法</h2>
+        """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">7. 多来源复杂几何与网格</h2>
 <p>同轴柱体采用轴向环带与周向对应，船体采用站位与剖面网格带，多边形及贯通开口采用相容分块。四边形保留到实际求解文件，并同时检查形状、翘曲、尺度过渡、水线闭环、拓扑、自交以及 CAD 体积与浮心。</p>
-<p>下表保留已完成计算的几何研究参照。曲线船体和 Spar 的密网格沿用既定配置；前面的曲线船体展示采用新的 2873 个总面元方案。常规新模型按包含湿面、水线面和对称展开的 3000 个总面元预算规划，提高预算须按具体算例明确授权。</p>
-<div class="table-wrap"><table><thead><tr><th>研究参照构型</th><th>湿面四边形 / 三角形</th><th>全体总面元</th><th>CAD 体积差</th></tr></thead><tbody>"""
+<figure class="mesh-plate"><div class="media-viewport"><a href="assets/geometry-source-cases.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/geometry-source-cases.png" width="4200" height="1890" loading="lazy" decoding="async" alt="曲线站位船体、贯通月池浮体和带升沉板 Spar 的实际求解网格总览"></a></div><figcaption>图 7a。三个原创复杂几何的已验收湿表面，坐标单位为 m，各视图独立取景。几何与响应图复用已发布的 Matplotlib 制图，数据来自各自的验收湿面和原生 RAO；图示面元与交付 HST 保持一致。点击查看矢量 PDF。</figcaption></figure>
+<p>下表保留已完成计算的几何研究参照。曲线站位船体与 Spar 的密网格沿用原授权配置；前面展示的曲线船体采用 2873 个总面元方案。常规新模型按包含湿面、水线面和对称展开的 3000 个总面元预算规划，提高预算须按具体算例明确授权。</p>
+<div class="table-wrap"><table><caption>三种复杂几何的实际求解面元与 CAD 体积核对</caption><thead><tr><th scope="col">研究参照构型</th><th scope="col">湿面四边形 / 三角形</th><th scope="col">全体总面元，含水线面</th><th scope="col">CAD 体积相对差</th></tr></thead><tbody>"""
         + "".join(rows)
         + """</tbody></table></div>
+<p>各例保留 7 个频率和 4 个浪向，已完成建模、几何与原生计算链路验收。目标工程用途还需对应构型的空间收敛、峰区频率及参考响应证据；月池共振与黏性耗散需专门验证和标定。</p>"""
+        + "".join(figures)
+        + """
 <p>型值表、曲线、DXF、CAD 和表面网格可沿统一流程进入湿表面建模。图像与 PDF 先完成尺寸标定和描线，再以独立尺寸点核对。资料接口及适用条件见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/geometry-sources.md">多来源建模说明</a>，结构分区与验收要求见<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/docs/panel-meshing.md">面元建模方法</a>。</p></section>"""
     )
 
@@ -320,7 +349,7 @@ def second_order_section():
         )
     return f"""<section id="second-order" aria-labelledby="second-order-heading"><h2 id="second-order-heading">6. 半潜平台的二阶差频荷载</h2>
 <p>半潜平台进一步完成平均漂移与完整差频二阶势计算。采用近场表达式，包含内外自由面积分，外部积分使用 QUADPACK。水深为 200 m，浪向为 60°，波频为 0.50–1.10 rad/s，差频为 0、0.05、0.10 rad/s。原生计算覆盖 36 对有效波频，共 216 个复数荷载系数。</p>
-<figure class="mesh-plate"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格"></a><figcaption>图 6a。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。几何倍率为 1，坐标单位为 m。</figcaption></figure>
+<figure class="mesh-plate"><div class="media-viewport"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格"></a></div><figcaption>图 6a。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。几何倍率为 1，坐标单位为 m。</figcaption></figure>
 <p>外部积分域已经检查完整覆盖、重叠、水线共边、内部接缝和面元形状，并从原生网格数据库独立核对实际使用的面元与向下法向。主网格外部自由面的内角范围为 {surface["panel_quality"]["min_corner_deg"]:.1f}°–{surface["panel_quality"]["max_corner_deg"]:.1f}°，最大边长比为 {surface["panel_quality"]["max_edge_ratio"]:.2f}。原有湿面和物理参数保持一致，一阶复响应与原算例在共同频率上逐项一致。</p>
 {figures[0]}{figures[1]}
 {second_order_animation_figures()}
