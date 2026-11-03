@@ -1,0 +1,28 @@
+{
+  "schema": "hydrostar-native-geometry-view-1",
+  "source_case_id": "cad_spar_rings_fine-7eac9cf3b014449b",
+  "project": "cad_spar_rings_fine",
+  "module": "hsprv",
+  "version": "8.2.0",
+  "ok": true,
+  "rc": 0,
+  "seconds": 31.687999999999874,
+  "command": [
+    "hsprv",
+    "mesh-view.prv",
+    "cad_spar_rings_fine"
+  ],
+  "manual": "HstarManual 8.2.0, chapter 14: HSprv to ParaView; Python-2-era macro is replaced by current ParaView PVDReader commands.",
+  "mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
+  "dataset": "visualization/native/ship1_.pvd",
+  "scope": "Mean solved wet geometry and panel connectivity only; deformation, pressure and wave fields are not displayed or accepted by this mesh view.",
+  "geometry_gain": 1,
+  "coordinate_unit": "m",
+  "files": {
+    "visualization/native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "visualization/native/ship1_00001.vtu": "2d4c2c2d31100e1cd056266871668854b1b5809fe2ab3fd09d36a150fe6c0115",
+    "visualization/native/ship1_00002.vtu": "67300bada7e8487f66ba841bee90555b73028266fe30d5492066a50df7081691",
+    "visualization/mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "logs/mesh-hsprv.log": "6612e20c1f8c9c8e262d6578eaab14f5ae4b89b213c983acf46f5f4f898c157e"
+  }
+}

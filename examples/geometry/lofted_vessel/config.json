@@ -64,8 +64,8 @@
   ],
   "output_point_m": null,
   "reference_form": null,
-  "recommended_max_panels": 16000,
-  "waterplane_estimate_factor": 1.2,
-  "nproc": 1,
+  "recommended_max_panels": 3000,
+  "waterplane_estimate_factor": 1.3807132094424912,
+  "nproc": 2,
   "module_timeout_s": 3600.0
 }

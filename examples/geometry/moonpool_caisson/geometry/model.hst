@@ -1,4 +1,4 @@
-PROJECT moonpool_blocks
+PROJECT moonpool_caisson
 USER SOURCE_GEOMETRY_PIPELINE
 NBBODY 1
 SYMMETRY 1 0

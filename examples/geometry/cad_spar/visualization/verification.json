@@ -1,0 +1,55 @@
+{
+  "schema": "hydrostar-native-curve-export-1",
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "status": "exported",
+  "source": "examples/geometry/cad_spar",
+  "project": "cad_spar_rings_fine",
+  "display_name": "Curved Spar with a heave plate",
+  "frequency_count": 7,
+  "heading_count": 4,
+  "phase_display": "Modulo 360 in [-180,180); native samples shown as points without lines across phase wraps",
+  "figures": {
+    "cad_spar_rao.png": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "e7b5952ad0457de3cc365dfdfe910a3dfee8aa4124242d91178a8064470350cc"
+    },
+    "cad_spar_rao.pdf": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "c379439ec3e55cfe525782ffffedf0940ce78e8d170cffb2df529d14c3288ed1"
+    }
+  },
+  "command": [
+    "gnuplot",
+    "curves.gp"
+  ],
+  "files": {
+    "curves.gp": "3dd67d53e9fc38bb3c7e21b6fc1c65672c7a439a43fab0c3a964fa0791c1020e",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "native-mesh.json": "de70e29613a81fa4ab7a031f9c54d67456ab860f29c14b1d2cb009b44644ac7a",
+    "data/heave.rao": "de237309107a5ab5194829513f44e8322c77f059c7c4e7ebd4fb164b6ae8d343",
+    "data/pitch.rao": "7a24c5f16e23eea535591a726bad1e87ade369776c10fd1151653549b8eb42c2",
+    "data/roll.rao": "dd6bc08fadf46a4532cfb40aafe9335a8184f5725f856c16df36eaec4bb2452f",
+    "data/surge.rao": "8e8d9787a1c3779cf02500a3ac210beaae79a54de66e730d662a6a6810f72fd2",
+    "data/sway.rao": "8880e2471df03f33c498a2b7948d7b3dc1492abd2e343c792a5002e16d4f0c9b",
+    "data/yaw.rao": "f3ecb94bd552524e19c61e52b7edabdecf07231b29c0bf6b56b5ee9695a0b448",
+    "native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "native/ship1_00001.vtu": "2d4c2c2d31100e1cd056266871668854b1b5809fe2ab3fd09d36a150fe6c0115",
+    "native/ship1_00002.vtu": "67300bada7e8487f66ba841bee90555b73028266fe30d5492066a50df7081691"
+  },
+  "native_mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
+  "motions_sha256": "f67f792450d5a6e04861dae4d1e877edf7874930196543bd79b792d1e7b64c43"
+}

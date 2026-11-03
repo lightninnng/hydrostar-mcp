@@ -152,13 +152,13 @@ Three original cases demonstrate curved-section lofting, through openings and CA
 
 [![Solved wet meshes of the curved-section hull, through-moonpool caisson and Spar with a heave plate](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
 
-| Research reference | Panel layout | Wetted quads / triangles | Full-equivalent total, including waterplane | CAD volume difference |
+| Example case | Panel layout | Wetted quads / triangles | Full-equivalent total, including waterplane | CAD volume difference |
 | --- | --- | --- | --- | --- |
-| [Curved-section hull](examples/geometry/lofted_vessel) | Matched station and section bands | 9811 / 7 | 14962 | 0.100% |
+| [Curved-section hull](examples/geometry/lofted_vessel) | Matched station and section bands | 1978 / 13 | 2749 | 0.490% |
 | [Through-moonpool caisson](examples/geometry/moonpool_caisson) | Conforming outer wall, inner wall and bottom blocks | 728 / 0 | 1108 | Less than 0.001% |
-| [Curved Spar and heave plate](examples/geometry/cad_spar) | Axial rings and radial partitions | 9312 / 0 | 9955 | 0.195% |
+| [Curved Spar and heave plate](examples/geometry/cad_spar) | Axial rings and radial partitions | 2832 / 0 | 2964 | 0.411% |
 
-The curved-section hull and Spar retain their previously authorized dense research configurations. The vessel shown earlier uses 2873 total panels. **New models retain the default budget of 3000 full-equivalent total panels.**
+**Current displays and generation scripts stay within 3000 full-equivalent total panels, including wet and waterplane panels and symmetry expansion.** The hull and Spar were recalculated with the new meshes while retaining their mass, CG, inertia, damping and environment. A nearby Spar discretization with 2916 total panels supports a local response-sensitivity comparison.
 
 **Through-moonpool caisson.** A through opening is cut from the outer solid. Conforming blocks connect the outer wall, moonpool wall and bottom while preserving both waterline loops.
 
@@ -172,7 +172,7 @@ The curved-section hull and Spar retain their previously authorized dense resear
 
 [![Actual wet mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
 
-These published Matplotlib figures read the accepted wet surfaces and native RAOs. Coordinates are in metres, with equal spatial scales within each 3D view. Click a figure for its vector PDF. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
+The mesh overview follows the native HSprv → ParaView route, with every cell checked against the delivered HST. Matplotlib supplies the geometry projections and overview PDF; response figures use the manual's Gnuplot route with native RAOs. Coordinates are in metres, with equal spatial scales within each 3D view. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
 
 <details>
 <summary>View six-DOF responses for the three complex geometry cases</summary>
@@ -191,7 +191,7 @@ The sampled grid verifies the modelling and native execution chain. Target-speci
 
 ## Modelling and native delivery
 
-Panels follow structural features: axial rings for coaxial bodies, station bands for hulls, and conforming blocks for polygons and through openings. Quadrilaterals remain in the solved HST. Acceptance covers angles, warpage, size transitions, CAD volume and buoyancy centre, topology and intersections. **New models default to 3000 full-equivalent total panels, including wet and waterplane panels and symmetry expansion. Budget increases require explicit case-specific authorization.** Previously authorized dense [research references](examples/geometry) retain their configurations.
+Panels follow structural features: axial rings for coaxial bodies, station bands for hulls, and conforming blocks for polygons and through openings. Quadrilaterals remain in the solved HST. Acceptance covers angles, warpage, size transitions, CAD volume and buoyancy centre, topology and intersections. **Current public cases and new models use a budget of 3000 full-equivalent total panels, including wet and waterplane panels and symmetry expansion. Budget increases require explicit case-specific authorization.**
 
 Sections, curves, DXF, STEP/IGES/BREP and surface meshes share the preprocessing workflow. Images and PDFs use dimensional calibration, reviewed traces and independent check dimensions. Install optional dependencies with `python -m pip install -e ".[geometry]"`; see [source-based modelling](docs/geometry-sources.md) and [panel meshing](docs/panel-meshing.md).
 

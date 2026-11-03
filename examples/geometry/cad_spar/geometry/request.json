@@ -1,5 +1,5 @@
 {
-  "project": "cad_spar_rings_fine",
+  "project": "cad_spar",
   "path": "examples/geometry/sources/stepped-spar.step",
   "units": "file",
   "waterline_z_m": 0.0,
@@ -15,11 +15,14 @@
     0.0,
     0.0
   ],
-  "mesh_size_m": 0.7,
+  "mesh_size_m": 0.95,
+  "radial_mesh_size_m": 2.0,
   "panel_layout": "ring_bands",
   "structured_axis": "z",
   "longitudinal_cells": null,
   "longitudinal_grading_blend": 0.2,
+  "adaptive_stations": false,
+  "end_cap_optimizer": "none",
   "axis_center_xy_m": [
     0.0,
     0.0
@@ -32,7 +35,7 @@
     "max_warpage_deg": 2.0,
     "max_neighbor_size_ratio": 1.8
   },
-  "curvature_samples": 96,
+  "curvature_samples": 48,
   "curve_tolerance_m": 0.005,
   "weld_tolerance_m": 1e-08,
   "section_axis": "x",
@@ -45,7 +48,7 @@
   "volume_tolerance_relative": 0.005,
   "expected_wet_components": 1,
   "flip_normals": false,
-  "max_panels": 12000,
+  "max_panels": 2850,
   "timeout_s": 600.0,
   "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
   "pdf_page": 0

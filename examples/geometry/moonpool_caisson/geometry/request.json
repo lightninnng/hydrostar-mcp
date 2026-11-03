@@ -1,5 +1,5 @@
 {
-  "project": "moonpool_blocks",
+  "project": "moonpool_caisson",
   "path": "examples/geometry/sources/moonpool-sections.json",
   "units": "m",
   "waterline_z_m": 0.0,
@@ -16,8 +16,13 @@
     0.0
   ],
   "mesh_size_m": 4.0,
+  "radial_mesh_size_m": null,
   "panel_layout": "polygon_blocks",
   "structured_axis": "z",
+  "longitudinal_cells": null,
+  "longitudinal_grading_blend": 0.2,
+  "adaptive_stations": false,
+  "end_cap_optimizer": "none",
   "axis_center_xy_m": null,
   "minimum_quad_fraction": 1.0,
   "panel_quality": {
@@ -40,7 +45,7 @@
   "volume_tolerance_relative": 0.005,
   "expected_wet_components": 1,
   "flip_normals": false,
-  "max_panels": 12000,
+  "max_panels": 2000,
   "timeout_s": 600.0,
   "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
   "pdf_page": 0

@@ -1,0 +1,27 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSmcn - Mechanical computations.
+
+
+Project: cad_spar
+User   : SOURCE_GEOMETRY_PIPELINE
+Reference length                1.000000
+Gravity acceleration            9.810000
+Water mass density           1025.000000
+
+Ref. point of incident wave (   0.000057,   0.000043)
+Body 1: Reference point is  (   0.000111,   0.000017, -13.486971)
+        Centre of gravity   (   0.000111,   0.000017, -13.486971)
+        Centre of buoyance  (   0.000057,   0.000043, -12.486115)
+        GMxx  , GMyy        (   1.136737,   1.156508)
+Wave_Freq :  0.2000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.3000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.4000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.5000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.6000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.7000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.8000  4 Headings from    0.00 to 180.00
+Wave_Freq :999.0000  4 Headings from    0.00 to 180.00
+Total clock time of operation was        2.38 s 

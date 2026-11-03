@@ -73,7 +73,7 @@ def check_geometry():
         actual = {
             p.relative_to(folder).as_posix()
             for p in folder.rglob("*")
-            if p.is_file() and p.name != "verification.json"
+            if p.is_file() and p != folder / "verification.json"
         }
         require(actual == set(native["files"]), "Geometry unindexed files")
         for name, expected in native["files"].items():
@@ -113,6 +113,10 @@ def check_geometry():
         ) * 2 ** native["hslec"]["symmetry"]
         require(
             native["resource_policy"]["default_full_equivalent_total_budget"] == 3000
+            and cfg.recommended_max_panels == 3000
+            and report["request"]["max_panels"] <= 3000
+            and total <= 3000
+            and native["resource_policy"]["configured_case_budget"] == 3000
             and native["resource_policy"]["full_equivalent_total"] == total
             and delivery["resource_policy"] == native["resource_policy"],
             "Full-equivalent total panel budget record",
@@ -122,6 +126,41 @@ def check_geometry():
             == file_hash(folder / "geometry/model.hst"),
             "Solved mesh differs from accepted source",
         )
+        preflight = read(folder / "budget-preflight.json")
+        require(
+            preflight["budget"] == 3000
+            and preflight["full_equivalent_total"] == total
+            and preflight["counts"] == native["hslec"]
+            and preflight["mesh_sha256"] == file_hash(folder / "geometry/model.hst")
+            and math.isclose(
+                cfg.waterplane_estimate_factor,
+                total
+                / (native["hslec"]["hull_panels"] * 2 ** native["hslec"]["symmetry"]),
+            ),
+            "Native measured planning budget",
+        )
+        require(
+            core.parse_hslec((folder / "logs/hslec.log").read_text(encoding="utf-8"))
+            == native["hslec"],
+            "Published native HSLEC log/counts",
+        )
+        if folder != coarse:
+            curves = read(folder / "visualization/verification.json")
+            require(
+                curves["native_mesh_sha256"] == file_hash(folder / "geometry/model.hst")
+                and curves["motions_sha256"] == file_hash(folder / "motions.json"),
+                "Native curve input provenance",
+            )
+            for name, digest in curves["files"].items():
+                require(
+                    file_hash(folder / "visualization" / name) == digest,
+                    "Native curve source: " + name,
+                )
+            for name, record in curves["figures"].items():
+                require(
+                    file_hash(ROOT / "docs/assets" / name) == record["sha256"],
+                    "Native curve figure: " + name,
+                )
         hyd = core.hydrostatics(folder / "geometry/model.hst")
         require(
             math.isclose(hyd["volume"], entry["volume_m3"], rel_tol=1e-10),
@@ -181,6 +220,39 @@ def check_geometry():
         require(
             file_hash(ROOT / "docs/assets" / name) == expected, "Geometry figure hash"
         )
+    views_path = ROOT / index["native_mesh_views"]["path"]
+    require(
+        file_hash(views_path) == index["native_mesh_views"]["sha256"],
+        "Native mesh view receipt",
+    )
+    views = read(views_path)
+    require(
+        {item["key"] for item in views["cases"]}
+        == {item["key"] for item in index["cases"]}
+        and views["renderer_script_sha256"]
+        == file_hash(ROOT / "scripts/render_geometry_meshes.py")
+        and views["output_sha256"] == file_hash(ROOT / views["output"]),
+        "HSprv/ParaView geometry export",
+    )
+    for item in views["cases"]:
+        path = base / item["native_export"]
+        require(file_hash(path) == item["native_export_sha256"], "HSprv source receipt")
+        export = read(path)
+        folder = base / item["key"]
+        require(
+            export["ok"]
+            and export["rc"] == 0
+            and item["mesh_sha256"]
+            == export["mesh_sha256"]
+            == file_hash(folder / "geometry/model.hst")
+            and item["full_equivalent_total"] <= 3000
+            and item["coordinate_rounding_check"] == "passed"
+            and item["max_native_coordinate_error_m"]
+            <= item["max_native_coordinate_rounding_bound_m"],
+            "Native geometry/HST cross-check",
+        )
+        for name, digest in export["files"].items():
+            require(file_hash(folder / name) == digest, "HSprv output: " + name)
     comparison_path = ROOT / index["mesh_comparison"]["path"]
     require(
         file_hash(comparison_path) == index["mesh_comparison"]["sha256"],

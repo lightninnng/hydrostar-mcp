@@ -1,0 +1,19 @@
+{
+  "mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
+  "module": "hslec",
+  "version": "8.2.0",
+  "counts": {
+    "bodies": 1,
+    "symmetry": 0,
+    "hull_panels": 2832,
+    "waterline_segments": 48,
+    "waterplane_panels": 132,
+    "above_waterline": 0,
+    "cb_x": 5.7e-05
+  },
+  "full_equivalent_total": 2964,
+  "budget": 3000,
+  "waterplane_estimate_factor": 1.0466101694915255,
+  "estimate_basis": "HSLEC measured wet and automatic waterplane panels for the identical HST; actual counts are checked again during preparation.",
+  "log_sha256": "be4544ea4d5f15005c570ba725b488526755a51bc4c22ce8866e1af95cd59d07"
+}

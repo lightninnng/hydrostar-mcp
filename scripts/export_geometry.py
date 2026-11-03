@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from hydrostar_mcp import __version__
 from hydrostar_mcp.geometry_worker import plot_surface
-from hydrostar_mcp.visualization import _scientific_style, plot_rao
+from hydrostar_mcp.visualization import _scientific_style
 from hydrostar_mcp.workflow import file_hash, save_json
 
 LABELS = {
@@ -51,6 +51,14 @@ def export():
             (folder / "geometry/surface.json").read_text(encoding="utf-8")
         )
         motions = json.loads((folder / "motions.json").read_text(encoding="utf-8"))
+        curves = json.loads(
+            (folder / "visualization/verification.json").read_text(encoding="utf-8")
+        )
+        if curves["motions_sha256"] != file_hash(folder / "motions.json"):
+            raise ValueError("Native Gnuplot curve source changed: " + key)
+        for name, item in curves["figures"].items():
+            if item["sha256"] != file_hash(assets / name):
+                raise ValueError("Native Gnuplot figure changed: " + name)
         cfg = json.loads((folder / "config.json").read_text(encoding="utf-8"))
         v, f = np.array(surface["vertices"]), surface["faces"]
         ax = fig.add_axes([0.035 + index * 0.33, 0.30, 0.28, 0.48], projection="3d")
@@ -105,13 +113,12 @@ def export():
             surface["reference"],
             output_name=key + "_geometry.png",
         )
-        plot_rao(motions, assets / (key + "_rao.png"), title=labels[1])
         # Verification indexes the exact data bundle; figures outside it have their own hashes.
         native["publication_version"] = __version__
         native["files"] = {
             p.relative_to(folder).as_posix(): file_hash(p)
             for p in folder.rglob("*")
-            if p.is_file() and p.name != "verification.json"
+            if p.is_file() and p != folder / "verification.json"
         }
         save_json(folder / "verification.json", native)
         cases.append(
@@ -129,7 +136,9 @@ def export():
                 panel_layout=report["request"]["panel_layout"],
                 panel_quality=report["quality"]["panel_quality"],
                 waterplane_panels=native["hslec"]["waterplane_panels"],
-                full_equivalent_total=native["resource_policy"]["full_equivalent_total"],
+                full_equivalent_total=native["resource_policy"][
+                    "full_equivalent_total"
+                ],
                 quality_gates=native["quality_gates"],
                 frequency_count=len(motions["heave"]["omega"]),
                 heading_count=len(motions["heave"]["headings"]),
@@ -152,7 +161,12 @@ def export():
         fontsize=9,
         color="#526278",
     )
-    fig.savefig(assets / "geometry-source-cases.png", dpi=300)
+    # The primary PNG is exported first through native HSprv/ParaView.
+    native_views = json.loads(
+        (ROOT / "examples/geometry/native-mesh-views.json").read_text(encoding="utf-8")
+    )
+    if native_views["output_sha256"] != file_hash(assets / "geometry-source-cases.png"):
+        raise ValueError("Native ParaView overview changed")
     fig.savefig(assets / "geometry-source-cases.pdf")
     plt.close(fig)
     payload = dict(
@@ -160,6 +174,10 @@ def export():
         publication_version=__version__,
         source_origin="Original scalar construction in geometry_source_study.py; no external meshes",
         cases=cases,
+        native_mesh_views=dict(
+            path="examples/geometry/native-mesh-views.json",
+            sha256=file_hash(ROOT / "examples/geometry/native-mesh-views.json"),
+        ),
     )
     payload["figures"] = {
         p.name: file_hash(p)

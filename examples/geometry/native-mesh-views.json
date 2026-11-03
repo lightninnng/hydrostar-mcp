@@ -1,0 +1,53 @@
+{
+  "renderer": "ParaView 6.2",
+  "workflow": "HSprv native PVD -> ParaView PVDReader -> SaveScreenshot; mean geometry, deformation off",
+  "cases": [
+    {
+      "key": "lofted_vessel",
+      "native_export": "lofted_vessel/visualization/native-mesh.json",
+      "native_export_sha256": "0015ca28bed166ca5394d2506054a07971f0eb030642d1cfb5d906d3dbfa25ee",
+      "mesh_sha256": "094e0e279120752f16493788327ff98a6b7c4b2fa60e1e81f37713a7cc4e960e",
+      "wet_panels": 1991,
+      "full_equivalent_total": 2749,
+      "max_native_coordinate_error_m": 0.005972684042006298,
+      "coordinate_rounding_check": "passed",
+      "native_triangle_padding_count": 13,
+      "max_native_coordinate_rounding_bound_m": 0.00709204970679577,
+      "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+    },
+    {
+      "key": "moonpool_caisson",
+      "native_export": "moonpool_caisson/visualization/native-mesh.json",
+      "native_export_sha256": "0cae60dec6748c7bcbe114102d38ea9cde2a6fb37905e01f90f155856a550e97",
+      "mesh_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
+      "wet_panels": 728,
+      "full_equivalent_total": 1108,
+      "max_native_coordinate_error_m": 0.007077737253549147,
+      "coordinate_rounding_check": "passed",
+      "native_triangle_padding_count": 0,
+      "max_native_coordinate_rounding_bound_m": 0.008664039697536397,
+      "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+    },
+    {
+      "key": "cad_spar",
+      "native_export": "cad_spar/visualization/native-mesh.json",
+      "native_export_sha256": "de70e29613a81fa4ab7a031f9c54d67456ab860f29c14b1d2cb009b44644ac7a",
+      "mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
+      "wet_panels": 2832,
+      "full_equivalent_total": 2964,
+      "max_native_coordinate_error_m": 0.0034068061956355022,
+      "coordinate_rounding_check": "passed",
+      "native_triangle_padding_count": 0,
+      "max_native_coordinate_rounding_bound_m": 0.005052217442066201,
+      "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+    }
+  ],
+  "geometry_gain": 1,
+  "coordinate_unit": "m",
+  "output": "docs/assets/geometry-source-cases.png",
+  "output_sha256": "f7f6c68886c9648740cc73e66a3d9975c916be2ab0c37bbcb7c6f0f7ecf0e582",
+  "renderer_script_sha256": "c04f0669a2a019d05ed6082e754ffc60901cee98a0fec1bad4b0314a5b4815ef"
+}

@@ -82,6 +82,18 @@ python scripts/export_readme_media.py --check
 
 ## 交付记录
 
+三种复杂几何的当前总览使用各自新网格完成原生重算，再由 HSprv 的 SHIP 输出进入 ParaView PVDReader。每个原生三角形或四边形与验收 HST 按节点坐标及完整连接关系逐面核对；显示平均湿面，关闭 deformation，几何倍率为 1。原始 PVD、两帧 VTU、实际 mesh-view.prv、执行日志与来源记录保存于各算例 visualization/ 和 logs/。本总览只验收网格，HSprv 诊断输出中的场量不用于该图。
+
+```powershell
+pvpython --disable-registry --force-offscreen-rendering scripts/render_geometry_meshes.py
+python scripts/export_native_curves.py --gnuplot C:/path/to/gnuplot.exe --case lofted_vessel --case moonpool_caisson --case cad_spar
+python scripts/export_geometry.py
+python scripts/build_gallery.py
+python scripts/check_geometry.py
+```
+
+总览 PNG 来自 HSprv → ParaView；Matplotlib 补充几何投影与总览 PDF，Gnuplot 从本次原生 RAO 导出响应。记录见 `examples/geometry/native-mesh-views.json` 及各例 visualization/verification.json。
+
 交付清单保存手册依据、工具名称和版本、项目名、相对数据路径、输入及数据库哈希、命令或界面操作、视图设置、场量与工况、色标、单位、倍率、时间/帧率、导出格式和媒体哈希。原生绘图设置、场点输入、实际 .prv、所用 Anim/ 索引及数据、宏/会话设置、原始导出文件和必要的转码设置按采用的路径交付；数据库可随包保存，或清楚记录由交付输入再生成的方法。
 
 原生及官方配套可视化状态按实际证据记为待查看、已查看、已导出、已验证或受限并采用补充方案。已验证须具备来源匹配、实际输出与视觉检查。求解质量门禁与可视化验收分别保留，各自完成相应阶段。

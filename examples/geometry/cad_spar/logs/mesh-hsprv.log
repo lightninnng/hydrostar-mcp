@@ -1,0 +1,60 @@
+ 
+Started on 2026-11-03 at 17:52:54
+Spectum type :  AIRY wave
+Mean heading :   0.0000
+Spreading :            0
+ SYM :  F
+ Initialize Ref System
+File contains 11328 Nodes.
+File contains 2832 Panels.
+ #--------------- Ship ---------------------#
+ Compute pressure on ship hull...
+ HStar path D:\Bureau Veritas\Hstar4Experts\v8.2.0/bin
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSprs - Pressure and relative-wave-elevation computations.
+
+ ******* 64-bit version *******
+Method : Source
+  1/  7 w=  0.20 (rad/s)     0.s remaining (core  0)  0.0s
+  2/  7 w=  0.30 (rad/s)    21.s remaining (core  0)  3.0s
+  3/  7 w=  0.40 (rad/s)    19.s remaining (core  0)  3.3s
+  4/  7 w=  0.50 (rad/s)    16.s remaining (core  0)  3.3s
+  5/  7 w=  0.60 (rad/s)    12.s remaining (core  0)  2.9s
+  6/  7 w=  0.70 (rad/s)     9.s remaining (core  0)  3.1s
+  7/  7 w=  0.80 (rad/s)     6.s remaining (core  0)  3.0s
+  8/  7 w=999.00 (rad/s)     3.s remaining (core  0)  3.2s
+ Merge p8v_ file 
+Total clock time of operation was       25.88 s 
+ PrsCalcShip done
+                                                                   0.00 s                                                                   0.00 s        0.04 s 
+ 
+ #--------------- Wave field ---------------------#
+ HStar path 
+ D:\Bureau Veritas\Hstar4Experts\v8.2.0/bin                                     
+                                                                                
+                                                                                
+                        
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSprs - Pressure and relative-wave-elevation computations.
+
+ ******* 64-bit version *******
+Method : Source
+  1/  7 w=  0.20 (rad/s)     0.s remaining (core  0)  0.0s
+  2/  7 w=  0.30 (rad/s)     0.s remaining (core  0)  0.0s
+  3/  7 w=  0.40 (rad/s)     0.s remaining (core  0)  0.0s
+  4/  7 w=  0.50 (rad/s)     0.s remaining (core  0)  0.0s
+  5/  7 w=  0.60 (rad/s)     0.s remaining (core  0)  0.0s
+  6/  7 w=  0.70 (rad/s)     0.s remaining (core  0)  0.0s
+  7/  7 w=  0.80 (rad/s)     0.s remaining (core  0)  0.0s
+  8/  7 w=999.00 (rad/s)     0.s remaining (core  0)  0.0s
+ Merge p8v_ file 
+Total clock time of operation was        2.47 s 
+ PrsCalc done
+                                                                   0.00 s                                                                   0.00 s        0.00 s 
+ 

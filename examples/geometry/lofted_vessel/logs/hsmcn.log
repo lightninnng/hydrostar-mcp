@@ -1,0 +1,27 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSmcn - Mechanical computations.
+
+
+Project: lofted_vessel
+User   : SOURCE_GEOMETRY_PIPELINE
+Reference length                1.000000
+Gravity acceleration            9.810000
+Water mass density           1025.000000
+
+Ref. point of incident wave (  -1.912855,   0.003543)
+Body 1: Reference point is  (  -1.912387,   0.001026,  -4.434738)
+        Centre of gravity   (  -1.912387,   0.001026,  -4.434738)
+        Centre of buoyance  (  -1.912855,   0.003543,  -3.445350)
+        GMxx  , GMyy        (   5.342954, 124.908970)
+Wave_Freq :  0.2000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.3000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.4000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.5000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.6000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.7000  4 Headings from    0.00 to 180.00
+Wave_Freq :  0.8000  4 Headings from    0.00 to 180.00
+Wave_Freq :999.0000  4 Headings from    0.00 to 180.00
+Total clock time of operation was        2.32 s 

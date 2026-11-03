@@ -13,6 +13,7 @@ import time
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+from hydrostar_mcp import core
 from hydrostar_mcp.geometry_sources import GeometryRequest
 from hydrostar_mcp.geometry_workflow import GeometryService, verify_bundle
 from hydrostar_mcp.models import CaseConfig
@@ -30,9 +31,12 @@ RECIPES = {
         spline_seam="lowest_z",
         panel_layout="station_bands",
         structured_axis="x",
-        curvature_samples=48,
-        longitudinal_cells=192,
-        max_panels=12000,
+        curvature_samples=24,
+        longitudinal_cells=42,
+        longitudinal_grading_blend=0.1,
+        adaptive_stations=True,
+        end_cap_optimizer="quad_quasi_structured",
+        max_panels=2200,
         minimum_quad_fraction=0.95,
         panel_quality=dict(
             max_edge_ratio=5,
@@ -49,7 +53,7 @@ RECIPES = {
         mesh_size_m=4.0,
         depth=100.0,
         panel_layout="polygon_blocks",
-        max_panels=12000,
+        max_panels=2000,
         structured_axis="z",
         minimum_quad_fraction=1.0,
         panel_quality=dict(
@@ -63,13 +67,14 @@ RECIPES = {
     "cad_spar": dict(
         file="stepped-spar.step",
         units="file",
-        mesh_size_m=0.7,
-        curvature_samples=96,
+        mesh_size_m=0.95,
+        radial_mesh_size_m=2.0,
+        curvature_samples=48,
         panel_layout="ring_bands",
         structured_axis="z",
         axis_center_xy_m=[0.0, 0.0],
         minimum_quad_fraction=1.0,
-        max_panels=12000,
+        max_panels=2850,
         panel_quality=dict(
             max_edge_ratio=4,
             min_corner_deg=20,
@@ -80,6 +85,8 @@ RECIPES = {
         depth=150.0,
     ),
 }
+RECIPES["cad_spar_coarse"] = {**RECIPES["cad_spar"], "mesh_size_m": 0.98}
+CASE_PATHS = {"cad_spar_coarse": "sensitivity/cad_spar_coarse"}
 
 
 def make_sources():
@@ -260,14 +267,20 @@ def build_case(key, folder):
 
 def native_config(key, folder):
     existing = folder / "config.json"
-    if existing.is_file():
-        cfg = json.loads(existing.read_text(encoding="utf-8"))
+    template = (
+        existing
+        if existing.is_file()
+        else ROOT / "examples/geometry" / CASE_PATHS.get(key, key) / "config.json"
+    )
+    if template.is_file():
+        cfg = json.loads(template.read_text(encoding="utf-8"))
         cfg["geometry"]["path"] = (
             (folder / "geometry/model.hst").relative_to(ROOT).as_posix()
         )
         cfg["geometry"]["source_manifest"] = (
             (folder / "geometry/geometry-report.json").relative_to(ROOT).as_posix()
         )
+        cfg.update(recommended_max_panels=3000, nproc=2)
         return CaseConfig.model_validate(cfg)
     report = json.loads(
         (folder / "geometry/geometry-report.json").read_text(encoding="utf-8")
@@ -312,12 +325,148 @@ def native_config(key, folder):
                 roll_damping_pct=5.0,
                 source_note="Course/simplified-analysis assumption: mass balanced to the accepted mesh displacement, CG 1 m below integrated CB, bounding-envelope gyradii and 5% additional roll damping; zero speed and static external preload.",
             ),
+            recommended_max_panels=3000,
+            nproc=2,
         )
     )
 
 
+def measured_config(cfg, folder):
+    """Measure automatic waterplane panels before planning a near-budget HST.
+
+    The global planning estimate stays at 1.2. This specific case uses the ratio
+    measured by HSLEC for the identical HST, with the 3000-panel gate unchanged.
+    """
+    source = ROOT / cfg.geometry.path
+    directory = (
+        ROOT
+        / "output/validation/geometry-budget-preflight"
+        / (cfg.project + "-" + file_hash(source)[:16])
+    )
+    directory.mkdir(parents=True, exist_ok=True)
+    for child in ("bin", "hdf", "tmp", "logs", "rao"):
+        (directory / child).mkdir(exist_ok=True)
+    target = directory / (cfg.project + ".hst")
+    shutil.copyfile(source, target)
+    run = core.run(
+        "hslec",
+        [target.name, cfg.project],
+        directory,
+        timeout=180,
+        log_path=directory / "logs/hslec.log",
+    )
+    if not run.ok:
+        raise ValueError("HSLEC budget preflight failed: " + str(directory))
+    counts = core.parse_hslec(run.log)
+    wet = counts["hull_panels"] * 2 ** counts["symmetry"]
+    total = (counts["hull_panels"] + counts["waterplane_panels"]) * 2 ** counts[
+        "symmetry"
+    ]
+    if total > 3000 or cfg.recommended_max_panels != 3000:
+        raise ValueError(f"Full-equivalent panel budget exceeded: {total}/3000")
+    save_json(
+        folder / "budget-preflight.json",
+        dict(
+            mesh_sha256=file_hash(source),
+            module="hslec",
+            version="8.2.0",
+            counts=counts,
+            full_equivalent_total=total,
+            budget=3000,
+            waterplane_estimate_factor=total / wet,
+            estimate_basis="HSLEC measured wet and automatic waterplane panels for the identical HST; actual counts are checked again during preparation.",
+            log_sha256=file_hash(directory / "logs/hslec.log"),
+        ),
+    )
+    print(f"{cfg.project}: measured full-equivalent panels {total}/3000", flush=True)
+    return cfg.model_copy(update={"waterplane_estimate_factor": total / wet})
+
+
+def export_delivery(cfg, folder, report):
+    counts = report["hslec"]
+    total = (counts["hull_panels"] + counts["waterplane_panels"]) * 2 ** counts[
+        "symmetry"
+    ]
+    if total > 3000 or cfg.recommended_max_panels != 3000:
+        raise ValueError("Public geometry case exceeds the 3000-panel budget")
+    policy = dict(
+        default_full_equivalent_total_budget=3000,
+        configured_case_budget=3000,
+        full_equivalent_total=total,
+        nproc=cfg.nproc,
+        scope="Current case: wet and automatic waterplane panels including symmetry expansion; within the 3000-panel budget.",
+    )
+    purposes = {
+        "hst": "hslec; hschk: validated native quadrilateral/triangle mesh",
+        "rdf": "hsrdf: radiation/diffraction frequencies, headings, depth and speed",
+        "mcn": "hsmcn: mass, CG, inertia, damping and motion parameters",
+        "rao": "hsrao: response extraction instructions; distinct from rao/*.rao output",
+    }
+    delivery = dict(
+        schema="hydrostar-native-delivery-1",
+        project=cfg.project,
+        source_case_id=report["case_id"],
+        input_files={
+            f"inputs/{cfg.project}.{ext}": dict(
+                status="validated",
+                purpose=purpose,
+                sha256=file_hash(folder / "inputs" / f"{cfg.project}.{ext}"),
+            )
+            for ext, purpose in purposes.items()
+        },
+        output_files={
+            f"rao/{dof}.rao": dict(
+                status="validated",
+                purpose="Native response amplitude and phase",
+                unit=core.read_rao(folder / "rao" / f"{dof}.rao")["unit"],
+                sha256=file_hash(folder / "rao" / f"{dof}.rao"),
+            )
+            for dof in core.DOFS
+        },
+        spc=dict(
+            status="not_applicable",
+            reason="Regular-wave first-order RAOs; spectral statistics require sea states and an actual .spc input.",
+        ),
+        native_database=dict(
+            status="regenerate_for_further_native_postprocessing",
+            reason="Replay the delivered inputs in order to regenerate binary databases.",
+        ),
+        parameters="config.json",
+        geometry="geometry/geometry-report.json",
+        resource_policy=policy,
+    )
+    save_json(folder / "delivery.json", delivery)
+    commands = "\n".join(
+        [f"hslec inputs/{cfg.project}.hst {cfg.project}", f"hschk - {cfg.project}"]
+        + [
+            f"{module} inputs/{cfg.project}.{ext} {cfg.project}"
+            for module, ext in (("hsrdf", "rdf"), ("hsmcn", "mcn"), ("hsrao", "rao"))
+        ]
+    )
+    (folder / "README.md").write_text(
+        "# 原生算例文件 / Native case files\n\n"
+        f"项目名 `{cfg.project}`，湿面 {counts['hull_panels']}，水线面 {counts['waterplane_panels']}，"
+        f"全体等效总面元 **{total}/3000**，MPI 进程数 {cfg.nproc}。\n\n"
+        "实际求解网格及 .rdf/.mcn/.rao 输入保存在 inputs/，六自由度原生响应保存在 rao/。"
+        "config.json 保存质量、重心、惯性、阻尼、环境和单位；geometry/ 保存源资料、网格及独立验收。"
+        "budget-preflight.json 记录相同 HST 的原生预算实测；verification.json、logs/ 和 delivery.json 保存执行、质量门禁及哈希。\n\n"
+        "The solved native inputs are in inputs/, the six-DOF outputs in rao/, and the accepted source geometry in geometry/. "
+        "Physical parameters are held fixed for the sampled panel-layout comparison. The total includes automatic waterplane panels and symmetry expansion.\n\n"
+        "## 复算顺序 / Replay order\n\n"
+        "在本目录使用已配置且获许可的 HydroStar 8.2.0 环境，逐步核对日志和门禁。"
+        "以下输入重新生成二进制数据库；确保 bin/、hdf/、tmp/、logs/、rao/ 工作目录存在。\n\n"
+        f"```text\n{commands}\n```\n\n"
+        "响应采样为 0.2–0.8 rad/s、间隔 0.1 rad/s，四个浪向。"
+        "本次完成几何及原生计算链路验收；工程精度仍需对应构型的空间、峰区频率和参考响应证据。"
+        "The two nearby Spar discretizations measure local sampled sensitivity; they do not establish spatial convergence. "
+        "Regular-wave first-order analysis uses no .spc; a StarSpec extension supplies sea states and an actual spectral input.\n",
+        encoding="utf-8",
+    )
+    return policy
+
+
 def execute(key, folder, study):
-    cfg = native_config(key, folder)
+    cfg = measured_config(native_config(key, folder), folder)
     service = CaseService(ROOT / "output/validation/general_geometry_native", ROOT)
     try:
         report = service.prepare(cfg)
@@ -365,6 +514,10 @@ def execute(key, folder, study):
                 k: data[k] for k in ("omega", "headings", "amplitude", "phase", "unit")
             }
         save_json(folder / "motions.json", motions)
+        (folder / "logs").mkdir(exist_ok=True)
+        for step in report["steps"]:
+            shutil.copyfile(step["log"], folder / "logs" / (step["module"] + ".log"))
+        policy = export_delivery(cfg, folder, report)
         summary = dict(
             source_case_id=report["case_id"],
             quality_gates=report["quality_gates"],
@@ -374,18 +527,22 @@ def execute(key, folder, study):
             solver_mechanics=report["solver_mechanics"],
             geometry_source_validation=report["geometry_source_validation"],
             steps=[
-                {k: s[k] for k in ("module", "ok", "rc", "seconds")}
+                {
+                    **{k: s[k] for k in ("module", "ok", "rc", "seconds")},
+                    "log": "logs/" + s["module"] + ".log",
+                }
                 for s in report["steps"]
             ],
             engineering_acceptance=dict(
                 ready=False,
                 scope="Own geometry and simplified rigid-body assumptions; target-specific validation remains an evidence requirement.",
             ),
+            resource_policy=policy,
         )
         summary["files"] = {
             p.relative_to(folder).as_posix(): file_hash(p)
             for p in folder.rglob("*")
-            if p.is_file() and p.name != "verification.json"
+            if p.is_file() and p != folder / "verification.json"
         }
         save_json(folder / "verification.json", summary)
         print(key + ": native six gates passed", flush=True)
@@ -399,6 +556,7 @@ def main():
     parser.add_argument("--build", action="store_true")
     parser.add_argument("--run", action="store_true")
     parser.add_argument("--form", choices=list(RECIPES))
+    parser.add_argument("--output-root", type=Path, default=ROOT / "examples/geometry")
     args = parser.parse_args()
     if args.sources:
         make_sources()
@@ -408,7 +566,7 @@ def main():
         else dict(cases={})
     )
     for key in [args.form] if args.form else RECIPES:
-        folder = ROOT / "examples/geometry" / key
+        folder = args.output_root / CASE_PATHS.get(key, key)
         folder.mkdir(parents=True, exist_ok=True)
         if args.build:
             manifest = folder / "geometry/geometry-report.json"

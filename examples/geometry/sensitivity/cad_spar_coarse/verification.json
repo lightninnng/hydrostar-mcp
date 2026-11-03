@@ -1,4 +1,5 @@
 {
+  "source_case_id": "cad_spar_rings-c7fe72fdca1740c3",
   "quality_gates": {
     "semantic_input": "passed",
     "static_equilibrium": "passed",
@@ -8,18 +9,18 @@
     "rao_integrity": "passed"
   },
   "hydrostatics": {
-    "volume": 1720.734163859647,
+    "volume": 1717.5523323046366,
     "cb": [
-      5.711288757685457e-05,
-      4.3924514572016577e-05,
-      -12.486827384937442
+      5.6979995043331644e-05,
+      4.300090410296667e-05,
+      -12.486442630178647
     ],
-    "wetted_area": 1070.6746829674134,
-    "n_nodes": 6841,
-    "n_panels": 6800,
+    "wetted_area": 1069.5705221877681,
+    "n_nodes": 2809,
+    "n_panels": 2784,
     "sym": 0,
-    "max_edge": 0.7459358477984689,
-    "max_aspect_ratio": 2.7972594281004692,
+    "max_edge": 1.2426591541639067,
+    "max_aspect_ratio": 3.1066478854097777,
     "free_surface": 0.0,
     "rho": 1025.0,
     "gravity": 9.81
@@ -27,9 +28,9 @@
   "hslec": {
     "bodies": 1,
     "symmetry": 0,
-    "hull_panels": 6800,
-    "waterline_segments": 80,
-    "waterplane_panels": 436,
+    "hull_panels": 2784,
+    "waterline_segments": 48,
+    "waterplane_panels": 132,
     "above_waterline": 0,
     "cb_x": 5.7e-05
   },
@@ -47,37 +48,38 @@
     "balanced": true,
     "relative_error_pct": null,
     "gm_roll_pitch_m": [
-      1.138092,
-      1.158017
+      1.136821,
+      1.156591
     ]
   },
   "geometry_source_validation": {
     "schema": "hydrostar-geometry-bundle-1",
     "quality": {
       "passed": true,
-      "nodes": 6841,
-      "panels": 6800,
+      "nodes": 2809,
+      "panels": 2784,
       "wetted_components": 1,
       "expected_wet_components": 1,
       "component_volume_m3": [
-        1720.734163859707
+        1717.5523323046389
       ],
       "zero_area_panels": [],
       "duplicate_faces": 0,
       "above_water_panels": [],
       "waterplane_panels": [],
       "invalid_edges": [],
-      "cut_edges": 80,
+      "cut_edges": 48,
       "invalid_waterline_vertices": [],
       "self_intersections": [],
       "nonpositive_components": [],
       "intersection_method": "AABB broad phase, triangle-plane intervals and coplanar polygon overlap",
-      "checking_triangles": 13600,
-      "quadrilaterals": 6800,
+      "checking_triangles": 5568,
+      "quadrilaterals": 2784,
       "triangles": 0,
+      "diagnostic_indexing": "Native HST panel and node numbers start at 1; checking triangles are internal only",
       "panel_quality": {
         "passed": true,
-        "quadrilaterals": 6800,
+        "quadrilaterals": 2784,
         "triangles": 0,
         "quad_fraction": 1.0,
         "limits": {
@@ -88,21 +90,21 @@
           "max_neighbor_size_ratio": 1.8
         },
         "edge_ratio": {
-          "p50": 1.2262652665124418,
-          "p95": 2.2689953293859575,
-          "max": 2.797259428100846
+          "p50": 1.277130911603412,
+          "p95": 2.4952943411692217,
+          "max": 3.106647885409774
         },
         "warpage_deg": {
-          "p50": 0.017137331493805624,
-          "p95": 0.24409238678866035,
-          "max": 0.35275436995716397
+          "p50": 0.05968800581807174,
+          "p95": 0.39095930435943765,
+          "max": 0.5114912460952797
         },
-        "minimum_corner_deg": 48.8033873841041,
-        "maximum_corner_deg": 137.25570821626366,
+        "minimum_corner_deg": 52.59706145334318,
+        "maximum_corner_deg": 139.0311321403241,
         "adjacent_size_ratio": {
-          "p50": 1.0027482264515712,
-          "p95": 1.0430554913039776,
-          "max": 1.3394742316965915
+          "p50": 1.003292487909454,
+          "p95": 1.1706467577307416,
+          "max": 1.6020005018625199
         },
         "invalid_convexity": [],
         "shape_violations": [],
@@ -114,8 +116,8 @@
       "quad_fraction_passed": true
     },
     "fidelity": {
-      "cad_volume_relative_error": 0.0022664294508134564,
-      "cad_cb_distance_m": 0.00940650899072779,
+      "cad_volume_relative_error": 0.0041113513596956475,
+      "cad_cb_distance_m": 0.0096923915828803,
       "cad_cb_tolerance_m": 0.01
     },
     "geometry_gates": {
@@ -125,6 +127,8 @@
       "topology": "passed",
       "self_intersection": "passed",
       "orientation": "passed",
+      "panel_shape": "passed",
+      "panel_layout": "passed",
       "fidelity": "passed"
     },
     "reference": {
@@ -132,7 +136,7 @@
       "gmsh_version": "4.15.2",
       "mesh_controls": {
         "algorithm": "CAD axial sections, equal-angle rings, mapped radial shoulders and four-block O-grid bottom",
-        "azimuth_cells": 80,
+        "azimuth_cells": 48,
         "axial_intervals": [
           {
             "z0_m": -20.0,
@@ -142,16 +146,17 @@
           {
             "z0_m": -19.0,
             "z1_m": -18.2,
-            "axial_cells": 3
+            "axial_cells": 2
           },
           {
             "z0_m": -18.2,
             "z1_m": 0.0,
-            "axial_cells": 46
+            "axial_cells": 38
           }
         ],
-        "ring_count": 70,
-        "target_axial_radial_spacing_m": 0.4,
+        "ring_count": 52,
+        "target_axial_spacing_m": 0.49,
+        "target_radial_spacing_m": 1.0,
         "axis_center_xy_m": [
           0.0,
           0.0
@@ -167,74 +172,83 @@
       ],
       "source_profiles": null,
       "wet_solids": 1,
-      "orientation_method": "Counterclockwise section bands, outward horizontal shoulders and downward O-grid bottom; independently checked edges and signed volume"
+      "orientation_method": "Consistent mapped surface bands; independently checked oriented edges, component closure and signed volume"
     }
   },
-  "source_case_id": "cad_spar_rings-24d1062e0815442e",
-  "producer_version": "0.4.0",
   "steps": [
     {
       "module": "hslec",
       "ok": true,
       "rc": 0,
-      "seconds": 0.609
+      "seconds": 0.438,
+      "log": "logs/hslec.log"
     },
     {
       "module": "hschk",
       "ok": true,
       "rc": 0,
-      "seconds": 22.797
+      "seconds": 4.281,
+      "log": "logs/hschk.log"
     },
     {
       "module": "hsrdf",
       "ok": true,
       "rc": 0,
-      "seconds": 146.906
+      "seconds": 37.109,
+      "log": "logs/hsrdf.log"
     },
     {
       "module": "hsmcn",
       "ok": true,
       "rc": 0,
-      "seconds": 2.625
+      "seconds": 2.531,
+      "log": "logs/hsmcn.log"
     },
     {
       "module": "hsrao",
       "ok": true,
       "rc": 0,
-      "seconds": 0.203
+      "seconds": 0.157,
+      "log": "logs/hsrao.log"
     }
   ],
   "engineering_acceptance": {
     "ready": false,
-    "scope": "Original geometry, fixed v0.4.0 baseline mechanics and a sampled first-order response grid; target-specific spatial, peak-frequency and reference-response evidence remains to be supplied."
+    "scope": "Own geometry and simplified rigid-body assumptions; target-specific validation remains an evidence requirement."
   },
   "resource_policy": {
     "default_full_equivalent_total_budget": 3000,
-    "configured_case_budget": 12000,
-    "full_equivalent_total": 7236,
-    "nproc": 4,
-    "scope": "This specifically retained dense reference study; new models use the default 3000-panel budget and case-specific review for increases."
+    "configured_case_budget": 3000,
+    "full_equivalent_total": 2916,
+    "nproc": 2,
+    "scope": "Current case: wet and automatic waterplane panels including symmetry expansion; within the 3000-panel budget."
   },
   "files": {
-    "config.json": "7ff95dad299effc45395afcd4ce6ba40d965378b667bab104039e2f895a5aeed",
-    "delivery.json": "0edeec03042429e7ca99938a3cd5293a8e547b746cdb8b4ca5e3265e86461619",
-    "motions.json": "248aa3fea1cbb3ce37c0d04460b2af6182b8fc952837dadadf2b93e1a54db291",
-    "README.md": "8ab11ed11cbb0c754e4da81824c3a64754e6951a784277d112c342106727f867",
-    "geometry/geometry-qa.png": "246625ffd62a26171c8a0a88c9b58b1145b60d011a9d579431392a9c7b5edc62",
-    "geometry/geometry-report.json": "592f0076bc8c37c5b0b1644f3c47cdbd14bea08bcd8a7f08002f5974622a2f4b",
-    "geometry/model.hst": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838",
-    "geometry/request.json": "0bce7b8dea1af9291766c3d903f28be0e6a8de4feb3c77ecfdced4363d524416",
+    "budget-preflight.json": "f6958a37532419d40770c75915258178d4afd2de77e734544cb0f32aaa8dd1fe",
+    "config.json": "e273987011eed559f84145ed6b2f5ee75490ffee73fb2f2d556bcc1e698d3151",
+    "delivery.json": "6a1eba28834b74653894e4064f9230724fbbdea29592b96ab983ec6c19ede224",
+    "motions.json": "470d1e83cd3df9873f5b8f9bd26b53489ee0c1398cadaa9f859282968c4163d8",
+    "README.md": "b91a7c295d75e197d8d45f620f7d0af86515ef1ef15a9c035821802166cb77b4",
+    "geometry/geometry-qa.png": "61918938c343c3c5f4da5540a396db2b07c4636d07ead3af9025269c1110b02b",
+    "geometry/geometry-report.json": "d8588a936137b60bdd1a57d297556ef10f88e02108f0ab55bb9e0864789de809",
+    "geometry/model.hst": "cea4059498c5c1cd3d4cc2274f63c74291d7f4d1bb6725656baa3907a376a4fe",
+    "geometry/request.json": "b3aa3996553fdc8ee6bf8a72a616928d08948a7ce09e20aed8c36a73a7d3301a",
     "geometry/source.step": "e9bdc57225e06b49cfe93d34af44cbd5bf174874f6ae5a57f489f581405b2fb3",
-    "geometry/surface.json": "943a238abc59ee9c2fa1b906878ab2ee584640e10ff6cf3ef15f836f3638b225",
-    "inputs/cad_spar_rings.hst": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838",
+    "geometry/surface.json": "ce53eab6832cc4775c9fbdf886ce7a5974936d13be67d10de31466e7b330a76b",
+    "inputs/cad_spar_rings.hst": "cea4059498c5c1cd3d4cc2274f63c74291d7f4d1bb6725656baa3907a376a4fe",
     "inputs/cad_spar_rings.mcn": "2f3787fce00a339523b165699bb690775724972c1fd4d4bcb6df9c2564e993b4",
     "inputs/cad_spar_rings.rao": "b78e067bc3369883a177adbcde33a5c5ed1f80218c1e3804e4ac44fdc76c3ab2",
     "inputs/cad_spar_rings.rdf": "9908a84082793cc66406c91512ad8d731ed3eeda0662d3e24974aba4e46a5127",
-    "rao/heave.rao": "d7766cdfc7846d1b941b36b2cc6c4c2f9ba44ec861cea7059f9ed30bb73a8d0f",
-    "rao/pitch.rao": "2d5e2232513c741bc4d2f109711f6aed3f958a9029b0daa99eea8e2fc7832e68",
-    "rao/roll.rao": "00e8cea4596dd8a63b4afe87f5cfd06f8fddcb9d2309977f30d6d80d000651fa",
-    "rao/surge.rao": "7241d9a5b9ff3442b9ebdb71710b012f5ee6d7794b0b2e9d65fb0944ec3945cc",
-    "rao/sway.rao": "6f4eac28abdfa950f16557f0b35f01d4fe8c0e2ae63ff9079641a4facdcd3653",
-    "rao/yaw.rao": "4cbaf2cc7412341d6586b44ea9be5704339f11b4089267b8c9c3b434c4f6b902"
+    "logs/hschk.log": "1614cb7b4794b25826f0f9949d7f54da18fcda8265336ad3e505e44a9f15ecc7",
+    "logs/hslec.log": "b768661ebd77f2919bd6f33195adbbf9d921133dd4df88f618d156d1cb9d7c6c",
+    "logs/hsmcn.log": "09ea761cfc3cfb0500baab759ba2d00151c08eafcd62042cd3862eed1230de4a",
+    "logs/hsrao.log": "c09c3e8014113ee1bdbaec1711f34f3a379bdd5baee3ce1e4f50b43bcc1f4504",
+    "logs/hsrdf.log": "0c08bbd91bc78ec99922877b65177ce4b4a1054b85016da10756311fd8f588ad",
+    "rao/heave.rao": "3cb9579afdb040f015b9e23300120f4e6e803d01bfd97b82038107b842baa707",
+    "rao/pitch.rao": "1a534e9b16f39347f9137d00403ab6634f3899bea2775b1d246eb6eb43a5281f",
+    "rao/roll.rao": "e499bf550b5068bf11bc315dba0cd7b626771160e13160b091cc1682d78f57f5",
+    "rao/surge.rao": "52be5f2b0c6f9cb77734de109bc9f9116734dd97b2412d020f0c21c64be86fd1",
+    "rao/sway.rao": "6d02245b61e263f1a2a5abd55f9811713333874ed7ac77c8db25233e8bd1fbcc",
+    "rao/yaw.rao": "ff19eae6db596e3419fd97b3940e5d6b054b33cf2e58d67d6927896866ca4719"
   }
 }

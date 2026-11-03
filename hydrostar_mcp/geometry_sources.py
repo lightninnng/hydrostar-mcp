@@ -28,6 +28,7 @@ class GeometryRequest(Model):
     )
     translation_m: Vector3 = Field(default_factory=lambda: [0.0, 0.0, 0.0])
     mesh_size_m: Positive = 3.0
+    radial_mesh_size_m: Positive | None = None
     panel_layout: Literal[
         "quad_dominant", "ring_bands", "polygon_blocks", "station_bands", "triangular"
     ] = "quad_dominant"
@@ -35,6 +36,7 @@ class GeometryRequest(Model):
     longitudinal_cells: Annotated[int, Field(ge=8, le=1000)] | None = None
     longitudinal_grading_blend: Annotated[float, Field(ge=0, le=1)] = 0.2
     adaptive_stations: bool = False
+    end_cap_optimizer: Literal["none", "quad_quasi_structured"] = "none"
     axis_center_xy_m: (
         Annotated[list[float], Field(min_length=2, max_length=2)] | None
     ) = None

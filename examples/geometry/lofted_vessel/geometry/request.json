@@ -1,5 +1,5 @@
 {
-  "project": "vessel_bands",
+  "project": "lofted_vessel",
   "path": "examples/geometry/sources/vessel-stations.csv",
   "units": "mm",
   "waterline_z_m": 0.0,
@@ -16,10 +16,13 @@
     0.0
   ],
   "mesh_size_m": 4.5,
+  "radial_mesh_size_m": null,
   "panel_layout": "station_bands",
   "structured_axis": "x",
-  "longitudinal_cells": 192,
-  "longitudinal_grading_blend": 0.2,
+  "longitudinal_cells": 42,
+  "longitudinal_grading_blend": 0.1,
+  "adaptive_stations": true,
+  "end_cap_optimizer": "quad_quasi_structured",
   "axis_center_xy_m": null,
   "minimum_quad_fraction": 0.95,
   "panel_quality": {
@@ -29,7 +32,7 @@
     "max_warpage_deg": 5.0,
     "max_neighbor_size_ratio": 1.8
   },
-  "curvature_samples": 48,
+  "curvature_samples": 24,
   "curve_tolerance_m": 0.005,
   "weld_tolerance_m": 1e-08,
   "section_axis": "x",
@@ -42,7 +45,7 @@
   "volume_tolerance_relative": 0.005,
   "expected_wet_components": 1,
   "flip_normals": false,
-  "max_panels": 12000,
+  "max_panels": 2200,
   "timeout_s": 600.0,
   "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
   "pdf_page": 0

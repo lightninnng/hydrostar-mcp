@@ -110,7 +110,7 @@ def _cap_ogrid(boundary, spacing, center):
     n = count // 4
     xy = boundary[:, :2]
     radius = np.max(np.abs(xy - center), axis=0)
-    half = radius * 0.35
+    half = radius * 0.45
     polygon = Polygon(xy)
     for _ in range(12):
         corners = (
@@ -199,6 +199,7 @@ def ring_bands(gmsh, wet, low, high, request, cad_cb):
             "环带需要平面底面、明确的水平台阶与平均水线边界；检测高程为 " + str(levels)
         )
     target = request.mesh_size_m / 2
+    radial_target = (request.radial_mesh_size_m or request.mesh_size_m) / 2
     rings = []
     intervals = []
     for start, stop in zip(levels, levels[1:]):
@@ -214,7 +215,8 @@ def ring_bands(gmsh, wet, low, high, request, cad_cb):
             radial_n = max(
                 1,
                 math.ceil(
-                    float(np.max(np.linalg.norm(bottom - previous, axis=1))) / target
+                    float(np.max(np.linalg.norm(bottom - previous, axis=1)))
+                    / radial_target
                 ),
             )
             rings.extend(
@@ -239,7 +241,7 @@ def ring_bands(gmsh, wet, low, high, request, cad_cb):
             faces.append(
                 [j * count + i, j * count + k, (j + 1) * count + k, (j + 1) * count + i]
             )
-    cap_v, cap_f = _cap_ogrid(rings[0], target, center)
+    cap_v, cap_f = _cap_ogrid(rings[0], radial_target, center)
     offset = len(vertices)
     vertices.extend(cap_v)
     faces.extend([[i + offset for i in face] for face in cap_f])
@@ -251,7 +253,8 @@ def ring_bands(gmsh, wet, low, high, request, cad_cb):
             azimuth_cells=count,
             axial_intervals=intervals,
             ring_count=len(rings),
-            target_axial_radial_spacing_m=target,
+            target_axial_spacing_m=target,
+            target_radial_spacing_m=radial_target,
             axis_center_xy_m=center.tolist(),
             section_sampling="1024 samples per original CAD curve; periodic polar interpolation",
             source_shape="Original CAD sections retained; horizontal plate boundaries taken from CAD face loops",
@@ -429,9 +432,11 @@ def _axial_wet_arc(gmsh, wet, station, low, high, count):
     return result
 
 
-def _cap_mesh(gmsh, arc, direction):
+def _cap_mesh(gmsh, arc, direction, optimizer="none"):
     import numpy as np
 
+    if arc[0, 1] > arc[-1, 1]:
+        arc = arc[::-1]
     original = gmsh.model.getCurrent()
     gmsh.model.add(original + "_end_cap")
     try:
@@ -458,6 +463,8 @@ def _cap_mesh(gmsh, arc, direction):
         gmsh.option.setNumber("Mesh.RecombinationAlgorithm", 1)
         gmsh.option.setNumber("Mesh.RecombineMinimumQuality", 0.2)
         gmsh.model.mesh.generate(2)
+        if optimizer == "quad_quasi_structured":
+            gmsh.model.mesh.optimize("QuadQuasiStructured", niter=20)
         ids, coordinates, _ = gmsh.model.mesh.getNodes()
         coordinates = np.array(coordinates).reshape(-1, 3)
         lookup = {int(tag): i for i, tag in enumerate(ids)}
@@ -586,7 +593,8 @@ def station_bands(gmsh, wet, low, high, profiles, request):
     if request.adaptive_stations:
         ends = [sample(stations[0]), sample(stations[-1])]
         caps = [
-            _cap_mesh(gmsh, ring, direction) for ring, direction in zip(ends, (-1, 1))
+            _cap_mesh(gmsh, ring, direction, request.end_cap_optimizer)
+            for ring, direction in zip(ends, (-1, 1))
         ]
         stations, rings, refinement = _adaptive_station_rings(
             stations, sample, count, sum(len(f) for _, f in caps), request
@@ -594,7 +602,7 @@ def station_bands(gmsh, wet, low, high, profiles, request):
     else:
         rings = [sample(x) for x in stations]
         caps = [
-            _cap_mesh(gmsh, ring, direction)
+            _cap_mesh(gmsh, ring, direction, request.end_cap_optimizer)
             for ring, direction in ((rings[0], -1), (rings[-1], 1))
         ]
     longitudinal = len(stations) - 1
@@ -623,6 +631,7 @@ def station_bands(gmsh, wet, low, high, profiles, request):
             longitudinal_cells=longitudinal,
             longitudinal_grading_blend=blend,
             finite_end_interval_subdivisions=2,
+            end_cap_optimizer=request.end_cap_optimizer,
             wet_section_cells=count,
             stations_m=list(map(float, stations)),
             adaptive_station_refinement=refinement,

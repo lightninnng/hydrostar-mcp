@@ -1,9 +1,9 @@
 {
   "schema": "hydrostar-geometry-bundle-1",
-  "version": "0.4.0",
+  "version": "0.6.0",
   "status": "geometry_accepted",
   "request": {
-    "project": "moonpool_blocks",
+    "project": "moonpool_caisson",
     "path": "examples/geometry/sources/moonpool-sections.json",
     "units": "m",
     "waterline_z_m": 0.0,
@@ -20,8 +20,13 @@
       0.0
     ],
     "mesh_size_m": 4.0,
+    "radial_mesh_size_m": null,
     "panel_layout": "polygon_blocks",
     "structured_axis": "z",
+    "longitudinal_cells": null,
+    "longitudinal_grading_blend": 0.2,
+    "adaptive_stations": false,
+    "end_cap_optimizer": "none",
     "axis_center_xy_m": null,
     "minimum_quad_fraction": 1.0,
     "panel_quality": {
@@ -44,7 +49,7 @@
     "volume_tolerance_relative": 0.005,
     "expected_wet_components": 1,
     "flip_normals": false,
-    "max_panels": 12000,
+    "max_panels": 2000,
     "timeout_s": 600.0,
     "source_note": "Original project source geometry from geometry_source_study.py. Curved vessel: closed interpolating sections, smooth longitudinal loft, keel-side spline seam and finite narrow end caps. CAD envelopes and loading are demonstrator assumptions.",
     "pdf_page": 0
@@ -71,6 +76,7 @@
     "checking_triangles": 1456,
     "quadrilaterals": 728,
     "triangles": 0,
+    "diagnostic_indexing": "Native HST panel and node numbers start at 1; checking triangles are internal only",
     "panel_quality": {
       "passed": true,
       "quadrilaterals": 728,
@@ -110,12 +116,12 @@
     "quad_fraction_passed": true
   },
   "generator_sources": {
-    "geometry_worker.py": "cb2f7da3ed858ce1b081cf75326916be39b9e57276106d69882d9a1e5884e81a",
-    "geometry_kernel.py": "915bbf23c0a25df609b3555d9e7b2da72ee2ea340c9e36b70e82785af5285c41",
-    "geometry_sources.py": "4b4e9d9300cacede08e7dc9cb02254392d63ee69b80709831a3087f559e233d2",
-    "surface_checks.py": "12d92d403a486af9e58616e0cc62f4968bac3e5f54b6c27e38516b3b1fc573c7",
+    "geometry_worker.py": "0b7346a84b9eac9ca49a0f0f9b01c8bd1ef48a0bcf8731af4da70299042ed67d",
+    "geometry_kernel.py": "3d14ac3e9c73a3f710f25e7f9cd811fded0109bb5a294fb317f08194bdb022a6",
+    "geometry_sources.py": "81ee20d917fa3503143d8e72e2774aceec8b77cbe2e4677715bf014c318e06e2",
+    "surface_checks.py": "5419c47ea0828c8d30ec52ea597fdc84d6cdbb97e2d2e9d6f70810b0b30beb3d",
     "panel_checks.py": "acf37c29f360d308895bf9db9efa0b9708f01ee6000fb60a649e4e1de5c60c57",
-    "structured_panels.py": "9e96de39ab41d56e2a210b08f7a192f0810031e80c24ada7eeb0ddace5dae84a"
+    "structured_panels.py": "f5aad3a42735f1950c0d4941ec4293dbe707fa69712e8ec48c1676ddc0b3e1a6"
   },
   "fidelity": {
     "cad_volume_relative_error": 8.415490526658687e-14,
@@ -177,6 +183,8 @@
       {
         "solid": "chamfered_hull",
         "operation": "add",
+        "curve": "polyline",
+        "ruled": true,
         "position": -10.0,
         "points_m": [
           [
@@ -224,6 +232,8 @@
       {
         "solid": "chamfered_hull",
         "operation": "add",
+        "curve": "polyline",
+        "ruled": true,
         "position": 5.0,
         "points_m": [
           [
@@ -271,6 +281,8 @@
       {
         "solid": "through_moonpool",
         "operation": "cut",
+        "curve": "polyline",
+        "ruled": true,
         "position": -12.0,
         "points_m": [
           [
@@ -298,6 +310,8 @@
       {
         "solid": "through_moonpool",
         "operation": "cut",
+        "curve": "polyline",
+        "ruled": true,
         "position": 7.0,
         "points_m": [
           [
@@ -333,14 +347,16 @@
     "topology": "passed",
     "self_intersection": "passed",
     "orientation": "passed",
+    "panel_shape": "passed",
+    "panel_layout": "passed",
     "fidelity": "passed"
   },
   "physics_status": "Geometry accepted; use prepare_case and start_case for native hydrodynamic validation",
   "files": {
     "geometry-qa.png": "f7783467d7b37f7aed99eeca15e54ba07d19a172746fdca067fc7cf310e755c4",
-    "model.hst": "7efc33258f5ef1020cdf91aaae4375cb9fa63fe476f3b7dcc2283e44e91e5875",
-    "request.json": "f9dac692e94cceeab6d7996420d9b044a929e6ce29134cbdee076ba767c623eb",
+    "model.hst": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
+    "request.json": "bc871d78ea07887ebb6d613f85936761110601814527640a93e7a8ee73b799f7",
     "source.json": "996e6358fa99a402a321540c31d16193f1857813e4c46d3f5508132c3c67712c",
-    "surface.json": "ce66a238b59ddf7378108d9d4f73d7173e03866ac3807dd54dac5e5f2ecf7686"
+    "surface.json": "ffb0b692e95c85512ca48d66c8f235b6f8b2c7c6f45f4e3daaf6077bfb91b790"
   }
 }

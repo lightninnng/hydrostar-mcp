@@ -1,0 +1,28 @@
+{
+  "schema": "hydrostar-native-geometry-view-1",
+  "source_case_id": "vessel_bands-d23d9ef1b2154e43",
+  "project": "vessel_bands",
+  "module": "hsprv",
+  "version": "8.2.0",
+  "ok": true,
+  "rc": 0,
+  "seconds": 26.718000000000075,
+  "command": [
+    "hsprv",
+    "mesh-view.prv",
+    "vessel_bands"
+  ],
+  "manual": "HstarManual 8.2.0, chapter 14: HSprv to ParaView; Python-2-era macro is replaced by current ParaView PVDReader commands.",
+  "mesh_sha256": "094e0e279120752f16493788327ff98a6b7c4b2fa60e1e81f37713a7cc4e960e",
+  "dataset": "visualization/native/ship1_.pvd",
+  "scope": "Mean solved wet geometry and panel connectivity only; deformation, pressure and wave fields are not displayed or accepted by this mesh view.",
+  "geometry_gain": 1,
+  "coordinate_unit": "m",
+  "files": {
+    "visualization/native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "visualization/native/ship1_00001.vtu": "7f11a7267c1b4b9a236dc454659a391e518eca4953da652e492a9e8e7483d9b7",
+    "visualization/native/ship1_00002.vtu": "d13cc50c1692bbe7392130cd588f45e63020c181a1feb84b35a6ef0d1db95251",
+    "visualization/mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "logs/mesh-hsprv.log": "257ae88f1873f67ddf6747e2136514cb3b20dde17b105a35934cd37f9880d94b"
+  }
+}

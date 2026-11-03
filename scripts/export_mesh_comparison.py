@@ -92,6 +92,9 @@ def comparison_data():
             candidate_case_id=summary["source_case_id"],
             candidate_mesh_sha256=file_hash(folder / "geometry/model.hst"),
             candidate_wetted_panels=summary["hslec"]["hull_panels"],
+            candidate_full_equivalent_total=summary["resource_policy"][
+                "full_equivalent_total"
+            ],
             native_summary_sha256=file_hash(folder / "verification.json"),
             responses_sha256=file_hash(folder / "motions.json"),
             mechanics_fixed=True,
@@ -114,13 +117,19 @@ def comparison_data():
         baseline_sha256=file_hash(baseline_path),
         normalization="Maximum complex response difference across all sampled frequencies/headings, divided by the reference peak of that DOF.",
         phase_convention="Complex RAO = amplitude * exp(i * phase_deg * pi / 180).",
-        scope="Sampled panel-layout sensitivity at seven frequencies and four headings, with fixed mass, CG, inertia, restoring settings, damping and environment. Two ring grids; target-specific spatial convergence, peak-frequency and benchmark evidence remain to be established.",
+        scope="Sampled panel-layout sensitivity at seven frequencies and four headings, with fixed mass, CG, inertia, restoring settings, damping and environment. The v0.4 baseline is historical numerical evidence. Current cases and both nearby Spar grids are within 3000 total panels; the Spar pair measures local sensitivity and does not establish spatial convergence.",
         baseline_to_structured=cases,
         spar_ring_pair=dict(
             reference_case_id=coarse_native["source_case_id"],
             candidate_case_id=fine_native["source_case_id"],
             reference_wetted_panels=coarse_native["hslec"]["hull_panels"],
             candidate_wetted_panels=fine_native["hslec"]["hull_panels"],
+            reference_full_equivalent_total=coarse_native["resource_policy"][
+                "full_equivalent_total"
+            ],
+            candidate_full_equivalent_total=fine_native["resource_policy"][
+                "full_equivalent_total"
+            ],
             reference_summary="sensitivity/cad_spar_coarse/verification.json",
             reference_summary_sha256=file_hash(COARSE / "verification.json"),
             reference_responses_sha256=file_hash(COARSE / "motions.json"),
@@ -139,19 +148,23 @@ def export_comparison():
 
     data = comparison_data()
     _scientific_style(plt)
-    baseline = read(BASE / "mesh-baseline-v0.4.0.json")["cases"]["cad_spar"]
     coarse, fine = read(COARSE / "motions.json"), read(BASE / "cad_spar/motions.json")
     fig, axes = plt.subplots(2, 3, figsize=(12.5, 7.1))
     sources = [
         (
-            baseline["motions"],
-            f"v0.4 triangles ({baseline['panels']:,})",
-            "#7A838C",
-            "--",
-            "s",
+            coarse,
+            f"Ring bands ({data['spar_ring_pair']['reference_full_equivalent_total']:,} total)",
+            "#0072B2",
+            "-",
+            "o",
         ),
-        (coarse, "Ring bands (6,800)", "#0072B2", "-", "o"),
-        (fine, "Ring bands (9,312)", "#D55E00", "-.", "^"),
+        (
+            fine,
+            f"Ring bands ({data['spar_ring_pair']['candidate_full_equivalent_total']:,} total)",
+            "#D55E00",
+            "-.",
+            "^",
+        ),
     ]
     for i, (dof, ax) in enumerate(zip(core.DOFS, axes.flat)):
         for motions, label, colour, style, marker in sources:
@@ -177,12 +190,12 @@ def export_comparison():
         handles,
         labels,
         loc="lower center",
-        ncol=3,
+        ncol=2,
         bbox_to_anchor=(0.5, 0.055),
         frameon=False,
     )
     fig.suptitle(
-        "Spar: sampled sensitivity to native panel layout", fontsize=14, y=0.98
+        "Spar: local sampled sensitivity within 3,000 total panels", fontsize=14, y=0.98
     )
     fig.text(
         0.5,

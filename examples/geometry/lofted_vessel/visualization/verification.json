@@ -1,0 +1,55 @@
+{
+  "schema": "hydrostar-native-curve-export-1",
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "status": "exported",
+  "source": "examples/geometry/lofted_vessel",
+  "project": "vessel_bands",
+  "display_name": "Curved-section hull",
+  "frequency_count": 7,
+  "heading_count": 4,
+  "phase_display": "Modulo 360 in [-180,180); native samples shown as points without lines across phase wraps",
+  "figures": {
+    "lofted_vessel_rao.png": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "918030efbf377af9db90ef64049ace25787e82951d331cf160a35b05ddb9f49e"
+    },
+    "lofted_vessel_rao.pdf": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "415aadfb1c318c35f81cb98d324d82fcb9dc099662cb62ac4853681a77237117"
+    }
+  },
+  "command": [
+    "gnuplot",
+    "curves.gp"
+  ],
+  "files": {
+    "curves.gp": "120f944fc3d970c1b8b3e274c7a40642b9fb50df0cb03259426afb3d07072f93",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "native-mesh.json": "0015ca28bed166ca5394d2506054a07971f0eb030642d1cfb5d906d3dbfa25ee",
+    "data/heave.rao": "d11cb719d8ea37e5d1ddce4807742fedb1eed8f2272223531152680228af9a22",
+    "data/pitch.rao": "241d95a08b870d7b632541e537da2f3fe99d778f12dc13bdea8b65ce234f17c4",
+    "data/roll.rao": "7a1a96415bf557a4e7564d2f877d5cbd99cb4240e6114f9b3f455fb8d46ac120",
+    "data/surge.rao": "c22518dc093aff53c4f25f979612fc96aef5fd4989224486cb4c4c1f87e1fafb",
+    "data/sway.rao": "787f659d5622c60cdd7d5cfd6892b88ab6cd5e7f17a16bfd3ea6a750924b8c96",
+    "data/yaw.rao": "5d20e8aa34a3ef9c699c6588f484a0d74e7374c478027a2e01a21b9c7033d093",
+    "native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "native/ship1_00001.vtu": "7f11a7267c1b4b9a236dc454659a391e518eca4953da652e492a9e8e7483d9b7",
+    "native/ship1_00002.vtu": "d13cc50c1692bbe7392130cd588f45e63020c181a1feb84b35a6ef0d1db95251"
+  },
+  "native_mesh_sha256": "094e0e279120752f16493788327ff98a6b7c4b2fa60e1e81f37713a7cc4e960e",
+  "motions_sha256": "df1ae174855d9f449d7005bfe19e02035f0cbaab0fa3136e0d384b38a8853019"
+}

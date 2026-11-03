@@ -1,0 +1,53 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSrdf - Radiation and diffraction computations.
+
+ ******* 64-bit version *******
+
+Project: cad_spar_coarse
+User   : SOURCE_GEOMETRY_PIPELINE
+Nb of bodies to be analysed          1
+Nb panels on hulls                2784
+Nb geometric symmetry                0
+Nb segments along waterlines        48
+Nb panels over waterplanes         132
+Nb panels over the free surface      0
+
+Reference length                     1.000000
+Gravity acceleration                 9.810000
+Reference point of incident wave (   0.000057,   0.000043)
+
+Body 1: reference point x=    0.000057 center of buoyancy x=    0.000057
+                        y=    0.000043                    y=    0.000043
+                        z=  -12.486033                    z=  -12.486033
+
+Option - Elimination of irr. freq. : Yes
+Name of output files  :             cad_spar_rings.rd1
+
+Method = Sources
+Linear system solved by LU decomposition 
+Calculation in open sea
+ INFINITE FREQUENCY = YES
+ Singularity method = SOURCE
+                 Water depth is  150.000 m ( 150.000)
+  7 frequencies from   0.200 to    0.800
+  4 headings    from   0.000 to  180.000
+  1 speeds      from   0.000 to    0.000
+------------------------------------------------------------------
+processor   1 on LAPTOP-U6SC4LCC deals with frequencies from   1 to   4
+processor   0 on LAPTOP-U6SC4LCC deals with frequencies from   1 to   3
+             Wave frequency                    Comp-Time Rest-Time    Proc
+    1st/   3 Wave frequency =   0.200 r/s              -         -
+    1st/   4 Wave frequency =   0.500 r/s              -         -
+    2nd/   3 Wave frequency =   0.300 r/s              7        14     0
+    2nd/   4 Wave frequency =   0.600 r/s              7        23     1
+    3rd/   3 Wave frequency =   0.400 r/s             14         6     0
+    3rd/   4 Wave frequency =   0.700 r/s             15        14     1
+    4th/   4 Wave frequency =   0.800 r/s             22         7     1
+ INFFREQ
+   Gathering data ...         Deleting temporary binary and log files ...       Ok
+ Writing integrated results to HDF format...
+ Writing integrated results to ASCII format...
+Total clock time of operation was       36.31 s 

@@ -1,0 +1,55 @@
+{
+  "schema": "hydrostar-native-curve-export-1",
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "status": "exported",
+  "source": "examples/geometry/moonpool_caisson",
+  "project": "moonpool_blocks",
+  "display_name": "Through-moonpool caisson",
+  "frequency_count": 7,
+  "heading_count": 4,
+  "phase_display": "Modulo 360 in [-180,180); native samples shown as points without lines across phase wraps",
+  "figures": {
+    "moonpool_caisson_rao.png": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "fba8c150d3fdb09e91b56ec2933bc6b3076b545cac59b4e99a2e5d0241d2a895"
+    },
+    "moonpool_caisson_rao.pdf": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "25b65ce33606ee90c6486ff9277e175137cd8f3e1b738b5cdacfeb9f7c9887b7"
+    }
+  },
+  "command": [
+    "gnuplot",
+    "curves.gp"
+  ],
+  "files": {
+    "curves.gp": "bec6744c4c2509213f337a7570498892d6a2ca5a2dd8c70bf5a8f2dadf485971",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "native-mesh.json": "0cae60dec6748c7bcbe114102d38ea9cde2a6fb37905e01f90f155856a550e97",
+    "data/heave.rao": "c7016d245584b3760fbf3688af92ab67bdf8b85333a48af4b7c742a856da2273",
+    "data/pitch.rao": "fdb5646a50ee63d46597414a48131cd74c61a2b09c81b579d19272dfa34041d9",
+    "data/roll.rao": "c0a498ac9791a8b67f263e2be048640986310a0ce7585181c850ac3776d65679",
+    "data/surge.rao": "27fb0f454325d5aef3d3066bb5f6c7d0eff3c9b3327e4fa68a3b8cd0844306fd",
+    "data/sway.rao": "d00ab73d9862401fb9910d9a5af77b7b2a31aaea6e8727003b29fc8b00719ccc",
+    "data/yaw.rao": "371ddc3911fba347544bd4a15ab36029ecae642f9a0ea22b54d3ef3bfb149c98",
+    "native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "native/ship1_00001.vtu": "8e0e16bd7896680114fefed91a567e1c95a2ceb790f03f762c191647a5c5e41f",
+    "native/ship1_00002.vtu": "d62a89ade6c957d62d86d058cf99798403ee1045bb82ebf820a41349ffc0423f"
+  },
+  "native_mesh_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
+  "motions_sha256": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741"
+}

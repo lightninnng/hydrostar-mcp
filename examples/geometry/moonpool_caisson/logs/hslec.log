@@ -1,0 +1,29 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSlec - Reading geometrical data.
+
+INPUT FILE : moonpool_blocks.hst
+PROJECT NAME : moonpool_blocks
+PROJECT : moonpool_caisson                                                                
+USER    : SOURCE_GEOMETRY_PIPELINE                                                        
+
+
+Nb of bodies to be analysed            1
+Nb symmetry of hull geometry           0
+Nb panels on hulls                   728
+Nb segments along waterlines         112
+Nb panels on the waterplanes         380
+Nb panels over the free surface        0
+Nb hull panels over the waterline      0
+Nb thin plates panels                  0
+
+Reference length                     1.000000
+Gravity acceleration                 9.810000
+Reference point of incident wave (   0.000000,   0.000000)
+Body 1: reference point x=    0.000000 center of buoyancy x=    0.000000
+                        y=    0.000000                    y=    0.000000
+                        z=   -5.000000                    z=   -5.000000
+
+Total clock time of operation was        0.09 s 

@@ -279,9 +279,9 @@ def geometry_section():
     return (
         """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">7. 多来源复杂几何与网格</h2>
 <p>同轴柱体采用轴向环带与周向对应，船体采用站位与剖面网格带，多边形及贯通开口采用相容分块。四边形保留到实际求解文件，并同时检查形状、翘曲、尺度过渡、水线闭环、拓扑、自交以及 CAD 体积与浮心。</p>
-<figure class="mesh-plate"><div class="media-viewport"><a href="assets/geometry-source-cases.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/geometry-source-cases.png" width="4200" height="1890" loading="lazy" decoding="async" alt="曲线站位船体、贯通月池浮体和带升沉板 Spar 的实际求解网格总览"></a></div><figcaption>图 7a。三个原创复杂几何的已验收湿表面，坐标单位为 m，各视图独立取景。几何与响应图复用已发布的 Matplotlib 制图，数据来自各自的验收湿面和原生 RAO；图示面元与交付 HST 保持一致。点击查看矢量 PDF。</figcaption></figure>
-<p>下表保留已完成计算的几何研究参照。曲线站位船体与 Spar 的密网格沿用原授权配置；前面展示的曲线船体采用 2873 个总面元方案。常规新模型按包含湿面、水线面和对称展开的 3000 个总面元预算规划，提高预算须按具体算例明确授权。</p>
-<div class="table-wrap"><table><caption>三种复杂几何的实际求解面元与 CAD 体积核对</caption><thead><tr><th scope="col">研究参照构型</th><th scope="col">湿面四边形 / 三角形</th><th scope="col">全体总面元，含水线面</th><th scope="col">CAD 体积相对差</th></tr></thead><tbody>"""
+<figure class="mesh-plate"><div class="media-viewport"><a href="assets/geometry-source-cases.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/geometry-source-cases.png" width="2700" height="1160" loading="lazy" decoding="async" alt="曲线站位船体、贯通月池浮体和带升沉板 Spar 的实际求解网格总览"></a></div><figcaption>图 7a。三个原创复杂几何的已验收湿表面，坐标单位为 m，各视图独立取景。总览由原生 HSprv → ParaView 导出，逐面核对交付 HST；几何投影及总览 PDF 由 Matplotlib 补充排版，响应图采用手册配套的 Gnuplot 路径。点击查看总览矢量 PDF。</figcaption></figure>
+<p>下表展示重新计算并通过验收的当前算例，均控制在 3000 个全体等效总面元内，包含湿面、水线面和对称展开。网格调整保持原质量、重心、惯性、恢复、阻尼及环境；生成脚本与发布检查执行相同总预算。</p>
+<div class="table-wrap"><table><caption>三种复杂几何的实际求解面元与 CAD 体积核对</caption><thead><tr><th scope="col">示例构型</th><th scope="col">湿面四边形 / 三角形</th><th scope="col">全体总面元，含水线面</th><th scope="col">CAD 体积相对差</th></tr></thead><tbody>"""
         + "".join(rows)
         + """</tbody></table></div>
 <p>各例保留 7 个频率和 4 个浪向，已完成建模、几何与原生计算链路验收。目标工程用途还需对应构型的空间收敛、峰区频率及参考响应证据；月池共振与黏性耗散需专门验证和标定。</p>"""

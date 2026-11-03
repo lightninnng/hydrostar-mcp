@@ -1,0 +1,29 @@
+
+ =====================*******   HydroStar For Experts V8.2.0beta   *******====================
+-----------------------------------------------------------------x64----(c)BV/DR 1991-2018
+
+ HSlec - Reading geometrical data.
+
+INPUT FILE : vessel_bands.hst
+PROJECT NAME : vessel_bands
+PROJECT : lofted_vessel                                                                   
+USER    : SOURCE_GEOMETRY_PIPELINE                                                        
+
+
+Nb of bodies to be analysed            1
+Nb symmetry of hull geometry           0
+Nb panels on hulls                  1991
+Nb segments along waterlines         169
+Nb panels on the waterplanes         758
+Nb panels over the free surface        0
+Nb hull panels over the waterline      0
+Nb thin plates panels                  0
+
+Reference length                     1.000000
+Gravity acceleration                 9.810000
+Reference point of incident wave (  -1.912855,   0.003543)
+Body 1: reference point x=   -1.912855 center of buoyancy x=   -1.912855
+                        y=    0.003543                    y=    0.003543
+                        z=   -3.445350                    z=   -3.445350
+
+Total clock time of operation was        0.19 s 

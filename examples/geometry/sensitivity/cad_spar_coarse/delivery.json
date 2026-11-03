@@ -1,12 +1,12 @@
 {
   "schema": "hydrostar-native-delivery-1",
   "project": "cad_spar_rings",
-  "source_case_id": "cad_spar_rings-24d1062e0815442e",
+  "source_case_id": "cad_spar_rings-c7fe72fdca1740c3",
   "input_files": {
     "inputs/cad_spar_rings.hst": {
       "status": "validated",
       "purpose": "hslec; hschk: validated native quadrilateral/triangle mesh",
-      "sha256": "5e509ad46df765c88cad6da5e0d69791e2757a7b4a6de3131499d45f57f20838"
+      "sha256": "cea4059498c5c1cd3d4cc2274f63c74291d7f4d1bb6725656baa3907a376a4fe"
     },
     "inputs/cad_spar_rings.rdf": {
       "status": "validated",
@@ -29,54 +29,54 @@
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "m/m",
-      "sha256": "7241d9a5b9ff3442b9ebdb71710b012f5ee6d7794b0b2e9d65fb0944ec3945cc"
+      "sha256": "52be5f2b0c6f9cb77734de109bc9f9116734dd97b2412d020f0c21c64be86fd1"
     },
     "rao/sway.rao": {
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "m/m",
-      "sha256": "6f4eac28abdfa950f16557f0b35f01d4fe8c0e2ae63ff9079641a4facdcd3653"
+      "sha256": "6d02245b61e263f1a2a5abd55f9811713333874ed7ac77c8db25233e8bd1fbcc"
     },
     "rao/heave.rao": {
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "m/m",
-      "sha256": "d7766cdfc7846d1b941b36b2cc6c4c2f9ba44ec861cea7059f9ed30bb73a8d0f"
+      "sha256": "3cb9579afdb040f015b9e23300120f4e6e803d01bfd97b82038107b842baa707"
     },
     "rao/roll.rao": {
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "deg/m",
-      "sha256": "00e8cea4596dd8a63b4afe87f5cfd06f8fddcb9d2309977f30d6d80d000651fa"
+      "sha256": "e499bf550b5068bf11bc315dba0cd7b626771160e13160b091cc1682d78f57f5"
     },
     "rao/pitch.rao": {
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "deg/m",
-      "sha256": "2d5e2232513c741bc4d2f109711f6aed3f958a9029b0daa99eea8e2fc7832e68"
+      "sha256": "1a534e9b16f39347f9137d00403ab6634f3899bea2775b1d246eb6eb43a5281f"
     },
     "rao/yaw.rao": {
       "status": "validated",
       "purpose": "Native response amplitude and phase",
       "unit": "deg/m",
-      "sha256": "4cbaf2cc7412341d6586b44ea9be5704339f11b4089267b8c9c3b434c4f6b902"
+      "sha256": "ff19eae6db596e3419fd97b3940e5d6b054b33cf2e58d67d6927896866ca4719"
     }
   },
   "spc": {
     "status": "not_applicable",
-    "reason": "This case computes regular-wave first-order RAOs. Sea-state spectral statistics are outside this study; a StarSpec stage requires its sea states and an actual .spc input."
+    "reason": "Regular-wave first-order RAOs; spectral statistics require sea states and an actual .spc input."
   },
   "native_database": {
     "status": "regenerate_for_further_native_postprocessing",
-    "reason": "Run the delivered inputs in order to regenerate the binary databases; the portable archive includes original inputs and text RAO outputs."
+    "reason": "Replay the delivered inputs in order to regenerate binary databases."
   },
   "parameters": "config.json",
   "geometry": "geometry/geometry-report.json",
   "resource_policy": {
     "default_full_equivalent_total_budget": 3000,
-    "configured_case_budget": 12000,
-    "full_equivalent_total": 7236,
-    "nproc": 4,
-    "scope": "This specifically retained dense reference study; new models use the default 3000-panel budget and case-specific review for increases."
+    "configured_case_budget": 3000,
+    "full_equivalent_total": 2916,
+    "nproc": 2,
+    "scope": "Current case: wet and automatic waterplane panels including symmetry expansion; within the 3000-panel budget."
   }
 }

@@ -8329,6 +8329,8 @@
       {
         "solid": "chamfered_hull",
         "operation": "add",
+        "curve": "polyline",
+        "ruled": true,
         "position": -10.0,
         "points_m": [
           [
@@ -8376,6 +8378,8 @@
       {
         "solid": "chamfered_hull",
         "operation": "add",
+        "curve": "polyline",
+        "ruled": true,
         "position": 5.0,
         "points_m": [
           [
@@ -8423,6 +8427,8 @@
       {
         "solid": "through_moonpool",
         "operation": "cut",
+        "curve": "polyline",
+        "ruled": true,
         "position": -12.0,
         "points_m": [
           [
@@ -8450,6 +8456,8 @@
       {
         "solid": "through_moonpool",
         "operation": "cut",
+        "curve": "polyline",
+        "ruled": true,
         "position": 7.0,
         "points_m": [
           [

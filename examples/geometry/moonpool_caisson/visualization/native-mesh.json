@@ -1,0 +1,28 @@
+{
+  "schema": "hydrostar-native-geometry-view-1",
+  "source_case_id": "moonpool_blocks-61e51e3b573e4dc3",
+  "project": "moonpool_blocks",
+  "module": "hsprv",
+  "version": "8.2.0",
+  "ok": true,
+  "rc": 0,
+  "seconds": 8.530999999999949,
+  "command": [
+    "hsprv",
+    "mesh-view.prv",
+    "moonpool_blocks"
+  ],
+  "manual": "HstarManual 8.2.0, chapter 14: HSprv to ParaView; Python-2-era macro is replaced by current ParaView PVDReader commands.",
+  "mesh_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
+  "dataset": "visualization/native/ship1_.pvd",
+  "scope": "Mean solved wet geometry and panel connectivity only; deformation, pressure and wave fields are not displayed or accepted by this mesh view.",
+  "geometry_gain": 1,
+  "coordinate_unit": "m",
+  "files": {
+    "visualization/native/ship1_.pvd": "6adc829c4ee594aa86c96d1180cc275ea2624dc8cd43800aa22803042af5b990",
+    "visualization/native/ship1_00001.vtu": "8e0e16bd7896680114fefed91a567e1c95a2ceb790f03f762c191647a5c5e41f",
+    "visualization/native/ship1_00002.vtu": "d62a89ade6c957d62d86d058cf99798403ee1045bb82ebf820a41349ffc0423f",
+    "visualization/mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
+    "logs/mesh-hsprv.log": "c1cbf522078fc050eb4373fa6c35941eda7703e496a0fe0c0479af0c4f1acec1"
+  }
+}

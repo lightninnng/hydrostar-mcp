@@ -21,6 +21,14 @@ CASES = {
     "platform": ("examples/results/semisub_oc4_style", "Column semisubmersible"),
     "vessel": ("examples/vessel", "Curved station hull"),
 }
+GEOMETRY_CASES = {
+    "lofted_vessel": ("examples/geometry/lofted_vessel", "Curved-section hull"),
+    "moonpool_caisson": (
+        "examples/geometry/moonpool_caisson",
+        "Through-moonpool caisson",
+    ),
+    "cad_spar": ("examples/geometry/cad_spar", "Curved Spar with a heave plate"),
+}
 COLOURS = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#4C5966"]
 
 
@@ -98,14 +106,21 @@ def plot_commands(title, headings, native, kind, font_scale=1.0):
 
 
 def export_case(key, executable):
-    relative, title = CASES[key]
+    relative, title = {**CASES, **GEOMETRY_CASES}[key]
     source = ROOT / relative
+    geometry = relative.startswith("examples/geometry/")
     config = json.loads((source / "config.json").read_text(encoding="utf-8"))
-    summary_path = source / ("summary.json" if key != "vessel" else "verification.json")
+    summary_path = source / (
+        "verification.json" if geometry or key == "vessel" else "summary.json"
+    )
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     if set(summary["quality_gates"].values()) != {"passed"}:
         raise ValueError("Accepted native calculation required: " + key)
-    folder = ROOT / "examples/visualization/curves" / key
+    folder = (
+        source / "visualization"
+        if geometry
+        else ROOT / "examples/visualization/curves" / key
+    )
     (folder / "data").mkdir(parents=True, exist_ok=True)
     assets = ROOT / "docs/assets"
     native = {}
@@ -115,7 +130,7 @@ def export_case(key, executable):
         shutil.copyfile(original, folder / "data" / original.name)
     heads = native["heave"]["headings"]
     script, outputs = [], {}
-    for heading in heads:
+    for heading in [] if geometry else heads:
         for kind in ("amplitude", "phase"):
             filename = f"{key}-{kind}-{heading_tag(heading)}.svg"
             # Each reset precedes the terminal/output settings in this batch.
@@ -138,10 +153,18 @@ def export_case(key, executable):
             "set terminal pdfcairo size 12in,7.7in enhanced font 'Times New Roman,12'",
         ),
     ]:
-        filename = key + "-response." + ext
+        filename = key + ("_rao." if geometry else "-response.") + ext
         commands = plot_commands(
             title, selected, native, "amplitude", 1.65 if ext == "png" else 1.0
         )
+        if geometry:
+            commands = [
+                line.replace(
+                    "with lines linewidth 1.7",
+                    "with linespoints pointtype 7 pointsize 0.5 linewidth 1.7",
+                )
+                for line in commands
+            ]
         commands[1:1] = [
             terminal,
             "set output " + gp_string(os.path.relpath(assets / filename, folder)),
@@ -190,6 +213,13 @@ def export_case(key, executable):
             if p.is_file() and p.name != "verification.json"
         },
     )
+    if geometry:
+        # This receipt is indexed by the native summary, so avoid a hash cycle.
+        record.pop("native_summary_sha256")
+        record["native_mesh_sha256"] = file_hash(
+            source / "inputs" / (config["project"] + ".hst")
+        )
+        record["motions_sha256"] = file_hash(source / "motions.json")
     save_json(folder / "verification.json", record)
     print(
         key + ": " + str(len(outputs)) + " command-exported scientific figures",
@@ -203,7 +233,9 @@ def main():
     parser.add_argument(
         "--gnuplot", default=os.environ.get("GNUPLOT_EXE") or shutil.which("gnuplot")
     )
-    parser.add_argument("--case", choices=list(CASES), action="append")
+    parser.add_argument(
+        "--case", choices=list(CASES) + list(GEOMETRY_CASES), action="append"
+    )
     args = parser.parse_args()
     if not args.gnuplot:
         parser.error(
