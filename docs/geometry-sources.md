@@ -109,7 +109,9 @@ build_geometry 返回 case_geometry，可直接用于新的 CaseConfig.geometry�
 ~~~powershell
 python scripts/geometry_source_study.py --sources
 python scripts/geometry_source_study.py --build --run
-python scripts/export_geometry.py
+pvpython --disable-registry --force-offscreen-rendering scripts/render_geometry_meshes.py
+python scripts/export_native_curves.py --gnuplot C:/path/to/gnuplot.exe --case lofted_vessel --case moonpool_caisson --case cad_spar
+python scripts/export_geometry.py --gnuplot C:/path/to/gnuplot.exe
 python scripts/check_geometry.py
 ~~~
 

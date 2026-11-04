@@ -1,6 +1,8 @@
 {
   "renderer": "ParaView 6.2",
   "workflow": "HSprv native PVD -> ParaView PVDReader -> SaveScreenshot; mean geometry, deformation off",
+  "capture_method": "Direct offscreen PNG and GL2PS PDF export; no desktop/window capture",
+  "pdf_limitation": "ParaView 6.2 OpenGL exporter rasterizes 3D geometry even with Rasterize3Dgeometry=0; mesh PDFs are high-resolution native views, not vector geometry",
   "cases": [
     {
       "key": "lofted_vessel",
@@ -14,7 +16,89 @@
       "native_triangle_padding_count": 13,
       "max_native_coordinate_rounding_bound_m": 0.00709204970679577,
       "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
-      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST",
+      "geometry_figures": {
+        "png": "docs/assets/lofted_vessel_geometry.png",
+        "png_sha256": "25fe62a07628f324f9f770063da9ad1c2a918150b904fba4438cf2c1183968be",
+        "pdf_pages": [
+          {
+            "file": "lofted_vessel-isometric.pdf",
+            "sha256": "93584f70fc953223e2aa4ae986b72062a24b2a6f3b37a2eb559963247756faf9",
+            "view": "isometric",
+            "camera_position": [
+              64.89477014541626,
+              -142.00603926181793,
+              107.30619943141937
+            ],
+            "camera_focal_point": [
+              -1.1052298545837402,
+              1.9939607381820679,
+              -0.6938005685806274
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 74.8051415816219,
+            "render_size_px": [
+              3120,
+              3400
+            ]
+          },
+          {
+            "file": "lofted_vessel-longitudinal.pdf",
+            "sha256": "977cd45f422f1e6a7d402022a8989eb16dfa6664e2eebdf8daadd1a8fc8b9188",
+            "view": "longitudinal",
+            "camera_position": [
+              0.0,
+              -119.99000024795532,
+              -2.907729387283325
+            ],
+            "camera_focal_point": [
+              0.0,
+              0.009999752044677734,
+              -2.907729387283325
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 44.27083333333333,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          },
+          {
+            "file": "lofted_vessel-plan.pdf",
+            "sha256": "d0994881962c456c0bd16fb2f3f58b4d82540a4dd7c0c68c302645464df4e488",
+            "view": "plan",
+            "camera_position": [
+              0.0,
+              1.116770625114441,
+              115.9854998588562
+            ],
+            "camera_focal_point": [
+              0.0,
+              1.116770625114441,
+              -4.014500141143799
+            ],
+            "camera_view_up": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "camera_parallel_scale": 44.27083333333333,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          }
+        ],
+        "pdf_method": "ParaView GL2PS native export with full-size raster 3D geometry and vector text paths; page assembly preserves the original PDF objects"
+      }
     },
     {
       "key": "moonpool_caisson",
@@ -28,7 +112,89 @@
       "native_triangle_padding_count": 0,
       "max_native_coordinate_rounding_bound_m": 0.008664039697536397,
       "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
-      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST",
+      "geometry_figures": {
+        "png": "docs/assets/moonpool_caisson_geometry.png",
+        "png_sha256": "93ed621108abf14d24552153f8a3b7bee8c0db4ae83b2169ed205a4f4111e2ec",
+        "pdf_pages": [
+          {
+            "file": "moonpool_caisson-isometric.pdf",
+            "sha256": "4619d3636df58949e99c4f048648c502e2b88366c9502b35da6850f635da964b",
+            "view": "isometric",
+            "camera_position": [
+              38.212381064891815,
+              -83.37246775627136,
+              59.012476682662964
+            ],
+            "camera_focal_point": [
+              -0.2876189351081848,
+              0.6275322437286377,
+              -3.987523317337036
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 49.016415897912296,
+            "render_size_px": [
+              3120,
+              3400
+            ]
+          },
+          {
+            "file": "moonpool_caisson-longitudinal.pdf",
+            "sha256": "52b08ee5f6658f16463dcd73a4bafd932400c4a1988e0029eecb916933541cad",
+            "view": "longitudinal",
+            "camera_position": [
+              0.0,
+              -70.0,
+              -4.35438346862793
+            ],
+            "camera_focal_point": [
+              0.0,
+              0.0,
+              -4.35438346862793
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 25.824652777777775,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          },
+          {
+            "file": "moonpool_caisson-plan.pdf",
+            "sha256": "4024d400339c6818da9f7a50add02d7406b5e274500b89ed81a8009070fe7652",
+            "view": "plan",
+            "camera_position": [
+              0.0,
+              0.7042253613471985,
+              65.0
+            ],
+            "camera_focal_point": [
+              0.0,
+              0.7042253613471985,
+              -5.0
+            ],
+            "camera_view_up": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "camera_parallel_scale": 28.169014084507044,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          }
+        ],
+        "pdf_method": "ParaView GL2PS native export with full-size raster 3D geometry and vector text paths; page assembly preserves the original PDF objects"
+      }
     },
     {
       "key": "cad_spar",
@@ -42,12 +208,261 @@
       "native_triangle_padding_count": 0,
       "max_native_coordinate_rounding_bound_m": 0.005052217442066201,
       "coordinate_precision": "All native coordinates equal exact HST coordinates rounded to four significant digits and read as Float32. Native VTU pads HST triangles by repeating their last vertex; cell matching removes that padding only. Exact coordinates and panel types remain in HST.",
-      "connectivity": "Every native triangle/quadrilateral matches the accepted HST"
+      "connectivity": "Every native triangle/quadrilateral matches the accepted HST",
+      "geometry_figures": {
+        "png": "docs/assets/cad_spar_geometry.png",
+        "png_sha256": "04cd9db065e64aa40fc639e08b364a87a748e8917c3c840bcd7682628e8fb3f9",
+        "pdf_pages": [
+          {
+            "file": "cad_spar-isometric.pdf",
+            "sha256": "8baa3d41b2eb35849740053b8f4b86704f735bad074a69331ce6f84fb499885e",
+            "view": "isometric",
+            "camera_position": [
+              11.159655705094337,
+              -24.34833973646164,
+              7.437979698181152
+            ],
+            "camera_focal_point": [
+              0.15965570509433746,
+              -0.3483397364616394,
+              -10.562020301818848
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 16.467719032401614,
+            "render_size_px": [
+              3120,
+              3400
+            ]
+          },
+          {
+            "file": "cad_spar-longitudinal.pdf",
+            "sha256": "109b33477ec8ce59d97b5b981046359435baa231312ce77f3743dbb4719f4d9e",
+            "view": "longitudinal",
+            "camera_position": [
+              0.0,
+              -20.0,
+              -9.647887229919434
+            ],
+            "camera_focal_point": [
+              0.0,
+              0.0,
+              -9.647887229919434
+            ],
+            "camera_view_up": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "camera_parallel_scale": 14.084507042253522,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          },
+          {
+            "file": "cad_spar-plan.pdf",
+            "sha256": "b42c63e07859ccc4a2f42f01e2bd0d8212e1476611386142fa12a2930f1ae523",
+            "view": "plan",
+            "camera_position": [
+              0.0,
+              0.3345070481300354,
+              10.0
+            ],
+            "camera_focal_point": [
+              0.0,
+              0.3345070481300354,
+              -10.0
+            ],
+            "camera_view_up": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "camera_parallel_scale": 13.380281690140846,
+            "render_size_px": [
+              2880,
+              1700
+            ]
+          }
+        ],
+        "pdf_method": "ParaView GL2PS native export with full-size raster 3D geometry and vector text paths; page assembly preserves the original PDF objects"
+      }
     }
   ],
   "geometry_gain": 1,
   "coordinate_unit": "m",
   "output": "docs/assets/geometry-source-cases.png",
   "output_sha256": "f7f6c68886c9648740cc73e66a3d9975c916be2ab0c37bbcb7c6f0f7ecf0e582",
-  "renderer_script_sha256": "c04f0669a2a019d05ed6082e754ffc60901cee98a0fec1bad4b0314a5b4815ef"
+  "renderer_script_sha256": "4d53aaf3e75eb70ba66a7e0e6f670f0bf397abc042faaa315e1b49a17f3f3548",
+  "pdf_outputs": {
+    "lofted_vessel_geometry.pdf": {
+      "sha256": "c5de38e1d86312f01a6682d6f4c5b5ef2ced3f8125b4ec50a76080f59c900105",
+      "pages": 3,
+      "method": "Unmodified ParaView GL2PS pages assembled with PDFium; native raster geometry and vector text paths preserved",
+      "geometry_encoding": "native raster render; not vector geometry",
+      "page_objects": [
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        }
+      ],
+      "native_image_sizes_px": [
+        [
+          [
+            3120,
+            3400
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ]
+      ]
+    },
+    "moonpool_caisson_geometry.pdf": {
+      "sha256": "fe5a6e6e5fedc36b6f963a8555975c2ebd02fe3e57351feb0057c385779da099",
+      "pages": 3,
+      "method": "Unmodified ParaView GL2PS pages assembled with PDFium; native raster geometry and vector text paths preserved",
+      "geometry_encoding": "native raster render; not vector geometry",
+      "page_objects": [
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        }
+      ],
+      "native_image_sizes_px": [
+        [
+          [
+            3120,
+            3400
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ]
+      ]
+    },
+    "cad_spar_geometry.pdf": {
+      "sha256": "3dfb7f66bcd5851f0b35eba65228bc7e770ea8e7f87bdcbad719acbaa6b07186",
+      "pages": 3,
+      "method": "Unmodified ParaView GL2PS pages assembled with PDFium; native raster geometry and vector text paths preserved",
+      "geometry_encoding": "native raster render; not vector geometry",
+      "page_objects": [
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        }
+      ],
+      "native_image_sizes_px": [
+        [
+          [
+            3120,
+            3400
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ],
+        [
+          [
+            2880,
+            1700
+          ]
+        ]
+      ]
+    },
+    "geometry-source-cases.pdf": {
+      "sha256": "9d1dd445f217c74cd0b7531adcb956650a1891bec3c33b4d8d68c2ac9d87fa29",
+      "pages": 3,
+      "method": "Unmodified ParaView GL2PS pages assembled with PDFium; native raster geometry and vector text paths preserved",
+      "geometry_encoding": "native raster render; not vector geometry",
+      "page_objects": [
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        },
+        {
+          "3": 1,
+          "2": 2
+        }
+      ],
+      "native_image_sizes_px": [
+        [
+          [
+            3120,
+            3400
+          ]
+        ],
+        [
+          [
+            3120,
+            3400
+          ]
+        ],
+        [
+          [
+            3120,
+            3400
+          ]
+        ]
+      ]
+    }
+  },
+  "status": "verified",
+  "visual_review": {
+    "date": "2026-11-04",
+    "method": "Opened exported native PNGs and rendered PDF pages; verified mesh boundaries, units, camera, labels and legends. Native PDF geometry is raster; Gnuplot PDFs contain no image objects."
+  }
 }

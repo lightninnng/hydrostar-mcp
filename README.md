@@ -84,7 +84,7 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 
 ## 六自由度频率响应
 
-曲线通过手册推荐的 Gnuplot 路径读取原生响应文件并批量保存。下图分别叠加 0°、60°、90°、120° 和 180° 浪向，覆盖纵荡、横荡、升沉、横摇、纵摇和艏摇。横轴为角频率（rad/s），平移幅值单位为 m/m，转动为 deg/m。每组曲线对应其自身的装载、阻尼、水深和频率范围。
+曲线沿手册保留的 Gnuplot 路径直接导出，保存 hsrao 原始 .gnu 绘图宏并逐列核对原生 RAO。下图分别叠加 0°、60°、90°、120° 和 180° 浪向，覆盖纵荡、横荡、升沉、横摇、纵摇和艏摇。横轴为角频率（rad/s），平移幅值单位为 m/m，转动为 deg/m。每组曲线对应其自身的装载、阻尼、水深和频率范围。
 
 **曲线船体。** 231 个频率点覆盖 0.05–1.20 rad/s，间隔为 0.005 rad/s，保留升沉、横摇与纵摇等响应的峰谷细节。
 
@@ -166,13 +166,13 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 
 **曲线站位船体。** 由原创曲线站位资料放样，采用对应的纵向与剖面网格带；艏艉保留有记录的局部三角形过渡。
 
-[![曲线站位船体的实际湿面网格与源剖面对照](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+[![曲线站位船体的原生湿面网格与正交投影](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
 
 **带升沉板的曲面 Spar。** 导入本项目构造的毫米制 STEP，完成单位转换与水线裁剪，柱体环带与有限厚升沉板的径向分区相接。
 
 [![曲面 Spar 与升沉板的实际湿面网格及几何投影](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
 
-网格总览沿原生 HSprv → ParaView 流程导出，并逐面核对交付 HST；几何投影与总览 PDF 使用 Matplotlib 补充排版，响应图通过手册配套的 Gnuplot 路径读取原生 RAO。坐标单位为 m，各三维视图采用相同空间比例。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
+网格总览、三维图和正交投影均由原生 HSprv → ParaView 直接导出，并逐面核对交付 HST。图片为 3000×1700 高清原生视图；各模型 PDF 分三页保存三维、纵向和俯视图，总览 PDF 每个模型一页。本机 ParaView 的三维 PDF 含高清位图，曲线 PDF/SVG 保留矢量线条。响应与网格对照曲线直接读取原始 RAO 和 hsrao 绘图宏。坐标单位为 m，几何倍率为 1，各视图独立取景。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
 
 <details>
 <summary>查看三个复杂几何算例的六自由度响应</summary>

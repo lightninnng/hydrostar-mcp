@@ -12,8 +12,10 @@ import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "skills/hydrostar-modeling/scripts"))
 from hydrostar_mcp import core
 from hydrostar_mcp.workflow import file_hash, save_json
+from export_hsrao import native_column, parse_macro
 
 CASES = {
     "container": ("examples/results/container_kcs_style", "Container hull"),
@@ -40,7 +42,7 @@ def heading_tag(heading):
     return f"{heading:g}".replace(".", "-")
 
 
-def plot_commands(title, headings, native, kind, font_scale=1.0):
+def plot_commands(title, headings, native, kind, font_scale=1.0, macro=None):
     lines = [
         "reset",
         "set encoding utf8",
@@ -86,9 +88,13 @@ def plot_commands(title, headings, native, kind, font_scale=1.0):
             lines.append("set key off")
         plots = []
         for j, heading in enumerate(headings):
-            col = 2 + d["headings"].index(heading)
+            col = (
+                native_column(macro, dof + ".rao", d, heading)
+                if macro is not None
+                else 2 + d["headings"].index(heading)
+            )
             using = str(col)
-            style = "with lines linewidth 1.7"
+            style = "with linespoints pointtype 7 pointsize 0.35 linewidth 1.7"
             if kind == "phase":
                 col += len(d["headings"])
                 using = f"(wrap(column({col})))"
@@ -122,6 +128,8 @@ def export_case(key, executable):
         else ROOT / "examples/visualization/curves" / key
     )
     (folder / "data").mkdir(parents=True, exist_ok=True)
+    macro_path = folder / "native.gnu"
+    macro = parse_macro(macro_path)
     assets = ROOT / "docs/assets"
     native = {}
     for dof in core.DOFS:
@@ -134,7 +142,7 @@ def export_case(key, executable):
         for kind in ("amplitude", "phase"):
             filename = f"{key}-{kind}-{heading_tag(heading)}.svg"
             # Each reset precedes the terminal/output settings in this batch.
-            commands = plot_commands(title, [heading], native, kind)
+            commands = plot_commands(title, [heading], native, kind, macro=macro)
             terminal = "set terminal svg size 1400,900 enhanced font 'Times New Roman,15' background rgb 'white'"
             commands[1:1] = [
                 terminal,
@@ -143,7 +151,7 @@ def export_case(key, executable):
             script.extend(commands + ["unset output"])
             outputs[filename] = dict(heading_deg=heading, mode=kind)
     selected = [h for h in (0.0, 60.0, 90.0, 120.0, 180.0) if h in heads]
-    for ext, terminal in [
+    terminals = [
         (
             "png",
             "set terminal pngcairo size 2400,1540 enhanced font 'Times New Roman,23'",
@@ -152,10 +160,23 @@ def export_case(key, executable):
             "pdf",
             "set terminal pdfcairo size 12in,7.7in enhanced font 'Times New Roman,12'",
         ),
-    ]:
+    ]
+    if geometry:
+        terminals.append(
+            (
+                "svg",
+                "set terminal svg size 1400,900 enhanced font 'Times New Roman,15' background rgb 'white'",
+            )
+        )
+    for ext, terminal in terminals:
         filename = key + ("_rao." if geometry else "-response.") + ext
         commands = plot_commands(
-            title, selected, native, "amplitude", 1.65 if ext == "png" else 1.0
+            title,
+            selected,
+            native,
+            "amplitude",
+            1.65 if ext == "png" else 1.0,
+            macro=macro,
         )
         if geometry:
             commands = [
@@ -197,6 +218,10 @@ def export_case(key, executable):
         schema="hydrostar-native-curve-export-1",
         renderer=version,
         workflow="HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+        native_macro="native.gnu",
+        native_macro_sha256=file_hash(macro_path),
+        column_mapping="HSRAO macro columns checked against original RAO headers; stored mirrored headings absent from the macro use their explicit native header columns without interpolation",
+        capture_method="Direct Gnuplot file terminals; no desktop/window capture",
         status="exported",
         source=relative,
         native_summary_sha256=file_hash(summary_path),

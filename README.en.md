@@ -166,13 +166,13 @@ Three original cases demonstrate curved-section lofting, through openings and CA
 
 **Curved-section hull.** Original curved station data define a loft with matched longitudinal and section bands. Documented local triangles handle the end transitions.
 
-[![Actual wet mesh, projections and source sections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+[![Native wet mesh and orthographic projections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
 
 **Curved Spar with a heave plate.** An original millimetre STEP solid is converted to metres and clipped at the waterline. Axial rings connect to radial partitions on the finite-thickness plate.
 
 [![Actual wet mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
 
-The mesh overview follows the native HSprv → ParaView route, with every cell checked against the delivered HST. Matplotlib supplies the geometry projections and overview PDF; response figures use the manual's Gnuplot route with native RAOs. Coordinates are in metres, with equal spatial scales within each 3D view. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
+The overview, 3D meshes and orthographic projections are exported directly through HSprv → ParaView, with every cell checked against the delivered HST. Each model has a 3000×1700 image and a three-page PDF of the 3D, longitudinal and plan views; the overview PDF has one page per model. This ParaView build embeds high-resolution raster geometry in PDFs. Response and mesh-comparison curves use original RAOs and checked HSRAO macros through Gnuplot, preserving vector PDF/SVG output. Coordinates are in metres, geometry gain is 1, and views are framed independently. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
 
 <details>
 <summary>View six-DOF responses for the three complex geometry cases</summary>

@@ -46,7 +46,7 @@
 
 当前复杂几何算例先按新网格完成原生重算，再沿 HSprv 的 SHIP 输出进入 ParaView PVDReader，显示平均湿面并关闭 deformation。逐面核对原生导出与交付 HST 的节点对应和完整连接；HSprv 8.2 的坐标四位有效数字量化、三角形重复末点填充分别验证和记录，精确坐标及面元类型以交付 HST 为准。
 
-实际 PVD、两帧 VTU、mesh-view.prv、执行日志和来源保存在各算例 visualization/ 与 logs/。总览 PNG 由 scripts/render_geometry_meshes.py 导出，Matplotlib 补充几何投影及总览 PDF，响应图用 scripts/export_native_curves.py 沿手册配套 Gnuplot 路径读取原生 RAO。场量与变形不属于该静态网格图的验收范围。
+实际 PVD、两帧 VTU、mesh-view.prv、执行日志和来源保存在各算例 visualization/ 与 logs/。总览、三维和正交投影由 scripts/render_geometry_meshes.py 直接离屏导出；本机 ParaView 的 GL2PS PDF 三维几何实际为位图，交付时标明高清原生视图。单模型 PDF 分三页保存三种视图，总览 PDF 每模型一页。响应及网格对照图沿手册配套 Gnuplot 路径读取原始 RAO，并核对 hsrao 原始宏的列映射，输出矢量 PDF/SVG。独立脚本、视口限制及验收见[直接导出](direct-export.md)。场量与变形不属于该静态网格图的验收范围。
 
 ## 正式交付与验收
 

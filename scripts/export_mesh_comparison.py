@@ -3,16 +3,21 @@
 from __future__ import annotations
 
 import cmath
+import argparse
 import json
 import math
+import os
 from pathlib import Path
+import shutil
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "skills/hydrostar-modeling/scripts"))
 from hydrostar_mcp import core
-from hydrostar_mcp.visualization import _scientific_style
 from hydrostar_mcp.workflow import file_hash, save_json
+from export_hsrao import native_column, parse_macro
 
 BASE = ROOT / "examples/geometry"
 COARSE = BASE / "sensitivity/cad_spar_coarse"
@@ -140,87 +145,132 @@ def comparison_data():
     )
 
 
-def export_comparison():
-    import matplotlib
-
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
+def export_comparison(executable=None):
+    executable = executable or os.environ.get("GNUPLOT_EXE") or shutil.which("gnuplot")
+    if not executable:
+        raise ValueError(
+            "Provide --gnuplot or GNUPLOT_EXE for the native curve renderer"
+        )
+    executable = Path(executable).resolve()
     data = comparison_data()
-    _scientific_style(plt)
-    coarse, fine = read(COARSE / "motions.json"), read(BASE / "cad_spar/motions.json")
-    fig, axes = plt.subplots(2, 3, figsize=(12.5, 7.1))
+    folder = BASE / "sensitivity/visualization"
+    (folder / "data").mkdir(parents=True, exist_ok=True)
     sources = [
         (
-            coarse,
-            f"Ring bands ({data['spar_ring_pair']['reference_full_equivalent_total']:,} total)",
+            "coarse",
+            COARSE,
+            data["spar_ring_pair"]["reference_full_equivalent_total"],
             "#0072B2",
-            "-",
-            "o",
         ),
         (
-            fine,
-            f"Ring bands ({data['spar_ring_pair']['candidate_full_equivalent_total']:,} total)",
+            "fine",
+            BASE / "cad_spar",
+            data["spar_ring_pair"]["candidate_full_equivalent_total"],
             "#D55E00",
-            "-.",
-            "^",
         ),
     ]
-    for i, (dof, ax) in enumerate(zip(core.DOFS, axes.flat)):
-        for motions, label, colour, style, marker in sources:
-            r = motions[dof]
-            j = r["headings"].index(60.0)
-            ax.plot(
-                r["omega"],
-                [row[j] for row in r["amplitude"]],
-                label=label,
-                color=colour,
-                linestyle=style,
-                marker=marker,
-                linewidth=1.4,
-                markersize=4,
-            )
-        ax.set_title(f"({chr(97 + i)}) {dof.capitalize()}", loc="left", fontsize=11)
-        ax.set_xlabel("Wave frequency (rad/s)")
-        ax.set_ylabel("RAO (" + fine[dof]["unit"] + ")")
-        ax.set_ylim(bottom=0)
-        ax.grid(alpha=0.25)
-    handles, labels = axes.flat[0].get_legend_handles_labels()
-    fig.legend(
-        handles,
-        labels,
-        loc="lower center",
-        ncol=2,
-        bbox_to_anchor=(0.5, 0.055),
-        frameon=False,
-    )
-    fig.suptitle(
-        "Spar: local sampled sensitivity within 3,000 total panels", fontsize=14, y=0.98
-    )
-    fig.text(
-        0.5,
-        0.025,
-        "Heading 60°. Native samples connected by lines. Mass, CG, inertia, damping and environment held fixed.",
-        ha="center",
-        fontsize=9,
-        color="#526278",
-    )
-    fig.tight_layout(rect=(0.015, 0.11, 0.995, 0.94), h_pad=1.4, w_pad=1.6)
+    native = {}
+    macros = {label: parse_macro(folder / (label + ".gnu")) for label, *_ in sources}
+    for label, source, *_ in sources:
+        (folder / "data" / label).mkdir(exist_ok=True)
+        native[label] = {}
+        for dof in core.DOFS:
+            path = source / "rao" / (dof + ".rao")
+            native[label][dof] = core.read_rao(path)
+            shutil.copyfile(path, folder / "data" / label / path.name)
+    from scripts.export_native_curves import gp_string
+
+    commands = []
     assets = ROOT / "docs/assets"
-    for suffix in ("png", "pdf"):
-        fig.savefig(assets / ("cad_spar_mesh_comparison." + suffix), dpi=300)
-    plt.close(fig)
+    for suffix, terminal, scale in (
+        ("png", "pngcairo size 2400,1540 enhanced font 'Times New Roman,23'", 1.65),
+        ("pdf", "pdfcairo size 12in,7.7in enhanced font 'Times New Roman,12'", 1),
+        ("svg", "svg size 1400,900 enhanced font 'Times New Roman,15'", 1),
+    ):
+        commands.extend(
+            [
+                "reset",
+                "set encoding utf8",
+                "set terminal " + terminal,
+                "set output "
+                + gp_string(
+                    os.path.relpath(
+                        assets / ("cad_spar_mesh_comparison." + suffix), folder
+                    )
+                ),
+                "set border linewidth 0.8",
+                "set grid back linecolor rgb '#E0E5E9'",
+                "set multiplot layout 2,3 rowsfirst margins 0.075,0.98,0.20,0.88 spacing 0.085,0.14 title 'Spar: local sensitivity within 3,000 total panels; heading 60 deg'",
+            ]
+        )
+        for i, dof in enumerate(core.DOFS):
+            commands.extend(
+                [
+                    "set title " + gp_string(f"({chr(97 + i)}) {dof.capitalize()}"),
+                    "set xlabel 'Wave frequency (rad/s)'",
+                    "set ylabel "
+                    + gp_string("RAO (" + native["fine"][dof]["unit"] + ")"),
+                    "set yrange [0:*]",
+                    f"set key at screen 0.5,0.045 center horizontal font 'Times New Roman,{11 * scale:g}'"
+                    if i == 4
+                    else "set key off",
+                ]
+            )
+            plots = []
+            for j, (label, source, total, colour) in enumerate(sources):
+                column = native_column(
+                    macros[label], dof + ".rao", native[label][dof], 60.0
+                )
+                plots.append(
+                    gp_string("data/" + label + "/" + dof + ".rao")
+                    + f" using 1:{column} with linespoints pointtype {7 + j * 2} pointsize 0.5 linewidth 1.7 dashtype {j + 1} linecolor rgb "
+                    + gp_string(colour)
+                    + " title "
+                    + gp_string(f"Ring bands ({total:,} total)")
+                )
+            commands.append("plot " + (", \\\n").join(plots))
+        commands.extend(["unset multiplot", "unset output"])
+    batch = folder / "comparison.gp"
+    batch.write_text("\n".join(commands) + "\n", encoding="utf-8", newline="\n")
+    env = dict(os.environ)
+    env["PATH"] = str(executable.parent) + os.pathsep + env.get("PATH", "")
+    run = subprocess.run(
+        [str(executable), batch.name],
+        cwd=folder,
+        env=env,
+        capture_output=True,
+        timeout=180,
+    )
+    (folder / "export.log").write_bytes(run.stdout + run.stderr)
+    if run.returncode:
+        raise RuntimeError(run.stderr.decode("utf-8", "replace"))
     data["figures"] = {
         "cad_spar_mesh_comparison." + ext: file_hash(
             assets / ("cad_spar_mesh_comparison." + ext)
         )
-        for ext in ("png", "pdf")
+        for ext in ("png", "pdf", "svg")
     }
+    receipt = dict(
+        renderer=subprocess.check_output(
+            [str(executable), "--version"], env=env, text=True
+        ).strip(),
+        method="Original HSRAO macros and native response files -> Gnuplot file terminals; fixed physical parameters",
+        status="exported",
+        figures=data["figures"],
+        files={
+            p.relative_to(folder).as_posix(): file_hash(p)
+            for p in folder.rglob("*")
+            if p.is_file() and p.name != "verification.json"
+        },
+    )
+    save_json(folder / "verification.json", receipt)
     save_json(BASE / "mesh-comparison.json", data)
     index = read(BASE / "index.json")
     index["mesh_comparison"] = dict(
         path="examples/geometry/mesh-comparison.json",
         sha256=file_hash(BASE / "mesh-comparison.json"),
+        visualization="examples/geometry/sensitivity/visualization/verification.json",
+        visualization_sha256=file_hash(folder / "verification.json"),
     )
     index["figures"].update(data["figures"])
     save_json(BASE / "index.json", index)
@@ -229,4 +279,6 @@ def export_comparison():
 
 
 if __name__ == "__main__":
-    export_comparison()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--gnuplot")
+    export_comparison(parser.parse_args().gnuplot)

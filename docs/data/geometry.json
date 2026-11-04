@@ -68,8 +68,10 @@
         "step": 0.1
       },
       "summary": "examples/geometry/lofted_vessel/verification.json",
-      "summary_sha256": "3b4e122902325cd08c269c20c8aa7ece10b4f95fff0b9f31d15f180e695c6da8",
-      "source_case_id": "vessel_bands-d23d9ef1b2154e43"
+      "summary_sha256": "e272fd452f36cc5519a988e6d07395bd43fa542f8ab6795171a2ff5680168a10",
+      "source_case_id": "vessel_bands-d23d9ef1b2154e43",
+      "geometry_renderer": "HSprv native PVD -> ParaView direct orthographic PNG and high-resolution native-view PDF",
+      "curve_renderer": "HSRAO macro/native RAO columns -> Gnuplot direct file terminals"
     },
     {
       "key": "moonpool_caisson",
@@ -136,8 +138,10 @@
         "step": 0.1
       },
       "summary": "examples/geometry/moonpool_caisson/verification.json",
-      "summary_sha256": "27d5e5db1362e831755fe7b620d163feadaee562cd83664346f975e86dd23d96",
-      "source_case_id": "moonpool_blocks-61e51e3b573e4dc3"
+      "summary_sha256": "ffef0c77674b2366f1db30eae6d7bc5feb4e80fa17d898e139e629832f2ddce0",
+      "source_case_id": "moonpool_blocks-61e51e3b573e4dc3",
+      "geometry_renderer": "HSprv native PVD -> ParaView direct orthographic PNG and high-resolution native-view PDF",
+      "curve_renderer": "HSRAO macro/native RAO columns -> Gnuplot direct file terminals"
     },
     {
       "key": "cad_spar",
@@ -204,34 +208,42 @@
         "step": 0.1
       },
       "summary": "examples/geometry/cad_spar/verification.json",
-      "summary_sha256": "af2e0d50af2d3c877fdace4da4240fff46778016c8efe91413474ca107c78165",
-      "source_case_id": "cad_spar_rings_fine-7eac9cf3b014449b"
+      "summary_sha256": "5827debcb432fc38acbd35e6b900e1b381a2b5ee793dd7ed0eb7fd84cb8908a7",
+      "source_case_id": "cad_spar_rings_fine-7eac9cf3b014449b",
+      "geometry_renderer": "HSprv native PVD -> ParaView direct orthographic PNG and high-resolution native-view PDF",
+      "curve_renderer": "HSRAO macro/native RAO columns -> Gnuplot direct file terminals"
     }
   ],
   "native_mesh_views": {
     "path": "examples/geometry/native-mesh-views.json",
-    "sha256": "ee56db085c6c0d3eaf04b4d943f4ebc5f30ac1ea56f178467b420b203ae8c4ce"
+    "sha256": "6f6a4400052c5072e3280ad12dd91ed2cd5b55bf593b27373dca89998def26d7"
   },
   "figures": {
-    "cad_spar_geometry.pdf": "b30866f0cd7266d44463362ca289502ef5877819bb960b921c4e46784b64f246",
-    "cad_spar_geometry.png": "9ea92d16dc33f885303619b47f998779700dee53e6d47ff3784b6e876b2f2d00",
-    "cad_spar_mesh_comparison.pdf": "ba262968829efa0d7ccbb99a005218ac434f6e145d177775dfbb0195534eb8a3",
-    "cad_spar_mesh_comparison.png": "8b5fe2d8f0624057fa3c1aef6bf1780d41e2939c8a24d5d9f581d61b8176dea6",
-    "cad_spar_rao.pdf": "c379439ec3e55cfe525782ffffedf0940ce78e8d170cffb2df529d14c3288ed1",
-    "cad_spar_rao.png": "e7b5952ad0457de3cc365dfdfe910a3dfee8aa4124242d91178a8064470350cc",
-    "geometry-source-cases.pdf": "333bf9beb6dbbd9f2463d5d3af966a4107f5bf429435e7af8b26c75704d4d187",
+    "cad_spar_geometry.pdf": "3dfb7f66bcd5851f0b35eba65228bc7e770ea8e7f87bdcbad719acbaa6b07186",
+    "cad_spar_geometry.png": "04cd9db065e64aa40fc639e08b364a87a748e8917c3c840bcd7682628e8fb3f9",
+    "cad_spar_mesh_comparison.pdf": "57a50d63f410fe89c500f672ea0e45857a369d3ff37e787f6f0bc3686496bad1",
+    "cad_spar_mesh_comparison.png": "0befc0e4536d84af1785254ddeba3f43120505ff976a14a4217c4801817b0b14",
+    "cad_spar_mesh_comparison.svg": "e48166a296bca4a9f267b4fbde75d244897c0ca122c25e11ddd3b36a80f89f36",
+    "cad_spar_rao.pdf": "f2e0deece92d5c53e947c6401ccd4ff5641b72c925565465422c0cb94723b1c1",
+    "cad_spar_rao.png": "60094c3bfa89cb902c242d00edcc7d120432593a5d793f0d3736b87994de7ee1",
+    "cad_spar_rao.svg": "1013993410575872f5eac7dbca01c121db6efd192db404d0cb4cebc6cea0f79c",
+    "geometry-source-cases.pdf": "9d1dd445f217c74cd0b7531adcb956650a1891bec3c33b4d8d68c2ac9d87fa29",
     "geometry-source-cases.png": "f7f6c68886c9648740cc73e66a3d9975c916be2ab0c37bbcb7c6f0f7ecf0e582",
-    "lofted_vessel_geometry.pdf": "3412f35852d702ef3cf4563546f15c95777afda0445f571bd0171f6cfea3c241",
-    "lofted_vessel_geometry.png": "358983f366cb828487e5f30c97e260901d4fe446b2f5e37732d9b9b60b0f2d91",
-    "lofted_vessel_rao.pdf": "415aadfb1c318c35f81cb98d324d82fcb9dc099662cb62ac4853681a77237117",
-    "lofted_vessel_rao.png": "918030efbf377af9db90ef64049ace25787e82951d331cf160a35b05ddb9f49e",
-    "moonpool_caisson_geometry.pdf": "9e2c9fc109707e61d1c923b1d3110f04444f5a1a4ca4454234495f50fe04da4e",
-    "moonpool_caisson_geometry.png": "f7783467d7b37f7aed99eeca15e54ba07d19a172746fdca067fc7cf310e755c4",
-    "moonpool_caisson_rao.pdf": "25b65ce33606ee90c6486ff9277e175137cd8f3e1b738b5cdacfeb9f7c9887b7",
-    "moonpool_caisson_rao.png": "fba8c150d3fdb09e91b56ec2933bc6b3076b545cac59b4e99a2e5d0241d2a895"
+    "lofted_vessel_geometry.pdf": "c5de38e1d86312f01a6682d6f4c5b5ef2ced3f8125b4ec50a76080f59c900105",
+    "lofted_vessel_geometry.png": "25fe62a07628f324f9f770063da9ad1c2a918150b904fba4438cf2c1183968be",
+    "lofted_vessel_rao.pdf": "1a6b62b1d587b0faf6cf82ea38e65a99f7a4b2da7c8e9290cd5b07251e688078",
+    "lofted_vessel_rao.png": "0aa7095f99ba3901f3d81a7f5cf2814812fd0f3f5895e51b5f2e8a7e8e357faa",
+    "lofted_vessel_rao.svg": "50ab4e0653002a26c5fccb113d03757d7a2006a26c5480791f16f159c95fe02d",
+    "moonpool_caisson_geometry.pdf": "fe5a6e6e5fedc36b6f963a8555975c2ebd02fe3e57351feb0057c385779da099",
+    "moonpool_caisson_geometry.png": "93ed621108abf14d24552153f8a3b7bee8c0db4ae83b2169ed205a4f4111e2ec",
+    "moonpool_caisson_rao.pdf": "3ec2050a200fcded57c837bd411be47a4458f1a8e2bdf0b69f9ad47654f72149",
+    "moonpool_caisson_rao.png": "12e6da9901b3bc85a4234b8422881500fd89640c75f1d894d0548f5f331c5e24",
+    "moonpool_caisson_rao.svg": "5c672790fbccaa57aac79867fe12c41ce1d28a0b927c17e27b45d2f874cbe7e6"
   },
   "mesh_comparison": {
     "path": "examples/geometry/mesh-comparison.json",
-    "sha256": "810eaa44c21fa7999ae1b9af44200ad0395562e001e105354273edcb78e1d86f"
+    "sha256": "9ffd1b4e86c1233c764830a81030c637ff89d3f812cf40bc76cfbcf12e8c0a18",
+    "visualization": "examples/geometry/sensitivity/visualization/verification.json",
+    "visualization_sha256": "787e082eeda4fbc18853644763554924e85a049a7af465057955a7bbd4de5d80"
   }
 }

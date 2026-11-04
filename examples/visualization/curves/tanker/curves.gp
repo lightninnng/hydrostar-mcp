@@ -17,42 +17,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/surge.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/sway.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/heave.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/roll.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/pitch.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
+plot 'data/yaw.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg'
 unset multiplot
 unset output
 reset
@@ -131,42 +131,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/surge.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/sway.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/heave.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/roll.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/pitch.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:3 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
+plot 'data/yaw.rao' using 1:3 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '30 deg'
 unset multiplot
 unset output
 reset
@@ -245,42 +245,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/surge.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/sway.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/heave.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/roll.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/pitch.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:4 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
+plot 'data/yaw.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '60 deg'
 unset multiplot
 unset output
 reset
@@ -359,42 +359,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/surge.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/sway.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/heave.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/roll.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/pitch.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:5 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
+plot 'data/yaw.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '90 deg'
 unset multiplot
 unset output
 reset
@@ -473,42 +473,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/surge.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/sway.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/heave.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/roll.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/pitch.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
+plot 'data/yaw.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '120 deg'
 unset multiplot
 unset output
 reset
@@ -587,42 +587,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/surge.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/sway.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/heave.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/roll.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/pitch.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:7 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
+plot 'data/yaw.rao' using 1:7 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '150 deg'
 unset multiplot
 unset output
 reset
@@ -701,42 +701,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/surge.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/sway.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/heave.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/roll.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/pitch.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:8 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
+plot 'data/yaw.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '180 deg'
 unset multiplot
 unset output
 reset
@@ -815,42 +815,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/surge.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/sway.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/heave.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/roll.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/pitch.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:9 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
+plot 'data/yaw.rao' using 1:9 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '210 deg'
 unset multiplot
 unset output
 reset
@@ -929,42 +929,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/surge.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/sway.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/heave.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/roll.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/pitch.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:10 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
+plot 'data/yaw.rao' using 1:10 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '240 deg'
 unset multiplot
 unset output
 reset
@@ -1043,42 +1043,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/surge.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/sway.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/heave.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/roll.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/pitch.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:11 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
+plot 'data/yaw.rao' using 1:11 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '270 deg'
 unset multiplot
 unset output
 reset
@@ -1157,42 +1157,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/surge.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/sway.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/heave.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/roll.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/pitch.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:12 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
+plot 'data/yaw.rao' using 1:12 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '300 deg'
 unset multiplot
 unset output
 reset
@@ -1271,42 +1271,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/surge.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/sway.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/heave.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/roll.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/pitch.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:13 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
+plot 'data/yaw.rao' using 1:13 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '330 deg'
 unset multiplot
 unset output
 reset
@@ -1385,42 +1385,42 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/surge.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/sway.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/heave.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/roll.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/pitch.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/pitch.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:14 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
+plot 'data/yaw.rao' using 1:14 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '360 deg'
 unset multiplot
 unset output
 reset
@@ -1499,66 +1499,66 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/surge.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/surge.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/surge.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/surge.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/surge.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/surge.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/surge.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/surge.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/surge.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,23.1'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/sway.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/sway.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/sway.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/sway.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/sway.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/sway.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/sway.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/sway.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/sway.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,23.1'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/heave.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/heave.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/heave.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/heave.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/heave.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/heave.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/heave.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/heave.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/heave.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,23.1'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/roll.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/roll.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/roll.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/roll.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/roll.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/roll.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/roll.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/roll.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/roll.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,23.1'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key at screen 0.5,0.045 center horizontal maxrows 1 font 'Times New Roman,18.15' samplen 2.2 spacing 1
-plot 'data/pitch.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/pitch.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/pitch.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/pitch.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/pitch.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/pitch.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/pitch.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/pitch.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/pitch.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/pitch.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,23.1'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/yaw.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/yaw.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/yaw.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/yaw.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/yaw.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/yaw.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/yaw.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/yaw.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/yaw.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 unset multiplot
 unset output
 reset
@@ -1580,65 +1580,65 @@ set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/surge.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/surge.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/surge.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/surge.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/surge.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/surge.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/surge.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/surge.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/surge.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/surge.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(b) Sway' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/sway.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/sway.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/sway.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/sway.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/sway.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/sway.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/sway.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/sway.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/sway.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/sway.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(c) Heave' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (m/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/heave.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/heave.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/heave.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/heave.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/heave.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/heave.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/heave.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/heave.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/heave.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/heave.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(d) Roll' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/roll.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/roll.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/roll.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/roll.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/roll.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/roll.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/roll.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/roll.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/roll.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/roll.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(e) Pitch' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key at screen 0.5,0.045 center horizontal maxrows 1 font 'Times New Roman,11' samplen 2.2 spacing 1
-plot 'data/pitch.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/pitch.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/pitch.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/pitch.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/pitch.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/pitch.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/pitch.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/pitch.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/pitch.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/pitch.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 set title '(f) Yaw' offset 0,-0.1 font 'Times New Roman,14'
 set xlabel 'Wave frequency (rad/s)' offset 0,0.35
 set ylabel 'RAO (deg/m)' offset 0.5,0
 set xrange [0.05:0.6]
 set yrange [0:*]
 set key off
-plot 'data/yaw.rao' using 1:2 with lines linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
-'data/yaw.rao' using 1:4 with lines linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
-'data/yaw.rao' using 1:5 with lines linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
-'data/yaw.rao' using 1:6 with lines linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
-'data/yaw.rao' using 1:8 with lines linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
+plot 'data/yaw.rao' using 1:2 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#0072B2' title '0 deg', \
+'data/yaw.rao' using 1:4 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#D55E00' title '60 deg', \
+'data/yaw.rao' using 1:5 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 3 linecolor rgb '#009E73' title '90 deg', \
+'data/yaw.rao' using 1:6 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 1 linecolor rgb '#CC79A7' title '120 deg', \
+'data/yaw.rao' using 1:8 with linespoints pointtype 7 pointsize 0.35 linewidth 1.7 dashtype 2 linecolor rgb '#4C5966' title '180 deg'
 unset multiplot
 unset output

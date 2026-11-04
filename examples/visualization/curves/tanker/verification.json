@@ -2,6 +2,10 @@
   "schema": "hydrostar-native-curve-export-1",
   "renderer": "gnuplot 5.2 patchlevel 8",
   "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
+  "native_macro": "native.gnu",
+  "native_macro_sha256": "77250f82d4255ddf1d3c955b5cb46d1d1a3a90df51efb40e9c01b2654e0f8204",
+  "column_mapping": "HSRAO macro columns checked against original RAO headers; stored mirrored headings absent from the macro use their explicit native header columns without interpolation",
+  "capture_method": "Direct Gnuplot file terminals; no desktop/window capture",
   "status": "verified",
   "source": "examples/results/tanker_kvlcc2_style",
   "native_summary_sha256": "a5857136ab49b3bfa29b57f0388dc99803ffb56f5e3e3f516d6af55b46c852bf",
@@ -14,7 +18,7 @@
     "tanker-amplitude-0.svg": {
       "heading_deg": 0.0,
       "mode": "amplitude",
-      "sha256": "f039692ec9386637c8214441c1cb4a0aa2f82d7353b4cd7de51c86b82bad978c"
+      "sha256": "0191d2ae02965e8ac16f1714aacd8cf506788f17143703ac4efc95921292957d"
     },
     "tanker-phase-0.svg": {
       "heading_deg": 0.0,
@@ -24,7 +28,7 @@
     "tanker-amplitude-30.svg": {
       "heading_deg": 30.0,
       "mode": "amplitude",
-      "sha256": "5030165293124be678289a2dd54b9e814453f6a56f79387bfb0697a9f39b7b27"
+      "sha256": "cc0235b0c0887fa4ee58b2f498bb6a4e9a9498c6d16a0b4b0d219f811c741b8e"
     },
     "tanker-phase-30.svg": {
       "heading_deg": 30.0,
@@ -34,7 +38,7 @@
     "tanker-amplitude-60.svg": {
       "heading_deg": 60.0,
       "mode": "amplitude",
-      "sha256": "6484208d5300d7129a7403324976226799bc2d3544506f88391d985baa121ff8"
+      "sha256": "04d103bef14154a8a882e8d5c74ec6b8ee44082e862e9cae99b6ff44869eb644"
     },
     "tanker-phase-60.svg": {
       "heading_deg": 60.0,
@@ -44,7 +48,7 @@
     "tanker-amplitude-90.svg": {
       "heading_deg": 90.0,
       "mode": "amplitude",
-      "sha256": "99235442b7d7e7bba022afd59c971b15409b2d7d39656f797c254a36de38df09"
+      "sha256": "47dee221a68b4db565b2b45100613f694a0ab2a1ef0194eae0d533e0164aa39b"
     },
     "tanker-phase-90.svg": {
       "heading_deg": 90.0,
@@ -54,7 +58,7 @@
     "tanker-amplitude-120.svg": {
       "heading_deg": 120.0,
       "mode": "amplitude",
-      "sha256": "be5f6d0430fbcd7617e597a66d83564bf715cbb3b0fb8ecead19700bb4bfc8b9"
+      "sha256": "f5f5875ed6de5455436b35c6ab32b26af031684906cb2a41eb93deb91cd676ca"
     },
     "tanker-phase-120.svg": {
       "heading_deg": 120.0,
@@ -64,7 +68,7 @@
     "tanker-amplitude-150.svg": {
       "heading_deg": 150.0,
       "mode": "amplitude",
-      "sha256": "6cd2a4e637fb712b720b8888c015d9b7fdac2e2369679b633d07eccc7efbe050"
+      "sha256": "af95385b3b6dc969cbcc21284d49cdc89fba223a6e6bb9c3b57d341f460cad8a"
     },
     "tanker-phase-150.svg": {
       "heading_deg": 150.0,
@@ -74,7 +78,7 @@
     "tanker-amplitude-180.svg": {
       "heading_deg": 180.0,
       "mode": "amplitude",
-      "sha256": "e51bd6daf6805f63cb68c681c5da9270fac7da20b468146c14e99825939abb99"
+      "sha256": "c71c9cd105c0715cf07d55301f41b985a2467fbf701b369421a48acad8215da7"
     },
     "tanker-phase-180.svg": {
       "heading_deg": 180.0,
@@ -84,7 +88,7 @@
     "tanker-amplitude-210.svg": {
       "heading_deg": 210.0,
       "mode": "amplitude",
-      "sha256": "0cdede1860bfba5d69cd966ace5f69eb98f605813c401c767f256c6d03adb5a8"
+      "sha256": "f8c8a7ebe67241c69bdcfb38f1c70179aa16191cecedafbea58638c42467bf4a"
     },
     "tanker-phase-210.svg": {
       "heading_deg": 210.0,
@@ -94,7 +98,7 @@
     "tanker-amplitude-240.svg": {
       "heading_deg": 240.0,
       "mode": "amplitude",
-      "sha256": "b7403196e7e8961b2a1ab47d13d50f90395a0998a19dbac31e343afb53946b96"
+      "sha256": "d435e3bdfa48d26ce8f32b806bc13c906c58d33d236230e2acdfc8995a8904d1"
     },
     "tanker-phase-240.svg": {
       "heading_deg": 240.0,
@@ -104,7 +108,7 @@
     "tanker-amplitude-270.svg": {
       "heading_deg": 270.0,
       "mode": "amplitude",
-      "sha256": "7e7471c682616fb5f32fe82c8070ce97bfd5590141d97605eb43ec71871193ac"
+      "sha256": "7a4fd365823ffcb0bf11ad8b0b5ba06fa90d774c8739b2a663a9cab49638d998"
     },
     "tanker-phase-270.svg": {
       "heading_deg": 270.0,
@@ -114,7 +118,7 @@
     "tanker-amplitude-300.svg": {
       "heading_deg": 300.0,
       "mode": "amplitude",
-      "sha256": "6341718f6b3819378b7af0e99f11c01449df6afe4ae2e08b1daf3ae0c03632c7"
+      "sha256": "456f74af954a437ca0bf3e7c31917100f1e5fd2cb323b221e62ed8e80ea7e60e"
     },
     "tanker-phase-300.svg": {
       "heading_deg": 300.0,
@@ -124,7 +128,7 @@
     "tanker-amplitude-330.svg": {
       "heading_deg": 330.0,
       "mode": "amplitude",
-      "sha256": "75f057752d06f58a0cfa8b0cab2708add680afc63d19b73e11b20004d777a6f1"
+      "sha256": "4f5c30aab8d7e933fb13f26cf754d2a8da79009b04844116dc4a5816cb4f6967"
     },
     "tanker-phase-330.svg": {
       "heading_deg": 330.0,
@@ -134,7 +138,7 @@
     "tanker-amplitude-360.svg": {
       "heading_deg": 360.0,
       "mode": "amplitude",
-      "sha256": "bbde5bda9d59d96645be4b3cf5c10ce5dd3c8ebacab46668a202b074cc7e48b5"
+      "sha256": "cbd901c04ece8b897416f85c209c4d556d58e0eef5ac28ba722375f819256082"
     },
     "tanker-phase-360.svg": {
       "heading_deg": 360.0,
@@ -150,7 +154,7 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "a950ee378f92a3d2be380e812b9325053b18c583ac4f4541483d7cc862bfb4b2"
+      "sha256": "629247f84780a8585db2010ca7d8da2417518dc9c33aeeb4d19dcdc6cb7233a0"
     },
     "tanker-response.pdf": {
       "headings_deg": [
@@ -161,7 +165,7 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "9c75d2f1e8585ca2ed7180879805fb70f8ab26def1cd1b2594a9524b35e5dd77"
+      "sha256": "2e6dc8a07aff73ba2edb52777cd9afa9da3b3f0beffd56f04f7c51bec0521212"
     }
   },
   "command": [
@@ -169,8 +173,9 @@
     "curves.gp"
   ],
   "files": {
-    "curves.gp": "90f4fcefd1343c91175134c10956faea1004468adf511ea875653050ef1726e7",
+    "curves.gp": "f8be1b3811d03fcf9458c0487df681f8b7704d3c18148dd8c88081a015615de6",
     "export.log": "3a163885ec07510f1479d300cee6b64ac79222fc70929fc0e065e750bbbc6cd5",
+    "native.gnu": "77250f82d4255ddf1d3c955b5cb46d1d1a3a90df51efb40e9c01b2654e0f8204",
     "data/heave.rao": "225a848c85ddcd461d0ca74dce46d65aa8c4683aa3715ebfa26b543dd9316d4d",
     "data/pitch.rao": "ccfacb7eb6d387780114fe053cadd07e1c669328fb09ef37187a5c13749c6c4e",
     "data/roll.rao": "dc81f803abce03e1ca719872755e75171b0395ad2519d3965c26e088d2f06ce1",
@@ -179,12 +184,7 @@
     "data/yaw.rao": "f973c324d5064071b5dcb37c4166b7d15a26bbb616cf85f33debab85f4f83246"
   },
   "visual_review": {
-    "status": "passed",
-    "checks": [
-      "Scientific serif labels and heading legend",
-      "Explicit angular frequency and DOF units",
-      "Native sampling without phase-wrap lines",
-      "PNG/PDF amplitude overview and heading-selectable SVG"
-    ]
+    "date": "2026-11-04",
+    "method": "Opened exported native PNGs and rendered PDF pages; verified mesh boundaries, units, camera, labels and legends. Native PDF geometry is raster; Gnuplot PDFs contain no image objects."
   }
 }

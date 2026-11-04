@@ -2,7 +2,11 @@
   "schema": "hydrostar-native-curve-export-1",
   "renderer": "gnuplot 5.2 patchlevel 8",
   "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
-  "status": "exported",
+  "native_macro": "native.gnu",
+  "native_macro_sha256": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
+  "column_mapping": "HSRAO macro columns checked against original RAO headers; stored mirrored headings absent from the macro use their explicit native header columns without interpolation",
+  "capture_method": "Direct Gnuplot file terminals; no desktop/window capture",
+  "status": "verified",
   "source": "examples/geometry/moonpool_caisson",
   "project": "moonpool_blocks",
   "display_name": "Through-moonpool caisson",
@@ -18,7 +22,7 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "fba8c150d3fdb09e91b56ec2933bc6b3076b545cac59b4e99a2e5d0241d2a895"
+      "sha256": "12e6da9901b3bc85a4234b8422881500fd89640c75f1d894d0548f5f331c5e24"
     },
     "moonpool_caisson_rao.pdf": {
       "headings_deg": [
@@ -28,7 +32,17 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "25b65ce33606ee90c6486ff9277e175137cd8f3e1b738b5cdacfeb9f7c9887b7"
+      "sha256": "3ec2050a200fcded57c837bd411be47a4458f1a8e2bdf0b69f9ad47654f72149"
+    },
+    "moonpool_caisson_rao.svg": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "5c672790fbccaa57aac79867fe12c41ce1d28a0b927c17e27b45d2f874cbe7e6"
     }
   },
   "command": [
@@ -36,10 +50,11 @@
     "curves.gp"
   ],
   "files": {
-    "curves.gp": "bec6744c4c2509213f337a7570498892d6a2ca5a2dd8c70bf5a8f2dadf485971",
+    "curves.gp": "5ec2f82649470b3c96b910e9695e082c3de0142c468985b540ffabf3e2f7183f",
     "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
     "native-mesh.json": "0cae60dec6748c7bcbe114102d38ea9cde2a6fb37905e01f90f155856a550e97",
+    "native.gnu": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
     "data/heave.rao": "c7016d245584b3760fbf3688af92ab67bdf8b85333a48af4b7c742a856da2273",
     "data/pitch.rao": "fdb5646a50ee63d46597414a48131cd74c61a2b09c81b579d19272dfa34041d9",
     "data/roll.rao": "c0a498ac9791a8b67f263e2be048640986310a0ce7585181c850ac3776d65679",
@@ -51,5 +66,9 @@
     "native/ship1_00002.vtu": "d62a89ade6c957d62d86d058cf99798403ee1045bb82ebf820a41349ffc0423f"
   },
   "native_mesh_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
-  "motions_sha256": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741"
+  "motions_sha256": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741",
+  "visual_review": {
+    "date": "2026-11-04",
+    "method": "Opened exported native PNGs and rendered PDF pages; verified mesh boundaries, units, camera, labels and legends. Native PDF geometry is raster; Gnuplot PDFs contain no image objects."
+  }
 }

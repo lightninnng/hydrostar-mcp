@@ -1,6 +1,6 @@
 include README.en.md
 include AGENTS.md
-recursive-include skills/hydrostar-modeling *.md *.yaml
+recursive-include skills/hydrostar-modeling *.md *.yaml *.py
 include README.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md run_mcp.py
 recursive-include hydrostar_mcp *.py
 recursive-include hydrostar_mcp *.html
@@ -32,6 +32,7 @@ include scripts/native_animation_study.py scripts/prepare_native_media.py script
 include scripts/render_native_views.py scripts/encode_native_media.py scripts/vessel_wave_study.py
 include scripts/paraview-environment.yml scripts/check_native_media.py
 include scripts/render_readme_meshes.py scripts/export_readme_media.py
+include scripts/render_geometry_meshes.py
 
 graft examples/second-order
 include scripts/second_order_study.py scripts/second_order_surface.py scripts/second_order_ring_surface.py

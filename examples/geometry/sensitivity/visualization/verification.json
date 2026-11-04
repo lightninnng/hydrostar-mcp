@@ -1,0 +1,32 @@
+{
+  "renderer": "gnuplot 5.2 patchlevel 8",
+  "method": "Original HSRAO macros and native response files -> Gnuplot file terminals; fixed physical parameters",
+  "status": "verified",
+  "figures": {
+    "cad_spar_mesh_comparison.png": "0befc0e4536d84af1785254ddeba3f43120505ff976a14a4217c4801817b0b14",
+    "cad_spar_mesh_comparison.pdf": "57a50d63f410fe89c500f672ea0e45857a369d3ff37e787f6f0bc3686496bad1",
+    "cad_spar_mesh_comparison.svg": "e48166a296bca4a9f267b4fbde75d244897c0ca122c25e11ddd3b36a80f89f36"
+  },
+  "files": {
+    "coarse.gnu": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
+    "comparison.gp": "6f2ed7738d6dae7e70adb81096cdabd16483ae8e947d3861eee77a4e713f01c6",
+    "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fine.gnu": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
+    "data/coarse/heave.rao": "3cb9579afdb040f015b9e23300120f4e6e803d01bfd97b82038107b842baa707",
+    "data/coarse/pitch.rao": "1a534e9b16f39347f9137d00403ab6634f3899bea2775b1d246eb6eb43a5281f",
+    "data/coarse/roll.rao": "e499bf550b5068bf11bc315dba0cd7b626771160e13160b091cc1682d78f57f5",
+    "data/coarse/surge.rao": "52be5f2b0c6f9cb77734de109bc9f9116734dd97b2412d020f0c21c64be86fd1",
+    "data/coarse/sway.rao": "6d02245b61e263f1a2a5abd55f9811713333874ed7ac77c8db25233e8bd1fbcc",
+    "data/coarse/yaw.rao": "ff19eae6db596e3419fd97b3940e5d6b054b33cf2e58d67d6927896866ca4719",
+    "data/fine/heave.rao": "de237309107a5ab5194829513f44e8322c77f059c7c4e7ebd4fb164b6ae8d343",
+    "data/fine/pitch.rao": "7a24c5f16e23eea535591a726bad1e87ade369776c10fd1151653549b8eb42c2",
+    "data/fine/roll.rao": "dd6bc08fadf46a4532cfb40aafe9335a8184f5725f856c16df36eaec4bb2452f",
+    "data/fine/surge.rao": "8e8d9787a1c3779cf02500a3ac210beaae79a54de66e730d662a6a6810f72fd2",
+    "data/fine/sway.rao": "8880e2471df03f33c498a2b7948d7b3dc1492abd2e343c792a5002e16d4f0c9b",
+    "data/fine/yaw.rao": "f3ecb94bd552524e19c61e52b7edabdecf07231b29c0bf6b56b5ee9695a0b448"
+  },
+  "visual_review": {
+    "date": "2026-11-04",
+    "method": "Opened exported native PNGs and rendered PDF pages; verified mesh boundaries, units, camera, labels and legends. Native PDF geometry is raster; Gnuplot PDFs contain no image objects."
+  }
+}

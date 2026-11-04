@@ -14,7 +14,7 @@
       "candidate_mesh_sha256": "094e0e279120752f16493788327ff98a6b7c4b2fa60e1e81f37713a7cc4e960e",
       "candidate_wetted_panels": 1991,
       "candidate_full_equivalent_total": 2749,
-      "native_summary_sha256": "3b4e122902325cd08c269c20c8aa7ece10b4f95fff0b9f31d15f180e695c6da8",
+      "native_summary_sha256": "e272fd452f36cc5519a988e6d07395bd43fa542f8ab6795171a2ff5680168a10",
       "responses_sha256": "df1ae174855d9f449d7005bfe19e02035f0cbaab0fa3136e0d384b38a8853019",
       "mechanics_fixed": true,
       "environment_fixed": true,
@@ -77,7 +77,7 @@
       "candidate_mesh_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
       "candidate_wetted_panels": 728,
       "candidate_full_equivalent_total": 1108,
-      "native_summary_sha256": "27d5e5db1362e831755fe7b620d163feadaee562cd83664346f975e86dd23d96",
+      "native_summary_sha256": "ffef0c77674b2366f1db30eae6d7bc5feb4e80fa17d898e139e629832f2ddce0",
       "responses_sha256": "44deeccefab19420bcb143a034d74f6f934a9f7df64865ca12821cfd09ba8741",
       "mechanics_fixed": true,
       "environment_fixed": true,
@@ -140,7 +140,7 @@
       "candidate_mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
       "candidate_wetted_panels": 2832,
       "candidate_full_equivalent_total": 2964,
-      "native_summary_sha256": "af2e0d50af2d3c877fdace4da4240fff46778016c8efe91413474ca107c78165",
+      "native_summary_sha256": "5827debcb432fc38acbd35e6b900e1b381a2b5ee793dd7ed0eb7fd84cb8908a7",
       "responses_sha256": "f67f792450d5a6e04861dae4d1e877edf7874930196543bd79b792d1e7b64c43",
       "mechanics_fixed": true,
       "environment_fixed": true,
@@ -258,7 +258,8 @@
     }
   },
   "figures": {
-    "cad_spar_mesh_comparison.png": "8b5fe2d8f0624057fa3c1aef6bf1780d41e2939c8a24d5d9f581d61b8176dea6",
-    "cad_spar_mesh_comparison.pdf": "ba262968829efa0d7ccbb99a005218ac434f6e145d177775dfbb0195534eb8a3"
+    "cad_spar_mesh_comparison.pdf": "57a50d63f410fe89c500f672ea0e45857a369d3ff37e787f6f0bc3686496bad1",
+    "cad_spar_mesh_comparison.png": "0befc0e4536d84af1785254ddeba3f43120505ff976a14a4217c4801817b0b14",
+    "cad_spar_mesh_comparison.svg": "e48166a296bca4a9f267b4fbde75d244897c0ca122c25e11ddd3b36a80f89f36"
   }
 }

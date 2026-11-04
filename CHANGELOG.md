@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Replace complex-geometry display plates with direct HSprv/ParaView views and high-resolution native PDFs; label the actual raster geometry encoding.
+- Preserve checked HSRAO macros for seven response cases and the Spar comparison, with direct Gnuplot PDF/SVG/PNG exports and source hashes.
+- Add a standalone skill exporter with exact CSV round-trip checks, staged acceptance and tested native-export troubleshooting.
+
 - Add two phase-resolved native-QTF coefficient GIFs with fixed colour/axis limits, explicit harmonic scope, 80 phases and per-panel pixel validation.
 
 - Add real native mean-drift and full difference-frequency QTF results for the original semisubmersible, with 36 valid frequency pairs and explicit yaw convergence limits.

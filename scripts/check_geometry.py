@@ -146,6 +146,7 @@ def check_geometry():
         )
         if folder != coarse:
             curves = read(folder / "visualization/verification.json")
+            require(curves["status"] == "verified", "Geometry curves visually reviewed")
             require(
                 curves["native_mesh_sha256"] == file_hash(folder / "geometry/model.hst")
                 and curves["motions_sha256"] == file_hash(folder / "motions.json"),
@@ -161,6 +162,24 @@ def check_geometry():
                     file_hash(ROOT / "docs/assets" / name) == record["sha256"],
                     "Native curve figure: " + name,
                 )
+            from scripts.export_native_curves import native_column, parse_macro
+
+            macro_path = folder / "visualization" / curves["native_macro"]
+            require(
+                file_hash(macro_path) == curves["native_macro_sha256"],
+                "Geometry native macro hash",
+            )
+            macro = parse_macro(macro_path)
+            for dof in core.DOFS:
+                name = dof + ".rao"
+                require(
+                    file_hash(folder / "visualization/data" / name)
+                    == file_hash(folder / "rao" / name),
+                    "Geometry curve raw source",
+                )
+                raw = core.read_rao(folder / "rao" / name)
+                for heading in raw["headings"]:
+                    native_column(macro, name, raw, heading)
         hyd = core.hydrostatics(folder / "geometry/model.hst")
         require(
             math.isclose(hyd["volume"], entry["volume_m3"], rel_tol=1e-10),
@@ -226,6 +245,7 @@ def check_geometry():
         "Native mesh view receipt",
     )
     views = read(views_path)
+    require(views["status"] == "verified", "Native mesh views visually reviewed")
     require(
         {item["key"] for item in views["cases"]}
         == {item["key"] for item in index["cases"]}
@@ -235,6 +255,11 @@ def check_geometry():
         "HSprv/ParaView geometry export",
     )
     for item in views["cases"]:
+        figure = item["geometry_figures"]
+        require(
+            file_hash(ROOT / figure["png"]) == figure["png_sha256"],
+            "Native projection PNG",
+        )
         path = base / item["native_export"]
         require(file_hash(path) == item["native_export_sha256"], "HSprv source receipt")
         export = read(path)
@@ -253,6 +278,27 @@ def check_geometry():
         )
         for name, digest in export["files"].items():
             require(file_hash(folder / name) == digest, "HSprv output: " + name)
+    import pypdfium2 as pdfium
+
+    for name, output in views["pdf_outputs"].items():
+        path = ROOT / "docs/assets" / name
+        require(file_hash(path) == output["sha256"], "Native mesh PDF hash")
+        with pdfium.PdfDocument(str(path)) as pdf:
+            require(len(pdf) == output["pages"] == 3, "Three native mesh PDF views")
+            for page in pdf:
+                images = [
+                    o
+                    for o in page.get_objects()
+                    if o.type == pdfium.raw.FPDF_PAGEOBJ_IMAGE
+                ]
+                require(
+                    images and min(min(o.get_px_size()) for o in images) >= 1600,
+                    "High-resolution native PDF render",
+                )
+        require(
+            output["geometry_encoding"] == "native raster render; not vector geometry",
+            "Accurate native PDF encoding",
+        )
     comparison_path = ROOT / index["mesh_comparison"]["path"]
     require(
         file_hash(comparison_path) == index["mesh_comparison"]["sha256"],
@@ -265,6 +311,30 @@ def check_geometry():
         {k: v for k, v in comparison.items() if k != "figures"} == comparison_data(),
         "Fixed-physics mesh comparison and metrics",
     )
+    visualization = ROOT / index["mesh_comparison"]["visualization"]
+    require(
+        file_hash(visualization) == index["mesh_comparison"]["visualization_sha256"],
+        "Comparison export receipt",
+    )
+    record = read(visualization)
+    require(
+        record["status"] == "verified" and record["figures"] == comparison["figures"],
+        "Native comparison review",
+    )
+    for name, digest in record["files"].items():
+        require(
+            file_hash(visualization.parent / name) == digest, "Comparison source hash"
+        )
+    for label, source in (("coarse", coarse), ("fine", base / "cad_spar")):
+        macro = parse_macro(visualization.parent / (label + ".gnu"))
+        for dof in core.DOFS:
+            name = dof + ".rao"
+            require(
+                file_hash(visualization.parent / "data" / label / name)
+                == file_hash(source / "rao" / name),
+                "Comparison raw response source",
+            )
+            native_column(macro, name, core.read_rao(source / "rao" / name), 60)
     return dict(
         general_geometry_native_cases=3,
         general_geometry_response_values=values,

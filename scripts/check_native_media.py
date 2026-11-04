@@ -21,6 +21,7 @@ from hydrostar_mcp.pressure import verify_pressure_physics, wet_panel_samples
 from hydrostar_mcp.visualization import whole_mesh
 from hydrostar_mcp.workflow import file_hash
 from scripts.export_native_curves import CASES
+from export_hsrao import native_column, parse_macro
 
 
 def require(value, message):
@@ -141,12 +142,21 @@ def check_curves(key):
         record["renderer"].startswith("gnuplot ") and record["status"] == "verified",
         "Gnuplot export/review state",
     )
+    macro_path = folder / record["native_macro"]
+    require(
+        file_hash(macro_path) == record["native_macro_sha256"],
+        "Original HSRAO macro hash",
+    )
+    macro = parse_macro(macro_path)
     for dof in core.DOFS:
         require(
             file_hash(folder / "data" / (dof + ".rao"))
             == file_hash(source / "rao" / (dof + ".rao")),
             "Gnuplot original response source",
         )
+        raw = core.read_rao(source / "rao" / (dof + ".rao"))
+        for heading in raw["headings"]:
+            native_column(macro, dof + ".rao", raw, heading)
     require(len(record["figures"]) == 28, "Complete curve exports")
     for name, entry in record["figures"].items():
         require(

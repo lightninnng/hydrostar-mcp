@@ -15,6 +15,7 @@ from paraview.simple import (
     _DisableFirstRenderCameraReset,
     CreateLayout,
     CreateView,
+    ExportView,
     PVDReader,
     RenderAllViews,
     SaveScreenshot,
@@ -28,6 +29,7 @@ from render_native_views import set_points
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = ROOT / "examples/geometry"
+PDF_STAGE = ROOT / "output/validation/native-geometry-export"
 CASES = (
     ("lofted_vessel", "Curved-section hull"),
     ("moonpool_caisson", "Through-moonpool caisson"),
@@ -91,6 +93,139 @@ def mesh_check(data, surface, native_frame):
     return error, bound, padded_triangles, points
 
 
+def export_case_views(key, title, source, points, total):
+    """Native orthographic images and full-size GL2PS pages of the same PVD."""
+    layout = CreateLayout(name=key + " native views")
+    layout.SplitHorizontal(0, 0.52)
+    layout.SplitVertical(2, 0.5)
+    layout.SetSize(3000, 1700)
+    PDF_STAGE.mkdir(parents=True, exist_ok=True)
+    pages = []
+    pdf_views = []
+    settings = (
+        (
+            1,
+            "isometric",
+            "(a) Native wet mesh",
+            [0.55, -1.2, 0.9],
+            [0, 0, 1],
+            [1560, 1700],
+        ),
+        (
+            5,
+            "longitudinal",
+            "(b) Longitudinal projection (x-z)",
+            [0, -1, 0],
+            [0, 0, 1],
+            [1440, 850],
+        ),
+        (6, "plan", "(c) Plan projection (x-y)", [0, 0, 1], [0, 1, 0], [1440, 850]),
+    )
+    for cell, name, heading, direction, up, size in settings:
+        view = CreateView("RenderView")
+        layout.AssignView(cell, view)
+        view.UseColorPaletteForBackground = 0
+        view.Background = [1, 1, 1]
+        view.CameraParallelProjection = 1
+        view.CenterAxesVisibility = 0
+        view.OrientationAxesVisibility = 1
+        view.OrientationAxesLabelColor = [0.1, 0.15, 0.2]
+        display = Show(source, view)
+        display.Representation = "Surface With Edges"
+        display.ColorArrayName = ["POINTS", ""]
+        display.DiffuseColor = [0.63, 0.76, 0.79]
+        display.AmbientColor = [0.63, 0.76, 0.79]
+        display.EdgeColor = [0.16, 0.28, 0.33]
+        display.LineWidth = 0.8
+        display.Ambient = 0.35
+        display.Diffuse = 0.75
+        direction = np.asarray(direction, dtype=float)
+        forward = -direction / np.linalg.norm(direction)
+        right = np.cross(forward, up)
+        right /= np.linalg.norm(right)
+        upward = np.cross(right, forward)
+        projected = np.column_stack([points @ right, points @ upward])
+        center = (points.min(axis=0) + points.max(axis=0)) / 2
+        midpoint = (projected.min(axis=0) + projected.max(axis=0)) / 2
+        center += right * (midpoint[0] - center @ right)
+        center += upward * (midpoint[1] - center @ upward)
+        width, height = np.ptp(projected, axis=0)
+        scale = max(height / 1.42, width / (2 * size[0] / size[1] * 0.80))
+        center += upward * (0.025 * scale)
+        view.CameraFocalPoint = center
+        view.CameraPosition = center + max(np.ptp(points, axis=0)) * direction
+        view.CameraViewUp = up
+        view.CameraParallelScale = scale
+        text = Text()
+        text.Text = heading + (
+            f"\n{title}\n{len(points):,} nodes; {total:,} total panels"
+            if name == "isometric"
+            else ""
+        )
+        label = Show(text, view)
+        label.FontFamily = "Times"
+        label.FontSize = 26
+        label.Color = [0.09, 0.16, 0.20]
+        label.WindowLocation = "Any Location"
+        label.Position = [0.035, 0.94]
+        label.Justification = "Left"
+        footer = Text()
+        footer.Text = "Mean wetted surface; coordinates in m; geometry gain 1x"
+        if name != "isometric":
+            # Coplanar native bounds make AxesGrid auto-scaled labels unreadable.
+            # Keep the native orientation marker and explicit metric bounds.
+            axes = (0, 2) if name == "longitudinal" else (0, 1)
+            footer.Text += "\n" + "; ".join(
+                f"{'xyz'[axis]}: {points[:, axis].min():.4g} to {points[:, axis].max():.4g} m"
+                for axis in axes
+            )
+        note = Show(footer, view)
+        note.FontFamily = "Times"
+        note.FontSize = 21
+        note.Color = [0.27, 0.34, 0.38]
+        note.WindowLocation = "Lower Right Corner"
+        pdf_views.append((view, name, scale, size, label, note))
+    RenderAllViews()
+    output = ROOT / "docs/assets" / (key + "_geometry.png")
+    SaveScreenshot(
+        str(output),
+        layout,
+        ImageResolution=[3000, 1700],
+        FontScaling="Do not scale fonts",
+    )
+    for view, name, scale, size, label, note in pdf_views:
+        # An attached split-layout view exports a default 400x400 window.
+        # Detach it and size the native render window before GL2PS export.
+        layout.RemoveView(view)
+        view.ViewSize = [size[0] * 2, size[1] * 2]
+        label.FontSize *= 2
+        note.FontSize *= 2
+        note.WindowLocation = "Any Location"
+        note.Position = [0.97, 0.035]
+        note.Justification = "Right"
+        RenderAllViews()
+        pdf = PDF_STAGE / f"{key}-{name}.pdf"
+        ExportView(str(pdf), view=view, Rasterize3Dgeometry=0, Rendertextaspaths=1)
+        pages.append(
+            dict(
+                file=pdf.name,
+                sha256=digest(pdf),
+                view=name,
+                camera_position=list(view.CameraPosition),
+                camera_focal_point=list(view.CameraFocalPoint),
+                camera_view_up=list(view.CameraViewUp),
+                camera_parallel_scale=scale,
+                render_size_px=list(view.ViewSize),
+            )
+        )
+    return dict(
+        png=output.relative_to(ROOT).as_posix(),
+        png_sha256=digest(output),
+        pdf_pages=pages,
+        pdf_method="ParaView GL2PS native export with full-size raster 3D geometry and vector text paths; page assembly preserves the original PDF objects",
+    )
+
+
 def main():
     _DisableFirstRenderCameraReset()
     layout = CreateLayout(name="Budgeted native wet meshes")
@@ -98,6 +233,7 @@ def main():
     layout.SplitHorizontal(2, 0.5)
     layout.SetSize(2700, 1160)
     records = []
+    loaded = []
     for i, ((key, title), cell) in enumerate(zip(CASES, (1, 5, 6))):
         folder = BASE / key
         native = read(folder / "visualization/native-mesh.json")
@@ -204,6 +340,7 @@ def main():
                 connectivity="Every native triangle/quadrilateral matches the accepted HST",
             )
         )
+        loaded.append((key, title, source, points, total))
     RenderAllViews()
     output = ROOT / "docs/assets/geometry-source-cases.png"
     SaveScreenshot(
@@ -212,9 +349,15 @@ def main():
         ImageResolution=[2700, 1160],
         FontScaling="Do not scale fonts",
     )
+    for record, (key, title, source, points, total) in zip(records, loaded):
+        record["geometry_figures"] = export_case_views(
+            key, title, source, points, total
+        )
     receipt = dict(
         renderer=f"ParaView {servermanager.vtkSMProxyManager.GetVersionMajor()}.{servermanager.vtkSMProxyManager.GetVersionMinor()}",
         workflow="HSprv native PVD -> ParaView PVDReader -> SaveScreenshot; mean geometry, deformation off",
+        capture_method="Direct offscreen PNG and GL2PS PDF export; no desktop/window capture",
+        pdf_limitation="ParaView 6.2 OpenGL exporter rasterizes 3D geometry even with Rasterize3Dgeometry=0; mesh PDFs are high-resolution native views, not vector geometry",
         cases=records,
         geometry_gain=1,
         coordinate_unit="m",

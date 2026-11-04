@@ -1,17 +1,15 @@
-"""Publish source geometry, native arrays and scientific figures as one dataset."""
+"""Index native geometry/curve exports and assemble original PDF pages."""
 
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 import sys
-import textwrap
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from hydrostar_mcp import __version__
-from hydrostar_mcp.geometry_worker import plot_surface
-from hydrostar_mcp.visualization import _scientific_style
 from hydrostar_mcp.workflow import file_hash, save_json
 
 LABELS = {
@@ -24,96 +22,70 @@ LABELS = {
 }
 
 
-def export():
-    import matplotlib
+def read(path):
+    return json.loads(path.read_text(encoding="utf-8"))
 
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-    import numpy as np
-    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-    from matplotlib.ticker import MaxNLocator
 
-    _scientific_style(plt)
+def assemble_pdf(pages, target):
+    """Copy native PDF page objects without an additional image conversion."""
+    import pypdfium2 as pdfium
+
+    combined = pdfium.PdfDocument.new()
+    try:
+        for page in pages:
+            path = ROOT / "output/validation/native-geometry-export" / page["file"]
+            if file_hash(path) != page["sha256"]:
+                raise ValueError("Native PDF page changed: " + page["file"])
+            source = pdfium.PdfDocument(str(path))
+            try:
+                combined.import_pages(source)
+            finally:
+                source.close()
+        combined.save(str(target))
+    finally:
+        combined.close()
+    return dict(
+        sha256=file_hash(target),
+        pages=len(pages),
+        method="Unmodified ParaView GL2PS pages assembled with PDFium; native raster geometry and vector text paths preserved",
+        geometry_encoding="native raster render; not vector geometry",
+    )
+
+
+def export(gnuplot=None):
     assets = ROOT / "docs/assets"
-    fig = plt.figure(figsize=(14, 6.3))
+    views_path = ROOT / "examples/geometry/native-mesh-views.json"
+    views = read(views_path)
+    if views["output_sha256"] != file_hash(assets / "geometry-source-cases.png"):
+        raise ValueError("Native ParaView overview changed")
+    native_cases = {case["key"]: case for case in views["cases"]}
+    views["pdf_outputs"] = {}
+    overview_pages = []
     cases = []
-    for index, (key, labels) in enumerate(LABELS.items()):
+    for key, labels in LABELS.items():
         folder = ROOT / "examples/geometry" / key
-        report = json.loads(
-            (folder / "geometry/geometry-report.json").read_text(encoding="utf-8")
-        )
-        native = json.loads((folder / "verification.json").read_text(encoding="utf-8"))
+        report = read(folder / "geometry/geometry-report.json")
+        native = read(folder / "verification.json")
         if report["status"] != "geometry_accepted" or set(
             native["quality_gates"].values()
         ) != {"passed"}:
             raise ValueError("Accepted geometry and native results required: " + key)
-        surface = json.loads(
-            (folder / "geometry/surface.json").read_text(encoding="utf-8")
-        )
-        motions = json.loads((folder / "motions.json").read_text(encoding="utf-8"))
-        curves = json.loads(
-            (folder / "visualization/verification.json").read_text(encoding="utf-8")
-        )
+        motions = read(folder / "motions.json")
+        curves = read(folder / "visualization/verification.json")
         if curves["motions_sha256"] != file_hash(folder / "motions.json"):
             raise ValueError("Native Gnuplot curve source changed: " + key)
         for name, item in curves["figures"].items():
             if item["sha256"] != file_hash(assets / name):
                 raise ValueError("Native Gnuplot figure changed: " + name)
-        cfg = json.loads((folder / "config.json").read_text(encoding="utf-8"))
-        v, f = np.array(surface["vertices"]), surface["faces"]
-        ax = fig.add_axes([0.035 + index * 0.33, 0.30, 0.28, 0.48], projection="3d")
-        ax.add_collection3d(
-            Poly3DCollection(
-                [v[face] for face in f],
-                facecolor="#6891a6",
-                edgecolor="#355369",
-                linewidth=0.12,
-                alpha=0.8,
-            )
+        figure = native_cases[key]["geometry_figures"]
+        if file_hash(ROOT / figure["png"]) != figure["png_sha256"]:
+            raise ValueError("Native mesh figure changed: " + key)
+        pdf_name = key + "_geometry.pdf"
+        views["pdf_outputs"][pdf_name] = assemble_pdf(
+            figure["pdf_pages"], assets / pdf_name
         )
-        low, high = v.min(axis=0), v.max(axis=0)
-        ax.set(
-            xlim=(low[0], high[0]),
-            ylim=(low[1], high[1]),
-            zlim=(low[2], max(high[2], 1)),
-            xlabel="x (m)",
-            ylabel="y (m)",
-            zlabel="z (m)",
-        )
-        ax.set_box_aspect(np.maximum(high - low, 1))
-        ax.view_init(23, -58)
-        ax.tick_params(labelsize=8, pad=0)
-        for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
-            axis.set_major_locator(MaxNLocator(3))
-            axis.label.set_fontsize(9)
-        if key == "lofted_vessel":
-            ax.set_axis_off()
-        fig.text(
-            0.175 + index * 0.33,
-            0.84,
-            "(" + chr(97 + index) + ") " + textwrap.fill(labels[1], width=34),
-            ha="center",
-            va="top",
-            fontsize=11,
-        )
-        volume = report["hydrostatics"]["volume"]
-        error = report["fidelity"]["cad_volume_relative_error"]
-        fig.text(
-            0.04 + index * 0.33,
-            0.14,
-            f"{sum(len(p) == 4 for p in f):,} quadrilaterals; {sum(len(p) == 3 for p in f)} triangles\nWet extents = "
-            + " × ".join(f"{d:.1f}" for d in high - low)
-            + f" m\nVolume = {volume:,.3f} m³\nCAD/mesh volume difference = {100 * error:.3f}%",
-            fontsize=9.5,
-        )
-        plot_surface(
-            assets,
-            surface["vertices"],
-            surface["faces"],
-            surface["reference"],
-            output_name=key + "_geometry.png",
-        )
-        # Verification indexes the exact data bundle; figures outside it have their own hashes.
+        overview_pages.append(figure["pdf_pages"][0])
+        cfg = read(folder / "config.json")
         native["publication_version"] = __version__
         native["files"] = {
             p.relative_to(folder).as_posix(): file_hash(p)
@@ -128,11 +100,11 @@ def export():
                 label_en=labels[1],
                 geometry_figure="assets/" + key + "_geometry.png",
                 rao_figure="assets/" + key + "_rao.png",
-                volume_m3=volume,
+                volume_m3=report["hydrostatics"]["volume"],
                 cad_volume_m3=report["reference"]["cad_volume_m3"],
-                volume_relative_error=error,
+                volume_relative_error=report["fidelity"]["cad_volume_relative_error"],
                 cb_distance_m=report["fidelity"]["cad_cb_distance_m"],
-                panels=len(f),
+                panels=report["quality"]["panels"],
                 panel_layout=report["request"]["panel_layout"],
                 panel_quality=report["quality"]["panel_quality"],
                 waterplane_panels=native["hslec"]["waterplane_panels"],
@@ -146,29 +118,14 @@ def export():
                 summary="examples/geometry/" + key + "/verification.json",
                 summary_sha256=file_hash(folder / "verification.json"),
                 source_case_id=native["source_case_id"],
+                geometry_renderer="HSprv native PVD -> ParaView direct orthographic PNG and high-resolution native-view PDF",
+                curve_renderer="HSRAO macro/native RAO columns -> Gnuplot direct file terminals",
             )
         )
-    fig.suptitle(
-        "Original geometries used in native hydrodynamic calculations",
-        fontsize=14,
-        y=0.96,
+    views["pdf_outputs"]["geometry-source-cases.pdf"] = assemble_pdf(
+        overview_pages, assets / "geometry-source-cases.pdf"
     )
-    fig.text(
-        0.5,
-        0.04,
-        "Mean wetted surfaces. Coordinate units: m. Equal spatial scales within each view.",
-        ha="center",
-        fontsize=9,
-        color="#526278",
-    )
-    # The primary PNG is exported first through native HSprv/ParaView.
-    native_views = json.loads(
-        (ROOT / "examples/geometry/native-mesh-views.json").read_text(encoding="utf-8")
-    )
-    if native_views["output_sha256"] != file_hash(assets / "geometry-source-cases.png"):
-        raise ValueError("Native ParaView overview changed")
-    fig.savefig(assets / "geometry-source-cases.pdf")
-    plt.close(fig)
+    save_json(views_path, views)
     payload = dict(
         schema="hydrostar-general-geometry-study-1",
         publication_version=__version__,
@@ -176,22 +133,24 @@ def export():
         cases=cases,
         native_mesh_views=dict(
             path="examples/geometry/native-mesh-views.json",
-            sha256=file_hash(ROOT / "examples/geometry/native-mesh-views.json"),
+            sha256=file_hash(views_path),
         ),
+        figures={
+            p.name: file_hash(p)
+            for p in assets.iterdir()
+            if p.name in {"geometry-source-cases.png", "geometry-source-cases.pdf"}
+            or any(p.name.startswith(k + "_") for k in LABELS)
+        },
     )
-    payload["figures"] = {
-        p.name: file_hash(p)
-        for p in assets.iterdir()
-        if p.name in {"geometry-source-cases.png", "geometry-source-cases.pdf"}
-        or any(p.name.startswith(k + "_") for k in LABELS)
-    }
     save_json(ROOT / "examples/geometry/index.json", payload)
     save_json(ROOT / "docs/data/geometry.json", payload)
     from scripts.export_mesh_comparison import export_comparison
 
-    export_comparison()
-    print("Published geometry cases:", len(cases))
+    export_comparison(gnuplot)
+    print("Published native geometry cases:", len(cases))
 
 
 if __name__ == "__main__":
-    export()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--gnuplot")
+    export(parser.parse_args().gnuplot)

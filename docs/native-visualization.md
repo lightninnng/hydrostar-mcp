@@ -87,12 +87,14 @@ python scripts/export_readme_media.py --check
 ```powershell
 pvpython --disable-registry --force-offscreen-rendering scripts/render_geometry_meshes.py
 python scripts/export_native_curves.py --gnuplot C:/path/to/gnuplot.exe --case lofted_vessel --case moonpool_caisson --case cad_spar
-python scripts/export_geometry.py
+python scripts/export_geometry.py --gnuplot C:/path/to/gnuplot.exe
 python scripts/build_gallery.py
 python scripts/check_geometry.py
 ```
 
-总览 PNG 来自 HSprv → ParaView；Matplotlib 补充几何投影与总览 PDF，Gnuplot 从本次原生 RAO 导出响应。记录见 `examples/geometry/native-mesh-views.json` 及各例 visualization/verification.json。
+总览、各模型三维图与正交投影全部来自 HSprv → ParaView 离屏文件导出，单模型 PNG 为 3000×1700。每个模型的三页 PDF 分别保存三维、纵向和俯视图；总览 PDF 为每个模型一页。GL2PS 导出前将视图移出分割布局，显式设置两倍视图像素，避免默认 400×400 窗口裁切。检查实际 PDF 对象后确认本机 ParaView 6.2 仍会将三维几何栅格化，即使 Rasterize3Dgeometry=0；这些 PDF 为高清原生视图，不宣称矢量网格。PDFium 仅复制原生页对象。
+
+响应和两档网格对照通过原始 RAO、hsrao 生成的 .gnu 宏与 Gnuplot 文件终端导出 PNG、矢量 PDF/SVG。宏中的列号逐项与原表浪向核对；原表已存储而宏省略的对称浪向使用其实际列，不作插值。原始宏、数据副本、脚本与输出哈希随包保存。记录见 `examples/geometry/native-mesh-views.json`、各例 visualization/verification.json 和 sensitivity/visualization/verification.json。独立批量导出方法见 [skill 导出说明](../skills/hydrostar-modeling/references/direct-export.md)。
 
 交付清单保存手册依据、工具名称和版本、项目名、相对数据路径、输入及数据库哈希、命令或界面操作、视图设置、场量与工况、色标、单位、倍率、时间/帧率、导出格式和媒体哈希。原生绘图设置、场点输入、实际 .prv、所用 Anim/ 索引及数据、宏/会话设置、原始导出文件和必要的转码设置按采用的路径交付；数据库可随包保存，或清楚记录由交付输入再生成的方法。
 

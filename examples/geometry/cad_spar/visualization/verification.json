@@ -2,7 +2,11 @@
   "schema": "hydrostar-native-curve-export-1",
   "renderer": "gnuplot 5.2 patchlevel 8",
   "workflow": "HydroStar manual Gnuplot plotting route with batch terminal/output settings",
-  "status": "exported",
+  "native_macro": "native.gnu",
+  "native_macro_sha256": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
+  "column_mapping": "HSRAO macro columns checked against original RAO headers; stored mirrored headings absent from the macro use their explicit native header columns without interpolation",
+  "capture_method": "Direct Gnuplot file terminals; no desktop/window capture",
+  "status": "verified",
   "source": "examples/geometry/cad_spar",
   "project": "cad_spar_rings_fine",
   "display_name": "Curved Spar with a heave plate",
@@ -18,7 +22,7 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "e7b5952ad0457de3cc365dfdfe910a3dfee8aa4124242d91178a8064470350cc"
+      "sha256": "60094c3bfa89cb902c242d00edcc7d120432593a5d793f0d3736b87994de7ee1"
     },
     "cad_spar_rao.pdf": {
       "headings_deg": [
@@ -28,7 +32,17 @@
         180.0
       ],
       "mode": "amplitude",
-      "sha256": "c379439ec3e55cfe525782ffffedf0940ce78e8d170cffb2df529d14c3288ed1"
+      "sha256": "f2e0deece92d5c53e947c6401ccd4ff5641b72c925565465422c0cb94723b1c1"
+    },
+    "cad_spar_rao.svg": {
+      "headings_deg": [
+        0.0,
+        60.0,
+        120.0,
+        180.0
+      ],
+      "mode": "amplitude",
+      "sha256": "1013993410575872f5eac7dbca01c121db6efd192db404d0cb4cebc6cea0f79c"
     }
   },
   "command": [
@@ -36,10 +50,11 @@
     "curves.gp"
   ],
   "files": {
-    "curves.gp": "3dd67d53e9fc38bb3c7e21b6fc1c65672c7a439a43fab0c3a964fa0791c1020e",
+    "curves.gp": "45de32f2ca9c510682ace30075985458cf6e94689f347a28042a187872d406a2",
     "export.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "mesh-view.prv": "9221540b923ea2c2905661eec5ddb5e601828a9305f1bef26dcc6ce43a7ddf97",
     "native-mesh.json": "de70e29613a81fa4ab7a031f9c54d67456ab860f29c14b1d2cb009b44644ac7a",
+    "native.gnu": "56a597be8c76e4d35c73046db4600564322cc8bb9e107e1b4006a70efec1ad83",
     "data/heave.rao": "de237309107a5ab5194829513f44e8322c77f059c7c4e7ebd4fb164b6ae8d343",
     "data/pitch.rao": "7a24c5f16e23eea535591a726bad1e87ade369776c10fd1151653549b8eb42c2",
     "data/roll.rao": "dd6bc08fadf46a4532cfb40aafe9335a8184f5725f856c16df36eaec4bb2452f",
@@ -51,5 +66,9 @@
     "native/ship1_00002.vtu": "67300bada7e8487f66ba841bee90555b73028266fe30d5492066a50df7081691"
   },
   "native_mesh_sha256": "cad5843bc235cf4993a832487a1ac79ec2dc4d132d6db5669cc19e40a8d08c28",
-  "motions_sha256": "f67f792450d5a6e04861dae4d1e877edf7874930196543bd79b792d1e7b64c43"
+  "motions_sha256": "f67f792450d5a6e04861dae4d1e877edf7874930196543bd79b792d1e7b64c43",
+  "visual_review": {
+    "date": "2026-11-04",
+    "method": "Opened exported native PNGs and rendered PDF pages; verified mesh boundaries, units, camera, labels and legends. Native PDF geometry is raster; Gnuplot PDFs contain no image objects."
+  }
 }

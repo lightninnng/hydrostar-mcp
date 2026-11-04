@@ -18,14 +18,13 @@
 
 ## 科研图与交互查看
 
-静态六联图显示 0°、60°、90°、180° 四个浪向，采用色盲友好配色和不同线型。各自由度使用独立纵轴并保留实际量级；平移为 m/m，转角为 deg/m。PNG 为 300 dpi，PDF 为矢量格式。
+静态六联图沿手册配套的 Gnuplot 路径，从原始 RAO 与经过列映射核对的 hsrao 宏直接导出，显示 0°、60°、90°、120°、180° 五个浪向。各自由度使用独立纵轴并保留实际量级；平移为 m/m，转角为 deg/m。PNG 为 2400×1540，曲线 PDF 为矢量格式。原生网格总览见[README](../README.md)，导出方法和来源见[原生可视化](native-visualization.md)。
 
 | 图 | PNG | PDF |
 | --- | --- | --- |
-| 三类求解几何 | [查看](assets/reference-geometry.png) | [下载](assets/reference-geometry.pdf) |
-| 集装箱船 | [查看](assets/container_kcs_style_rao.png) | [下载](assets/container_kcs_style_rao.pdf) |
-| 丰满油船 | [查看](assets/tanker_kvlcc2_style_rao.png) | [下载](assets/tanker_kvlcc2_style_rao.pdf) |
-| 圆柱半潜 | [查看](assets/semisub_oc4_style_rao.png) | [下载](assets/semisub_oc4_style_rao.pdf) |
+| 集装箱船 | [查看](assets/container-response.png) | [下载](assets/container-response.pdf) |
+| 丰满油船 | [查看](assets/tanker-response.png) | [下载](assets/tanker-response.pdf) |
+| 圆柱半潜 | [查看](assets/platform-response.png) | [下载](assets/platform-response.pdf) |
 
 交互页提供 13 个浪向、幅值/相位切换、网格旋转与原始点取值。相位跨越周期分界且相邻跳变超过 180° 时断开连线；幅值近零时结合幅值解释相位。蓝色为实际计算湿面，棕色为实体细杆，灰色为干柱示意。各模型内空间比例统一，G/B 分别标记组合重心/浮心。
 

@@ -1,6 +1,6 @@
 ---
 name: hydrostar-modeling
-description: "Build and verify HydroStar models from parameters, sections, CAD or meshes with structure-aligned quadrilaterals, a default 3000-panel total budget and manual-recommended native or companion visualization first. Use for modelling, quality checks, native single-body calculations, result visualization and native file delivery."
+description: "Build and verify HydroStar models from parameters, sections, CAD or meshes within a default 3000-panel total budget. Use for structured meshing, native calculations, staged acceptance, direct figure/data exports and native file delivery."
 ---
 
 # HydroStar 建模与验收
@@ -36,6 +36,8 @@ description: "Build and verify HydroStar models from parameters, sections, CAD o
 
 ## 验收与执行
 
+按本次交付要求逐阶段执行：几何与网格 → hslec/hschk/hstat 静水力核对 → hsrdf 辐射绕射 → hsmcn/hsrsn 运动与固有周期 → hsrao 响应及曲线 → 任务需要的 hspec 谱统计。每阶段核对输入、原生日志、数值与交付文件后进入下游；已有来源一致的结果可以复用。任务要求的阶段缺数据或文件时记为待补充。
+
 build_geometry / geometry-build 产生独立几何包。检查原生面元比例、凸性、角度、翘曲、相邻尺度、CAD 体积/浮心、共享边、水线闭环、预期连通分量和全局自交。使用显式门限；超限先调整模型或离散，再复核。
 
 将返回的 case_geometry 连同 source_manifest 用于 plan_case → prepare_case → start_case → case_status → read_rao，或对应 CLI。规划时检查估算总量，hslec 后复核实测总量。硬性门禁失败时完成具体诊断和修正，再进入后续步骤。
@@ -46,11 +48,17 @@ build_geometry / geometry-build 产生独立几何包。检查原生面元比例
 
 ## 原生与手册推荐的可视化路径优先
 
+默认直接导出图和原始数据，截图用于必要的界面操作证据。曲线优先矢量 PDF/SVG，并提供高清 PNG；网格和场量优先原生/配套工具的离屏图像与实际支持的文件导出，检查页面对象后说明矢量或位图。使用已验收且来源一致的计算结果，按[直接导出与验收](references/direct-export.md)选择命令、运行随 skill 提供的导出脚本并核对输出。
+
+优先保留 hsrao 生成的 .gnu 绘图宏，核对其数据列与原始 .rao 的频率、浪向、幅值、相位和单位。没有原生宏时，从原始数值表建图并注明实际工具与方法。原生软件文件导出、手册配套脚本导出、自定义补充图和界面截图分别记录，名称与实际来源一致。
+
 将原生工具及当前版本手册默认、推荐的可视化路径作为必须遵循的第一选择，范围覆盖本次分析章节中的官方流程。开展可视化时先阅读[可视化方法](references/native-visualization.md)，再查配套手册与教程，核对入口、数据依赖、版本兼容及实际导出能力。
 
 网格优先 hview 或手册适用的 hvisu / Visu4D；响应、荷载及谱曲线优先 hsplt / StarViewer，按当前版本使用 gnplt 等官方绘图入口；谱统计采用 StarSpec 手册的相应绘图流程。运动、波面、压力云图和 GIF/视频优先 hview / HyView，或手册规定的 HSprv → ParaView / Hstar2Paraview 流程。官方输出接配套查看器同属第一选择。其他手册规定的可视化路径按同一原则选用。
 
 官方链路可用并覆盖需求时，须先沿该流程完成查看、核对和导出，再安排论文排版、曲线比较或网页展示。复用已经计算且来源一致的原生结果，记录手册依据、工具版本、项目、数据文件、命令或界面操作、视角、物理工况、色标、单位和倍率。输出须实际打开并检查，原生/官方查看与导出状态和求解验收状态分别记录。
+
+替换项目展示时先核对旧图引用与来源，再更新图片、原生数据/宏、验收记录、哈希索引、README 和展示页；仅修改配色或使用原生数值不构成原生软件导出。仅更换导出方式且网格、工况与物理参数一致时，复用原计算。
 
 场量采用完整复响应独立核对。总场分量闭合、解析入射波、辐射与六自由度运动的幅值相位、压力静水运动修正和采样敏感性分别验收；每项展示字段指向通过核对的原生数据。单频动画配套计算保持原网格与物理参数，并与完整扫频的对应复响应比较后使用。
 
