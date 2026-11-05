@@ -55,15 +55,22 @@ All four configurations provide synchronized surface pressure, total elevation a
 | Container hull | 0.50 | 12.566 | 80 |
 | Full-form tanker | 0.40 | 15.708 | 80 |
 
-The left view shows the body-following first-order pressure perturbation on the mean wetted panels in kPa. The centre shows total elevation and rigid-body motion. The right shows scattered elevation, including diffraction and motion-induced radiation; elevation colours are in metres. Colours retain physical values. Motion and wave height each use a stated 6× viewing gain; pressure geometry uses 1×. Views share the physical phase and fixed cycle-wide colour scales.
+In the companion plates, the left view shows first-order body-following pressure on the mean wetted panels (kPa), the centre shows total elevation and rigid-body motion, and the right shows scattered elevation including diffraction and motion-induced radiation (m). Motion and wave height use a 6× viewing gain; pressure geometry uses 1×. Each plate shares a physical phase and fixed cycle-wide colour scales.
 
 **Curved station hull.** The selected phase shows wet-surface pressure alongside total and scattered elevation and the corresponding six-DOF rigid-body motion.
 
 [![Curved hull pressure, total elevation and scattered elevation](docs/assets/vessel-coupled-frame.png)](docs/assets/vessel-coupled-frame.png)
 
-**Semisubmersible.** The column arrangement and inter-column wave field appear together, with pressure attached to the actual wet panels.
+**Semisubmersible: HyView wet-surface pressure.** The bundled HyView replays a 60° regular wave of period 7.9 s and amplitude 0.50 m in 200 m of water. The still comes from its native recording with the free surface hidden. Purple to yellow spans a displayed pressure head of −0.56 to +0.56 m (about −5.63 to +5.63 kPa). The field is first-order body-following dynamic pressure. Structural stress requires a separate calculation.
+
+[![HyView recording still: first-order wet-surface pressure on the semisubmersible](docs/assets/platform_pressure_hyview.png)](docs/assets/platform_pressure_hyview.png)
+
+<details>
+<summary>View the ParaView companion for pressure, total and scattered elevation</summary>
 
 [![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/platform-coupled-frame.png)](docs/assets/platform-coupled-frame.png)
+
+</details>
 
 **Container hull.** This reference reconstruction includes a parallel midbody, rounded bilge, bulbous bow and transom. Its static view uses its own computed fields.
 
@@ -73,7 +80,7 @@ The left view shows the body-following first-order pressure perturbation on the 
 
 [![Full-form tanker pressure, total elevation and scattered elevation](docs/assets/tanker-coupled-frame.png)](docs/assets/tanker-coupled-frame.png)
 
-The figures display full-resolution ParaView PNG exports. Click an image for the original file. Conditions, t, t/T and fixed colour limits are retained; a representative phase is separate from a cycle-wide peak assessment.
+The ParaView companion figures mark the conditions, t, t/T and fixed colour limits. Click an image for its original file. The [bundled-viewer export record](examples/visualization/result-viewer-exports.json) gives the HyView frame and display range. The stills show representative field patterns; cycle-wide peaks come from the full numerical results.
 
 ## Diffraction and radiation fields
 
@@ -107,15 +114,17 @@ The fields come from independently checked native HSPRS complex results. ParaVie
 
 ## Six-DOF frequency response
 
-The manual-recommended Gnuplot route reads the original response files and exports the curves by command. Each figure overlays headings of 0°, 60°, 90°, 120° and 180° for surge, sway, heave, roll, pitch and yaw. Angular frequency is in rad/s, translation amplitudes in m/m and rotation amplitudes in deg/m. Each case retains its own loading, damping, depth and frequency range.
+The six degrees of freedom are surge, sway, heave, roll, pitch and yaw. Angular frequency is in rad/s, translation amplitudes in m/m and rotation amplitudes in deg/m. Each case retains the original RAO files. Gnuplot companion figures check the HSrao macros against the source columns and overlay headings of 0°, 60°, 90°, 120° and 180°.
 
 **Curved station hull.** The 231-point sweep covers 0.05–1.20 rad/s at 0.005 rad/s spacing, retaining the peaks and troughs in heave, roll, pitch and the other responses.
 
 [![Native six-DOF response of the curved station hull](docs/assets/vessel-response.png)](docs/assets/vessel-response.pdf)
 
-**Semisubmersible.** The 237-point sweep covers 0.02–1.20 rad/s with the published restoring and damping assumptions.
+**Semisubmersible: StarViewer RAOs.** The bundled StarViewer opens six `.rao` files and saves a vector SVG of the six amplitudes at 60°. The 237-point sweep covers 0.02–1.20 rad/s.
 
-[![Native six-DOF response of the semisubmersible](docs/assets/platform-response.png)](docs/assets/platform-response.pdf)
+[![StarViewer vector export of the semisubmersible six-DOF RAOs](docs/assets/platform_rao_starviewer.svg)](docs/assets/platform_rao_starviewer.svg)
+
+[Five-heading Gnuplot companion PDF for the semisubmersible](docs/assets/platform-response.pdf).
 
 **Container hull.** The 151-point sweep covers 0.05–0.80 rad/s.
 
@@ -134,11 +143,19 @@ Phase is in degrees, wrapped to −180° through 180°. Discrete points retain t
 
 </details>
 
-Click a response figure for its vector PDF. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [Gnuplot curves and original data](examples/visualization/curves).
+Click a response figure for its vector original. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [Gnuplot curves and original data](examples/visualization/curves).
 
 ## Second-order mean drift and difference-frequency loads
 
 The semisubmersible has completed native **HSdft → HSamg → HSqtf** calculations, providing mean drift loads and full difference-frequency QTFs including the free-surface integral. Water depth is 200 m, heading is 60°, and difference frequencies are 0, 0.05 and 0.10 rad/s: **36 valid wave-frequency pairs and 216 complex load coefficients**.
+
+**The same configuration in waves, in HyView.** The native replay combines first-order HSMCN rigid-body motion with the HSPRS free surface. The regular wave has period 7.9 s (about 0.795 rad/s), amplitude 0.50 m and heading 60°. The scene shows the first-order sea state and motion; the QTF below gives the actual second-order load coefficients.
+
+[![HyView recording still: first-order semisubmersible motion in waves](docs/assets/platform_wave_hyview.png)](docs/assets/platform_wave_hyview.png)
+
+**StarViewer vertical-load QTF.** StarViewer reads `qtf_fz.qtf` and plots three difference-frequency magnitudes in N/m². The abscissa is the mean of the two wave angular frequencies; the view is limited to the valid interval of about 0.50–1.05 rad/s. See the [export and reconstruction record](examples/visualization/result-viewer-exports.json).
+
+[![StarViewer vector export of the vertical difference-frequency QTF](docs/assets/platform_qtf_fz_starviewer.svg)](docs/assets/platform_qtf_fz_starviewer.svg)
 
 [![Exterior integration mesh and four waterline openings saved directly by Visu5D](docs/assets/platform_exterior_visu5d.jpg)](docs/assets/platform_exterior_visu5d.jpg)
 

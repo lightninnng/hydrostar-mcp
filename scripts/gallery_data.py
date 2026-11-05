@@ -8,6 +8,7 @@ from hydrostar_mcp import __version__
 from hydrostar_mcp.visualization import whole_mesh
 
 ROOT = Path(__file__).resolve().parent.parent
+RESULT_VIEWER_RECORD = "examples/visualization/result-viewer-exports.json"
 NAMES = dict(
     vessel="曲线船体", container="集装箱船", tanker="丰满油船", platform="半潜平台"
 )
@@ -134,6 +135,7 @@ def result_sections(dataset):
         item["preview"]: item
         for item in read(ROOT / "examples/visualization/readme-media.json")["media"]
     }
+    exports = result_viewer_exports()
     sections = []
     for section, key in enumerate(("vessel", "platform", "container", "tanker"), 2):
         case = cases[key]
@@ -189,15 +191,26 @@ def result_sections(dataset):
         )
         if not sources:
             sources = "<p>曲线船体使用本项目原创型值表，尺寸、坐标、单位、放样方法与装载假设随算例保存。</p>"
+        response = f'''<figure class="response-overview"><h3>六自由度频率响应</h3><a href="assets/{key}-response.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/{key}-response.png" width="2400" height="1540" loading="lazy" decoding="async" alt="{label}，五个浪向的六自由度响应幅值"></a>
+<figcaption>图 {section}a。原生响应覆盖 {first:g}–{last:g} rad/s，步长为 {case["frequency_step"]:g} rad/s，共 {case["frequency_count"]} 个频率点和 {len(case["headings"])} 个浪向。Gnuplot 配套图叠加 0°、60°、90°、120° 和 180° 浪向；平移幅值为 m/m，转动幅值为 deg/m。点击图片查看矢量 PDF。</figcaption></figure>'''
+        pressure = ""
+        if key == "platform":
+            response = (
+                software_result_figure(exports["platform_rao"])
+                + "<details><summary>查看五个浪向的 Gnuplot 配套叠图</summary>"
+                + response
+                + "</details>"
+            )
+            pressure = software_result_figure(exports["platform_pressure"])
         sections.append(
             f'''<section class="case-report" id="case-{key}" data-result-case="{key}" aria-labelledby="{key}-heading">
 <div class="case-heading"><h2 id="{key}-heading">{section}. {label}</h2><a href="#model-heading" data-inspect-model="{key}">查看交互网格</a></div>
 <p>{html.escape(case["features"])}全体湿面共 {case["wet_panels"]:,} 个面元，包含水线面的总数为 {case["total_panels"]:,}。{html.escape(case["assumptions"])}</p>
-<figure class="response-overview"><h3>六自由度频率响应</h3><a href="assets/{key}-response.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/{key}-response.png" width="2400" height="1540" loading="lazy" decoding="async" alt="{label}，五个浪向的六自由度响应幅值"></a>
-<figcaption>图 {section}a。原生响应覆盖 {first:g}–{last:g} rad/s，步长为 {case["frequency_step"]:g} rad/s，共 {case["frequency_count"]} 个频率点和 {len(case["headings"])} 个浪向。图中叠加 0°、60°、90°、120° 和 180° 浪向；平移幅值为 m/m，转动幅值为 deg/m。点击图片查看矢量 PDF。</figcaption></figure>
+{response}
 <details class="response-detail" data-response-case="{key}"><summary>按浪向查看幅值与相位</summary>
 <div class="toolbar"><label class="field">响应浪向<select class="response-heading" aria-label="{label}响应浪向">{headings}</select></label><div class="tabs" role="group" aria-label="{label}响应类型"><button type="button" data-mode="amplitude" aria-pressed="true">幅值</button><button type="button" data-mode="phase" aria-pressed="false">相位</button></div></div>
 <figure><div class="media-viewport"><img class="media-image curve response-curve" src="assets/{key}-amplitude-60.svg" width="1400" height="900" loading="lazy" alt="{label}，60 度浪向，六自由度幅值"></div><figcaption class="response-caption">平移幅值单位为 m/m，转动幅值为 deg/m，横轴为波浪角频率（rad/s）。</figcaption></figure><p class="data-links"><a class="response-original" href="assets/{key}-amplitude-60.svg" target="_blank" rel="noopener">查看当前矢量原图</a>。窄屏可横向查看完整图幅。</p></details>
+{pressure}
 <p class="case-condition">本节动画采用同一规则波工况。{condition}</p>
 {"".join(figures)}
 <p class="source">每组动图完整保留 40 个物理相位，以 10 帧/秒循环播放，一次播放循环为 4 秒；真实物理时刻见 t 和 t/T。不同构型和面板采用各自标明的色标范围，颜色保持实际物理量。灰色干结构和细杆提供空间背景。</p>
@@ -250,6 +263,29 @@ def viewer_exports():
             "figures"
         ]
     }
+
+
+def result_viewer_exports():
+    return {
+        entry["key"]: entry for entry in read(ROOT / RESULT_VIEWER_RECORD)["figures"]
+    }
+
+
+def software_result_figure(entry):
+    if entry["status"] != "verified" or entry["origin"] != "hydrostar_bundled_viewer":
+        raise ValueError("Verified bundled viewer result required: " + entry["key"])
+    key = html.escape(entry["key"], quote=True)
+    anchor = key.replace("_", "-")
+    source = html.escape(entry["image"].removeprefix("docs/"), quote=True)
+    title = html.escape(entry["title_zh"])
+    viewer = html.escape(entry["viewer"])
+    caption = html.escape(entry["caption_zh"])
+    width, height = map(round, entry["size"])
+    method = {
+        "save_figure_svg": "直接保存 SVG",
+        "native_recording_frame": "从原生录制提取静帧",
+    }[entry["export_method"]]
+    return f'''<figure class="response-overview" id="viewer-{anchor}" data-image-origin="hydrostar-bundled-viewer" data-result-viewer="{key}"><h3>{title}</h3><a href="{source}" target="_blank" rel="noopener"><img class="media-image" src="{source}" width="{width}" height="{height}" loading="lazy" decoding="async" alt="{viewer}：{title}"></a><figcaption><strong>{viewer} · {method}</strong>。{caption} <a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/{RESULT_VIEWER_RECORD}">查看来源与设置</a>。</figcaption></figure>'''
 
 
 def software_mesh_figure(entry, label):
@@ -342,6 +378,9 @@ def second_order_section():
     software_view = software_mesh_figure(
         viewer_exports()["platform_exterior"], "半潜平台的二阶外部积分自由面"
     )
+    exports = result_viewer_exports()
+    wave_view = software_result_figure(exports["platform_wave"])
+    qtf_view = software_result_figure(exports["platform_qtf_fz"])
     figures = []
     for kind, letter, title, caption in (
         (
@@ -394,6 +433,8 @@ def second_order_section():
         )
     return f"""<section id="second-order" aria-labelledby="second-order-heading"><h2 id="second-order-heading">6. 半潜平台的二阶差频荷载</h2>
 <p>半潜平台进一步完成平均漂移与完整差频二阶势计算。采用近场表达式，包含内外自由面积分，外部积分使用 QUADPACK。水深为 200 m，浪向为 60°，波频为 0.50–1.10 rad/s，差频为 0、0.05、0.10 rad/s。原生计算覆盖 36 对有效波频，共 216 个复数荷载系数。</p>
+{wave_view}
+{qtf_view}
 {software_view}
 <p class="source">图中可查看外部环带、近体分区和四个水线开口，柱体位于自由面下方。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。</p>
 <details><summary>查看 ParaView 配套图中的湿面与积分域</summary><figure class="mesh-plate"><div class="media-viewport"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格的 ParaView 配套图"></a></div><figcaption>图 6a。几何倍率为 1，坐标单位为 m。</figcaption></figure></details>

@@ -1,0 +1,216 @@
+{
+  "hydrostar_version": "8.2.0",
+  "scope": "Bundled viewer results for the published semisubmersible; visual review of saved outputs",
+  "hyview_case": {
+    "project": "platform_hyview",
+    "reconstruction_command": "python scripts/prepare_hyview_platform.py output/validation/native-views/platform-hyview",
+    "motion_and_wave_sources": "HSMCN motion database and HSPRS pressure and wave elevation",
+    "panel_scope": "Explicitly reflected and welded accepted wet panels; original second-order integration surface omitted from this first-order run",
+    "full_total_panels": 1782,
+    "wet_panels": 1656,
+    "waterplane_panels": 126,
+    "heading_deg": 60,
+    "period_s": 7.9,
+    "omega_rad_s": 0.7953399123012134,
+    "wave_amplitude_m": 0.5,
+    "water_depth_m": 200,
+    "rho_kg_m3": 1025,
+    "gravity_m_s2": 9.81,
+    "speed_m_s": 0,
+    "primary_sources_sha256": {
+      "examples/second-order/platform/inputs/platform2.hst": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1",
+      "examples/second-order/platform/inputs/platform2.rdf": "0403fb1ee645d570a683a13b4fa40ce13737bafaf7aa01b61987b24281bac888",
+      "examples/second-order/platform/inputs/platform2.mcn": "e750ffc2e1bd331dc370fd193973e469cae5d0c54e8766da4f9d4ad9a449b122"
+    },
+    "published_evidence_sha256": {
+      "examples/visualization/hyview-platform/hyview/fs.prs": "1c8f1a54e68a45e06acd038b3d6ca37f1db10bea018a432f714f510cf5f55a8f",
+      "examples/visualization/hyview-platform/hyview/hull_0.prs": "f0f1cee683f5c86fd9ac08c9bcfcda6f6158a67e6edd069d61592acbb40c8a41",
+      "examples/visualization/hyview-platform/hyview/parameters.json": "a1edacd1b076ff126b8de716aa54caedcb66dfdca2cbb7b0c2356cba4caa27d5",
+      "examples/visualization/hyview-platform/platform_hyview.hst": "f1bd0269ffa170e453dcd9d2fb6873384c04077ed44b263adaf26b6d3c19e52d",
+      "examples/visualization/hyview-platform/platform_hyview.rao": "43da16eccdd47b88446561262a9b07bad60136cfd2b0f4158464cca608da929e",
+      "examples/visualization/hyview-platform/rao/heave.rao": "9ae034030a7b3c72032936541b34daf68edf3ed861aa0303c196d7373c54a02f",
+      "examples/visualization/hyview-platform/rao/pitch.rao": "b6e7a2305eb9caee7d173cc2eb182ee8dde1af107913c8d0ced10388c4c1f4e3",
+      "examples/visualization/hyview-platform/rao/roll.rao": "85812a019d31e6b07c998261a8fdf8eb7c874efa137695a3ec2f162404ea9512",
+      "examples/visualization/hyview-platform/rao/surge.rao": "8ce0594d377a33cb80809214830e5a529a00dcc70e19571a2ae1ea64baecc4c7",
+      "examples/visualization/hyview-platform/rao/sway.rao": "fdc4a9fae20fd4a45f2ee408f51d61ebe4826397696c58b604338acef144149a",
+      "examples/visualization/hyview-platform/rao/yaw.rao": "c71de5582115859c12386211b2f0f937354a1fb8cfe67d02e8f513c512ed55f9",
+      "examples/visualization/hyview-platform/verification.json": "90f9f716dd170a9a74a698a9efa2c65540d38be6455effe26a0c9b23799e2895"
+    },
+    "native_run_verification": "examples/visualization/hyview-platform/verification.json",
+    "frame_extraction": "python scripts/extract_hyview_frame.py INPUT.mkv INDEX OUTPUT.png",
+    "decoder": "OpenCV 4.10.0",
+    "frame_policy": "Independent representative frames. Recording indexes are not physical times. PNG pixels are decoded from the original MKV without crop, resize, overlays or redraw.",
+    "local_recording_root": "output/validation/native-views/platform-hyview-verified"
+  },
+  "figures": [
+    {
+      "key": "platform_rao",
+      "viewer": "StarViewer",
+      "origin": "hydrostar_bundled_viewer",
+      "status": "verified",
+      "export_method": "save_figure_svg",
+      "image": "docs/assets/platform_rao_starviewer.svg",
+      "format": "svg",
+      "size": [
+        620.64,
+        519.84
+      ],
+      "sha256": "cd21392b94885fb6cc6676b55d3202cd2c7cf4e97c4d8ccd70732d463bb18f54",
+      "title_zh": "半潜平台六自由度 RAO",
+      "caption_zh": "从六个原生 .rao 读取 60° 浪向的幅值。平移为 m/m，转动为 deg/m，横轴为波浪角频率（rad/s）。",
+      "sources_sha256": {
+        "examples/results/semisub_oc4_style/rao/surge.rao": "66d22a6b21fdea96952976ec1bbb978ad38715e3b9fa34700b3f3c249e64080e",
+        "examples/results/semisub_oc4_style/rao/sway.rao": "06b058e0848aeddd1c03b0e353c9c2eddbe3640da10b833c4b06383373eeaeee",
+        "examples/results/semisub_oc4_style/rao/heave.rao": "f8be25c8a89b843b430266459dba85f7fadc1b3a15f5795b86eca6fa19a143a2",
+        "examples/results/semisub_oc4_style/rao/roll.rao": "f25c4c28a6c3668b8da65ca3e9f5ba54bc5c7ab2da55a3c4a4b3afcb0f7d0d46",
+        "examples/results/semisub_oc4_style/rao/pitch.rao": "93855dac4c5287e99f21a6541de234f43eb7f094f304d84b6b4c04ee2fbddfb9",
+        "examples/results/semisub_oc4_style/rao/yaw.rao": "8afe03b03deef038bbdc1c19a11940fb8a1ca7ab0a856ccb604d9e97b7d849bd"
+      },
+      "settings": {
+        "tab": "RAOs",
+        "quantity": "motion_amplitude",
+        "heading_deg": 60,
+        "frequency_count": 237,
+        "omega_rad_s": [
+          0.02,
+          1.2
+        ],
+        "translation_unit": "m/m",
+        "rotation_unit": "deg/m",
+        "layout": "Tight layout"
+      }
+    },
+    {
+      "key": "platform_pressure",
+      "viewer": "HyView",
+      "origin": "hydrostar_bundled_viewer",
+      "status": "verified",
+      "export_method": "native_recording_frame",
+      "image": "docs/assets/platform_pressure_hyview.png",
+      "format": "png",
+      "size": [
+        1184,
+        926
+      ],
+      "sha256": "893618d62122090ac1e760f08e59b3509e6157b880b30830a68fd0d6d03bdc24",
+      "title_zh": "半潜平台一阶湿面压力云图",
+      "caption_zh": "60°、周期 7.9 s、波幅 0.50 m、水深 200 m 规则波下的随体一阶扰动压力，隐藏自由面以查看四个柱体。Viridis 从紫到黄对应 −0.56 至 +0.56 m 水柱（约 −5.63 至 +5.63 kPa）的显示范围。该图用于查看流体压力分布；结构应力需另行计算。",
+      "original_recording": {
+        "local_case_file": "hyview_hull_pressure.mkv",
+        "sha256": "42ccf6fc642a5a34ce89aca15292fe55f306904ca857840e40dae97728b5d6e1",
+        "container": "Matroska",
+        "codec": "H.264",
+        "fps": 20,
+        "frame_count": 557,
+        "frame_index_zero_based": 80,
+        "physical_time_s": null,
+        "physical_phase_deg": null
+      },
+      "field_card": "examples/visualization/hyview-platform/hyview/hull_0.prs",
+      "field_database": {
+        "file": "p_platform_hyview_hull_0.h5",
+        "sha256": "a33db2e43edfaf74f43f0a06db9f5acbd6924c2ddae91134387599b14866906d"
+      },
+      "settings": {
+        "quantity": "first_order_body_following_hydrodynamic_pressure",
+        "native_hull_pressure_type": "Perturbed",
+        "coefhds": 1.0,
+        "calm_water_hydrostatic_base_included": false,
+        "free_surface_visible": false,
+        "colormap": "viridis",
+        "pressure_head_display_range_m": [
+          -0.56,
+          0.56
+        ],
+        "representation": "Surface",
+        "manual_geometry_gain_applied": false
+      }
+    },
+    {
+      "key": "platform_wave",
+      "viewer": "HyView",
+      "origin": "hydrostar_bundled_viewer",
+      "status": "verified",
+      "export_method": "native_recording_frame",
+      "image": "docs/assets/platform_wave_hyview.png",
+      "format": "png",
+      "size": [
+        1184,
+        926
+      ],
+      "sha256": "9c7ca7adf84b96fc6c98d0471308f1ff24ce04a3a75f5cc7f8a42df049cd7538",
+      "title_zh": "半潜平台的波面与刚体运动",
+      "caption_zh": "HSMCN 一阶刚体运动配合 HSPRS 自由面，取 60°、周期 7.9 s、波幅 0.50 m、水深 200 m 的原生回放帧。蓝色波面显示水位变化（m）；这是二阶算例构型的配套波况画面，二阶荷载见下方 QTF。",
+      "original_recording": {
+        "local_case_file": "hyview_wave_motion.mkv",
+        "sha256": "fb611a741752aaa38a6b7bc56475598c0b3711833f0df7950b8c102201ae9e6e",
+        "container": "Matroska",
+        "codec": "H.264",
+        "fps": 20,
+        "frame_count": 861,
+        "frame_index_zero_based": 60,
+        "physical_time_s": null,
+        "physical_phase_deg": null
+      },
+      "field_card": "examples/visualization/hyview-platform/hyview/fs.prs",
+      "field_database": {
+        "file": "p_platform_hyview_fs.h5",
+        "sha256": "0bd100a2c0367983bb4c5596de73b77850faf1abc48f4edc9b25138fe9894ef6"
+      },
+      "settings": {
+        "quantity": [
+          "first_order_wave_elevation",
+          "first_order_rigid_body_motion"
+        ],
+        "native_free_surface_type": "Perturbed",
+        "free_surface_visible": true,
+        "display_radius_m": 110,
+        "free_surface_opacity": 0.5,
+        "free_surface_colormap": "Blues",
+        "free_surface_display_range_m": [
+          -0.72,
+          0.72
+        ],
+        "pressure_colormap": "viridis",
+        "representation": "Surface",
+        "manual_geometry_gain_applied": false
+      }
+    },
+    {
+      "key": "platform_qtf_fz",
+      "viewer": "StarViewer",
+      "origin": "hydrostar_bundled_viewer",
+      "status": "verified",
+      "export_method": "save_figure_svg",
+      "image": "docs/assets/platform_qtf_fz_starviewer.svg",
+      "format": "svg",
+      "size": [
+        620.64,
+        519.84
+      ],
+      "sha256": "a05b695837e180a93815cbccd195d00ea26795c750b7fcd5f1beb7e0395da62f",
+      "title_zh": "垂向差频二阶荷载 QTF",
+      "caption_zh": "直接读取 qtf_fz.qtf 的 60° 浪向，显示差频 0、0.05、0.10 rad/s 的幅值，单位 N/m²。横轴为两波角频率的平均值，画面限制在约 0.50–1.05 rad/s，以排除无效配对的补零。",
+      "sources_sha256": {
+        "examples/second-order/platform/rao/qtf_fz.qtf": "4dc9a6ba870820213dbfda5af902efdbd6da5feb62bbc94c5146ed04cb845c77"
+      },
+      "settings": {
+        "tab": "QTF",
+        "quantity": "second_order_vertical_load_coefficient_magnitude",
+        "heading_deg": 60,
+        "difference_omega_rad_s": [
+          0,
+          0.05,
+          0.1
+        ],
+        "abscissa": "mean_wave_angular_frequency",
+        "visible_mean_omega_rad_s_approx": [
+          0.5,
+          1.05
+        ],
+        "unit": "N/m^2",
+        "display_range_method": "StarViewer zoom rectangle; raw file unchanged"
+      }
+    }
+  ]
+}

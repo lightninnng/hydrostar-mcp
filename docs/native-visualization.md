@@ -50,6 +50,20 @@
 
 **已验证的原生软件图。** HydroStar 8.2.0 自带 Visu5D。切换算例先用 **File → Close** 清空旧模型（直接连续打开会叠加）；再用 **File → Open** 读取实际求解 `.hst`，在 **Mesh → Hull 1** 核对湿面面元边界。半体算例用 **Display xOz symmetry** 展开，核对两侧形状；二阶 `platform2.hst` 还可选 **Mesh → Free-surface**，倾斜视角检查外部环带和四个水线开口。旋转和缩放至完整构型后，由工具栏 **Save image to file** 保存 JPG。本机对话框仅列 `picture (*.jpg)`；发布图均为 1630×900，保留原始文件、HST 和图像哈希，详见[导出记录](../examples/visualization/viewer-exports.json)。HyView 加载同一月池项目时报告 `vtkDelaunay2D` 填充警告，月池发布图采用已验证的 Visu5D 路径。
 
+**StarViewer 曲线。** 打开算例 `rao/`，在 **RAOs** 选六个运动文件，设幅值（**Module**）与单一 60° 浪向，关闭 **All-In-One**，用 **Tight layout** 整理坐标后从工具栏 **Save** 直接保存 SVG。二阶用 **QTF** 标签读取 `qtf_fz.qtf`，选 **Module**、**plot in w** 和三条差频；此视图的横轴是两波平均角频率。原表在无效配对处保留零值，发布图在 StarViewer 内缩放到约 0.50–1.05 rad/s，保留原表并避开补零段。已核对保存的两张 SVG 由矢量路径组成。五浪向叠图和六分量 QTF 继续提供 Gnuplot 配套版。
+
+**HyView 带浪画面与压力。** 同一半潜平台的对称 HST 在此版本 HyView 中只显示文件中存储的半体。为获得完整场景，将已验收湿面沿 xOz 显式镜像、共面节点合并，保留面元类型和法向；不带入二阶外部积分面。固定物理参数重做 `HSlec → HSchk → HSrdf → HSmcn → HSrao`。共 1656 个湿面和 126 个水线面（1782 个全体总面元）。排水量、浮心和湿面积通过对称前后核对；在 60° 的 31 个共同频率上，五个自由度最大复数差异小于各自峰值的 0.002%，艏摇为 0.7553%。原二阶求解输入和 QTF 独立保留。
+
+```powershell
+python scripts/prepare_hyview_platform.py output/validation/native-views/platform-hyview
+```
+
+用 **File → Open** 选重算目录。随算例保存的 `hyview/parameters.json` 设置规则波 7.9 s、0.50 m、60°，自由面和湿面压力均选择 **Perturbed**。点 **Play** 后核对日志中刚体运动、自由面和随体压力重建成功。`fs.prs` 使用 `COEFHDS 0.0`，`hull_0.prs` 使用 `COEFHDS 1.0`；后者保留一阶随体扰动，不含静水基值。波面图关闭测速标记，水面设 **Surface**、透明度 0.5；压力图隐藏自由面，采用原生 Viridis 色标。压力色标是显示范围；水柱单位及 `p = ρgh` 换算见手册第 9 章及第 12.1.11 节。
+
+本机通过 **Record → 再点 Record → Save recording** 得到 H.264/MKV（20 fps）；发布 PNG 从原生录制逐帧解码，未裁切、缩放或重绘。没有用桌面截图，也未从此版本确认单图直接保存入口。两图是同一工况的独立代表帧；录制帧号用于复现，HyView 未提供该帧的物理时刻，不能用帧号除以帧率推断求解相位。静帧提取命令为 `python scripts/extract_hyview_frame.py INPUT.mkv INDEX OUTPUT.png`（需 OpenCV）。[出图验收记录](../examples/visualization/result-viewer-exports.json)保存选帧、单位、色标和哈希；[原生输入与复算数据](../examples/visualization/hyview-platform)包括 HST、提取卡、HSPRS 场点和六个重算 RAO。原生录制留在本地工作目录。
+
+HyView 波面与刚体运动是一阶结果，可与二阶荷载并列说明工况。空间压力云图同样是一阶水动力压力。二阶 QTF 表达的是整个浮体的差频荷载系数；计算二阶湿面压力、慢漂运动或结构应力时，分别提供对应原生求解证据。
+
 **配套工具图。** 以下命令保留配套出图的来源及复现方法。
 
 响应图通过 `scripts/export_native_curves.py` 读取原生 RAO，沿 Gnuplot 路径保存 PNG、PDF 和 SVG。场量由 HSPRS 与 HSRAO 提取完整复数系数，通过 ParaView 命令渲染，再由 `scripts/encode_native_media.py` 添加科研图注并编码为 GIF。公开目录保存原生输入、原始数值、HSprv 数据、图像来源、参数和实际执行记录。

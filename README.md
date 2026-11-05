@@ -55,15 +55,22 @@
 | 集装箱船 | 0.50 | 12.566 | 80 |
 | 丰满油船 | 0.40 | 15.708 | 80 |
 
-左图显示平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；右图为包含绕射和运动诱导辐射的散射波面，波面色标单位为 m。颜色保持实际物理数值，运动和波高各采用 6 倍观察倍率，压力图几何倍率为 1。所有视图采用同一物理相位，色标在整个周期内固定。
+下方三联配套图的左图显示平均湿表面的随体一阶动态压力（kPa），中图为总波面与刚体运动，右图为包含绕射和运动诱导辐射的散射波面（m）。运动和波高各采用 6 倍观察倍率，压力图几何倍率为 1。各组三联图采用同一物理相位，色标在整个周期内固定。
 
 **曲线船体。** 查看所选相位下船体湿面压力、总波面、散射波面与六自由度运动的对应关系。
 
 [![曲线船体动态压力、总波面和散射波面](docs/assets/vessel-coupled-frame.png)](docs/assets/vessel-coupled-frame.png)
 
-**半潜平台。** 多柱外形与柱间波场同时展示，压力着色沿实际湿面面元保存。
+**半潜平台：HyView 湿面压力云图。** 在 HydroStar 自带 HyView 中回放 60°、周期 7.9 s、波幅 0.50 m、水深 200 m 的规则波，隐藏自由面后保存原生录制并提取静帧。颜色从紫到黄对应 −0.56 至 +0.56 m 水柱（约 −5.63 至 +5.63 kPa）的显示范围。图中为随体一阶扰动压力；结构应力需另行计算。
+
+[![HyView 原生录制静帧：半潜平台一阶湿面压力](docs/assets/platform_pressure_hyview.png)](docs/assets/platform_pressure_hyview.png)
+
+<details>
+<summary>查看 ParaView 的压力、总波面与散射波面配套图</summary>
 
 [![半潜平台动态压力、总波面和散射波面](docs/assets/platform-coupled-frame.png)](docs/assets/platform-coupled-frame.png)
+
+</details>
 
 **集装箱船。** 参照构型包含平行中体、圆舭、球鼻艏和艉封板，静图使用该构型自身的计算结果。
 
@@ -73,7 +80,7 @@
 
 [![丰满油船动态压力、总波面和散射波面](docs/assets/tanker-coupled-frame.png)](docs/assets/tanker-coupled-frame.png)
 
-README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸文件。图中标明 t、t/T、工况与固定色标；这些代表相位图用于查看场量分布，全周期峰值另由完整数值确定。
+配套 ParaView 图标明 t、t/T、工况与固定色标，点击可查看原尺寸。HyView 静帧保留原生画面，其录制帧号和色标见[原生结果图验收记录](examples/visualization/result-viewer-exports.json)。这些图用于查看场量分布，全周期峰值另由完整数值确定。
 
 ## 绕射与辐射波场
 
@@ -107,15 +114,17 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 ## 六自由度频率响应
 
-曲线沿手册保留的 Gnuplot 路径直接导出，保存 hsrao 原始 .gnu 绘图宏并逐列核对原生 RAO。下图分别叠加 0°、60°、90°、120° 和 180° 浪向，覆盖纵荡、横荡、升沉、横摇、纵摇和艏摇。横轴为角频率（rad/s），平移幅值单位为 m/m，转动为 deg/m。每组曲线对应其自身的装载、阻尼、水深和频率范围。
+六自由度为纵荡、横荡、升沉、横摇、纵摇和艏摇。横轴为角频率（rad/s），平移幅值单位为 m/m，转动为 deg/m。各例保留原生 RAO；Gnuplot 配套叠图通过核对 hsrao 宏与数据列导出，展示 0°、60°、90°、120° 和 180° 浪向。
 
 **曲线船体。** 231 个频率点覆盖 0.05–1.20 rad/s，间隔为 0.005 rad/s，保留升沉、横摇与纵摇等响应的峰谷细节。
 
 [![曲线船体六自由度原生响应](docs/assets/vessel-response.png)](docs/assets/vessel-response.pdf)
 
-**半潜平台。** 237 个频率点覆盖 0.02–1.20 rad/s，展示多柱平台在所列恢复与阻尼设置下的响应。
+**半潜平台：StarViewer 原生 RAO。** 用 HydroStar 自带 StarViewer 读取六个 `.rao`，直接保存 60° 浪向的六自由度幅值 SVG。237 个频率点覆盖 0.02–1.20 rad/s。
 
-[![半潜平台六自由度原生响应](docs/assets/platform-response.png)](docs/assets/platform-response.pdf)
+[![StarViewer 保存的半潜平台六自由度 RAO 矢量图](docs/assets/platform_rao_starviewer.svg)](docs/assets/platform_rao_starviewer.svg)
+
+[半潜平台五个浪向的 Gnuplot 配套 PDF](docs/assets/platform-response.pdf)。
 
 **集装箱船。** 151 个频率点覆盖 0.05–0.80 rad/s。
 
@@ -134,11 +143,19 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 </details>
 
-点击响应图打开矢量 PDF。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[Gnuplot 曲线与原始数据](examples/visualization/curves)。
+点击响应图打开对应的矢量原图。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[Gnuplot 曲线与原始数据](examples/visualization/curves)。
 
 ## 二阶平均漂移与差频荷载
 
 半潜平台已完成 **HSdft → HSamg → HSqtf** 原生二阶计算，提供平均漂移荷载及包含自由面积分的完整差频 QTF。水深为 200 m，浪向为 60°，差频为 0、0.05、0.10 rad/s，共保留 **36 对有效波频、216 个复数荷载系数**。
+
+**同一构型的 HyView 带浪画面。** HSMCN 的一阶刚体运动与 HSPRS 自由面在 HyView 中一起回放。规则波周期 7.9 s（约 0.795 rad/s），波幅 0.50 m，浪向 60°。画面显示一阶波况与运动；实际二阶荷载见下方 QTF。
+
+[![HyView 原生录制静帧：半潜平台带浪的一阶刚体运动](docs/assets/platform_wave_hyview.png)](docs/assets/platform_wave_hyview.png)
+
+**StarViewer 原生二阶垂向 QTF。** 读取 `qtf_fz.qtf`，显示三条差频幅值曲线，单位 N/m²。横轴为两波角频率的平均值，显示约 0.50–1.05 rad/s 的有效段。[图像来源与复算记录](examples/visualization/result-viewer-exports.json)。
+
+[![StarViewer 保存的二阶垂向差频荷载 QTF](docs/assets/platform_qtf_fz_starviewer.svg)](docs/assets/platform_qtf_fz_starviewer.svg)
 
 [![Visu5D 直接保存的二阶外部积分网格与四个水线开口](docs/assets/platform_exterior_visu5d.jpg)](docs/assets/platform_exterior_visu5d.jpg)
 

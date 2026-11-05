@@ -1,0 +1,92 @@
+{
+  "project": "platform_hyview",
+  "source_hst_sha256": "9a32faaf68001d32937e38f241896e16f9e395ff9be6ac34a18c1912c1f957a1",
+  "inputs_sha256": {
+    "platform_hyview.hst": "f1bd0269ffa170e453dcd9d2fb6873384c04077ed44b263adaf26b6d3c19e52d",
+    "platform_hyview.rdf": "0403fb1ee645d570a683a13b4fa40ce13737bafaf7aa01b61987b24281bac888",
+    "platform_hyview.mcn": "e750ffc2e1bd331dc370fd193973e469cae5d0c54e8766da4f9d4ad9a449b122",
+    "platform_hyview.rao": "43da16eccdd47b88446561262a9b07bad60136cfd2b0f4158464cca608da929e"
+  },
+  "geometry": {
+    "volume": 13556.757698414194,
+    "cb": [
+      1.7064685079835027e-11,
+      3.8617485047275104e-15,
+      -13.153467354157042
+    ],
+    "wetted_area": 5766.780946364523,
+    "n_nodes": 1691,
+    "n_panels": 1656,
+    "sym": 0,
+    "max_edge": 3.1506133470392452,
+    "max_aspect_ratio": 3.8306487884055755,
+    "free_surface": 0.0,
+    "rho": 1025.0,
+    "gravity": 9.81
+  },
+  "hslec": {
+    "bodies": 1,
+    "symmetry": 0,
+    "hull_panels": 1656,
+    "waterline_segments": 96,
+    "waterplane_panels": 126,
+    "above_waterline": 0,
+    "cb_x": 0.0
+  },
+  "total_panels": 1782,
+  "steps": [
+    {
+      "module": "hslec",
+      "args": [
+        "platform_hyview.hst",
+        "platform_hyview"
+      ],
+      "log_sha256": "0904109bf62fc2bc3f0ca39d09b693b1ab0614f5c2318399d1070ffa5c19a899"
+    },
+    {
+      "module": "hschk",
+      "args": [
+        "-",
+        "platform_hyview"
+      ],
+      "log_sha256": "3441f9f700a84f0a97d29a4e75ae0147638eb21280cc9390a211c4558c8f10e5"
+    },
+    {
+      "module": "hsrdf",
+      "args": [
+        "platform_hyview.rdf",
+        "platform_hyview"
+      ],
+      "log_sha256": "d316af2e121c6e5187c4a49902cb7aba35e9e0e74f45146b1aa0e8006aec51b3"
+    },
+    {
+      "module": "hsmcn",
+      "args": [
+        "platform_hyview.mcn",
+        "platform_hyview"
+      ],
+      "log_sha256": "6881f30435317797bb3bf274636491e3b8213b13d2c531f06440ae9f7f4d5c25"
+    },
+    {
+      "module": "hsrao",
+      "args": [
+        "platform_hyview.rao",
+        "platform_hyview"
+      ],
+      "log_sha256": "5a2e66b215214d5e24b5d178bfb91a1128b03b7cc08bb7e4d44e1c9eeea95b01"
+    }
+  ],
+  "response_max_complex_delta_over_reference_peak": {
+    "surge": 9.051854453539892e-07,
+    "sway": 5.226085693511419e-07,
+    "heave": 3.7410699763372037e-07,
+    "roll": 1.7729855660102615e-06,
+    "pitch": 1.2314477817385458e-05,
+    "yaw": 0.007552950558914504
+  },
+  "databases_sha256": {
+    "hslec_platform_hyview.h5": "289dba4d41eedbfd4a91126075a807bfddcea8d372cd3d5dd72db4cdbc8091b8",
+    "hsmcn_platform_hyview.h5": "241e51c0e8432af85e067e8b87e88175b216eb39951d9a89df0a03db26ec2257",
+    "hsrdf_platform_hyview.rd1.h5": "47755a50953064e9baf1cc81d69bf7062c856c7ccc49f96e211e9318f9de5096"
+  }
+}

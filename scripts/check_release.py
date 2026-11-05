@@ -12,15 +12,21 @@ import subprocess
 import sys
 from html.parser import HTMLParser
 from urllib.parse import unquote, urlsplit
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from hydrostar_mcp import __version__, core
 from hydrostar_mcp.models import CaseConfig
 from hydrostar_mcp.reference_forms import FORMS
-from hydrostar_mcp.second_order import read_integration_mesh
+from hydrostar_mcp.second_order import (
+    read_difference_qtf,
+    read_integration_mesh,
+    supported_pairs,
+)
 from hydrostar_mcp.visualization import whole_mesh
-from scripts.gallery_data import presentation_data
+from scripts.gallery_data import RESULT_VIEWER_RECORD, presentation_data
+from scripts.prepare_hyview_platform import compare_responses
 
 GATES = {
     "semantic_input",
@@ -150,12 +156,139 @@ def check_links(files):
     return count
 
 
+def check_result_viewer_exports(document):
+    from PIL import Image
+
+    record = read_json(ROOT / RESULT_VIEWER_RECORD)
+    expected = {
+        "platform_rao": ("StarViewer", "save_figure_svg", "svg"),
+        "platform_qtf_fz": ("StarViewer", "save_figure_svg", "svg"),
+        "platform_wave": ("HyView", "native_recording_frame", "png"),
+        "platform_pressure": ("HyView", "native_recording_frame", "png"),
+    }
+    entries = {entry["key"]: entry for entry in record["figures"]}
+    require(
+        entries.keys() == expected.keys()
+        and len(record["figures"]) == len(document.result_viewers) == len(expected)
+        and set(document.result_viewers) == set(expected),
+        "Each bundled-viewer result needs one gallery figure",
+    )
+    readmes = [
+        (ROOT / name).read_text(encoding="utf-8")
+        for name in ("README.md", "README.en.md")
+    ]
+    case = record["hyview_case"]
+    for key, entry in entries.items():
+        viewer, method, fmt = expected[key]
+        source = f"docs/assets/{key}_{viewer.lower()}.{fmt}"
+        web_path = source.removeprefix("docs/")
+        require(
+            entry["status"] == "verified"
+            and entry["origin"] == "hydrostar_bundled_viewer"
+            and (entry["viewer"], entry["export_method"], entry["format"])
+            == expected[key]
+            and entry["image"] == source
+            and sha256(ROOT / source) == entry["sha256"]
+            and sum(img.get("src") == web_path for img in document.images) == 1
+            and web_path in document.links
+            and all(f"]({source})" in readme for readme in readmes),
+            "Bundled-viewer result or public references differ: " + key,
+        )
+        if fmt == "svg":
+            svg = ElementTree.parse(ROOT / source).getroot()
+            namespace = "{http://www.w3.org/2000/svg}"
+            require(
+                svg.tag == namespace + "svg"
+                and [float(x) for x in svg.attrib["viewBox"].split()[2:]]
+                == entry["size"]
+                and svg.find(f".//{namespace}path") is not None
+                and not any(
+                    e.tag.rsplit("}", 1)[-1] in ("image", "foreignObject", "script")
+                    for e in svg.iter()
+                ),
+                "StarViewer curve export must be a pure vector image: " + key,
+            )
+            for path, digest in entry["sources_sha256"].items():
+                require(
+                    sha256(ROOT / path) == digest,
+                    "Viewer curve source changed: " + path,
+                )
+        else:
+            with Image.open(ROOT / source) as png:
+                require(
+                    png.format == "PNG" and list(png.size) == entry["size"],
+                    "Invalid HyView still",
+                )
+                png.verify()
+            recording = entry["original_recording"]
+            require(
+                0 <= recording["frame_index_zero_based"] < recording["frame_count"]
+                and recording["physical_time_s"] is None
+                and recording["physical_phase_deg"] is None
+                and entry["field_card"] in case["published_evidence_sha256"],
+                "HyView frame provenance or HSPRS card missing",
+            )
+    rao = entries["platform_rao"]
+    require(
+        len(rao["sources_sha256"]) == 6, "The bundled RAO uses all six motion files"
+    )
+    for path in rao["sources_sha256"]:
+        data = core.read_rao(ROOT / path)
+        settings = rao["settings"]
+        require(
+            settings["heading_deg"] in data["headings"]
+            and settings["frequency_count"] == len(data["omega"])
+            and settings["omega_rad_s"] == [data["omega"][0], data["omega"][-1]],
+            "Bundled RAO range or heading differs from the original",
+        )
+    qtf = entries["platform_qtf_fz"]
+    data = read_difference_qtf(ROOT / next(iter(qtf["sources_sha256"])))
+    invalid = [
+        w + d / 2
+        for w, row in zip(data["omega1_rad_s"], supported_pairs(data), strict=True)
+        for d, valid in zip(data["difference_rad_s"], row, strict=True)
+        if not valid
+    ]
+    require(
+        data["direction"] == 3
+        and data["headings_deg"] == [qtf["settings"]["heading_deg"]]
+        and data["difference_rad_s"] == qtf["settings"]["difference_omega_rad_s"]
+        and qtf["settings"]["visible_mean_omega_rad_s_approx"][1] < min(invalid),
+        "The QTF view must use vertical loads and exclude invalid pairs",
+    )
+    for key in ("primary_sources_sha256", "published_evidence_sha256"):
+        for path, digest in case[key].items():
+            require(
+                sha256(ROOT / path) == digest, "HyView case evidence changed: " + path
+            )
+    report_path = ROOT / case["native_run_verification"]
+    report = read_json(report_path)
+    errors = compare_responses(report_path.parent / "rao")
+    recorded_errors = report["response_max_complex_delta_over_reference_peak"]
+    require(
+        report["hslec"]["symmetry"] == 0
+        and report["hslec"]["hull_panels"] == case["wet_panels"]
+        and report["hslec"]["waterplane_panels"] == case["waterplane_panels"]
+        and case["wet_panels"] + case["waterplane_panels"]
+        == report["total_panels"]
+        == case["full_total_panels"]
+        <= 3000
+        and errors.keys() == recorded_errors.keys()
+        and all(
+            math.isclose(error, recorded_errors[dof], rel_tol=1e-8, abs_tol=1e-13)
+            for dof, error in errors.items()
+        ),
+        "Full HyView case budget and comparison with its symmetric reference",
+    )
+    return len(entries)
+
+
 def check_gallery_media():
     class Media(HTMLParser):
         def __init__(self):
             super().__init__()
             self.cases, self.images, self.links = [], [], []
-            self.geometry_cases, self.viewer_cases = [], []
+            self.geometry_cases, self.viewer_cases, self.result_viewers = [], [], []
 
         def handle_starttag(self, tag, attributes):
             attrs = dict(attributes)
@@ -167,7 +300,10 @@ def check_gallery_media():
                 tag == "figure"
                 and attrs.get("data-image-origin") == "hydrostar-bundled-viewer"
             ):
-                self.viewer_cases.append(attrs.get("data-viewer-case"))
+                if "data-viewer-case" in attrs:
+                    self.viewer_cases.append(attrs["data-viewer-case"])
+                if "data-result-viewer" in attrs:
+                    self.result_viewers.append(attrs["data-result-viewer"])
             if tag == "img":
                 self.images.append(attrs)
             if tag == "a":
@@ -329,6 +465,7 @@ def check_gallery_media():
         gallery_dynamic_views=10,
         gallery_geometry_chapters=len(geometry),
         gallery_bundled_viewer_exports=len(viewer_figures),
+        gallery_bundled_result_exports=check_result_viewer_exports(document),
     )
 
 

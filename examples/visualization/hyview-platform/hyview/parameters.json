@@ -1,0 +1,26 @@
+{
+  "freeSurfaceParameters": {
+    "center": "Mesh",
+    "dx": 5.0,
+    "dy": 5.0,
+    "hole": true,
+    "length": 220.0,
+    "radius": 110.0,
+    "shape": "Disk",
+    "width": 220.0,
+    "x": 0.0,
+    "y": 0.0
+  },
+  "seaStateParameters": {
+    "seaStateType": "Regular",
+    "wifParameters": {
+      "amplitude": 0.5,
+      "heading": 1.0471975511965976,
+      "period": 7.9
+    }
+  },
+  "waveType": {
+    "freeSurfaceType": "Perturbed",
+    "hullPressureType": "Perturbed"
+  }
+}
