@@ -29,7 +29,7 @@ This plate is exported by ParaView commands from the accepted solved connectivit
 
 The three reference configurations use public principal dimensions and explicit shape assumptions. The project generates its own nodes and panels. [Source notes](docs/reference-forms.md) document the dimensional references, reconstruction and physical idealizations.
 
-## Dynamic pressure, waves and motion
+## Static pressure, waves and motion
 
 All four configurations provide synchronized surface pressure, total elevation and scattered elevation. Incident amplitude is **0.50 m** and heading is **60°**. Each uses the selected frequency, physical period and depth below.
 
@@ -42,45 +42,53 @@ All four configurations provide synchronized surface pressure, total elevation a
 
 The left view shows the body-following first-order pressure perturbation on the mean wetted panels in kPa. The centre shows total elevation and rigid-body motion. The right shows scattered elevation, including diffraction and motion-induced radiation; elevation colours are in metres. Colours retain physical values. Motion and wave height each use a stated 6× viewing gain; pressure geometry uses 1×. Views share the physical phase and fixed cycle-wide colour scales.
 
-**Curved station hull.** The wet-surface pressure cycle is shown alongside total and scattered elevation and the corresponding six-DOF rigid-body motion.
+**Curved station hull.** The selected phase shows wet-surface pressure alongside total and scattered elevation and the corresponding six-DOF rigid-body motion.
 
-[![Curved hull pressure, total elevation and scattered elevation](docs/assets/readme-vessel-coupled.gif)](docs/assets/vessel-coupled.gif)
+[![Curved hull pressure, total elevation and scattered elevation](docs/assets/vessel-coupled-frame.png)](docs/assets/vessel-coupled-frame.png)
 
 **Semisubmersible.** The column arrangement and inter-column wave field appear together, with pressure attached to the actual wet panels.
 
-[![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/readme-platform-coupled.gif)](docs/assets/platform-coupled.gif)
+[![Semisubmersible pressure, total elevation and scattered elevation](docs/assets/platform-coupled-frame.png)](docs/assets/platform-coupled-frame.png)
 
-**Container hull.** This reference reconstruction includes a parallel midbody, rounded bilge, bulbous bow and transom. Its animation uses its own computed fields.
+**Container hull.** This reference reconstruction includes a parallel midbody, rounded bilge, bulbous bow and transom. Its static view uses its own computed fields.
 
-[![Container hull pressure, total elevation and scattered elevation](docs/assets/readme-container-coupled.gif)](docs/assets/container-coupled.gif)
+[![Container hull pressure, total elevation and scattered elevation](docs/assets/container-coupled-frame.png)](docs/assets/container-coupled-frame.png)
 
 **Full-form tanker.** The full midbody and continuously narrowing ends are shown with their computed surface pressure and exterior wave fields.
 
-[![Full-form tanker pressure, total elevation and scattered elevation](docs/assets/readme-tanker-coupled.gif)](docs/assets/tanker-coupled.gif)
+[![Full-form tanker pressure, total elevation and scattered elevation](docs/assets/tanker-coupled-frame.png)](docs/assets/tanker-coupled-frame.png)
 
-Click any preview to open its full-resolution export. Each retains all 40 physical phases and time annotations, playing at 10 frames/s. A playback cycle lasts four seconds; physical time is given by t, t/T and the periods above. Colour limits are stated separately for each panel and configuration.
+The figures display full-resolution ParaView PNG exports. Click an image for the original file. Conditions, t, t/T and fixed colour limits are retained; a representative phase is separate from a cycle-wide peak assessment.
 
 ## Diffraction and radiation fields
 
-These animations decompose the scattered field into fixed-body diffraction and motion-induced radiation. The left view retains the mean body pose; the right shows radiation from that case's six-DOF response. Components are separated in the complex domain and reconstructed at a shared physical phase. Elevation is in metres, with 6× viewing gains for wave height and motion. Each panel retains its colour limits throughout the cycle.
+These static views decompose the scattered field at the same phase into fixed-body diffraction and motion-induced radiation. The left view retains the mean body pose; the right shows radiation from that case's six-DOF response. Components are separated in the complex domain and reconstructed at a shared physical phase. Elevation is in metres, with 6× viewing gains for wave height and motion. Each panel retains its colour limits throughout the cycle.
 
 **Curved hull diffraction and radiation.**
 
-[![Curved hull fixed-body diffraction and motion-induced radiation](docs/assets/readme-vessel-components.gif)](docs/assets/vessel-components.gif)
+[![Curved hull fixed-body diffraction and motion-induced radiation](docs/assets/vessel-components-frame.png)](docs/assets/vessel-components-frame.png)
 
 **Semisubmersible diffraction and radiation.**
 
-[![Semisubmersible fixed-body diffraction and motion-induced radiation](docs/assets/readme-platform-components.gif)](docs/assets/platform-components.gif)
+[![Semisubmersible fixed-body diffraction and motion-induced radiation](docs/assets/platform-components-frame.png)](docs/assets/platform-components-frame.png)
 
 **Container hull diffraction and radiation.**
 
-[![Container hull fixed-body diffraction and motion-induced radiation](docs/assets/readme-container-components.gif)](docs/assets/container-components.gif)
+[![Container hull fixed-body diffraction and motion-induced radiation](docs/assets/container-components-frame.png)](docs/assets/container-components-frame.png)
 
 **Full-form tanker diffraction and radiation.**
 
-[![Full-form tanker fixed-body diffraction and motion-induced radiation](docs/assets/readme-tanker-components.gif)](docs/assets/tanker-components.gif)
+[![Full-form tanker fixed-body diffraction and motion-induced radiation](docs/assets/tanker-components-frame.png)](docs/assets/tanker-components-frame.png)
 
-The fields come from independently checked native HSPRS complex results. ParaView saves frames by command, followed by GIF encoding. Checks cover analytical incident waves, full-complex radiation reconstruction, body-following pressure correction and outward-normal sampling sensitivity. Original HSprv exports and version diagnostics are retained, while display records identify the accepted fields. [Visualization data and export records](examples/visualization) and [command reproduction](docs/native-visualization.md) are included. Larger total/scattered wave views are available for the [curved hull](docs/assets/vessel-wave.gif), [semisubmersible](docs/assets/platform-wave.gif), [container hull](docs/assets/container-wave.gif) and [tanker](docs/assets/tanker-wave.gif).
+The fields come from independently checked native HSPRS complex results. ParaView exports PNG files by command, with recorded phase selection and caption composition. Checks cover analytical incident waves, full-complex radiation reconstruction, body-following pressure correction and outward-normal sampling sensitivity. Original HSprv exports and version diagnostics are retained, while display records identify the accepted fields. [Visualization data and export records](examples/visualization) and [command reproduction](docs/native-visualization.md) are included. Larger total/scattered wave views are available for the [curved hull](docs/assets/vessel-wave.gif), [semisubmersible](docs/assets/platform-wave.gif), [container hull](docs/assets/container-wave.gif) and [tanker](docs/assets/tanker-wave.gif).
+
+
+<details>
+<summary>Existing animations (optional)</summary>
+
+[Curved hull: pressure and waves](docs/assets/readme-vessel-coupled.gif) · [Curved hull: diffraction and radiation](docs/assets/readme-vessel-components.gif) · [Semisubmersible: pressure and waves](docs/assets/readme-platform-coupled.gif) · [Semisubmersible: diffraction and radiation](docs/assets/readme-platform-components.gif) · [Container hull: pressure and waves](docs/assets/readme-container-coupled.gif) · [Container hull: diffraction and radiation](docs/assets/readme-container-components.gif) · [Tanker: pressure and waves](docs/assets/readme-tanker-coupled.gif) · [Tanker: diffraction and radiation](docs/assets/readme-tanker-components.gif)
+
+</details>
 
 ## Six-DOF frequency response
 
@@ -125,13 +133,13 @@ The exterior domain uses 72 equal angular divisions and nine graded quadrilatera
 
 [![Full difference-frequency QTF magnitudes](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
 
-**Second-order coefficient animations.** Native complex QTFs are phase-resolved as `q(t)=Re[Q exp(iΔωt)]`. The first view maps six coefficients over the 36 valid frequency pairs. The second shows six harmonics for ω₁=0.80 and ω₂=0.90 rad/s, at difference frequency 0.10 rad/s.
+**Representative phase of second-order coefficients.** These static views resolve native complex QTFs as `q(t)=Re[Q exp(iΔωt)]`. The first maps six coefficients over the 36 valid frequency pairs. The second shows six harmonics for ω₁=0.80 and ω₂=0.90 rad/s, at difference frequency 0.10 rad/s.
 
-[![Phase-resolved difference-frequency load coefficients](docs/assets/platform-second-order-map.gif)](docs/assets/platform-second-order-map.gif)
+[![Phase-resolved difference-frequency load coefficients](docs/assets/platform-second-order-map-frame.png)](docs/assets/platform-second-order-map-frame.png)
 
-[![Six second-order coefficient harmonics for a selected frequency pair](docs/assets/platform-second-order-harmonics.gif)](docs/assets/platform-second-order-harmonics.gif)
+[![Six second-order coefficient harmonics for a selected frequency pair](docs/assets/platform-second-order-harmonics-frame.png)](docs/assets/platform-second-order-harmonics-frame.png)
 
-Each animation retains 80 phases at 10 frames/s, with an 8 s playback loop. Physical periods are 125.664 s and 62.832 s respectively. Force coefficients use kN/m² and moment coefficients use kN m/m²; colour and vertical-axis limits remain fixed, with coefficient gain 1. These views express normalized second-order load-coefficient phases. Actual bichromatic load assembly, second-order panel pressure and slow-drift displacement require their corresponding solutions and acceptance. Yaw remains marked as a convergence-study component.
+The static exports identify their selected phase; physical periods are 125.664 s and 62.832 s respectively. Existing [coefficient-map](docs/assets/platform-second-order-map.gif) and [harmonic animations](docs/assets/platform-second-order-harmonics.gif) remain optional. Force coefficients use kN/m² and moment coefficients use kN m/m²; colour and vertical-axis limits remain fixed, with coefficient gain 1. These views express normalized second-order load-coefficient phases. Actual bichromatic load assembly, second-order panel pressure and slow-drift displacement require their corresponding solutions and acceptance. Yaw remains marked as a convergence-study component.
 
 Force coefficients use kN/m² and moment coefficients use kN m/m². Figures retain the native frequency samples. QTF diagonal terms agree with mean drift within 0.032% of the corresponding peak; horizontal near/far-field drift differs by at most 3.76%. Across the two exterior meshes, complex force differences reach 0.41%, and roll/pitch moments reach 0.083%. **Yaw moment changes by 23.37% of its own peak, with a 128.85% near/far-field mean-drift difference. It remains a numerical research component requiring further convergence before engineering load use.** This comparison fixes the wet mesh and exterior radius; engineering use needs corresponding spatial, domain, frequency and reference-result evidence.
 

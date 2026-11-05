@@ -29,9 +29,9 @@
 
 三类资料参照构型使用公开主尺度与本项目明确的形状假设，节点和面元由项目生成器建立。[来源说明](docs/reference-forms.md)保存了尺度引用、重建方法与物理模型。
 
-## 动态压力、波面与运动
+## 压力、波面与运动静态图
 
-四种构型均提供表面压力、总波面和散射波面的同相位动画。共同入射波幅为 **0.50 m**，浪向为 **60°**；各自选定频率、物理周期和水深如下。
+四种构型均提供表面压力、总波面和散射波面的同相位静态原图。共同入射波幅为 **0.50 m**，浪向为 **60°**；各自选定频率、物理周期和水深如下。
 
 | 计算对象 | 角频率（rad/s） | 物理周期（s） | 水深（m） |
 | --- | --- | --- | --- |
@@ -42,45 +42,53 @@
 
 左图显示平均湿表面的随体一阶动态压力，单位为 kPa；中图为总波面与刚体运动；右图为包含绕射和运动诱导辐射的散射波面，波面色标单位为 m。颜色保持实际物理数值，运动和波高各采用 6 倍观察倍率，压力图几何倍率为 1。所有视图采用同一物理相位，色标在整个周期内固定。
 
-**曲线船体。** 观察船体湿表面压力的周期变化，以及总波面、散射波面与六自由度运动之间的对应关系。
+**曲线船体。** 查看所选相位下船体湿面压力、总波面、散射波面与六自由度运动的对应关系。
 
-[![曲线船体动态压力、总波面和散射波面](docs/assets/readme-vessel-coupled.gif)](docs/assets/vessel-coupled.gif)
+[![曲线船体动态压力、总波面和散射波面](docs/assets/vessel-coupled-frame.png)](docs/assets/vessel-coupled-frame.png)
 
 **半潜平台。** 多柱外形与柱间波场同时展示，压力着色沿实际湿面面元保存。
 
-[![半潜平台动态压力、总波面和散射波面](docs/assets/readme-platform-coupled.gif)](docs/assets/platform-coupled.gif)
+[![半潜平台动态压力、总波面和散射波面](docs/assets/platform-coupled-frame.png)](docs/assets/platform-coupled-frame.png)
 
-**集装箱船。** 参照构型包含平行中体、圆舭、球鼻艏和艉封板，动图使用该构型自身的计算结果。
+**集装箱船。** 参照构型包含平行中体、圆舭、球鼻艏和艉封板，静图使用该构型自身的计算结果。
 
-[![集装箱船动态压力、总波面和散射波面](docs/assets/readme-container-coupled.gif)](docs/assets/container-coupled.gif)
+[![集装箱船动态压力、总波面和散射波面](docs/assets/container-coupled-frame.png)](docs/assets/container-coupled-frame.png)
 
 **丰满油船。** 展示丰满中体和连续收缩艏艉所对应的湿表面压力与外部波场。
 
-[![丰满油船动态压力、总波面和散射波面](docs/assets/readme-tanker-coupled.gif)](docs/assets/tanker-coupled.gif)
+[![丰满油船动态压力、总波面和散射波面](docs/assets/tanker-coupled-frame.png)](docs/assets/tanker-coupled-frame.png)
 
-README 使用便于阅读的预览，点击动图打开高清原图。每组完整保留 40 个物理相位与时间标注，以 10 帧/秒循环播放；播放一周为 4 秒，实际物理周期见图中 t、t/T 及上表。不同面板和构型的色标范围分别标注。
+README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸文件。图中标明 t、t/T、工况与固定色标；这些代表相位图用于查看场量分布，全周期峰值另由完整数值确定。
 
 ## 绕射与辐射波场
 
-以下动画将散射波场分解为固定体绕射和运动诱导辐射。左图保持平均姿态，右图显示该工况六自由度运动激发的辐射贡献。分量在复数域分解后按统一物理相位重建，波面色标为 m，波高和运动观察倍率均为 6。每个面板在完整周期内采用固定色标。
+以下静态原图将同一相位的散射波场分解为固定体绕射和运动诱导辐射。左图保持平均姿态，右图显示该工况六自由度运动激发的辐射贡献。分量在复数域分解后按统一物理相位重建，波面色标为 m，波高和运动观察倍率均为 6。每个面板在完整周期内采用固定色标。
 
 **曲线船体的绕射与辐射。**
 
-[![曲线船体固定体绕射和运动诱导辐射](docs/assets/readme-vessel-components.gif)](docs/assets/vessel-components.gif)
+[![曲线船体固定体绕射和运动诱导辐射](docs/assets/vessel-components-frame.png)](docs/assets/vessel-components-frame.png)
 
 **半潜平台的绕射与辐射。**
 
-[![半潜平台固定体绕射和运动诱导辐射](docs/assets/readme-platform-components.gif)](docs/assets/platform-components.gif)
+[![半潜平台固定体绕射和运动诱导辐射](docs/assets/platform-components-frame.png)](docs/assets/platform-components-frame.png)
 
 **集装箱船的绕射与辐射。**
 
-[![集装箱船固定体绕射和运动诱导辐射](docs/assets/readme-container-components.gif)](docs/assets/container-components.gif)
+[![集装箱船固定体绕射和运动诱导辐射](docs/assets/container-components-frame.png)](docs/assets/container-components-frame.png)
 
 **丰满油船的绕射与辐射。**
 
-[![丰满油船固定体绕射和运动诱导辐射](docs/assets/readme-tanker-components.gif)](docs/assets/tanker-components.gif)
+[![丰满油船固定体绕射和运动诱导辐射](docs/assets/tanker-components-frame.png)](docs/assets/tanker-components-frame.png)
 
-场量来自经独立核对的 HSPRS 原生复数结果，使用 ParaView 命令保存帧序列后编码为 GIF。入射波解析解、完整复辐射重建、随体压力修正及外法向采样敏感性分别验收。HSprv 原始导出和版本兼容性诊断一并保存，展示字段明确指向已验收结果。[可视化数据与导出记录](examples/visualization)和[命令复现方法](docs/native-visualization.md)随仓库提供。单独放大的总波与散射波视图见[曲线船体](docs/assets/vessel-wave.gif)、[半潜平台](docs/assets/platform-wave.gif)、[集装箱船](docs/assets/container-wave.gif)和[丰满油船](docs/assets/tanker-wave.gif)。
+场量来自经独立核对的 HSPRS 原生复数结果，使用 ParaView 命令直接导出 PNG；图注排版与所选相位随导出记录保存。入射波解析解、完整复辐射重建、随体压力修正及外法向采样敏感性分别验收。HSprv 原始导出和版本兼容性诊断一并保存，展示字段明确指向已验收结果。[可视化数据与导出记录](examples/visualization)和[命令复现方法](docs/native-visualization.md)随仓库提供。单独放大的总波与散射波视图见[曲线船体](docs/assets/vessel-wave.gif)、[半潜平台](docs/assets/platform-wave.gif)、[集装箱船](docs/assets/container-wave.gif)和[丰满油船](docs/assets/tanker-wave.gif)。
+
+
+<details>
+<summary>已有动画（可选）</summary>
+
+[曲线船体压力与波面](docs/assets/readme-vessel-coupled.gif) · [曲线船体绕射与辐射](docs/assets/readme-vessel-components.gif) · [半潜平台压力与波面](docs/assets/readme-platform-coupled.gif) · [半潜平台绕射与辐射](docs/assets/readme-platform-components.gif) · [集装箱船压力与波面](docs/assets/readme-container-coupled.gif) · [集装箱船绕射与辐射](docs/assets/readme-container-components.gif) · [丰满油船压力与波面](docs/assets/readme-tanker-coupled.gif) · [丰满油船绕射与辐射](docs/assets/readme-tanker-components.gif)
+
+</details>
 
 ## 六自由度频率响应
 
@@ -125,13 +133,13 @@ README 使用便于阅读的预览，点击动图打开高清原图。每组完�
 
 [![半潜平台完整差频 QTF 幅值](docs/assets/platform-second-order-qtf.png)](docs/assets/platform-second-order-qtf.pdf)
 
-**二阶荷载系数动画。** 下图从已验收的原生复数 QTF 按 `q(t)=Re[Q exp(iΔωt)]` 重建相位。第一组以波频和差频为坐标，显示 36 对有效频率的六分量系数；第二组选取 ω₁=0.80、ω₂=0.90 rad/s，显示差频为 0.10 rad/s 的六分量谐波。
+**二阶荷载系数的代表相位。** 下列静态图从已验收的原生复数 QTF 按 `q(t)=Re[Q exp(iΔωt)]` 重建相位。第一组以波频和差频为坐标，显示 36 对有效频率的六分量系数；第二组选取 ω₁=0.80、ω₂=0.90 rad/s，显示差频为 0.10 rad/s 的六分量谐波。
 
-[![二阶差频荷载系数的动态相位云图](docs/assets/platform-second-order-map.gif)](docs/assets/platform-second-order-map.gif)
+[![二阶差频荷载系数的动态相位云图](docs/assets/platform-second-order-map-frame.png)](docs/assets/platform-second-order-map-frame.png)
 
-[![选定频率对的二阶荷载系数谐波](docs/assets/platform-second-order-harmonics.gif)](docs/assets/platform-second-order-harmonics.gif)
+[![选定频率对的二阶荷载系数谐波](docs/assets/platform-second-order-harmonics-frame.png)](docs/assets/platform-second-order-harmonics-frame.png)
 
-每组保留 80 个相位，以 10 帧/秒播放，循环为 8 s；对应物理周期分别为 125.664 s 和 62.832 s。力系数为 kN/m²，力矩系数为 kN m/m²，色标与纵轴在整个周期内固定，系数倍率为 1。这些视图表达归一化二阶荷载系数的相位变化，实际双频总荷载组合、二阶表面压力和慢漂位移各需相应求解与验收。艏摇分量保留收敛研究标识。
+静图注明所选相位，对应物理周期分别为 125.664 s 和 62.832 s。已有的[相位云图动画](docs/assets/platform-second-order-map.gif)和[谐波动画](docs/assets/platform-second-order-harmonics.gif)作为可选资料保留。力系数为 kN/m²，力矩系数为 kN m/m²，色标与纵轴在整个周期内固定，系数倍率为 1。这些视图表达归一化二阶荷载系数的相位变化，实际双频总荷载组合、二阶表面压力和慢漂位移各需相应求解与验收。艏摇分量保留收敛研究标识。
 
 力系数单位为 kN/m²，力矩系数为 kN m/m²；图中保留原生频率采样。QTF 对角项与平均漂移结果的最大归一差异为 0.032%，水平漂移力的近远场差异最高为 3.76%。两档外部积分离散的三个力分量复数差异最高为 0.41%，横摇和纵摇力矩最高为 0.083%。**艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量标为需继续收敛研究，完成验证后再用于工程荷载。** 当前比较固定湿面与外部域半径，目标工程用途还需相应的空间、外部域、频率与参考结果证据。
 

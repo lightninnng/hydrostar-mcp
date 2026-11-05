@@ -352,7 +352,7 @@ def second_order_section():
 <figure class="mesh-plate"><div class="media-viewport"><a href="assets/platform-second-order-mesh.png" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-mesh.png" width="2400" height="1060" loading="lazy" decoding="async" alt="实际计算的半潜平台和规则环带外部积分网格"></a></div><figcaption>图 6a。50–110 m 的外圈采用 72 个等角分段和 9 层渐变四边形环带；近体 60° 分区按对称关系对应，水线使用湿面已有节点。主网格全体总数为 {record["main_total_panels"]:,}，包含湿面、水线面、外部自由面及对称展开；对照为 {record["comparison_total_panels"]:,}。几何倍率为 1，坐标单位为 m。</figcaption></figure>
 <p>外部积分域已经检查完整覆盖、重叠、水线共边、内部接缝和面元形状，并从原生网格数据库独立核对实际使用的面元与向下法向。主网格外部自由面的内角范围为 {surface["panel_quality"]["min_corner_deg"]:.1f}°–{surface["panel_quality"]["max_corner_deg"]:.1f}°，最大边长比为 {surface["panel_quality"]["max_edge_ratio"]:.2f}。原有湿面和物理参数保持一致，一阶复响应与原算例在共同频率上逐项一致。</p>
 {figures[0]}{figures[1]}
-{second_order_animation_figures()}
+<details><summary>可选：已有差频系数相位演示</summary>{second_order_animation_figures()}</details>
 <details><summary>查看复数荷载及积分网格敏感性</summary>{figures[2]}{figures[3]}</details>
 <div class="table-wrap"><table><caption>两档外部积分网格的复数差异，以各分量自身峰值归一</caption><thead><tr><th scope="col">荷载分量</th><th scope="col">最大复数差异</th><th scope="col">本例验收范围</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
 <p>QTF 对角项与平均漂移荷载的最大归一差异为 0.032%。三个力分量及横摇、纵摇力矩通过本例的外部积分网格敏感性门限。艏摇力矩的自身峰值归一差异为 23.37%，近远场平均漂移差异为 128.85%，该分量保留作数值研究，完成进一步收敛验证后再用于工程荷载。当前比较固定湿面和外部域半径；目标工程用途需补充对应的空间、外部域、频率及参考结果证据。</p>
