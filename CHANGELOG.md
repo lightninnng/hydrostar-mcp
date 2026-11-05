@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Publish the through-moonpool mesh saved directly by bundled Visu5D, with a source and output receipt; distinguish bundled-viewer exports from companion-tool figures.
+- Publish Visu5D originals for all seven wet meshes and the platform's exterior integration mesh in both READMEs and the report. Verify solved-mesh provenance, symmetry, original JPG hashes and display coverage.
 
 - Prioritize static native/companion exports in both READMEs and the report; keep existing animations available through explicit playback, with the same priority recorded in the modelling skill.
 

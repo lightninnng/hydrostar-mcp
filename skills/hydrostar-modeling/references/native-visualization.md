@@ -1,6 +1,6 @@
 # HydroStar 原生与手册推荐的可视化流程
 
-“原生软件图”限定为 HydroStar 自带 HyView、Visu5D/Visu4D、StarViewer 等查看器中生成并保存的画面。优先打开本次项目并实际验收这些查看器的保存/导出；ParaView、Gnuplot 的结果标为配套工具出图，原生计算数值来源另行记录。当前已验收的原查看器静图为 Visu5D 月池网格；其他配套图保留实际来源。
+“原生软件图”限定为 HydroStar 自带 HyView、Visu5D/Visu4D、StarViewer 等查看器中生成并保存的画面。优先打开本次项目并实际验收这些查看器的保存/导出；ParaView、Gnuplot 的结果标为配套工具出图，原生计算数值来源另行记录。Visu5D 已实测直接保存完整湿面、对称展开湿面和二阶外部积分网格，操作见[直接导出](direct-export.md)。
 
 网格、曲线、运动和场量展示首先采用当前版本手册默认、推荐的可视化路径，包括原生工具以及官方输出接配套查看器的流程。这是项目必须遵循的默认选择：官方链路可用并覆盖需求时，先完成查看、核对与导出，再组织科研排版和在线展示。
 
@@ -46,7 +46,7 @@
 
 ## 3000 总面元内的复杂几何展示
 
-当前复杂几何算例先按新网格完成原生重算，再沿 HSprv 的 SHIP 输出进入 ParaView PVDReader，显示平均湿面并关闭 deformation。逐面核对原生导出与交付 HST 的节点对应和完整连接；HSprv 8.2 的坐标四位有效数字量化、三角形重复末点填充分别验证和记录，精确坐标及面元类型以交付 HST 为准。
+当前复杂几何算例在原生重算后，优先展示 Visu5D 从求解 HST 保存的湿面原图。需要配套正交投影时，沿 HSprv 的 SHIP 输出进入 ParaView PVDReader，显示平均湿面并关闭 deformation。逐面核对原生导出与交付 HST 的节点对应和完整连接；HSprv 8.2 的坐标四位有效数字量化、三角形重复末点填充分别验证和记录，精确坐标及面元类型以交付 HST 为准。
 
 实际 PVD、两帧 VTU、mesh-view.prv、执行日志和来源保存在各算例 visualization/ 与 logs/。总览、三维和正交投影由 scripts/render_geometry_meshes.py 直接离屏导出；本机 ParaView 的 GL2PS PDF 三维几何实际为位图，交付时标明高清原生视图。单模型 PDF 分三页保存三种视图，总览 PDF 每模型一页。响应及网格对照图沿手册配套 Gnuplot 路径读取原始 RAO，并核对 hsrao 原始宏的列映射，输出矢量 PDF/SVG。独立脚本、视口限制及验收见[直接导出](direct-export.md)。场量与变形不属于该静态网格图的验收范围。
 

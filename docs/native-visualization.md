@@ -1,6 +1,6 @@
 # HydroStar 原生与手册推荐的可视化流程
 
-“原生软件图”限定为 HydroStar 自带 HyView、Visu5D/Visu4D、StarViewer 等查看器中生成并保存的画面。优先打开本次项目并实际验收这些查看器的保存/导出；ParaView、Gnuplot 的结果标为配套工具出图，原生计算数值来源另行记录。当前已验收的原查看器静图为 Visu5D 月池网格；其他配套图保留实际来源。
+“原生软件图”限定为 HydroStar 自带 HyView、Visu5D/Visu4D、StarViewer 等查看器中生成并保存的画面。优先打开本次项目并实际验收这些查看器的保存/导出；ParaView、Gnuplot 的结果标为配套工具出图，原生计算数值来源另行记录。当前发布七种湿面构型和半潜平台二阶外部积分面的 Visu5D 原图。
 
 当前交付优先静态网格、压力/荷载和响应原图及数值表。原生软件自身保存与官方配套工具导出分别注明实际工具；代表相位图记录工况与相位，峰值结论另有全周期数据支持。README 默认展示高清 PNG 和矢量曲线，在线报告的动画由用户主动播放。已有 GIF 作为可选资料保存。
 
@@ -48,7 +48,7 @@
 
 ## 当前发布图的命令复现
 
-**已验证的原生软件图。** 本机 Visu5D 使用 **File → Open** 直接读取月池的实际 `.hst`，勾选 **Mesh → Hull 1** 显示湿面，由工具栏 **Save image to file** 保存 [1630×900 JPG](assets/moonpool_caisson_visu5d.jpg)。该对话框仅列 `picture (*.jpg)`。输出保留软件原始文件，源 HST 与实际求解输入逐字节一致，详见[导出记录](../examples/visualization/viewer-exports.json)。HyView 已加载同一月池项目；加载时出现 `vtkDelaunay2D` 填充警告，本次未将该画面用于发布。
+**已验证的原生软件图。** HydroStar 8.2.0 自带 Visu5D。切换算例先用 **File → Close** 清空旧模型（直接连续打开会叠加）；再用 **File → Open** 读取实际求解 `.hst`，在 **Mesh → Hull 1** 核对湿面面元边界。半体算例用 **Display xOz symmetry** 展开，核对两侧形状；二阶 `platform2.hst` 还可选 **Mesh → Free-surface**，倾斜视角检查外部环带和四个水线开口。旋转和缩放至完整构型后，由工具栏 **Save image to file** 保存 JPG。本机对话框仅列 `picture (*.jpg)`；发布图均为 1630×900，保留原始文件、HST 和图像哈希，详见[导出记录](../examples/visualization/viewer-exports.json)。HyView 加载同一月池项目时报告 `vtkDelaunay2D` 填充警告，月池发布图采用已验证的 Visu5D 路径。
 
 **配套工具图。** 以下命令保留配套出图的来源及复现方法。
 

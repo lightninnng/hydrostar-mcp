@@ -19,6 +19,6 @@ Each fields directory contains native inputs, field cards, full complex values, 
 
 See [visualization methods](../../docs/native-visualization.md) for replay commands. Tools are installed separately; the [version record](paraview-versions.json) and repository environment file identify the tested Windows combination.
 
-README 的四构型网格总览记录见 [readme-meshes.json](readme-meshes.json)，八组动态预览记录见 [readme-media.json](readme-media.json)。预览保留原动图的全部相位、时间、固定调色板与图例，点击后可查看原始高清导出。
+七种湿面构型及二阶外部积分面的 [Visu5D 原图记录](viewer-exports.json)保存所用 HST、对称显示、导出步骤及哈希。四构型 ParaView 配套总览记录见 [readme-meshes.json](readme-meshes.json)，八组动态预览记录见 [readme-media.json](readme-media.json)。预览保留原动图的全部相位、时间、固定调色板与图例，点击后可查看原始高清导出。
 
-The README's four-model mesh plate is recorded in [readme-meshes.json](readme-meshes.json), and its eight dynamic previews in [readme-media.json](readme-media.json). Previews retain every source phase, timing, fixed palette and legend, with links to the original full-resolution exports.
+The [Visu5D export record](viewer-exports.json) lists the solved HST files, symmetry settings, export steps and hashes for the seven wet meshes and the exterior integration mesh. See [readme-meshes.json](readme-meshes.json) for the four-model ParaView companion plate and [readme-media.json](readme-media.json) for the eight dynamic previews. Previews retain every source phase, timing, fixed palette and legend, with links to the original full-resolution exports.

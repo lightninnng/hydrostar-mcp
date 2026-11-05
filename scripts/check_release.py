@@ -18,7 +18,9 @@ sys.path.insert(0, str(ROOT))
 from hydrostar_mcp import __version__, core
 from hydrostar_mcp.models import CaseConfig
 from hydrostar_mcp.reference_forms import FORMS
+from hydrostar_mcp.second_order import read_integration_mesh
 from hydrostar_mcp.visualization import whole_mesh
+from scripts.gallery_data import presentation_data
 
 GATES = {
     "semantic_input",
@@ -153,7 +155,7 @@ def check_gallery_media():
         def __init__(self):
             super().__init__()
             self.cases, self.images, self.links = [], [], []
-            self.geometry_cases = []
+            self.geometry_cases, self.viewer_cases = [], []
 
         def handle_starttag(self, tag, attributes):
             attrs = dict(attributes)
@@ -161,6 +163,11 @@ def check_gallery_media():
                 self.cases.append(attrs["data-result-case"])
             if tag == "article" and "data-geometry-case" in attrs:
                 self.geometry_cases.append(attrs["data-geometry-case"])
+            if (
+                tag == "figure"
+                and attrs.get("data-image-origin") == "hydrostar-bundled-viewer"
+            ):
+                self.viewer_cases.append(attrs.get("data-viewer-case"))
             if tag == "img":
                 self.images.append(attrs)
             if tag == "a":
@@ -191,7 +198,7 @@ def check_gallery_media():
     )
     sources = [image.get("src", "") for image in document.images]
     require(
-        "assets/readme-meshes.png" in sources, "Native four-model mesh plate required"
+        "assets/readme-meshes.png" in sources, "ParaView companion mesh plate required"
     )
     geometry = read_json(ROOT / "docs/data/geometry.json")["cases"]
     require(
@@ -215,36 +222,86 @@ def check_gallery_media():
     viewer_figures = read_json(ROOT / "examples/visualization/viewer-exports.json")[
         "figures"
     ]
-    require(viewer_figures, "Bundled-viewer export evidence is missing")
-    geometry_keys = {entry["key"]: entry for entry in geometry}
+    expected = {
+        case["key"]: (case["package"], case["wet_panels"], case["total_panels"])
+        for case in presentation_data()["cases"]
+    }
+    expected.update(
+        {
+            case["key"]: (
+                f"examples/geometry/{case['key']}",
+                case["panels"],
+                case["full_equivalent_total"],
+            )
+            for case in geometry
+        }
+    )
+    second_order = "examples/second-order/platform"
+    expected["platform_exterior"] = (
+        second_order,
+        expected["platform"][1],
+        read_json(ROOT / second_order / "verification.json")["main_total_panels"],
+    )
+    require(
+        len(viewer_figures) == len(document.viewer_cases) == len(expected)
+        and {entry["case"] for entry in viewer_figures} == set(expected)
+        and set(document.viewer_cases) == set(expected),
+        "Each public mesh needs one bundled-viewer export and one gallery entry",
+    )
+    require(
+        len({entry["image_sha256"] for entry in viewer_figures}) == len(expected),
+        "Bundled-viewer images must be distinct",
+    )
     for entry in viewer_figures:
-        case = geometry_keys[entry["case"]]
-        require(
-            entry["origin"] == "hydrostar_bundled_viewer"
-            and entry["status"] == "verified"
-            and entry["wet_panels"] == case["panels"]
-            and entry["full_equivalent_total"] == case["full_equivalent_total"],
-            "Bundled-viewer origin and mesh acceptance",
+        key = entry["case"]
+        package, wet, total = expected[key]
+        project = (
+            "platform2"
+            if key == "platform_exterior"
+            else read_json(ROOT / package / "config.json")["project"]
+        )
+        solved_hst = f"{package}/inputs/{project}.hst"
+        _, stored_faces, mesh_meta = core.read_hst(ROOT / solved_hst)
+        symmetry = int(mesh_meta["SYMMETRY_BODY"][0][1])
+        exterior = (
+            len(read_integration_mesh(ROOT / solved_hst)["faces"]) * 2**symmetry
+            if key == "platform_exterior"
+            else 0
         )
         require(
-            sha256(ROOT / entry["source"])
+            entry["origin"] == "hydrostar_bundled_viewer"
+            and entry["viewer"] == "Visu5D"
+            and entry["status"] == "verified"
+            and entry["wet_panels"] == wet == len(stored_faces) * 2**symmetry
+            and entry.get("exterior_panels", 0) == exterior
+            and entry["full_equivalent_total"] == total <= 3000
+            and entry.get("symmetry_display", "as_stored")
+            == ("viewer_mirror" if symmetry else "as_stored"),
+            "Bundled-viewer origin and mesh acceptance: " + key,
+        )
+        require(
+            entry["solved_hst"] == solved_hst
+            and sha256(ROOT / entry["source"])
             == entry["source_sha256"]
-            == sha256(ROOT / entry["solved_hst"]),
-            "Bundled-viewer source must be the solved mesh",
+            == sha256(ROOT / solved_hst),
+            "Bundled-viewer source must be the solved mesh: " + key,
         )
         source = entry["image"]
         require(
-            sha256(ROOT / source) == entry["image_sha256"], "Bundled-viewer export hash"
+            source == f"docs/assets/{key}_visu5d.jpg"
+            and sha256(ROOT / source) == entry["image_sha256"],
+            "Bundled-viewer export path and hash: " + key,
         )
         with Image.open(ROOT / source) as exported:
             require(
-                exported.format == entry["format"]
+                exported.format == entry["format"] == "JPEG"
                 and exported.size == (entry["width"], entry["height"]),
                 "Bundled-viewer export format and size",
             )
             exported.verify()
         require(
-            source.removeprefix("docs/") in sources,
+            sources.count(source.removeprefix("docs/")) == 1
+            and source.removeprefix("docs/") in document.links,
             "Bundled-viewer image missing from gallery",
         )
         for name in ("README.md", "README.en.md"):

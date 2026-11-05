@@ -10,6 +10,7 @@ from hydrostar_mcp import __version__
 from scripts.gallery_data import (
     acceptance_table,
     geometry_section,
+    overview_mesh_figures,
     overview_table,
     presentation_data,
     result_sections,
@@ -36,6 +37,7 @@ def main():
         .replace("__GEOMETRY_STUDY__", geometry_section())
         .replace("__RESULT_SECTIONS__", result_sections(dataset))
         .replace("__SECOND_ORDER_SECTION__", second_order_section())
+        .replace("__VIEWER_MESHES__", overview_mesh_figures(dataset))
         .replace("__OVERVIEW_ROWS__", overview_table(dataset))
         .replace("__ACCEPTANCE_ROWS__", acceptance_table(dataset))
     )

@@ -16,9 +16,22 @@ The [complex geometry gallery](#complex-geometry-and-panel-layouts) also present
 
 The original curved hull is reconstructed from the project's own station table using corresponding longitudinal and sectional quadrilateral bands. Its wet mesh has 2018 quadrilaterals and 11 end-cap triangles, with 844 waterplane panels: **2873 full-equivalent total panels**. The native sweep covers **231 frequencies and 13 headings** within the default budget. Geometry acceptance and all six execution gates passed.
 
-[![Actual solved wet meshes for the four configurations](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
+HydroStar's bundled **Visu5D** opened the actual solved HST for each configuration and saved the wet-mesh images below. Click any image for the full resolution. The [viewer export record](examples/visualization/viewer-exports.json) lists sources, steps and hashes.
 
-This plate is exported by ParaView commands from the accepted solved connectivity, retaining quadrilaterals and local triangles. Blue surfaces are the potential-flow wet mesh; grey geometry supplies the platform's dry-structure and slender-member context. Geometry uses a 1× gain, and each view is fitted independently. Total counts include waterplane panels; the plate shows wet surfaces. The online report provides a rotatable view of each model.
+| Original curved hull | Semisubmersible |
+| --- | --- |
+| [![Curved hull Visu5D export](docs/assets/vessel_visu5d.jpg)](docs/assets/vessel_visu5d.jpg) | [![Semisubmersible Visu5D export](docs/assets/platform_visu5d.jpg)](docs/assets/platform_visu5d.jpg) |
+| **Container hull** | **Full-form tanker** |
+| [![Container hull Visu5D export](docs/assets/container_visu5d.jpg)](docs/assets/container_visu5d.jpg) | [![Tanker Visu5D export](docs/assets/tanker_visu5d.jpg)](docs/assets/tanker_visu5d.jpg) |
+
+<details>
+<summary>View the ParaView companion plate with dry structure and slender members</summary>
+
+[![ParaView companion wet-mesh plate for the four configurations](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
+
+Blue surfaces are the potential-flow wet mesh; grey geometry shows the platform's dry structure and slender members. Geometry uses a 1× gain, with independently fitted views.
+
+</details>
 
 | Configuration | Full-equivalent total panels, including waterplane | Frequency range and spacing (rad/s) | Frequencies and headings |
 | --- | --- | --- | --- |
@@ -127,7 +140,16 @@ Click a response figure for its vector PDF. Full values, SVGs for all 13 heading
 
 The semisubmersible has completed native **HSdft → HSamg → HSqtf** calculations, providing mean drift loads and full difference-frequency QTFs including the free-surface integral. Water depth is 200 m, heading is 60°, and difference frequencies are 0, 0.05 and 0.10 rad/s: **36 valid wave-frequency pairs and 216 complex load coefficients**.
 
+[![Exterior integration mesh and four waterline openings saved directly by Visu5D](docs/assets/platform_exterior_visu5d.jpg)](docs/assets/platform_exterior_visu5d.jpg)
+
+Visu5D reads **Hull 1** and **Free-surface** from the second-order solved HST. The image shows the full mirrored exterior mesh, with the columns beneath the free surface.
+
+<details>
+<summary>View the ParaView companion image of the hull and integration domain</summary>
+
 ![Semisubmersible and structured annular integration mesh](docs/assets/platform-second-order-mesh.png)
+
+</details>
 
 The exterior domain uses 72 equal angular divisions and nine graded quadrilateral annuli, with corresponding near-body sectors. The main mesh has **2946 full-equivalent total panels**, including wet surfaces, waterplane, exterior free surface and symmetry expansion; the comparison has 2898. Both native calculations retain the same wet mesh, mass, inertia, restoring and damping.
 
@@ -160,7 +182,12 @@ Force coefficients use kN/m² and moment coefficients use kN m/m². Figures reta
 
 Three original cases demonstrate curved-section lofting, through openings and CAD import. Panels follow structural features and retain the quadrilaterals and local triangles used in the solved HST. Each case passes its recorded geometry checks and all six native execution gates.
 
-[![Solved wet meshes of the curved-section hull, through-moonpool caisson and Spar with a heave plate](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+<details>
+<summary>View the ParaView companion plate for the three cases</summary>
+
+[![ParaView companion plate for the curved-section hull, through-moonpool caisson and Spar with a heave plate](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+
+</details>
 
 | Example case | Panel layout | Wetted quads / triangles | Full-equivalent total, including waterplane | CAD volume difference |
 | --- | --- | --- | --- | --- |
@@ -174,7 +201,7 @@ Three original cases demonstrate curved-section lofting, through openings and CA
 
 [![Through-moonpool wet mesh saved directly by Visu5D](docs/assets/moonpool_caisson_visu5d.jpg)](docs/assets/moonpool_caisson_visu5d.jpg)
 
-Visu5D opened the solved HST and saved this 1630×900 JPG using **Save image to file**. See the [viewer export record and hashes](examples/visualization/viewer-exports.json).
+All three complex mesh originals were saved from their solved HST files in Visu5D with **Save image to file**. See the [viewer export record and hashes](examples/visualization/viewer-exports.json).
 
 <details>
 <summary>View companion orthographic projections from ParaView</summary>
@@ -185,11 +212,25 @@ Visu5D opened the solved HST and saved this 1630×900 JPG using **Save image to 
 
 **Curved-section hull.** Original curved station data define a loft with matched longitudinal and section bands. Documented local triangles handle the end transitions.
 
+[![Curved-section hull wet mesh saved directly by Visu5D](docs/assets/lofted_vessel_visu5d.jpg)](docs/assets/lofted_vessel_visu5d.jpg)
+
+<details>
+<summary>View companion orthographic projections from ParaView</summary>
+
 [![ParaView wet mesh and orthographic projections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+
+</details>
 
 **Curved Spar with a heave plate.** An original millimetre STEP solid is converted to metres and clipped at the waterline. Axial rings connect to radial partitions on the finite-thickness plate.
 
-[![Actual wet mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+[![Curved Spar and heave plate mesh saved directly by Visu5D](docs/assets/cad_spar_visu5d.jpg)](docs/assets/cad_spar_visu5d.jpg)
+
+<details>
+<summary>View companion orthographic projections from ParaView</summary>
+
+[![ParaView companion mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+
+</details>
 
 The overview and companion projections are exported through HSprv → ParaView, with every cell checked against the delivered HST. Each model has a 3000×1700 companion image and a three-page PDF of the 3D, longitudinal and plan views; the overview PDF has one page per model. This ParaView build embeds high-resolution raster geometry in PDFs. Response and mesh-comparison curves use original RAOs and checked HSRAO macros through Gnuplot, preserving vector PDF/SVG output. Coordinates are in metres, geometry gain is 1, and views are framed independently. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
 

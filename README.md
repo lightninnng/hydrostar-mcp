@@ -16,9 +16,22 @@
 
 曲线船体由本项目原创型值表重建，采用沿站位与剖面的四边形网格带。湿面包含 2018 个四边形和 11 个端部三角形，另有 844 个水线面元，全体合计 **2873 个面元**。在默认预算内完成 **231 个频率点和 13 个浪向**的真实计算，几何与六项原生执行门禁全部通过。
 
-[![四种计算对象的实际湿面网格](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
+以下为 HydroStar 自带 **Visu5D** 直接打开实际求解 HST 后保存的湿面网格原图。点击任一图片可看完整分辨率。[来源、导出步骤与哈希](examples/visualization/viewer-exports.json)随算例保存。
 
-图中网格由 ParaView 命令读取已验收的实际求解面元连接并导出，保留四边形与局部三角形边界。蓝色为势流湿表面，灰色为平台干结构和细杆背景。几何采用 1 倍比例，各视图独立取景；总面元数包含水线面，图中展示湿面。在线报告可继续旋转和检查三维模型。
+| 原创曲线船体 | 半潜平台 |
+| --- | --- |
+| [![曲线船体 Visu5D 原图](docs/assets/vessel_visu5d.jpg)](docs/assets/vessel_visu5d.jpg) | [![半潜平台 Visu5D 原图](docs/assets/platform_visu5d.jpg)](docs/assets/platform_visu5d.jpg) |
+| **集装箱船** | **丰满油船** |
+| [![集装箱船 Visu5D 原图](docs/assets/container_visu5d.jpg)](docs/assets/container_visu5d.jpg) | [![丰满油船 Visu5D 原图](docs/assets/tanker_visu5d.jpg)](docs/assets/tanker_visu5d.jpg) |
+
+<details>
+<summary>查看 ParaView 配套总览（含平台干结构与细杆背景）</summary>
+
+[![四种构型的 ParaView 配套湿面网格总览](docs/assets/readme-meshes.png)](docs/assets/readme-meshes.png)
+
+蓝色为势流湿表面，灰色为平台干结构和细杆背景。几何倍率为 1，各视图独立取景。
+
+</details>
 
 | 计算对象 | 全体总面元，含水线面 | 频率范围与间隔（rad/s） | 频率点与浪向数 |
 | --- | --- | --- | --- |
@@ -127,7 +140,16 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 半潜平台已完成 **HSdft → HSamg → HSqtf** 原生二阶计算，提供平均漂移荷载及包含自由面积分的完整差频 QTF。水深为 200 m，浪向为 60°，差频为 0、0.05、0.10 rad/s，共保留 **36 对有效波频、216 个复数荷载系数**。
 
+[![Visu5D 直接保存的二阶外部积分网格与四个水线开口](docs/assets/platform_exterior_visu5d.jpg)](docs/assets/platform_exterior_visu5d.jpg)
+
+Visu5D 从二阶求解 HST 读取 **Hull 1** 与 **Free-surface**；上图显示完整对称展开的外部积分网格，柱体位于自由面下方。
+
+<details>
+<summary>查看 ParaView 配套图中的湿面与积分域</summary>
+
 ![半潜平台与规则环带外部积分网格](docs/assets/platform-second-order-mesh.png)
+
+</details>
 
 外部水域采用 72 个等角分段与 9 层渐变四边形环带，近体分区按平台对称性对应。主网格为 **2946 个全体总面元**，计入湿面、水线面、外部自由面和对称展开；对照为 2898。湿面、质量、惯性、恢复与阻尼保持一致，两档均重新完成原生计算。
 
@@ -160,7 +182,12 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 以下三个原创算例展示曲线放样、贯通开口与 CAD 导入的完整建模链路。网格沿结构特征布置，保留实际求解 HST 中的四边形与局部三角形；各例已通过所列几何验收和六项原生执行门禁。
 
-[![曲线站位船体、贯通月池浮体与带升沉板 Spar 的实际求解网格](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+<details>
+<summary>查看三个算例的 ParaView 配套网格总览</summary>
+
+[![曲线站位船体、贯通月池浮体与带升沉板 Spar 的 ParaView 配套网格总览](docs/assets/geometry-source-cases.png)](docs/assets/geometry-source-cases.pdf)
+
+</details>
 
 | 示例构型 | 面元布局 | 湿面四边形 / 三角形 | 全体总面元，含水线面 | CAD 体积相对差 |
 | --- | --- | --- | --- | --- |
@@ -174,7 +201,7 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 [![Visu5D 直接保存的贯通月池湿面网格](docs/assets/moonpool_caisson_visu5d.jpg)](docs/assets/moonpool_caisson_visu5d.jpg)
 
-Visu5D 打开实际求解 HST，用 **Save image to file** 保存 1630×900 JPG。[软件原图的来源与哈希](examples/visualization/viewer-exports.json)。
+三个复杂构型同样由 Visu5D 打开实际求解 HST，用 **Save image to file** 保存 JPG。[软件原图的来源与哈希](examples/visualization/viewer-exports.json)。
 
 <details>
 <summary>查看 ParaView 配套正交投影</summary>
@@ -185,11 +212,25 @@ Visu5D 打开实际求解 HST，用 **Save image to file** 保存 1630×900 JPG�
 
 **曲线站位船体。** 由原创曲线站位资料放样，采用对应的纵向与剖面网格带；艏艉保留有记录的局部三角形过渡。
 
+[![Visu5D 直接保存的曲线站位船体湿面网格](docs/assets/lofted_vessel_visu5d.jpg)](docs/assets/lofted_vessel_visu5d.jpg)
+
+<details>
+<summary>查看 ParaView 配套正交投影</summary>
+
 [![曲线站位船体的 ParaView 湿面网格与正交投影](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+
+</details>
 
 **带升沉板的曲面 Spar。** 导入本项目构造的毫米制 STEP，完成单位转换与水线裁剪，柱体环带与有限厚升沉板的径向分区相接。
 
-[![曲面 Spar 与升沉板的实际湿面网格及几何投影](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+[![Visu5D 直接保存的曲面 Spar 与升沉板网格](docs/assets/cad_spar_visu5d.jpg)](docs/assets/cad_spar_visu5d.jpg)
+
+<details>
+<summary>查看 ParaView 配套正交投影</summary>
+
+[![曲面 Spar 与升沉板的 ParaView 配套网格及投影](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
+
+</details>
 
 网格总览和配套投影由 HSprv → ParaView 导出，并逐面核对交付 HST。配套单模型 PNG 为 3000×1700；各模型 PDF 分三页保存三维、纵向和俯视图，总览 PDF 每个模型一页。本机 ParaView 的三维 PDF 含高清位图。响应与网格对照曲线读取原始 RAO 和 hsrao 绘图宏，由 Gnuplot 导出矢量 PDF/SVG。坐标单位为 m，几何倍率为 1，各视图独立取景。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
 
