@@ -29,6 +29,8 @@
 
 三类资料参照构型使用公开主尺度与本项目明确的形状假设，节点和面元由项目生成器建立。[来源说明](docs/reference-forms.md)保存了尺度引用、重建方法与物理模型。
 
+展示图按生成工具标注。月池网格首图是 Visu5D 自带查看器直接保存的原生软件图；ParaView、Gnuplot 生成的图为配套工具出图，分别保留 HydroStar 原生数值来源。
+
 ## 压力、波面与运动静态图
 
 四种构型均提供表面压力、总波面和散射波面的同相位静态原图。共同入射波幅为 **0.50 m**，浪向为 **60°**；各自选定频率、物理周期和水深如下。
@@ -119,7 +121,7 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 </details>
 
-点击响应图打开矢量 PDF。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[原生曲线导出包](examples/visualization/curves)。
+点击响应图打开矢量 PDF。完整数值、13 个浪向的 SVG、物理参数及原生输入见[曲线船体算例](examples/vessel)、[其他三种构型结果](examples/results)和[Gnuplot 曲线与原始数据](examples/visualization/curves)。
 
 ## 二阶平均漂移与差频荷载
 
@@ -170,17 +172,26 @@ README 直接展示 ParaView 导出的高清 PNG，点击图片打开原尺寸�
 
 **带贯通月池的多边形浮体。** 由外部实体减去贯通开口，外壁、月池内壁和连接底面采用相容分块，保留内外水线闭环。
 
-[![贯通月池浮体的实际湿面网格与几何投影](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+[![Visu5D 直接保存的贯通月池湿面网格](docs/assets/moonpool_caisson_visu5d.jpg)](docs/assets/moonpool_caisson_visu5d.jpg)
+
+Visu5D 打开实际求解 HST，用 **Save image to file** 保存 1630×900 JPG。[软件原图的来源与哈希](examples/visualization/viewer-exports.json)。
+
+<details>
+<summary>查看 ParaView 配套正交投影</summary>
+
+[![贯通月池浮体的 ParaView 湿面网格与正交投影](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+
+</details>
 
 **曲线站位船体。** 由原创曲线站位资料放样，采用对应的纵向与剖面网格带；艏艉保留有记录的局部三角形过渡。
 
-[![曲线站位船体的原生湿面网格与正交投影](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+[![曲线站位船体的 ParaView 湿面网格与正交投影](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
 
 **带升沉板的曲面 Spar。** 导入本项目构造的毫米制 STEP，完成单位转换与水线裁剪，柱体环带与有限厚升沉板的径向分区相接。
 
 [![曲面 Spar 与升沉板的实际湿面网格及几何投影](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
 
-网格总览、三维图和正交投影均由原生 HSprv → ParaView 直接导出，并逐面核对交付 HST。图片为 3000×1700 高清原生视图；各模型 PDF 分三页保存三维、纵向和俯视图，总览 PDF 每个模型一页。本机 ParaView 的三维 PDF 含高清位图，曲线 PDF/SVG 保留矢量线条。响应与网格对照曲线直接读取原始 RAO 和 hsrao 绘图宏。坐标单位为 m，几何倍率为 1，各视图独立取景。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
+网格总览和配套投影由 HSprv → ParaView 导出，并逐面核对交付 HST。配套单模型 PNG 为 3000×1700；各模型 PDF 分三页保存三维、纵向和俯视图，总览 PDF 每个模型一页。本机 ParaView 的三维 PDF 含高清位图。响应与网格对照曲线读取原始 RAO 和 hsrao 绘图宏，由 Gnuplot 导出矢量 PDF/SVG。坐标单位为 m，几何倍率为 1，各视图独立取景。[完整验收数据](examples/geometry/index.json)记录角度、翘曲、相邻尺度比、CAD 体积与浮心误差及来源哈希。
 
 <details>
 <summary>查看三个复杂几何算例的六自由度响应</summary>

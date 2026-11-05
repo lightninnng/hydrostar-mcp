@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Publish the through-moonpool mesh saved directly by bundled Visu5D, with a source and output receipt; distinguish bundled-viewer exports from companion-tool figures.
+
 - Prioritize static native/companion exports in both READMEs and the report; keep existing animations available through explicit playback, with the same priority recorded in the modelling skill.
 
 - Replace complex-geometry display plates with direct HSprv/ParaView views and high-resolution native PDFs; label the actual raster geometry encoding.

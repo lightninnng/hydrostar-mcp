@@ -1,4 +1,6 @@
-# 原生图表直接导出与验收
+# HydroStar 查看器与配套工具出图验收
+
+本项目的“原生软件图”专指 HydroStar 自带的 HyView、Visu5D/Visu4D、StarViewer 等查看器生成的画面。优先用对应查看器的保存/导出功能；受限时如实记录原因及待完成状态。以下 ParaView、Gnuplot 路径属于配套工具出图。配套图保留真实工具与数值来源，不计作原查看器画面的已完成证据。
 
 本流程用于模型、曲线和计算结果的正式交付。优先通过命令直接生成图像、矢量图和原始数据；用户需要证明界面操作或检查特定显示状态时再截图。数据已计算且来源相符时，复用已有结果。
 
@@ -8,14 +10,16 @@
 
 | 内容 | 优先路径 | 交付 |
 | --- | --- | --- |
-| 运动、载荷、附加质量、辐射阻尼曲线 | hsrao 原始 .rao/.dat 与生成的 .gnu → 手册保留的 gnplt/Gnuplot 文件终端 | PDF、SVG、高清 PNG、原始表及需要的 CSV |
-| 复杂湿表面及投影 | HSprv 的 SHIP/PVD → ParaView PVDReader → 离屏渲染与经实测的 PDF 导出 | 高清 PNG、原生视图 PDF、原始 PVD/VTU、视角与导出脚本 |
-| 压力、波面、运动、动画 | 已通过完整复场量核对的原生数据 → 手册适用的 HyView 或 HSprv/ParaView 流程 | 固定色标的图/帧/视频、物理工况及所需原生输入 |
+| 运动、荷载及响应曲线 | StarViewer 对应结果视图；配套批量出图使用原始 .rao/.dat 和 .gnu → gnplt/Gnuplot | 原查看器图或配套 PDF/SVG/PNG、原始表及需要的 CSV |
+| 复杂湿表面及投影 | Visu5D、HyView 对应网格视图；配套图使用 HSprv SHIP/PVD → ParaView | 经实测的查看器 JPG，或配套 PNG/PDF、原始 PVD/VTU 与导出设置 |
+| 压力、波面、运动、动画 | 优先 HyView，核对完整复场量与工况；配套图使用 HSprv/ParaView 流程 | 固定色标的图/帧/视频、物理工况及所需原生输入 |
 | 波谱统计 | hspec 的原始统计表及 StarSpec 手册适用绘图入口 | .spc、统计表、曲线、参数和单位 |
 
 本机 HydroStar 8.2.0 手册 PDF 第 7 页记录 hsplt 调用 StarViewer，旧 Gnuplot 显示移至 gnplt；第 138 页说明 hsrao 生成绘图宏；第 143–145 页说明 HSprv → ParaView。软件版本不同，先按对应手册核实。
 
 StarViewer 的 Save 可保存绘图区；未核实独立批量命令接口时，不猜测命令行参数或操作内部对象。需要稳定批量出图时使用上述手册保留的文件终端路径。
+
+已验证本机 HydroStar 8.2.0 附带 Visu5D 的静图保存：**File → Open** 直接打开实际求解 `.hst`，选择 **Mesh → Hull 1**，工具栏 **Save image to file** 输出 JPG；本机对话框只列 JPG。月池实例导出 1630×900，保留查看器原始文件、模型和图像哈希。复杂开口模型如在 HyView 出现 `vtkDelaunay2D` 填充警告，核对视图部件和实际面元后再验收；本次月池使用已验证的 Visu5D 导出。
 
 ## 曲线批量导出
 
@@ -39,9 +43,9 @@ python "<skill目录>/scripts/export_hsrao.py" `
 
 ParaView 的 SaveScreenshot 是数据视图的文件渲染 API，不是抓取桌面窗口。离屏脚本读取本次原生数据后，固定视角、坐标、几何倍率、色标和物理相位再导出；保留每个真实面元的连接。
 
-本机 ParaView 6.2 的 GL2PS ExportView 已实测可导出 PDF，但设置 Rasterize3Dgeometry=0 后，页面对象检查仍显示三维几何为位图。此路径交付高清原生视图 PDF，不能宣称矢量网格。分割布局中的视图直接导出还会使用默认 400×400 窗口；先移出布局并显式设置 ViewSize，再检查实际页面及嵌入图像像素。多行文字采用显式归一位置、Justification 和 Rendertextaspaths=1，可保留正确换行与位置的矢量文字轮廓；默认文本导出存在换行丢失及裁切。像素加倍时字体同比放大。其他版本先做最小导出验证。
+本机 ParaView 6.2 的 GL2PS ExportView 已实测可导出 PDF，但设置 Rasterize3Dgeometry=0 后，页面对象检查仍显示三维几何为位图。此配套路径交付高清 ParaView 视图 PDF，不能宣称矢量网格。分割布局中的视图直接导出还会使用默认 400×400 窗口；先移出布局并显式设置 ViewSize，再检查实际页面及嵌入图像像素。多行文字采用显式归一位置、Justification 和 Rendertextaspaths=1，可保留正确换行与位置的矢量文字轮廓；默认文本导出存在换行丢失及裁切。像素加倍时字体同比放大。其他版本先做最小导出验证。
 
-多视图可分别导出原生 PDF 页，再无损组装页对象；记录实际页面尺寸和图像编码，不把位图 PDF 称为矢量图。曲线使用 Gnuplot PDF/SVG 文件终端可保留矢量线条与文本。
+多视图可分别导出 ParaView PDF 页，再无损组装页对象；记录实际页面尺寸和图像编码，不把位图 PDF 称为矢量图。配套曲线使用 Gnuplot PDF/SVG 文件终端可保留矢量线条与文本。
 
 HSprv 8.2 的既有 SHIP 导出存在四位有效数字坐标量化，并以重复末点填充三角形。对应本机已验证路径按[排错经验](troubleshooting.md)核对每个节点与面元；精确几何和实际面元类型以交付 HST 为准。该经验不替代其他版本的格式检查。
 

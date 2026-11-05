@@ -1,0 +1,31 @@
+{
+  "schema": "hydrostar-bundled-viewer-exports-1",
+  "figures": [
+    {
+      "case": "moonpool_caisson",
+      "origin": "hydrostar_bundled_viewer",
+      "viewer": "Visu5D",
+      "bundled_with": "HydroStar 8.2.0",
+      "status": "verified",
+      "date": "2026-11-05",
+      "source": "examples/geometry/moonpool_caisson/geometry/model.hst",
+      "source_sha256": "b0fd586e8440d31d52315cc6cbc0aba8f168fa66200d0ed9e57faa222f053364",
+      "solved_hst": "examples/geometry/moonpool_caisson/inputs/moonpool_blocks.hst",
+      "wet_panels": 728,
+      "full_equivalent_total": 1108,
+      "coordinate_unit": "m",
+      "command_path": [
+        "File > Open (HST)",
+        "Mesh > Hull 1",
+        "Save image to file (picture *.jpg)"
+      ],
+      "view": "Default shaded 3D view with actual hull panel boundaries; only wet hull loaded",
+      "format": "JPEG",
+      "width": 1630,
+      "height": 900,
+      "image": "docs/assets/moonpool_caisson_visu5d.jpg",
+      "image_sha256": "0676320d386c631824f08e19855877c5cf9cc554b3e8c07fd820fcf04ef1ab24",
+      "postprocessing": "none; unchanged file saved by the bundled viewer"
+    }
+  ]
+}

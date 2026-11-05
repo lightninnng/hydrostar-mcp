@@ -15,3 +15,4 @@
 - 原生文件属于正式交付物。按[原生文件交付](docs/native-delivery.md)保存实际 .hst、.rdf、.mcn、.rao、任务所需的 .spc 及荷载/场量输入，附参数、单位、相对路径、执行顺序、状态与哈希；需要的文件齐全并验证后完成对应阶段交付。
 - 可视化首先采用当前版本手册默认、推荐的[原生与配套流程](docs/native-visualization.md)，包括 hview、hvisu / Visu4D、hsplt / StarViewer、gnplt、HyView、HSprv → ParaView 及 StarSpec 等适用入口；其他手册推荐路径采用同一优先原则。先核实版本、数据依赖和导出能力，实际查看并验收输出；受限时记录原因再用自定义制图补充，保留手册依据、核对记录、转码设置、单位、色标、倍率及来源哈希。
 - 出图优先直接导出：曲线保留 hsrao 原生绘图宏和 RAO，沿 Gnuplot 文件终端输出 PDF/SVG/高清 PNG；网格与场量沿 HSprv → ParaView 离屏渲染及已核实的文件导出，按实际页面对象说明矢量或位图。截图用于必要的界面操作证据。保存可复现命令、原始数值、导出设置、格式与来源哈希，并同步更新 README、展示页和验收索引。
+- 原生软件图优先在 HydroStar 自带的 HyView、Visu5D/Visu4D、StarViewer 等查看器中打开本次项目并保存/导出。ParaView、Gnuplot 分类为配套工具出图；原生数值来源与画面生成工具分别记录。原生软件图阶段的完成须有原查看器及实际输出证据。

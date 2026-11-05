@@ -29,6 +29,8 @@ This plate is exported by ParaView commands from the accepted solved connectivit
 
 The three reference configurations use public principal dimensions and explicit shape assumptions. The project generates its own nodes and panels. [Source notes](docs/reference-forms.md) document the dimensional references, reconstruction and physical idealizations.
 
+Figures are labelled by the software that generated them. The moonpool lead image is a native-software export from bundled Visu5D. ParaView and Gnuplot figures are companion-tool exports with their original HydroStar data retained.
+
 ## Static pressure, waves and motion
 
 All four configurations provide synchronized surface pressure, total elevation and scattered elevation. Incident amplitude is **0.50 m** and heading is **60°**. Each uses the selected frequency, physical period and depth below.
@@ -119,7 +121,7 @@ Phase is in degrees, wrapped to −180° through 180°. Discrete points retain t
 
 </details>
 
-Click a response figure for its vector PDF. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [native curve exports](examples/visualization/curves).
+Click a response figure for its vector PDF. Full values, SVGs for all 13 headings, physical inputs and native files are in the [curved-hull package](examples/vessel), [three reference result packages](examples/results) and [Gnuplot curves and original data](examples/visualization/curves).
 
 ## Second-order mean drift and difference-frequency loads
 
@@ -170,17 +172,26 @@ Three original cases demonstrate curved-section lofting, through openings and CA
 
 **Through-moonpool caisson.** A through opening is cut from the outer solid. Conforming blocks connect the outer wall, moonpool wall and bottom while preserving both waterline loops.
 
-[![Actual wet mesh and projections of the through-moonpool caisson](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+[![Through-moonpool wet mesh saved directly by Visu5D](docs/assets/moonpool_caisson_visu5d.jpg)](docs/assets/moonpool_caisson_visu5d.jpg)
+
+Visu5D opened the solved HST and saved this 1630×900 JPG using **Save image to file**. See the [viewer export record and hashes](examples/visualization/viewer-exports.json).
+
+<details>
+<summary>View companion orthographic projections from ParaView</summary>
+
+[![ParaView wet mesh and projections of the through-moonpool caisson](docs/assets/moonpool_caisson_geometry.png)](docs/assets/moonpool_caisson_geometry.pdf)
+
+</details>
 
 **Curved-section hull.** Original curved station data define a loft with matched longitudinal and section bands. Documented local triangles handle the end transitions.
 
-[![Native wet mesh and orthographic projections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
+[![ParaView wet mesh and orthographic projections of the curved-section hull](docs/assets/lofted_vessel_geometry.png)](docs/assets/lofted_vessel_geometry.pdf)
 
 **Curved Spar with a heave plate.** An original millimetre STEP solid is converted to metres and clipped at the waterline. Axial rings connect to radial partitions on the finite-thickness plate.
 
 [![Actual wet mesh and projections of the curved Spar with a heave plate](docs/assets/cad_spar_geometry.png)](docs/assets/cad_spar_geometry.pdf)
 
-The overview, 3D meshes and orthographic projections are exported directly through HSprv → ParaView, with every cell checked against the delivered HST. Each model has a 3000×1700 image and a three-page PDF of the 3D, longitudinal and plan views; the overview PDF has one page per model. This ParaView build embeds high-resolution raster geometry in PDFs. Response and mesh-comparison curves use original RAOs and checked HSRAO macros through Gnuplot, preserving vector PDF/SVG output. Coordinates are in metres, geometry gain is 1, and views are framed independently. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
+The overview and companion projections are exported through HSprv → ParaView, with every cell checked against the delivered HST. Each model has a 3000×1700 companion image and a three-page PDF of the 3D, longitudinal and plan views; the overview PDF has one page per model. This ParaView build embeds high-resolution raster geometry in PDFs. Response and mesh-comparison curves use original RAOs and checked HSRAO macros through Gnuplot, preserving vector PDF/SVG output. Coordinates are in metres, geometry gain is 1, and views are framed independently. The [acceptance index](examples/geometry/index.json) records angles, warpage, neighbouring size ratios, CAD volume and buoyancy-centre errors, and source hashes.
 
 <details>
 <summary>View six-DOF responses for the three complex geometry cases</summary>

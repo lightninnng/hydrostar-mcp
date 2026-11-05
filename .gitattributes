@@ -9,6 +9,7 @@
 examples/results/** -text -whitespace
 docs/data/showcase.json -text whitespace=cr-at-eol
 *.png binary
+*.jpg binary
 *.pdf binary
 
 examples/animations/** -text -whitespace

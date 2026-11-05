@@ -1,4 +1,4 @@
 interface:
   display_name: "HydroStar 建模与验收"
-  short_description: "结构化网格、3000 总面元、原生图表直接导出与阶段验收"
-  default_prompt: "使用 $hydrostar-modeling 在 3000 个全体等效总面元预算内完成建模和逐阶段验收，优先沿本机手册推荐流程直接导出矢量曲线、高清网格与场量图及原始数据，交付原生输入、日志、来源哈希和复现命令。"
+  short_description: "结构化网格、3000 总面元、HydroStar 查看器导出与阶段验收"
+  default_prompt: "使用 $hydrostar-modeling 在 3000 个全体等效总面元预算内逐阶段验收，优先使用 HydroStar 自带查看器保存静态原图，明确标注配套工具图，并交付原生数据、日志和来源哈希。"

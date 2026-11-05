@@ -246,6 +246,12 @@ def acceptance_table(dataset):
 def geometry_section():
     rows = []
     figures = []
+    viewer_exports = {
+        entry["case"]: entry
+        for entry in read(ROOT / "examples/visualization/viewer-exports.json")[
+            "figures"
+        ]
+    }
     descriptions = {
         "lofted_vessel": "由原创曲线站位资料放样，沿站位和剖面形成对应的四边形网格带，艏艉保留有记录的局部三角形过渡。",
         "moonpool_caisson": "由外部多边形实体减去贯通开口，外壁、月池内壁和连接底面采用相容分块，保留内外水线闭环。",
@@ -270,16 +276,30 @@ def geometry_section():
         rows.append(
             f'<tr><th scope="row"><a href="#geometry-{key}">{label}</a></th><td>{q["quadrilaterals"]:,} / {q["triangles"]}</td><td>{c["full_equivalent_total"]:,}</td><td>{100 * c["volume_relative_error"]:.3f}%</td></tr>'
         )
+        software_view, before_projection, after_projection = "", "", ""
+        if key in viewer_exports:
+            entry = viewer_exports[key]
+            if (
+                entry["status"] != "verified"
+                or entry["origin"] != "hydrostar_bundled_viewer"
+            ):
+                raise ValueError("Verified bundled viewer export required: " + key)
+            source = html.escape(entry["image"].removeprefix("docs/"), quote=True)
+            viewer = html.escape(entry["viewer"])
+            software_view = f'''<figure class="geometry-figure" data-image-origin="hydrostar-bundled-viewer"><div class="media-viewport"><a href="{source}" target="_blank" rel="noopener"><img class="media-image" src="{source}" width="{entry["width"]}" height="{entry["height"]}" loading="lazy" decoding="async" alt="{viewer} 直接保存的{label}湿面网格"></a></div><figcaption>{viewer} 原生软件图。查看器打开实际求解 HST，使用 Save image to file 保存 JPG。显示 {entry["wet_panels"]:,} 个湿面面元，坐标单位为 m。<a href="https://github.com/lightninnng/hydrostar-mcp/blob/main/examples/visualization/viewer-exports.json">查看导出记录</a>。</figcaption></figure>'''
+            before_projection = "<details><summary>查看 ParaView 配套投影</summary>"
+            after_projection = "</details>"
         figures.append(f'''<article id="geometry-{key}" data-geometry-case="{key}">
 <h3>{label}</h3><p>{descriptions[key]}</p>
-<figure class="geometry-figure"><div class="media-viewport"><a href="{geometry.removesuffix(".png")}.pdf" target="_blank" rel="noopener"><img class="media-image" src="{geometry}" width="3000" height="1700" loading="lazy" decoding="async" alt="{label}的原生湿面网格与正交投影"></a></div><figcaption>图 7.{number}a。原生湿表面的三维、纵向和俯视图，保留实际面元边界。坐标单位为 m，几何倍率为 1，各视图独立取景。点击查看三页高清原生视图 PDF。</figcaption></figure>
+{software_view}
+{before_projection}<figure class="geometry-figure"><div class="media-viewport"><a href="{geometry.removesuffix(".png")}.pdf" target="_blank" rel="noopener"><img class="media-image" src="{geometry}" width="3000" height="1700" loading="lazy" decoding="async" alt="{label}的 ParaView 湿面网格与正交投影"></a></div><figcaption>图 7.{number}a。ParaView 配套导出的湿表面三维、纵向和俯视图，保留实际面元边界。坐标单位为 m，几何倍率为 1，各视图独立取景。点击查看三页高清 ParaView 视图 PDF。</figcaption></figure>{after_projection}
 <p class="source">湿面排水体积为 {c["volume_m3"]:,.3f} m³，CAD 体积相对差为 {100 * c["volume_relative_error"]:.3f}%，浮心距离偏差为 {c["cb_distance_m"]:.4f} m。最大边长比为 {q["edge_ratio"]["max"]:.2f}，内角范围为 {q["minimum_corner_deg"]:.1f}°–{q["maximum_corner_deg"]:.1f}°，最大翘曲为 {q["warpage_deg"]["max"]:.2f}°，相邻尺度比最大为 {q["adjacent_size_ratio"]["max"]:.2f}。已通过所列几何门限、拓扑与自交检查及六项原生执行门禁。</p>
 <details><summary>查看{label}的六自由度响应</summary><figure><a href="{response.removesuffix(".png")}.pdf" target="_blank" rel="noopener"><img class="media-image" src="{response}" width="2400" height="1540" loading="lazy" decoding="async" alt="{label}的原生六自由度响应，{c["frequency_count"]} 个频率和 {c["heading_count"]} 个浪向"></a><figcaption>图 7.{number}b。角频率为 {frequency["min"]:.1f}–{frequency["max"]:.1f} rad/s，间隔为 {frequency["step"]:.1f} rad/s，浪向为 0°、60°、120° 和 180°。折线连接原生采样点；平移响应单位为 m/m，转动为 deg/m。点击查看矢量 PDF。</figcaption></figure></details>
 <p class="data-links"><a href="{package}">源资料、模型参数、原生输入与完整响应</a> · <a href="{verification}">验收记录</a></p></article>''')
     return (
         """<section aria-labelledby="geometry-heading"><h2 id="geometry-heading">7. 多来源复杂几何与网格</h2>
 <p>同轴柱体采用轴向环带与周向对应，船体采用站位与剖面网格带，多边形及贯通开口采用相容分块。四边形保留到实际求解文件，并同时检查形状、翘曲、尺度过渡、水线闭环、拓扑、自交以及 CAD 体积与浮心。</p>
-<figure class="mesh-plate"><div class="media-viewport"><a href="assets/geometry-source-cases.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/geometry-source-cases.png" width="2700" height="1160" loading="lazy" decoding="async" alt="曲线站位船体、贯通月池浮体和带升沉板 Spar 的实际求解网格总览"></a></div><figcaption>图 7a。三个原创复杂几何的已验收湿表面，坐标单位为 m，各视图独立取景。总览和各模型投影均由原生 HSprv → ParaView 直接导出，逐面核对交付 HST。点击查看每个模型一页的原生视图 PDF。本机三维 PDF 含高清位图；响应及网格对照曲线采用原始 RAO 与 hsrao 宏，经 Gnuplot 导出矢量 PDF/SVG。</figcaption></figure>
+<figure class="mesh-plate"><div class="media-viewport"><a href="assets/geometry-source-cases.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/geometry-source-cases.png" width="2700" height="1160" loading="lazy" decoding="async" alt="曲线站位船体、贯通月池浮体和带升沉板 Spar 的实际求解网格总览"></a></div><figcaption>图 7a。三个原创复杂几何的已验收湿表面，坐标单位为 m，各视图独立取景。总览和投影由 HSprv → ParaView 配套流程导出，逐面核对交付 HST。点击查看每个模型一页的 ParaView 视图 PDF。本机三维 PDF 含高清位图；响应及网格对照曲线采用原始 RAO 与 hsrao 宏，经 Gnuplot 导出矢量 PDF/SVG。</figcaption></figure>
 <p>下表展示重新计算并通过验收的当前算例，均控制在 3000 个全体等效总面元内，包含湿面、水线面和对称展开。网格调整保持原质量、重心、惯性、恢复、阻尼及环境；生成脚本与发布检查执行相同总预算。</p>
 <div class="table-wrap"><table><caption>三种复杂几何的实际求解面元与 CAD 体积核对</caption><thead><tr><th scope="col">示例构型</th><th scope="col">湿面四边形 / 三角形</th><th scope="col">全体总面元，含水线面</th><th scope="col">CAD 体积相对差</th></tr></thead><tbody>"""
         + "".join(rows)
@@ -325,7 +345,7 @@ def second_order_section():
         ),
     ):
         figures.append(
-            f'<figure class="response-overview" data-second-order="{kind}"><h3>{title}</h3><a href="assets/platform-second-order-{kind}.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-{kind}.png" width="2400" height="1540" loading="lazy" decoding="async" alt="半潜平台，{title}，原生二阶计算"></a><figcaption>图 6{letter}。{caption}力系数单位为 kN/m²，力矩系数为 kN m/m²。点击图片查看矢量 PDF，也可查看<a href="assets/platform-second-order-{kind}.svg" target="_blank" rel="noopener">原生 SVG</a>。</figcaption></figure>'
+            f'<figure class="response-overview" data-second-order="{kind}"><h3>{title}</h3><a href="assets/platform-second-order-{kind}.pdf" target="_blank" rel="noopener"><img class="media-image" src="assets/platform-second-order-{kind}.png" width="2400" height="1540" loading="lazy" decoding="async" alt="半潜平台，{title}，原生二阶计算"></a><figcaption>图 6{letter}。{caption}力系数单位为 kN/m²，力矩系数为 kN m/m²。点击图片查看矢量 PDF，也可查看<a href="assets/platform-second-order-{kind}.svg" target="_blank" rel="noopener">Gnuplot SVG</a>。</figcaption></figure>'
         )
     rows = []
     labels = dict(

@@ -99,7 +99,7 @@ def check_files(files):
             path.suffix.lower() not in {".exe", ".dll", ".dat", ".key", ".lic"},
             "Vendor or credential file: " + name,
         )
-        if path.suffix.lower() in {".png", ".pdf", ".gif"}:
+        if path.suffix.lower() in {".png", ".jpg", ".pdf", ".gif"}:
             reviewed_geometry = re.fullmatch(
                 r"examples/geometry/(lofted_vessel|moonpool_caisson|cad_spar|sensitivity/cad_spar_coarse)/geometry/geometry-qa\.png",
                 name,
@@ -210,6 +210,48 @@ def check_gallery_media():
                 f"](docs/{source})" in (ROOT / name).read_text(encoding="utf-8"),
                 "Complex geometry figure missing in " + name + ": " + source,
             )
+    from PIL import Image
+
+    viewer_figures = read_json(ROOT / "examples/visualization/viewer-exports.json")[
+        "figures"
+    ]
+    require(viewer_figures, "Bundled-viewer export evidence is missing")
+    geometry_keys = {entry["key"]: entry for entry in geometry}
+    for entry in viewer_figures:
+        case = geometry_keys[entry["case"]]
+        require(
+            entry["origin"] == "hydrostar_bundled_viewer"
+            and entry["status"] == "verified"
+            and entry["wet_panels"] == case["panels"]
+            and entry["full_equivalent_total"] == case["full_equivalent_total"],
+            "Bundled-viewer origin and mesh acceptance",
+        )
+        require(
+            sha256(ROOT / entry["source"])
+            == entry["source_sha256"]
+            == sha256(ROOT / entry["solved_hst"]),
+            "Bundled-viewer source must be the solved mesh",
+        )
+        source = entry["image"]
+        require(
+            sha256(ROOT / source) == entry["image_sha256"], "Bundled-viewer export hash"
+        )
+        with Image.open(ROOT / source) as exported:
+            require(
+                exported.format == entry["format"]
+                and exported.size == (entry["width"], entry["height"]),
+                "Bundled-viewer export format and size",
+            )
+            exported.verify()
+        require(
+            source.removeprefix("docs/") in sources,
+            "Bundled-viewer image missing from gallery",
+        )
+        for name in ("README.md", "README.en.md"):
+            require(
+                f"]({source})" in (ROOT / name).read_text(encoding="utf-8"),
+                "Bundled-viewer image missing from " + name,
+            )
     for key in cases:
         require(
             f"assets/{key}-response.png" in sources,
@@ -229,6 +271,7 @@ def check_gallery_media():
         gallery_result_chapters=4,
         gallery_dynamic_views=10,
         gallery_geometry_chapters=len(geometry),
+        gallery_bundled_viewer_exports=len(viewer_figures),
     )
 
 
