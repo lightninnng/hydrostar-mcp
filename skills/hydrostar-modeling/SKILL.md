@@ -1,6 +1,6 @@
 ---
 name: hydrostar-modeling
-description: "Build and verify HydroStar models from parameters, sections, CAD or meshes within a default 3000-panel total budget. Use for structured meshing, native calculations, staged acceptance, direct figure/data exports and native file delivery."
+description: "Build and verify HydroStar models from parameters, sections, CAD or meshes within a default 3000-panel total budget. Use for structured meshing, native calculations, staged acceptance, native viewer operation, direct figure/data exports and native file delivery."
 ---
 
 # HydroStar 建模与验收
@@ -57,6 +57,8 @@ build_geometry / geometry-build 产生独立几何包。检查原生面元比例
 优先保留 hsrao 生成的 .gnu 绘图宏，核对其数据列与原始 .rao 的频率、浪向、幅值、相位和单位。没有原生宏时，从原始数值表建图并注明实际工具与方法。原生软件文件导出、手册配套脚本导出、自定义补充图和界面截图分别记录，名称与实际来源一致。
 
 先查对应章节的 HydroStar 自带查看器及其实际导出能力，再按已记录的限制和用途采用手册推荐的配套流程。开展可视化时阅读[可视化方法](references/native-visualization.md)，核对入口、数据依赖、版本兼容及实际输出。
+
+需要用鼠标和键盘操作原生查看器时，按[查看器界面操作](references/native-viewer-controls.md)接续命令行准备、窗口核对、原生保存和文件验收。
 
 网格优先 hview / HyView 或本机 visu5d.exe，按安装版本核对 hvisu / Visu4D 入口；响应、荷载及谱曲线优先 hsplt / StarViewer；谱统计采用 StarSpec 手册的相应绘图流程。先验收原查看器画面，再按需要采用 HSprv → ParaView / Hstar2Paraview、gnplt / Gnuplot 等配套出图，并保留其实际工具名称。其他手册规定的可视化路径按同一原则选用。
 
